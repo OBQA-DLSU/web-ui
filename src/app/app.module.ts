@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed!
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
@@ -38,6 +38,7 @@ import {
   MatTooltipModule,
   MatStepperModule,
 } from '@angular/material';
+import { NgRedux, NgReduxModule, DevToolsExtension } from '@angular-redux/store';
 
 import { AppComponent } from './app.component';
 
@@ -48,6 +49,11 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AppRoutes } from './app.routing';
+
+import { rootReducer, INITIAL_STATE, IAppState } from './store/app.store';
+import { ServiceModule } from './services/service.module';
+import { ActionCreatorModule } from './store/action-creators/action-creator.module';
+
 
 @NgModule({
   exports: [
@@ -90,8 +96,11 @@ export class MaterialModule {}
     imports:      [
         CommonModule,
         BrowserAnimationsModule,
+        NgReduxModule,
         FormsModule,
         RouterModule.forRoot(AppRoutes),
+        ServiceModule.forRoot(),
+        ActionCreatorModule.forRoot(),
         HttpModule,
         MaterialModule,
         MatNativeDateModule,
@@ -106,4 +115,9 @@ export class MaterialModule {}
     ],
     bootstrap:    [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(ngRedux: NgRedux<IAppState>, devTools:DevToolsExtension){
+    const enhancers = isDevMode() ? [devTools.enhancer()] : [];
+    ngRedux.configureStore( rootReducer, INITIAL_STATE, [], enhancers );
+  }
+}

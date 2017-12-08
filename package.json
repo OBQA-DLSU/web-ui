@@ -18,7 +18,7 @@
   "private": true,
   "dependencies": {
     "@agm/core": "1.0.0-beta.0",
-    "@angular-redux/store": "^7.0.1",
+    "@angular-redux/store": "^6.5.8-0",
     "@angular/animations": "4.3.1",
     "@angular/cdk": "^2.0.0-beta.8",
     "@angular/cli": "^1.2.5",
@@ -67,8 +67,8 @@
     "redux": "^3.7.2",
     "rxjs": "5.4.2",
     "sweetalert2": "^7.0.9",
-    "twitter-bootstrap-wizard": "1.2.0",
     "tassign": "^1.0.0",
+    "twitter-bootstrap-wizard": "1.2.0",
     "typescript": "~2.4.2",
     "validate": "3.0.1",
     "web-animations-js": "2.2.2",
