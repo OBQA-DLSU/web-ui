@@ -11,7 +11,7 @@ export class AddSopiComponent implements OnInit {
     {
       "inputLabel": "SOPI",
       "inputClass": "form-group label-floating col-md-3",
-      "inputType": "text"
+      "inputType": "number"
     },
     {
       "inputLabel": "Description",
