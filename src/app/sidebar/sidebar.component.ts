@@ -37,6 +37,16 @@ export const ROUTES: RouteInfo[] = [{
 		{ path: 'add-course', title: 'Add Course', ab: 'AC' }
 	]
 }, {
+	path: '/sopi',
+	title: 'Sopi',
+	type: 'sub',
+	icontype: 'subject',
+	collapse: 'sopi',
+	children: [
+		{ path: 'list', title: 'Sopi List', ab: 'SL'},
+		{ path: 'add-sopi', title: 'Add Sopi', ab: 'AS'}
+	]
+}, {
 	path: '/pages',
 	title: 'Pages',
 	type: 'sub',

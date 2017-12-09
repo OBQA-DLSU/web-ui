@@ -18,6 +18,9 @@ export const AppRoutes: Routes = [
       }, {
         path: 'course',
         loadChildren: './course/course.module#CourseModule'
+      }, {
+        path: 'sopi',
+        loadChildren: './sopi/sopi.module#SopiModule'
       }
     ]
   }, {
