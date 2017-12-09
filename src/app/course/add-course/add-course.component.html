@@ -1,12 +1,41 @@
-
 <div class="main-content">
   <div class="container-fluid">
-    <div class="row">  
+    <div class="row">
       <div class="col-md-12">
-        <div>
-          <p>
-            add-course works!
-          </p>
+        <div class="col-md-12">
+          <div class="card">
+            <form [formGroup]="courseForm">
+                <div class="card-header card-header-icon" data-background-color="green">
+                  <i class="material-icons">add</i>
+                </div>
+                <div class="card-content">
+                  <h4 class="card-title">Add New Course</h4>
+                  <div class="form-group label-floating col-md-6">
+                    <label class="control-label" for="code">Course Code:
+                      <span class="star">*</span>
+                    </label>
+                    <input type="text" id="code" class="form-control" formControlName="code">
+                  </div>
+                  <div class="form-group label-floating col-md-6">
+                    <label class="control-label" for="name">Course Name:
+                      <span class="star">*</span>
+                    </label>
+                    <input type="text" id="name" class="form-control" formControlName="name">
+                  </div>
+                  <div class="form-group label-floating col-md-12">
+                    <label class="control-label" for="email">Description:
+                      <span class="star">*</span>
+                    </label>
+                    <input type="text" id="description" class="form-control" formControlName="description">
+                  </div>
+                  <div class="checkbox pull-left">
+                      <label>
+                        <input type="checkbox" name="toBeAssessed" formControlName="toBeAssessed"> To Be Assessed
+                      </label>
+                    </div>
+                </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

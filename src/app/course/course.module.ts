@@ -16,6 +16,7 @@ import { ComponentModule } from 'app/components/component.module';
     CommonModule,
     RouterModule.forChild(CourseRoutes),
     FormsModule,
+    ReactiveFormsModule,
     MaterialModule,
     ComponentModule
   ],

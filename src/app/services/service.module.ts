@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 
 import { AuthenticationService } from './authentication.service';
-
+import { CourseService } from './course.service';
 
 @NgModule({
   imports: [
@@ -17,7 +17,8 @@ export class ServiceModule {
     return {
       ngModule: ServiceModule,
       providers: [
-        AuthenticationService
+        AuthenticationService,
+        CourseService
       ]
     }
   }
