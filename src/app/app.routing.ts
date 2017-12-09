@@ -15,6 +15,9 @@ export const AppRoutes: Routes = [
       {
         path: '',
         loadChildren: './dashboard/dashboard.module#DashboardModule'
+      }, {
+        path: 'course',
+        loadChildren: './course/course.module#CourseModule'
       }
     ]
   }, {
