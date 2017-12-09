@@ -21,6 +21,9 @@ export const AppRoutes: Routes = [
       }, {
         path: 'sopi',
         loadChildren: './sopi/sopi.module#SopiModule'
+      }, {
+        path: 'class',
+        loadChildren: './class/class.module#ClassModule'
       }
     ]
   }, {

@@ -36,11 +36,21 @@ export const ROUTES: RouteInfo[] = [{
 		{ path: 'list', title: 'Course List', ab: 'CL' },
 		{ path: 'add-course', title: 'Add Course', ab: 'AC' }
 	]
+},  {
+	path: '/class',
+	title: 'Class',
+	type: 'sub',
+	icontype: 'chrome_reader_mode',
+	collapse: 'class',
+	children: [
+		{ path: 'list', title: 'Class List', ab: 'CL'},
+		{ path: 'add-class', title: 'Add Class', ab: 'AC'}
+	]
 }, {
 	path: '/sopi',
 	title: 'Sopi',
 	type: 'sub',
-	icontype: 'subject',
+	icontype: 'assignment',
 	collapse: 'sopi',
 	children: [
 		{ path: 'list', title: 'Sopi List', ab: 'SL'},
