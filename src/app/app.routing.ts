@@ -24,6 +24,9 @@ export const AppRoutes: Routes = [
       }, {
         path: 'class',
         loadChildren: './class/class.module#ClassModule'
+      }, {
+        path: 'assessment',
+        loadChildren: './assessment/assessment.module#AssessmentModule'
       }
     ]
   }, {

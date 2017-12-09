@@ -57,6 +57,16 @@ export const ROUTES: RouteInfo[] = [{
 		{ path: 'add-sopi', title: 'Add Sopi', ab: 'AS'}
 	]
 }, {
+	path: '/assessment',
+	title: 'Assessment',
+	type: 'sub',
+	icontype: 'accessibility',
+	collapse: 'Assessment',
+	children: [
+		{ path: 'list', title: 'Assessment List', ab: 'AL'},
+		{ path: 'add-assessment', title: 'Add Assessment', ab: 'AA'}
+	]
+}, {
 	path: '/pages',
 	title: 'Pages',
 	type: 'sub',
