@@ -27,6 +27,16 @@ export const ROUTES: RouteInfo[] = [{
 	type: 'link',
 	icontype: 'dashboard'
 }, {
+	path: '/course',
+	title: 'Course',
+	type: 'sub',
+	icontype: 'subject',
+	collapse: 'course',
+	children: [
+		{ path: 'list', title: 'Course List', ab: 'CL' },
+		{ path: 'add-course', title: 'Add Course', ab: 'AC' }
+	]
+}, {
 	path: '/pages',
 	title: 'Pages',
 	type: 'sub',

@@ -53,6 +53,7 @@ import { AppRoutes } from './app.routing';
 import { rootReducer, INITIAL_STATE, IAppState } from './store/app.store';
 import { ServiceModule } from './services/service.module';
 import { ActionCreatorModule } from './store/action-creators/action-creator.module';
+import { ComponentModule } from 'app/components/component.module';
 
 
 @NgModule({
