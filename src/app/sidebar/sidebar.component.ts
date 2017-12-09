@@ -45,7 +45,6 @@ export const ROUTES: RouteInfo[] = [{
 	children: [
 		{ path: 'sign-in', title: 'Sign-in Page', ab: 'LP' },
 		{ path: 'register', title: 'Register Page', ab: 'RP' },
-		{ path: 'lock', title: 'Lock Screen Page', ab: 'LSP' },
 		{ path: 'user', title: 'User Page', ab: 'UP' }
 	]
 }
