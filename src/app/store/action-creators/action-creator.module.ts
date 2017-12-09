@@ -1,7 +1,8 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { UserActionCreator } from './user.actioncreator';
-
+import { SessionActionCreator } from './session.actioncreator';
+import { CourseActionCreator } from './course.actioncreator';
 
 @NgModule({
   imports: [],
@@ -12,7 +13,9 @@ export class ActionCreatorModule {
     return {
       ngModule: ActionCreatorModule,
       providers: [
-        UserActionCreator
+        UserActionCreator,
+        SessionActionCreator,
+        CourseActionCreator
       ]
     }
   }
