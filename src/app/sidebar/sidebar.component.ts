@@ -43,7 +43,7 @@ export const ROUTES: RouteInfo[] = [{
 	icontype: 'image',
 	collapse: 'pages',
 	children: [
-		{ path: 'login', title: 'Login Page', ab: 'LP' },
+		{ path: 'sign-in', title: 'Sign-in Page', ab: 'LP' },
 		{ path: 'register', title: 'Register Page', ab: 'RP' },
 		{ path: 'lock', title: 'Lock Screen Page', ab: 'LSP' },
 		{ path: 'user', title: 'User Page', ab: 'UP' }

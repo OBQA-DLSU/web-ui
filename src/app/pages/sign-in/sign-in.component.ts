@@ -3,11 +3,11 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 declare var $: any;
 
 @Component({
-    selector: 'app-login-cmp',
-    templateUrl: './login.component.html'
+    selector: 'app-sign-in-cmp',
+    templateUrl: './sign-in.component.html'
 })
 
-export class LoginComponent implements OnInit {
+export class SignInComponent implements OnInit {
     test: Date = new Date();
     private toggleButton: any;
     private sidebarVisible: boolean;
