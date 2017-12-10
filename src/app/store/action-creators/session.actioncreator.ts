@@ -38,7 +38,7 @@ export class SessionActionCreator implements OnDestroy {
     .subscribe(
       (session: ISession) => {
         this.authenticationService.SessionSave(session);
-        this.ngRedux.dispatch({type: SESSION_CREATE_FULFILLED, payload: session});
+        this.ngRedux.dispatch({type: SESSION_CREATE_FULFILLED, session});
       }, err => {
         console.log(err);
         this.ngRedux.dispatch({type: SESSION_CREATE_FAILED})
@@ -49,12 +49,11 @@ export class SessionActionCreator implements OnDestroy {
   SessionCheck () {
     const session = this.authenticationService.SessionRead();
     (!session) ? this.ngRedux.dispatch({type: SESSION_CHECK_FAILED})
-    : this.ngRedux.dispatch({type: SESSION_CHECK_FULFILLED, payload: session});
+    : this.ngRedux.dispatch({type: SESSION_CHECK_FULFILLED, session});
   }
 
   SessionDestroy () {
     this.authenticationService.SessionDestroy();
     this.ngRedux.dispatch({type: SESSION_DESTROY_FULFILLED});
   }
-
 }

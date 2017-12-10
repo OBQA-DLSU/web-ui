@@ -1,4 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
+import { CourseActionCreator } from '../../store/action-creators/course.actioncreator';
+
+import { select } from '@angular-redux/store';
 
 declare var $: any;
 
@@ -8,44 +11,14 @@ declare var $: any;
 })
 export class CourseListComponent implements OnInit {
 
-  private data = [
-    {
-      "id":"69",
-      "code": "INOPER1",
-      "name": "Inoper sample name",
-      "description": "sasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf"
-    },
-    {
-      "id":"69",
-      "code": "INOPER1",
-      "name": "Inoper sample name",
-      "description": "s"
-    },
-    {
-      "id":"69",
-      "code": "INOPER1",
-      "name": "Inoper sample name",
-      "description": "s"
-    },
-    {
-      "id":"69",
-      "code": "INOPER1",
-      "name": "Inoper sample name",
-      "description": "s"
-    },
-    {
-      "id":"69",
-      "code": "INOPER1",
-      "name": "Inoper sample name",
-      "description": "s"
-    }
-  ];
+  @select(s => s.courses.courses) courses;
+
+  constructor (private courseActionCreator: CourseActionCreator ) {}
 
   private dataNames = ['id', 'code', 'name', 'description', 'toBeAssessed'];
   private dataNameAlias = ['ID', 'Code', 'Name', 'Description', 'To Be Assessed?'];
 
   ngOnInit () {
-    
+    this.courseActionCreator.GetCourse(5);
   }
-
 }

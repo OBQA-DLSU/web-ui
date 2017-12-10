@@ -23,7 +23,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      '*': [null, Validators.required]
+      '*': [null,  Validators.required]
     });
   }
 

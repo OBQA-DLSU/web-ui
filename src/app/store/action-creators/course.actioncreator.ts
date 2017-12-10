@@ -53,10 +53,18 @@ export class CourseActionCreator implements OnDestroy {
     this.getCourseSubscription = this.courseService.GetCourse(programId)
     .subscribe(
       (courses: Array<ICourse>) => {
-        this.ngRedux.dispatch({type: COURSE_GET_FULFILLED, payload: courses});
+        this.ngRedux.dispatch({type: COURSE_GET_FULFILLED, courses});
       }, err => {
         console.log(err);
-        this.ngRedux.dispatch({type: COURSE_GET_FAILED, payload: err });
+        let error, errorMessage;
+        console.log(typeof err._body);
+        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
+        if (!errorMessage || !errorMessage.errorMessage) {
+          error = 'There is a server Error.';
+        } else {
+          error = errorMessage.errorMessage;
+        }
+        this.ngRedux.dispatch({type: COURSE_GET_FAILED, error });
       }
     );
   }

@@ -59,6 +59,7 @@ export const courseGetAttempt = (state, action) => {
 };
 
 export const courseGetFulfilled = (state, action) => {
+  console.log(action);
   return tassign(state, {
     courses: action.courses,
     error: ''
