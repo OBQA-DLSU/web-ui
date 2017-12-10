@@ -8,9 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PagesRoutes } from './pages.routing';
 
 import { RegisterComponent } from './register/register.component';
-import { PricingComponent } from './pricing/pricing.component';
 import { LockComponent } from './lock/lock.component';
-import { LoginComponent } from './login/login.component';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 @NgModule({
   imports: [
@@ -20,9 +19,8 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule
   ],
   declarations: [
-    LoginComponent,
+    SignInComponent,
     RegisterComponent,
-    PricingComponent,
     LockComponent
   ]
 })
