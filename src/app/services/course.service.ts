@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-
-import { ISession } from '../interfaces/session/session.interface';
 import { ICourse } from '../interfaces/course/course.interface';
-
 import { WEB_API_URL } from '../config/web-api-address';
-
 import "rxjs/add/operator/map";
 
 @Injectable()
