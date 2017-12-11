@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 
 import { AuthenticationService } from './authentication.service';
 import { CourseService } from './course.service';
+import { SopiService } from './sopi.service';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ export class ServiceModule {
       ngModule: ServiceModule,
       providers: [
         AuthenticationService,
-        CourseService
+        CourseService,
+        SopiService
       ]
     }
   }
