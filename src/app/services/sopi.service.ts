@@ -26,7 +26,7 @@ export class SopiService {
           so: sopi.sopi.so.code,
           code: sopi.sopi.code,
           description: sopi.description,
-          program: sopi.program
+          programId: sopi.program
         };
         newSopis.push(newSopi);
       });

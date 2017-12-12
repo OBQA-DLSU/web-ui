@@ -15,7 +15,7 @@ export const USER_INITIAL_STATE: IUserStore = {
   id: null,
   idNumber: '',
   role: null,
-  program: null,
+  programId: null,
   fname: '',
   lname: '',
   email: '',

@@ -7,3 +7,6 @@ export const SOPI_GET_FAILED: string = 'SOPI_GET_FAILED';
 export const SOPI_UPDATE_ATTEMPT: string = 'SOPI_GET_ATTEMPT';
 export const SOPI_UPDATE_FULFILLED: string = 'SOPI_UPDATE_FULFILLED';
 export const SOPI_UPDATE_FAILED: string = 'SOPI_UPDATE_FAILED';
+export const SOPI_DELETE_ATTEMPT: string = 'SOPI_DELETE_ATTEMPT';
+export const SOPI_DELETE_FULFILLED: string = 'SOPI_DELETE_FULFILLED';
+export const SOPI_DELETE_FAILED: string = 'SOPI_DELETE_FAILED';

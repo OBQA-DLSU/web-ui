@@ -15,7 +15,10 @@ import {
   SOPI_GET_FULFILLED,
   SOPI_UPDATE_ATTEMPT,
   SOPI_UPDATE_FAILED,
-  SOPI_UPDATE_FULFILLED
+  SOPI_UPDATE_FULFILLED,
+  SOPI_DELETE_ATTEMPT,
+  SOPI_DELETE_FAILED,
+  SOPI_DELETE_FULFILLED
 } from '../action/sopi.actions';
 import { Subscribable } from 'rxjs/Observable';
 
@@ -26,6 +29,7 @@ export class SopiActionCreator implements OnDestroy {
   private createSopiSubscription: Subscription = null;
   private getSopiSubscription: Subscription = null;
   private updateSopiSubscription: Subscription = null;
+  private deleteSopiSubscription: Subscription = null;
 
   constructor (
     private ngRedux: NgRedux<IAppState>,
@@ -36,6 +40,7 @@ export class SopiActionCreator implements OnDestroy {
     (this.createSopiSubscription) ? this.createSopiSubscription.unsubscribe() : null;
     (this.getSopiSubscription) ? this.getSopiSubscription.unsubscribe() : null;
     (this.updateSopiSubscription) ? this.updateSopiSubscription.unsubscribe() : null;
+    (this.deleteSopiSubscription) ? this.deleteSopiSubscription.unsubscribe() : null;
   }
 
   CreateSopi (programId: number, sopi: ISopi) {
@@ -89,6 +94,24 @@ export class SopiActionCreator implements OnDestroy {
           error = errorMessage.errorMessage;
         }
         this.ngRedux.dispatch({type: SOPI_UPDATE_FAILED, error });
+      }
+    );
+  }
+
+  DeleteSopi (id: number) {
+    this.deleteSopiSubscription = this.sopiService.DeleteSopi(id)
+    .subscribe(
+      (sopi: ISopi) => {
+        this.ngRedux.dispatch({ type: SOPI_DELETE_FULFILLED, sopi });
+      }, err => {
+        let error, errorMessage;
+        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
+        if (!errorMessage || !errorMessage.errorMessage) {
+          error = 'There is a server Error.';
+        } else {
+          error = errorMessage.errorMessage;
+        }
+        this.ngRedux.dispatch({type: SOPI_DELETE_FAILED, error });
       }
     );
   }
