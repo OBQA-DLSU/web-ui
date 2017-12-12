@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 import { IUserCreate } from '../interfaces/user/user-create.interface';
 import { ISessionCreate } from '../interfaces/session/session-create.interface';
@@ -21,14 +22,14 @@ export class AuthenticationService {
     this.headers.append('Content-type','application/json');
     const options = new RequestOptions({headers: this.headers});
     return this.http.post(this.signUpUrl, userCreate, options)
-    .lift(response => response.json())
+    .map(response => response.json())
   }
 
   SignIn(sessionCreate:ISessionCreate): Observable<ISession> {
     this.headers.append('Content-type', 'application/json');
     const options = new RequestOptions({headers: this.headers});
     return this.http.post(this.signInUrl, sessionCreate, options)
-    .lift(response => response.json())
+    .map(response => response.json())
   }
 
   SessionSave(session: ISession): void {

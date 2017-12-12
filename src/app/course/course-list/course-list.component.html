@@ -5,7 +5,7 @@
         tableTitle="Course List"
         [actionDelete]="true"
         [actionEdit]="true"
-        [tableDataArray]="data"
+        [tableDataArray]="(courses | async)"
         [tableHeaderName]="dataNames"
         [tableHeaderAlias]="dataNameAlias"
       ></app-obqa-table>

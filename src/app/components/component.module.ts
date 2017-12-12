@@ -1,23 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { FileSelectDirective } from 'ng2-file-upload';
 import { MaterialModule } from 'app/app.module';
 
 import { ObqaTableComponent } from './table/obqa-table.component';
 import { FormComponent } from './form/form.component';
+import { ObqaUploadBasicComponent } from './upload/basic/obqa-upload-basic.component';
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   exports: [
-    ObqaTableComponent, FormComponent
+    ObqaTableComponent,
+    FormComponent,
+    ObqaUploadBasicComponent
   ],
   declarations: [
     ObqaTableComponent,
-    FormComponent
+    FormComponent,
+    ObqaUploadBasicComponent,
+    FileSelectDirective
   ]
 })
 export class ComponentModule {

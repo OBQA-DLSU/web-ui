@@ -59,6 +59,7 @@ export const courseGetAttempt = (state, action) => {
 };
 
 export const courseGetFulfilled = (state, action) => {
+  console.log(action);
   return tassign(state, {
     courses: action.courses,
     error: ''
@@ -66,6 +67,31 @@ export const courseGetFulfilled = (state, action) => {
 };
 
 export const courseGetFailed = (state, action) => {
+  return tassign(state, {
+    courses: state.courses,
+    error: action.error
+  });
+};
+
+export const courseDeleteAttempt = (state, action) => {
+  return tassign(state, {
+    courses: state.courses,
+    error: ''
+  });
+};
+
+export const courseDeleteFulfilled = (state, action) => {
+  const index = _.find(state.courses, 'id', action.course.id);
+  const newArray = _.remove(state.courses, (n) => {
+    return n.id !== index;
+  });
+  return tassign(state, {
+    courses: newArray,
+    error: ''
+  });
+};
+
+export const courseDeleteFailed = (state, action) => {
   return tassign(state, {
     courses: state.courses,
     error: action.error

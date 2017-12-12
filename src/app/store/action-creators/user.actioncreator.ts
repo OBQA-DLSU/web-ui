@@ -29,10 +29,10 @@ export class UserActionCreator implements OnDestroy {
     .subscribe(
       (session: ISession) => {
         this.authenticationService.SessionSave(session);
-        this.ngRedux.dispatch({type: USER_CREATE_FAILED, payload: session.user});
+        this.ngRedux.dispatch({type: USER_CREATE_FAILED, user: session.user});
       }, err => {
         console.log(err);
-        this.ngRedux.dispatch({type: USER_CREATE_FAILED, payload: err});
+        this.ngRedux.dispatch({type: USER_CREATE_FAILED, err});
       }
     );
   }

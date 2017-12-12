@@ -8,7 +8,10 @@ import {
   COURSE_UPDATE_FAILED,
   COURSE_GET_ATTEMPT,
   COURSE_GET_FULFILLED,
-  COURSE_GET_FAILED
+  COURSE_GET_FAILED,
+  COURSE_DELETE_ATTEMPT,
+  COURSE_DELETE_FAILED,
+  COURSE_DELETE_FULFILLED
 } from './action/course.actions';
 import * as course from './pure-functions/course.functions';
 export interface ICourseStore {
@@ -32,6 +35,9 @@ export function courseReducer(state: ICourseStore = COURSE_INITIAL_STATE, action
     case COURSE_GET_ATTEMPT: return course.courseGetAttempt(state, action);
     case COURSE_GET_FULFILLED: return course.courseGetFulfilled(state, action);
     case COURSE_GET_FAILED: return course.courseGetFailed(state, action);
+    case COURSE_DELETE_ATTEMPT: return course.courseDeleteAttempt(state, action);
+    case COURSE_DELETE_FAILED: return course.courseDeleteFailed(state, action);
+    case COURSE_DELETE_FULFILLED: return course.courseDeleteFulfilled(state, action);
   }
   return state;
 };
