@@ -7,7 +7,8 @@ import { MaterialModule } from '../app.module';
 import { AssessmentListComponent } from './assessment-list/assessment-list.component';
 import { AddAssessmentComponent } from './add-assessment/add-assessment.component';
 import { AssessmentRoutes } from './assessment.routing';
-import { ComponentModule } from './../components/component.module'
+import { ComponentModule } from './../components/component.module';
+import { DynamicFormModule } from './../obqa-forms/dynamic-form.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { ComponentModule } from './../components/component.module'
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    ComponentModule
+    ComponentModule,
+    DynamicFormModule
   ],
   declarations: [ AssessmentListComponent, AddAssessmentComponent]
 })

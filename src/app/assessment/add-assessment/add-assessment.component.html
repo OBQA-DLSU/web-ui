@@ -4,13 +4,13 @@
       <div class="col-md-12">
         <div class="col-md-12">
           <div class="card">
-            <app-form
-              formLabel="Add New Assessment"
-              [numberOfInputs]="formDetails"
-              [inputLabel]="inputLabel"
-              [inputClass]="inputClass"
-              [inputType]="inputType"
-            ></app-form>
+              <dynamic-form
+                [config]="config"
+                #form="dynamicForm"
+                (submit)="submit($event)">
+              </dynamic-form>
+              {{ form.valid }}
+              {{ form.value | json }}
           </div>
         </div>
       </div>
