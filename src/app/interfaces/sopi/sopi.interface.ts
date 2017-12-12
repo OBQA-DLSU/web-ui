@@ -3,5 +3,5 @@ export interface ISopi {
   so: string;
   code: string;
   description: string;
-  program: number;
+  programId: number;
 }

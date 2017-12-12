@@ -15,16 +15,20 @@ import {
   COURSE_GET_FULFILLED,
   COURSE_UPDATE_ATTEMPT,
   COURSE_UPDATE_FAILED,
-  COURSE_UPDATE_FULFILLED
+  COURSE_UPDATE_FULFILLED,
+  COURSE_DELETE_ATTEMPT,
+  COURSE_DELETE_FAILED,
+  COURSE_DELETE_FULFILLED
 } from '../action/course.actions';
 
 @Injectable()
 
 export class CourseActionCreator implements OnDestroy {
 
-  private createCourseSubscription: Subscription;
-  private getCourseSubscription: Subscription;
-  private updateCourseSubscription: Subscription;
+  private createCourseSubscription: Subscription = null;
+  private getCourseSubscription: Subscription = null;
+  private updateCourseSubscription: Subscription = null;
+  private deleteCourseSubscription: Subscription = null;
 
   constructor (
     private ngRedux: NgRedux<IAppState>,
@@ -35,6 +39,7 @@ export class CourseActionCreator implements OnDestroy {
     (this.createCourseSubscription) ? this.createCourseSubscription.unsubscribe() : null;
     (this.getCourseSubscription) ? this.getCourseSubscription.unsubscribe() : null;
     (this.updateCourseSubscription) ? this.updateCourseSubscription.unsubscribe() : null;
+    (this.deleteCourseSubscription) ? this.deleteCourseSubscription.unsubscribe() : null;
   }
   
   CreateCourse (course: ICourse, programId: number) {
@@ -43,8 +48,15 @@ export class CourseActionCreator implements OnDestroy {
       (course: ICourse) => {
         this.ngRedux.dispatch({type: COURSE_CREATE_FULFILLED, payload: course});
       }, err => {
-        console.log(err);
-        this.ngRedux.dispatch({type: COURSE_CREATE_FAILED, payload: err});
+        let error, errorMessage;
+        console.log(typeof err._body);
+        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
+        if (!errorMessage || !errorMessage.errorMessage) {
+          error = 'There is a server Error.';
+        } else {
+          error = errorMessage.errorMessage;
+        }
+        this.ngRedux.dispatch({type: COURSE_CREATE_FAILED, error });
       }
     );
   }
@@ -52,10 +64,9 @@ export class CourseActionCreator implements OnDestroy {
   GetCourse (programId: number) {
     this.getCourseSubscription = this.courseService.GetCourse(programId)
     .subscribe(
-      (courses: Array<ICourse>) => {
+      (courses: ICourse[]) => {
         this.ngRedux.dispatch({type: COURSE_GET_FULFILLED, courses});
       }, err => {
-        console.log(err);
         let error, errorMessage;
         console.log(typeof err._body);
         (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
@@ -75,8 +86,34 @@ export class CourseActionCreator implements OnDestroy {
       (course: ICourse) => {
         this.ngRedux.dispatch({type: COURSE_UPDATE_FULFILLED, payload: course});
       }, err => {
-        console.log(err);
-        this.ngRedux.dispatch({type: COURSE_UPDATE_FAILED, payload: err});
+        let error, errorMessage;
+        console.log(typeof err._body);
+        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
+        if (!errorMessage || !errorMessage.errorMessage) {
+          error = 'There is a server Error.';
+        } else {
+          error = errorMessage.errorMessage;
+        }
+        this.ngRedux.dispatch({type: COURSE_UPDATE_FAILED, error });
+      }
+    );
+  }
+
+  DeleteCourse (id: number) {
+    this.deleteCourseSubscription = this.courseService.DeleteCourse(id)
+    .subscribe(
+      (course: ICourse) => {
+        this.ngRedux.dispatch({ type: COURSE_DELETE_FULFILLED, course });
+      }, err => {
+        let error, errorMessage;
+        console.log(typeof err._body);
+        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
+        if (!errorMessage || !errorMessage.errorMessage) {
+          error = 'There is a server Error.';
+        } else {
+          error = errorMessage.errorMessage;
+        }
+        this.ngRedux.dispatch({type: COURSE_DELETE_FAILED, error });
       }
     );
   }

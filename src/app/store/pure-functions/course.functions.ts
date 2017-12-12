@@ -72,3 +72,28 @@ export const courseGetFailed = (state, action) => {
     error: action.error
   });
 };
+
+export const courseDeleteAttempt = (state, action) => {
+  return tassign(state, {
+    courses: state.courses,
+    error: ''
+  });
+};
+
+export const courseDeleteFulfilled = (state, action) => {
+  const index = _.find(state.courses, 'id', action.course.id);
+  const newArray = _.remove(state.courses, (n) => {
+    return n.id !== index;
+  });
+  return tassign(state, {
+    courses: newArray,
+    error: ''
+  });
+};
+
+export const courseDeleteFailed = (state, action) => {
+  return tassign(state, {
+    courses: state.courses,
+    error: action.error
+  });
+};

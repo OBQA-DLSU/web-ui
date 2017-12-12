@@ -18,7 +18,7 @@ export const SESSION_INITIAL_STATE: ISessionStore = {
     id: null,
     idNumber: '',
     role: null,
-    program: null,
+    programId: null,
     fname: '',
     lname: '',
     email: ''

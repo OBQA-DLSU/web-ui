@@ -49,4 +49,11 @@ export class CourseService {
     .map(response => response.json())
   }
 
+  DeleteCourse (id: number): Observable<ICourse> {
+    this.headers.append('Content-type','application/json');
+    const options = new RequestOptions({headers: this.headers});
+    return this.http.delete(`${this.courseUrl}/programCourse/${id}`, options)
+    .map(response => response.json())
+  }
+
 }
