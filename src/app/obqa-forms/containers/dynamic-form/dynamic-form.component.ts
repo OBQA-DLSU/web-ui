@@ -6,7 +6,8 @@ import { FieldConfig } from '../../models/field-config.interface';
 @Component({
   exportAs: 'dynamicForm',
   selector: 'dynamic-form',
-  templateUrl: './dynamic-form.component.html'
+  templateUrl: './dynamic-form.component.html',
+  styles: ['card-content { padding:3rem; }']
 })
 export class DynamicFormComponent implements OnChanges, OnInit {
   @Input()

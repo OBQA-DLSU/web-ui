@@ -14,7 +14,7 @@ export class AddAssessmentComponent implements OnInit {
     {
       type: 'input',
       label: 'Assessment',
-      class: 'col-lg-1',
+      class: 'col-md-6 form-control',
       name: 'assessment',
       placeholder: '',
       validation: [Validators.required, Validators.minLength(4)]
@@ -22,7 +22,7 @@ export class AddAssessmentComponent implements OnInit {
     {
       type: 'input',
       label: 'Description',
-      class: 'col-lg-1',
+      class: 'col-md-6 form-control',
       name: 'description',
       placeholder: '',
       validation: [Validators.required, Validators.minLength(10)]
@@ -30,7 +30,7 @@ export class AddAssessmentComponent implements OnInit {
     {
       type: 'select',
       label: 'Favourite Food',
-      class: 'col-lg-1',
+      class: 'btn btn-primary col-md-3 dropdown-toggle',
       name: 'food',
       options: ['Pizza', 'Hot Dogs', 'Knakworstje', 'Coffee'],
       placeholder: 'Select an option',
@@ -38,7 +38,7 @@ export class AddAssessmentComponent implements OnInit {
     },
     {
       label: 'Submit',
-      class: 'col-md-1',
+      class: 'btn btn-primary col-md-3',
       name: 'submit',
       type: 'button'
     }
