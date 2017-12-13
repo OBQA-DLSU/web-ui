@@ -27,6 +27,9 @@ export const AppRoutes: Routes = [
       }, {
         path: 'assessment',
         loadChildren: './assessment/assessment.module#AssessmentModule'
+      }, {
+        path: 'invitation',
+        loadChildren: './invitation/invitation.module#InvitationModule'
       }
     ]
   }, {

@@ -77,6 +77,11 @@ export const ROUTES: RouteInfo[] = [{
 		{ path: 'register', title: 'Register Page', ab: 'RP' },
 		{ path: 'user', title: 'User Page', ab: 'UP' }
 	]
+}, {
+	path: '/invitation',
+	title: 'Invitation',
+	type: 'link',
+	icontype: 'dashboard'
 }
 ];
 @Component({

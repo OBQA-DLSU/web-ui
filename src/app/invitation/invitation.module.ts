@@ -4,9 +4,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../app.module';
 
-import { InvitationRoutes } from './invitation.routing';
 import { InvitationComponent } from './invitation.component';
-import { ComponentModule } from './../components/component.module'
+import { InvitationRoutes } from './invitation.routing';
+import { DynamicFormModule } from './../obqa-forms/dynamic-form.module';
 
 @NgModule({
   imports: [
@@ -15,8 +15,8 @@ import { ComponentModule } from './../components/component.module'
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    ComponentModule
+    DynamicFormModule
   ],
-  declarations: []
+  declarations: [InvitationComponent]
 })
 export class InvitationModule { }
