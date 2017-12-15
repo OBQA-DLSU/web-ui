@@ -41,7 +41,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-						<form method="#" action="#">
+						<form [formGroup]="signInForm" (submit)="submit()">
 							<div class="card card-login card-hidden">
 								<div class="card-header text-center" data-background-color="green">
 									<h4 class="card-title">Sign in</h4>
@@ -54,28 +54,15 @@
 										<span class="input-group-addon">
 											<i class="material-icons">face</i>
 										</span>
-										<div class="form-group label-floating">
-											<label class="control-label">First Name</label>
-											<input type="text" class="form-control">
-										</div>
+										<app-obqa-input-basic length="20" formControlName="email" [c]="signInForm.controls.email" [optional]="true" idd="email" placeholder=""
+										 type="email" text="Email:"></app-obqa-input-basic>
 									</div>
 									<div class="input-group">
 										<span class="input-group-addon">
 											<i class="material-icons">email</i>
 										</span>
-										<div class="form-group label-floating">
-											<label class="control-label">Email address</label>
-											<input type="email" class="form-control">
-										</div>
-									</div>
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="material-icons">lock_outline</i>
-										</span>
-										<div class="form-group label-floating">
-											<label class="control-label">Password</label>
-											<input type="password" class="form-control">
-										</div>
+										<app-obqa-input-basic length="20" formControlName="password" [c]="signInForm.controls.password" [optional]="true" idd="password"
+										 placeholder="" type="password" text="Password:"></app-obqa-input-basic>
 									</div>
 								</div>
 								<div class="footer text-center">

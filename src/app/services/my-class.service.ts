@@ -14,47 +14,46 @@ export class MyClassService {
     private http: Http
   ) { }
 
-  private headers = new Headers();
   private myClassUrl: string = `${WEB_API_URL}/api/myClass/`;
 
   GetMyClassPerProgramWithFilter (programId: number, filterName: string, filterValue: string): Observable<IMyClass[]> {
-    this.headers.append('Content-type','application/json');
-    const options = new RequestOptions({headers: this.headers});
+    const headers = new Headers({ 'Content-Type': 'application/json'})
+    const options = new RequestOptions({headers: headers});
     return this.http.get(`${this.myClassUrl}/filteredByProgramId/${programId}/${filterName}/${filterValue}`, options)
     .map(response => response.json())
   }
 
   GetMyClassWithFilter (filterName: string, filterValue: string): Observable<IMyClass[]> {
-    this.headers.append('Content-type', 'application/json');
-    const options = new RequestOptions({headers: this.headers});
+    const headers = new Headers({ 'Content-Type': 'application/json'})
+    const options = new RequestOptions({headers: headers});
     return this.http.get(`${this.myClassUrl}/${filterName}/${filterValue}`, options)
     .map(response => response.json())
   }
 
   GetMyClassAll (): Observable<IMyClass[]> {
-    this.headers.append('Content-type', 'application/json');
-    const options = new RequestOptions({headers: this.headers});
+    const headers = new Headers({ 'Content-Type': 'application/json'})
+    const options = new RequestOptions({headers: headers});
     return this.http.get(`${this.myClassUrl}/all`, options)
     .map(response => response.json())
   }
 
   CreateMyClass (programId: number, myClass: IMyClass): Observable<IMyClass> {
-    this.headers.append('Content-type', 'application/json');
-    const options = new RequestOptions({headers: this.headers});
+    const headers = new Headers({ 'Content-Type': 'application/json'})
+    const options = new RequestOptions({headers: headers});
     return this.http.post(`${this.myClassUrl}/${programId}`, myClass, options)
     .map(response => response.json())
   }
 
   UpdateMyClass (id: number, myClass: IMyClass): Observable<IMyClass> {
-    this.headers.append('Content-type', 'application/json');
-    const options = new RequestOptions({headers: this.headers});
+    const headers = new Headers({ 'Content-Type': 'application/json'})
+    const options = new RequestOptions({headers: headers});
     return this.http.put(`${this.myClassUrl}/${id}`, myClass, options)
     .map(response => response.json())
   }
 
   DeleteMyClass (id: number): Observable<IMyClass> {
-    this.headers.append('Content-type', 'application/json');
-    const options = new RequestOptions({headers: this.headers});
+    const headers = new Headers({ 'Content-Type': 'application/json'})
+    const options = new RequestOptions({headers: headers});
     return this.http.delete(`${this.myClassUrl}/${id}`, options)
     .map(response => response.json())
   }

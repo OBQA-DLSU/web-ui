@@ -10,12 +10,11 @@ export class CourseService {
 
   constructor(private http:Http) { }
   
-  private headers = new Headers();
   private courseUrl: string = `${WEB_API_URL}/api/course/`;
 
   GetCourse (programId: number): Observable<ICourse[]> {
-    this.headers.append('Content-type','application/json');
-    const options = new RequestOptions({headers: this.headers});
+    const headers = new Headers({ 'Content-Type': 'application/json'})
+    const options = new RequestOptions({headers: headers});
     return this.http.get(this.courseUrl+`${programId}`,options)
     .map(response => response.json())
     .map(courses => {
@@ -36,22 +35,22 @@ export class CourseService {
 
   CreateCourse (programId:number, course: ICourse): Observable<ICourse> {
     const { toBeAssessed } = course;
-    this.headers.append('Content-type','application/json');
-    const options = new RequestOptions({headers: this.headers});
+    const headers = new Headers({ 'Content-Type': 'application/json'})
+    const options = new RequestOptions({headers: headers});
     return this.http.post(this.courseUrl+`${programId}/${toBeAssessed}`, course, options)
     .map(response => response.json())
   }
 
   UpdateCourse (id: number, course: ICourse): Observable<ICourse> {
-    this.headers.append('Content-type','application/json');
-    const options = new RequestOptions({headers: this.headers});
+    const headers = new Headers({ 'Content-Type': 'application/json'})
+    const options = new RequestOptions({headers: headers});
     return this.http.put(this.courseUrl+`programCourse/${id}`, course, options)
     .map(response => response.json())
   }
 
   DeleteCourse (id: number): Observable<ICourse> {
-    this.headers.append('Content-type','application/json');
-    const options = new RequestOptions({headers: this.headers});
+    const headers = new Headers({ 'Content-Type': 'application/json'})
+    const options = new RequestOptions({headers: headers});
     return this.http.delete(`${this.courseUrl}/programCourse/${id}`, options)
     .map(response => response.json())
   }
