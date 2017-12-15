@@ -16,23 +16,14 @@ export class InvitationComponent implements OnInit {
       class: 'col-md-6 form-control',
       name: 'assessment',
       placeholder: '',
-      validation: [Validators.required, Validators.minLength(4)]
-    },
-    {
-      type: 'input',
-      label: 'Description',
-      class: 'col-md-6 form-control',
-      name: 'description',
-      placeholder: '',
-      validation: [Validators.required, Validators.minLength(10)]
+      validation: [Validators.required, Validators.minLength(5)]
     },
     {
       type: 'select',
-      label: 'Favourite Food',
       class: 'btn btn-primary col-md-3 dropdown-toggle',
-      name: 'food',
-      options: ['Pizza', 'Hot Dogs', 'Knakworstje', 'Coffee'],
-      placeholder: 'Select an option',
+      name: 'role',
+      options: ['1', '2', '3'],
+      placeholder: 'Select an role',
       validation: [Validators.required]
     },
     {
