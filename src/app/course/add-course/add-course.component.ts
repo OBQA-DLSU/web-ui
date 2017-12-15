@@ -27,7 +27,11 @@ export class AddCourseComponent implements OnInit {
       code: [null, Validators.required],
       name: [null, Validators.required],
       description: [null, Validators.required],
-      toBeAssessed: [null, Validators.required]
+      toBeAssessed: [false, Validators.required]
     });
+  }
+
+  onClick (event) {
+    console.log(this.courseForm.value);
   }
 }
