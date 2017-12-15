@@ -5,35 +5,47 @@
         <div class="col-md-12">
           <div class="card">
             <form [formGroup]="courseForm">
-                <div class="card-header card-header-icon" data-background-color="green">
-                  <i class="material-icons">add</i>
+              <div class="card-header card-header-icon" data-background-color="green">
+                <i class="material-icons">add</i>
+              </div>
+              <div class="card-content">
+                <h4 class="card-title">Add New Course</h4>
+                <app-obqa-input-basic
+                  length="6"
+                  formControlName="code"
+                  [c]="courseForm.controls.code"
+                  [optional]="true"
+                  idd="code"
+                  placeholder=""
+                  type="text"
+                  text="Course Code:"
+                ></app-obqa-input-basic>
+                <app-obqa-input-basic
+                  length="6"
+                  formControlName="name"
+                  [c]="courseForm.controls.name"
+                  [optional]="true"
+                  idd="name"
+                  placeholder=""
+                  type="text"
+                  text="Course Name:"
+                ></app-obqa-input-basic>
+                <app-obqa-input-basic
+                  length="12"
+                  formControlName="description"
+                  [c]="courseForm.controls.description"
+                  [optional]="true"
+                  idd="3"
+                  placeholder=""
+                  type="text"
+                  text="Description:"
+                ></app-obqa-input-basic>
+                <div class="checkbox pull-left">
+                  <label>
+                    <input type="checkbox" name="toBeAssessed" formControlName="toBeAssessed"> To Be Assessed
+                  </label>
                 </div>
-                <div class="card-content">
-                  <h4 class="card-title">Add New Course</h4>
-                  <div class="form-group label-floating col-md-6">
-                    <label class="control-label" for="code">Course Code:
-                      <span class="star">*</span>
-                    </label>
-                    <input type="text" id="code" class="form-control" formControlName="code">
-                  </div>
-                  <div class="form-group label-floating col-md-6">
-                    <label class="control-label" for="name">Course Name:
-                      <span class="star">*</span>
-                    </label>
-                    <input type="text" id="name" class="form-control" formControlName="name">
-                  </div>
-                  <div class="form-group label-floating col-md-12">
-                    <label class="control-label" for="email">Description:
-                      <span class="star">*</span>
-                    </label>
-                    <input type="text" id="description" class="form-control" formControlName="description">
-                  </div>
-                  <div class="checkbox pull-left">
-                      <label>
-                        <input type="checkbox" name="toBeAssessed" formControlName="toBeAssessed"> To Be Assessed
-                      </label>
-                    </div>
-                </div>
+              </div>
             </form>
           </div>
           <div class="col-md-6">
@@ -43,10 +55,7 @@
               </div>
               <div class="card-content">
                 <h4 class="card-title">Upload .xls File</h4>
-                <app-obqa-upload-basic
-                  fileAlias="file"
-                  [URL]="uploadUrl"
-                ></app-obqa-upload-basic>
+                <app-obqa-upload-basic fileAlias="file" [URL]="uploadUrl"></app-obqa-upload-basic>
               </div>
             </div>
           </div>

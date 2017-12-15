@@ -8,6 +8,7 @@ import { MaterialModule } from 'app/app.module';
 import { ObqaTableComponent } from './table/obqa-table.component';
 import { FormComponent } from './form/form.component';
 import { ObqaUploadBasicComponent } from './upload/basic/obqa-upload-basic.component';
+import { ObqaInputBasicComponent } from './input/basic/obqa-input-basic.component';
 
 @NgModule({
   imports: [
@@ -19,13 +20,15 @@ import { ObqaUploadBasicComponent } from './upload/basic/obqa-upload-basic.compo
   exports: [
     ObqaTableComponent,
     FormComponent,
-    ObqaUploadBasicComponent
+    ObqaUploadBasicComponent,
+    ObqaInputBasicComponent
   ],
   declarations: [
     ObqaTableComponent,
     FormComponent,
     ObqaUploadBasicComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    ObqaInputBasicComponent
   ]
 })
 export class ComponentModule {
