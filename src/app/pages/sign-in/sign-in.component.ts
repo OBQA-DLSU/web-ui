@@ -16,9 +16,11 @@ export class SignInComponent implements OnInit {
 
   private signInForm: FormGroup;
 
-  constructor(private element: ElementRef,
+  constructor(
+    private element: ElementRef,
     private formBuilder: FormBuilder,
-    private sessionActionCreator: SessionActionCreator) {
+    private sessionActionCreator: SessionActionCreator) 
+    {
     this.nativeElement = element.nativeElement;
     this.sidebarVisible = false;
   }
@@ -53,7 +55,10 @@ export class SignInComponent implements OnInit {
     }
   }
   submit(){
-    console.log(this.signInForm.value);
-    this.sessionActionCreator.SessionCreate(this.signInForm.value);
+    if (this.signInForm.valid) {
+      this.sessionActionCreator.SessionCreate(this.signInForm.value);
+    } else {
+      alert('Invalid form');
+    }
   }
 }

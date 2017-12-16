@@ -1,4 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgRedux } from '@angular-redux/store';
 import * as Redux from 'redux';
 import { Subscription } from 'rxjs/Subscription';
@@ -26,7 +27,8 @@ export class SessionActionCreator implements OnDestroy {
   private error: any;
   constructor (
     private ngRedux: NgRedux<IAppState>,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private router: Router
   ) {}
 
   ngOnDestroy () {
@@ -53,7 +55,7 @@ export class SessionActionCreator implements OnDestroy {
         this.ngRedux.dispatch({type: SESSION_CREATE_FAILED, error });
       },
       () => {
-        // lipat route
+        this.router.navigate(['./dashboard']);
       }
     );
   }
