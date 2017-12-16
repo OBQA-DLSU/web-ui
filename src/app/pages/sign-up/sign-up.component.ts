@@ -58,6 +58,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
       email: [null, Validators.required],
       fname: [null, Validators.required],
       lname: [null, Validators.required],
+      idNumber: [null, Validators.required],
       password: [null, Validators.required],
       confirmation: [null, Validators.required],
       invitationCode: [this.invitationCode, Validators.required]

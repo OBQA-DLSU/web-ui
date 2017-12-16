@@ -111,6 +111,21 @@
                     </app-obqa-input-basic>
                   </div>
                   <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="material-icons">info</i>
+                      </span>
+                      <app-obqa-input-basic 
+                        length="20" 
+                        formControlName="idNumber" 
+                        [c]="signUpForm.controls.idNumber" 
+                        [optional]="true"
+                        idd="idNumber" 
+                        placeholder=""
+                        type="text" 
+                        text="ID Number:">
+                      </app-obqa-input-basic>
+                    </div>
+                  <div class="input-group">
                     <span class="input-group-addon">
                       <i class="material-icons">info</i>
                     </span>
