@@ -1,0 +1,14 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <app-obqa-table
+        tableTitle="Course List"
+        [actionDelete]="true"
+        [actionEdit]="true"
+        [tableDataArray]="(courses | async)"
+        [tableHeaderName]="dataNames"
+        [tableHeaderAlias]="dataNameAlias"
+      ></app-obqa-table>
+    </div>
+  </div>
+</div>

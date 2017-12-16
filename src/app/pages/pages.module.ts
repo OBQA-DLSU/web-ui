@@ -8,21 +8,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PagesRoutes } from './pages.routing';
 
 import { RegisterComponent } from './register/register.component';
-import { PricingComponent } from './pricing/pricing.component';
 import { LockComponent } from './lock/lock.component';
-import { LoginComponent } from './login/login.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { ComponentModule } from '../components/component.module';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(PagesRoutes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ComponentModule
   ],
   declarations: [
-    LoginComponent,
+    SignInComponent,
     RegisterComponent,
-    PricingComponent,
     LockComponent
   ]
 })

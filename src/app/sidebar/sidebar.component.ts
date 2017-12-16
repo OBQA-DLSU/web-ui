@@ -27,17 +27,61 @@ export const ROUTES: RouteInfo[] = [{
 	type: 'link',
 	icontype: 'dashboard'
 }, {
+	path: '/course',
+	title: 'Course',
+	type: 'sub',
+	icontype: 'subject',
+	collapse: 'course',
+	children: [
+		{ path: 'list', title: 'Course List', ab: 'CL' },
+		{ path: 'add-course', title: 'Add Course', ab: 'AC' }
+	]
+},  {
+	path: '/class',
+	title: 'Class',
+	type: 'sub',
+	icontype: 'chrome_reader_mode',
+	collapse: 'class',
+	children: [
+		{ path: 'list', title: 'Class List', ab: 'CL'},
+		{ path: 'add-class', title: 'Add Class', ab: 'AC'}
+	]
+}, {
+	path: '/sopi',
+	title: 'Sopi',
+	type: 'sub',
+	icontype: 'assignment',
+	collapse: 'sopi',
+	children: [
+		{ path: 'list', title: 'Sopi List', ab: 'SL'},
+		{ path: 'add-sopi', title: 'Add Sopi', ab: 'AS'}
+	]
+}, {
+	path: '/assessment',
+	title: 'Assessment',
+	type: 'sub',
+	icontype: 'accessibility',
+	collapse: 'Assessment',
+	children: [
+		{ path: 'list', title: 'Assessment List', ab: 'AL'},
+		{ path: 'add-assessment', title: 'Add Assessment', ab: 'AA'}
+	]
+}, {
 	path: '/pages',
 	title: 'Pages',
 	type: 'sub',
 	icontype: 'image',
 	collapse: 'pages',
 	children: [
-		{ path: 'login', title: 'Login Page', ab: 'LP' },
+		{ path: 'sign-in', title: 'Sign-in Page', ab: 'LP' },
 		{ path: 'register', title: 'Register Page', ab: 'RP' },
-		{ path: 'lock', title: 'Lock Screen Page', ab: 'LSP' },
 		{ path: 'user', title: 'User Page', ab: 'UP' }
 	]
+}, {
+	path: '/invitation',
+	title: 'Invitation',
+	type: 'link',
+	icontype: 'dashboard'
 }
 ];
 @Component({

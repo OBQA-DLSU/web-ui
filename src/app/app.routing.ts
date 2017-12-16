@@ -15,6 +15,21 @@ export const AppRoutes: Routes = [
       {
         path: '',
         loadChildren: './dashboard/dashboard.module#DashboardModule'
+      }, {
+        path: 'course',
+        loadChildren: './course/course.module#CourseModule'
+      }, {
+        path: 'sopi',
+        loadChildren: './sopi/sopi.module#SopiModule'
+      }, {
+        path: 'class',
+        loadChildren: './class/class.module#ClassModule'
+      }, {
+        path: 'assessment',
+        loadChildren: './assessment/assessment.module#AssessmentModule'
+      }, {
+        path: 'invitation',
+        loadChildren: './invitation/invitation.module#InvitationModule'
       }
     ]
   }, {
