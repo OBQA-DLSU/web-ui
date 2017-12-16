@@ -13,7 +13,7 @@ export class SopiService {
   private sopiUrl: string = `${WEB_API_URL}/api/sopi`;
 
   GetSopi (programId: number): Observable<ISopi[]> {
-    const headers = new Headers({ 'Content-Type': 'application/json'})
+    const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
     return this.http.get(`${this.sopiUrl}/${programId}`, options)
     .map(response => response.json())
@@ -34,21 +34,21 @@ export class SopiService {
   }
 
   CreateSopi (programId: number, sopi: ISopi): Observable<ISopi> {
-    const headers = new Headers({ 'Content-Type': 'application/json'})
+    const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
     return this.http.post(`${this.sopiUrl}/${programId}`, sopi, options)
     .map(response => response.json())
   }
 
   UpdateSopi (id: number, sopi: ISopi): Observable<ISopi> {
-    const headers = new Headers({ 'Content-Type': 'application/json'})
+    const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
     return this.http.put(`${this.sopiUrl}/programSopi/${id}`, sopi, options)
     .map(response => response.json())
   }
 
   DeleteSopi (id: number): Observable<ISopi> {
-    const headers = new Headers({ 'Content-Type': 'application/json'})
+    const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
     return this.http.delete(`${this.sopiUrl}/programSopi/${id}`, options)
     .map(response => response.json())
