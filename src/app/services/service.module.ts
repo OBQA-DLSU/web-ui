@@ -6,6 +6,7 @@ import { AuthenticationService } from './authentication.service';
 import { CourseService } from './course.service';
 import { SopiService } from './sopi.service';
 import { MyClassService } from './my-class.service';
+import { InvitationService } from './invitation.service';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ export class ServiceModule {
         AuthenticationService,
         CourseService,
         SopiService,
-        MyClassService
+        MyClassService,
+        InvitationService
       ]
     }
   }
