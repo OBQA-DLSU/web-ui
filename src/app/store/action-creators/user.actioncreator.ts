@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { IAppState } from '../app.store';
 import { AuthenticationService } from '../../services/authentication.service';
+import { DialogService } from '../../services/dialog.service';
 import { IUserCreate } from '../../interfaces/user/user-create.interface';
 import { ISession } from '../../interfaces/session/session.interface';
 import { USER_CREATE_FULFILLED, USER_CREATE_FAILED, TOGGLE_USER_CREATE } from '../action/user.action';
@@ -18,7 +19,8 @@ export class UserActionCreator implements OnDestroy {
 
   constructor (
     private ngRedux: NgRedux<IAppState>,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private dialogService: DialogService
   ) {}
 
   ngOnDestroy() {
@@ -35,6 +37,10 @@ export class UserActionCreator implements OnDestroy {
       }, err => {
         console.log(err);
         this.ngRedux.dispatch({type: USER_CREATE_FAILED, err});
+        this.dialogService.showSwal('error-message',{
+          title: 'Signup Error!',
+          text: 'There is an error while Signing up'
+        });
       }
     );
   }

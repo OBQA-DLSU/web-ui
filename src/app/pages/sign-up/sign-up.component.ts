@@ -9,6 +9,8 @@ import { ISessionCreate } from '../../interfaces/session/session-create.interfac
 import { MiscActionCreator } from '../../store/action-creators/misc.actioncreator';
 import { IUserCreate } from '../../interfaces/user/user-create.interface';
 
+import swal from 'sweetalert2';
+
 declare var $: any;
 @Component({
   selector: 'app-sign-up-cmp',
@@ -85,10 +87,9 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
   submit(){
     if (this.signUpForm.valid) {
-      console.log(this.signUpForm);
       this.userActionCreator.CreateUser(this.signUpForm.value);
     } else {
-      alert('Invalid form');
+      console.log('waring');
     }
   }
 }
