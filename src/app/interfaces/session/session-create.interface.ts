@@ -1,4 +1,4 @@
 export interface ISessionCreate {
-  loginName: string;
+  email: string;
   password: string;
 }

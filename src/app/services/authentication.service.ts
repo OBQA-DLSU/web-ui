@@ -13,21 +13,20 @@ import { WEB_API_URL } from '../config/web-api-address';
 export class AuthenticationService {
 
   constructor(private http:Http) { }
-
-  private headers = new Headers();
-  private signUpUrl: string = `${WEB_API_URL}/sign-up`;
-  private signInUrl: string = `${WEB_API_URL}/sign-in`;
+  
+  private signUpUrl: string = `${WEB_API_URL}/api/auth/signup`;
+  private signInUrl: string = `${WEB_API_URL}/api/auth/signin`;
 
   SignUp(userCreate: IUserCreate): Observable<ISession> {
-    this.headers.append('Content-type','application/json');
-    const options = new RequestOptions({headers: this.headers});
+    const headers = new Headers({ 'Content-Type': 'application/json'})
+    const options = new RequestOptions({headers: headers});
     return this.http.post(this.signUpUrl, userCreate, options)
     .map(response => response.json())
   }
 
   SignIn(sessionCreate:ISessionCreate): Observable<ISession> {
-    this.headers.append('Content-type', 'application/json');
-    const options = new RequestOptions({headers: this.headers});
+    const headers = new Headers({ 'Content-Type': 'application/json'})
+    const options = new RequestOptions({headers: headers});
     return this.http.post(this.signInUrl, sessionCreate, options)
     .map(response => response.json())
   }
