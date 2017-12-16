@@ -31,7 +31,7 @@ export const SESSION_INITIAL_STATE: ISessionStore = {
 
 export function sessionReducer(state: ISessionStore = SESSION_INITIAL_STATE, action): ISessionStore {
   switch (action.type){
-    case SESSION_CHECK_ATTEMPT: return session.sessionCheckAttempt(state, action);
+    case SESSION_CREATE_ATTEMPT: return session.sessionCreateAttempt(state, action);
     case SESSION_CREATE_FULFILLED: return session.sessionCreateFulfilled(state, action);
     case SESSION_CREATE_FAILED: return session.sessionCreateFailed(state, action);
     case SESSION_DESTROY_FULFILLED: return session.sessionDestroy(state, action);
