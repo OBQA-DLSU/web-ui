@@ -8,6 +8,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { IUserCreate } from '../../interfaces/user/user-create.interface';
 import { ISession } from '../../interfaces/session/session.interface';
 import { USER_CREATE_FULFILLED, USER_CREATE_FAILED, TOGGLE_USER_CREATE } from '../action/user.action';
+import { SESSION_CREATE_FULFILLED } from 'app/store/action/session.actions';
 
 @Injectable()
 
@@ -29,7 +30,8 @@ export class UserActionCreator implements OnDestroy {
     .subscribe(
       (session: ISession) => {
         this.authenticationService.SessionSave(session);
-        this.ngRedux.dispatch({type: USER_CREATE_FAILED, payload: session.user });
+        this.ngRedux.dispatch({type: USER_CREATE_FULFILLED, payload: session });
+        this.ngRedux.dispatch({type: SESSION_CREATE_FULFILLED, payload: session });
       }, err => {
         console.log(err);
         this.ngRedux.dispatch({type: USER_CREATE_FAILED, err});
