@@ -5,70 +5,114 @@ declare const $: any;
 
 //Metadata
 export interface RouteInfo {
-    path: string;
-    title: string;
-    type: string;
-    icontype: string;
-    collapse?: string;
-    children?: ChildrenItems[];
+	path: string;
+	title: string;
+	type: string;
+	icontype: string;
+	collapse?: string;
+	children?: ChildrenItems[];
 }
 
 export interface ChildrenItems {
-    path: string;
-    title: string;
-    ab: string;
-    type?: string;
+	path: string;
+	title: string;
+	ab: string;
+	type?: string;
 }
 
 //Menu Items
 export const ROUTES: RouteInfo[] = [{
-        path: '/dashboard',
-        title: 'Dashboard',
-        type: 'link',
-        icontype: 'dashboard'
-    },{
-        path: '/pages',
-        title: 'Pages',
-        type: 'sub',
-        icontype: 'image',
-        collapse: 'pages',
-        children: [
-            {path: 'login', title: 'Login Page', ab:'LP'},
-            {path: 'register', title: 'Register Page', ab:'RP'},
-            {path: 'lock', title: 'Lock Screen Page', ab:'LSP'},
-            {path: 'user', title: 'User Page', ab:'UP'}
-        ]
-    }
+	path: '/dashboard',
+	title: 'Dashboard',
+	type: 'link',
+	icontype: 'dashboard'
+}, {
+	path: '/course',
+	title: 'Course',
+	type: 'sub',
+	icontype: 'subject',
+	collapse: 'course',
+	children: [
+		{ path: 'list', title: 'Course List', ab: 'CL' },
+		{ path: 'add-course', title: 'Add Course', ab: 'AC' }
+	]
+},  {
+	path: '/class',
+	title: 'Class',
+	type: 'sub',
+	icontype: 'chrome_reader_mode',
+	collapse: 'class',
+	children: [
+		{ path: 'list', title: 'Class List', ab: 'CL'},
+		{ path: 'add-class', title: 'Add Class', ab: 'AC'}
+	]
+}, {
+	path: '/sopi',
+	title: 'Sopi',
+	type: 'sub',
+	icontype: 'assignment',
+	collapse: 'sopi',
+	children: [
+		{ path: 'list', title: 'Sopi List', ab: 'SL'},
+		{ path: 'add-sopi', title: 'Add Sopi', ab: 'AS'}
+	]
+}, {
+	path: '/assessment',
+	title: 'Assessment',
+	type: 'sub',
+	icontype: 'accessibility',
+	collapse: 'Assessment',
+	children: [
+		{ path: 'list', title: 'Assessment List', ab: 'AL'},
+		{ path: 'add-assessment', title: 'Add Assessment', ab: 'AA'}
+	]
+}, {
+	path: '/pages',
+	title: 'Pages',
+	type: 'sub',
+	icontype: 'image',
+	collapse: 'pages',
+	children: [
+		{ path: 'sign-in', title: 'Sign-in Page', ab: 'LP' },
+		{ path: 'register', title: 'Register Page', ab: 'RP' },
+		{ path: 'user', title: 'User Page', ab: 'UP' }
+	]
+}, {
+	path: '/invitation',
+	title: 'Invitation',
+	type: 'link',
+	icontype: 'dashboard'
+}
 ];
 @Component({
-    selector: 'app-sidebar-cmp',
-    templateUrl: 'sidebar.component.html',
+	selector: 'app-sidebar-cmp',
+	templateUrl: 'sidebar.component.html',
 })
 
 export class SidebarComponent implements OnInit {
-    public menuItems: any[];
+	public menuItems: any[];
 
-    isMobileMenu() {
-        if ($(window).width() > 991) {
-            return false;
-        }
-        return true;
-    };
+	isMobileMenu() {
+		if ($(window).width() > 991) {
+			return false;
+		}
+		return true;
+	};
 
-    ngOnInit() {
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
-    }
-    updatePS(): void  {
-        if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
-            const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
-            let ps = new PerfectScrollbar(elemSidebar, { wheelSpeed: 2, suppressScrollX: true });
-        }
-    }
-    isMac(): boolean {
-        let bool = false;
-        if (navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.platform.toUpperCase().indexOf('IPAD') >= 0) {
-            bool = true;
-        }
-        return bool;
-    }
+	ngOnInit() {
+		this.menuItems = ROUTES.filter(menuItem => menuItem);
+	}
+	updatePS(): void {
+		if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
+			const elemSidebar = <HTMLElement>document.querySelector('.sidebar .sidebar-wrapper');
+			let ps = new PerfectScrollbar(elemSidebar, { wheelSpeed: 2, suppressScrollX: true });
+		}
+	}
+	isMac(): boolean {
+		let bool = false;
+		if (navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.platform.toUpperCase().indexOf('IPAD') >= 0) {
+			bool = true;
+		}
+		return bool;
+	}
 }

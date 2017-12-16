@@ -25,9 +25,19 @@ $white-transparent: rgba($white-color, .8);
 
 $gray-color:  #999999 !default;
 
+// default angular material pro Value
+// $brand-default: #cecece !default;
+// $brand-primary: $purple !default;
+// $brand-success: $green !default;
+// $brand-danger: $red !default;
+// $brand-warning: $orange !default;
+// $brand-info: $cyan !default;
+// $brand-rose: $pink !default;
+
+// custom Value
 $brand-default: #cecece !default;
-$brand-primary: $purple !default;
-$brand-success: $green !default;
+$brand-primary: $green !default;
+$brand-success: $blue !default;
 $brand-danger: $red !default;
 $brand-warning: $orange !default;
 $brand-info: $cyan !default;
