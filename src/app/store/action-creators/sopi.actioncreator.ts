@@ -47,7 +47,7 @@ export class SopiActionCreator implements OnDestroy {
     this.createSopiSubscription = this.sopiService.CreateSopi(programId, sopi)
     .subscribe(
       (sopi: ISopi) => {
-        this.ngRedux.dispatch({ type: SOPI_CREATE_FULFILLED, sopi });
+        this.ngRedux.dispatch({ type: SOPI_CREATE_FULFILLED, payload: sopi });
       }, err => {
         let error, errorMessage;
         console.log(typeof err._body);
@@ -66,7 +66,7 @@ export class SopiActionCreator implements OnDestroy {
     this.getSopiSubscription = this.sopiService.GetSopi(programId)
     .subscribe(
       (sopis: ISopi[]) => {
-        this.ngRedux.dispatch({ type: SOPI_GET_FULFILLED, sopis });
+        this.ngRedux.dispatch({ type: SOPI_GET_FULFILLED, payload: sopis });
       }, err => {
         let error, errorMessage;
         (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
@@ -84,7 +84,7 @@ export class SopiActionCreator implements OnDestroy {
     this.updateSopiSubscription = this.sopiService.UpdateSopi(id, sopi)
     .subscribe(
       (sopi: ISopi) => {
-        this.ngRedux.dispatch({ type: SOPI_UPDATE_FULFILLED, sopi });
+        this.ngRedux.dispatch({ type: SOPI_UPDATE_FULFILLED, payload: sopi });
       }, err => {
         let error, errorMessage;
         (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
@@ -102,7 +102,7 @@ export class SopiActionCreator implements OnDestroy {
     this.deleteSopiSubscription = this.sopiService.DeleteSopi(id)
     .subscribe(
       (sopi: ISopi) => {
-        this.ngRedux.dispatch({ type: SOPI_DELETE_FULFILLED, sopi });
+        this.ngRedux.dispatch({ type: SOPI_DELETE_FULFILLED, payload: sopi });
       }, err => {
         let error, errorMessage;
         (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;

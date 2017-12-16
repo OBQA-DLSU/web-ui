@@ -3,5 +3,4 @@ export interface ICourse {
   code: string;
   name: string;
   description?: string;
-  toBeAssessed: boolean;
 }

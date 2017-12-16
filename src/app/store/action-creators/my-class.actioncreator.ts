@@ -50,7 +50,7 @@ export class MyClassActionCreator implements OnDestroy {
     this.getMyClassPerProgramWithFilterSubscription = this.myClassService.GetMyClassPerProgramWithFilter(programId, filterName, filterValue)
     .subscribe(
       (myClasses: IMyClass[]) => {
-        this.ngRedux.dispatch({type: MY_CLASS_GET_FULFILLED, myClasses});
+        this.ngRedux.dispatch({type: MY_CLASS_GET_FULFILLED, payload: myClasses});
       }, err => {
         let error, errorMessage;
         console.log(typeof err._body);
@@ -69,7 +69,7 @@ export class MyClassActionCreator implements OnDestroy {
     this.getMyClassWithFilterSubscription = this.myClassService.GetMyClassWithFilter(filterName, filterValue)
     .subscribe(
       (myClasses: IMyClass[]) => {
-        this.ngRedux.dispatch({type: MY_CLASS_GET_FULFILLED, myClasses});
+        this.ngRedux.dispatch({type: MY_CLASS_GET_FULFILLED, payload: myClasses});
       }, err => {
         let error, errorMessage;
         console.log(typeof err._body);
@@ -88,7 +88,7 @@ export class MyClassActionCreator implements OnDestroy {
     this.getMyClassAllSubscription = this.myClassService.GetMyClassAll()
     .subscribe(
       (myClasses: IMyClass[]) => {
-        this.ngRedux.dispatch({type: MY_CLASS_GET_FULFILLED, myClasses});
+        this.ngRedux.dispatch({type: MY_CLASS_GET_FULFILLED, payload: myClasses});
       }, err => {
         let error, errorMessage;
         console.log(typeof err._body);
@@ -107,7 +107,7 @@ export class MyClassActionCreator implements OnDestroy {
     this.createMyClassSubscription = this.myClassService.CreateMyClass(programId, myClass)
     .subscribe(
       (myClass: IMyClass) => {
-        this.ngRedux.dispatch({ type: MY_CLASS_CREATE_FULFILLED, myClass });
+        this.ngRedux.dispatch({ type: MY_CLASS_CREATE_FULFILLED, payload: myClass });
       }, err => {
         let error, errorMessage;
         console.log(typeof err._body);
@@ -126,7 +126,7 @@ export class MyClassActionCreator implements OnDestroy {
     this.updateMyClassSubscription = this.myClassService.UpdateMyClass(id, myClass)
     .subscribe(
       (myClass: IMyClass) => {
-        this.ngRedux.dispatch({ type: MY_CLASS_UPDATE_FULFILLED, myClass });
+        this.ngRedux.dispatch({ type: MY_CLASS_UPDATE_FULFILLED, payload: myClass });
       }, err => {
         let error, errorMessage;
         console.log(typeof err._body);
@@ -145,7 +145,7 @@ export class MyClassActionCreator implements OnDestroy {
     this.deleteMyClassSubscription = this.myClassService.DeleteMyClass(id)
     .subscribe(
       (myClass: IMyClass) => {
-        this.ngRedux.dispatch({ type: MY_CLASS_DELETE_FULFILLED, myClass });
+        this.ngRedux.dispatch({ type: MY_CLASS_DELETE_FULFILLED, payload: myClass });
       }, err => {
         let error, errorMessage;
         console.log(typeof err._body);

@@ -8,4 +8,5 @@ export interface IProgramCourse {
   program?: IProgram;
   course?: ICourse;
   description?: string;
+  toBeAssessed?: boolean;
 }

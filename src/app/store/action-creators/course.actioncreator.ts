@@ -65,7 +65,7 @@ export class CourseActionCreator implements OnDestroy {
     this.getCourseSubscription = this.courseService.GetCourse(programId)
     .subscribe(
       (courses: ICourse[]) => {
-        this.ngRedux.dispatch({type: COURSE_GET_FULFILLED, courses});
+        this.ngRedux.dispatch({type: COURSE_GET_FULFILLED, payload: courses});
       }, err => {
         let error, errorMessage;
         console.log(typeof err._body);
@@ -103,7 +103,7 @@ export class CourseActionCreator implements OnDestroy {
     this.deleteCourseSubscription = this.courseService.DeleteCourse(id)
     .subscribe(
       (course: ICourse) => {
-        this.ngRedux.dispatch({ type: COURSE_DELETE_FULFILLED, course });
+        this.ngRedux.dispatch({ type: COURSE_DELETE_FULFILLED, paylaod: course });
       }, err => {
         let error, errorMessage;
         console.log(typeof err._body);

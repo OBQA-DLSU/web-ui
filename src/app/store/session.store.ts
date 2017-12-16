@@ -10,26 +10,29 @@ import {
 } from './action/session.actions';
 import * as session from './pure-functions/session.functions';
 export interface ISessionStore extends ISession {
-  
+  error: string;
 }
 
 export const SESSION_INITIAL_STATE: ISessionStore = {
   user: {
     id: null,
     idNumber: '',
+    roleId: null,
     role: null,
-    programId: null,
     fname: '',
     lname: '',
-    email: ''
+    email: '',
+    instructor: [],
+    student: []
   },
-  token: ''
+  token: '',
+  error: ''
 }
 
 export function sessionReducer(state: ISessionStore = SESSION_INITIAL_STATE, action): ISessionStore {
   switch (action.type){
     case SESSION_CHECK_ATTEMPT: return session.sessionCheckAttempt(state, action);
-    case SESSION_CREATE_FULFILLED: return session.sessionCreate(state, action);
+    case SESSION_CREATE_FULFILLED: return session.sessionCreateFulfilled(state, action);
     case SESSION_CREATE_FAILED: return session.sessionCreateFailed(state, action);
     case SESSION_DESTROY_FULFILLED: return session.sessionDestroy(state, action);
     case SESSION_CHECK_ATTEMPT: return session.sessionCheckAttempt(state, action);

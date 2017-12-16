@@ -6,8 +6,10 @@ export interface IMyClass {
   id?: number;
   instructorId?: number;
   instructor?: IInstructor;
+  programCourseId?: number;
   programCourse?: IProgramCourse;
   term: number;
   academicYear: string;
+  cycle: number;
   students: Array<IStudent>;
 }
