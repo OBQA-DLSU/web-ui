@@ -9,12 +9,12 @@ import "rxjs/add/operator/map";
 export class InvitationService {
 
   constructor(private http:Http) { }
-  private headers = new Headers();
   private inviteUrl: string = `${WEB_API_URL}/api/invitation/`;
 
   Invite (userInvites: IUserInvite[]): Observable<any[]> {
-    this.headers.append('Content-type','application/json');
-    const options = new RequestOptions({headers: this.headers});
+    const headers = new Headers();
+    headers.append('Content-type','application/json');
+    const options = new RequestOptions({headers});
     return this.http.post(this.inviteUrl, userInvites, options)
     .map(response => response.json())
   }
