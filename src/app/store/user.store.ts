@@ -7,16 +7,12 @@ import {
   TOGGLE_USER_CREATE
 } from './action/user.action';
 
-export interface IUserStore extends IUser {
+export interface IUserStore {
+  user: IUser;
   error: string
 }
 export const USER_INITIAL_STATE: IUserStore = {
-  id: null,
-  idNumber: '',
-  role: null,
-  fname: '',
-  lname: '',
-  email: '',
+  user: null,
   error: ''
 }
 
