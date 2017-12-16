@@ -1,6 +1,6 @@
 export interface ICourse {
-  id?: number;
+  id: number;
   code: string;
   name: string;
-  description?: string;
+  description: string;
 }

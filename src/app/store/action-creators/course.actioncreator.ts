@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { CourseService } from '../../services/course.service';
 import { IAppState } from '../app.store';
-import { ICourse } from '../../interfaces/course/course.interface';
+import { ICourseView } from '../../interfaces/course/course-view.interface';
 import { IProgramCourse } from '../../interfaces/programCourse/program-course.interface';
 import {
   COURSE_CREATE_ATTEMPT,
@@ -43,10 +43,11 @@ export class CourseActionCreator implements OnDestroy {
     (this.deleteCourseSubscription) ? this.deleteCourseSubscription.unsubscribe() : null;
   }
   
-  CreateCourse (course: ICourse, programId: number, toBeAssessed: boolean) {
+  CreateCourse (course: ICourseView, programId: number, toBeAssessed: boolean) {
     this.createCourseSubscription = this.courseService.CreateCourse(programId, course, toBeAssessed)
+    .map(data => this.programCourseToView(data))
     .subscribe(
-      (course: IProgramCourse) => {
+      (course: ICourseView) => {
         this.ngRedux.dispatch({type: COURSE_CREATE_FULFILLED, payload: course});
       }, err => {
         let error, errorMessage;
@@ -64,8 +65,13 @@ export class CourseActionCreator implements OnDestroy {
 
   GetCourse (programId: number) {
     this.getCourseSubscription = this.courseService.GetCourse(programId)
+    .map(data => {
+      let newData: ICourseView[];
+      newData = data.map(d => this.programCourseToView(d))
+      return newData;
+    })
     .subscribe(
-      (courses: IProgramCourse[]) => {
+      (courses: ICourseView[]) => {
         this.ngRedux.dispatch({type: COURSE_GET_FULFILLED, payload: courses});
       }, err => {
         let error, errorMessage;
@@ -81,10 +87,11 @@ export class CourseActionCreator implements OnDestroy {
     );
   }
 
-  UpdateCourse (id: number, course: ICourse) {
+  UpdateCourse (id: number, course: ICourseView) {
     this.updateCourseSubscription = this.courseService.UpdateCourse(id, course)
+    .map(data => this.programCourseToView(data))
     .subscribe(
-      (course: IProgramCourse) => {
+      (course: ICourseView) => {
         this.ngRedux.dispatch({type: COURSE_UPDATE_FULFILLED, payload: course});
       }, err => {
         let error, errorMessage;
@@ -102,8 +109,9 @@ export class CourseActionCreator implements OnDestroy {
 
   DeleteCourse (id: number) {
     this.deleteCourseSubscription = this.courseService.DeleteCourse(id)
+    .map(data => this.programCourseToView(data))
     .subscribe(
-      (course: ICourse) => {
+      (course: ICourseView) => {
         this.ngRedux.dispatch({ type: COURSE_DELETE_FULFILLED, paylaod: course });
       }, err => {
         let error, errorMessage;
@@ -118,5 +126,17 @@ export class CourseActionCreator implements OnDestroy {
       }
     );
   }
-
+  // functions
+  private programCourseToView: Function = (data: IProgramCourse): ICourseView => {
+    let newData: ICourseView;
+    newData = {
+      id: data.id,
+      code: data.course.code,
+      name: data.course.name,
+      description: data.description,
+      program: data.program.name,
+      programId: data.programId
+    };
+    return newData;
+  };
 }

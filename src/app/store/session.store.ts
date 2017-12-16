@@ -10,7 +10,7 @@ import {
 } from './action/session.actions';
 import * as session from './pure-functions/session.functions';
 export interface ISessionStore extends ISession {
-  error: string;
+  error: any;
 }
 
 export const SESSION_INITIAL_STATE: ISessionStore = {
@@ -26,7 +26,7 @@ export const SESSION_INITIAL_STATE: ISessionStore = {
     student: []
   },
   token: '',
-  error: ''
+  error: null
 }
 
 export function sessionReducer(state: ISessionStore = SESSION_INITIAL_STATE, action): ISessionStore {

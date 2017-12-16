@@ -23,7 +23,7 @@ import {
 export class SessionActionCreator implements OnDestroy {
 
   private signin: Subscription = null;
-
+  private error: any;
   constructor (
     private ngRedux: NgRedux<IAppState>,
     private authenticationService: AuthenticationService
@@ -40,14 +40,20 @@ export class SessionActionCreator implements OnDestroy {
         this.authenticationService.SessionSave(session);
         this.ngRedux.dispatch({type: SESSION_CREATE_FULFILLED, payload: session});
       }, err => {
-        let error, errorMessage;
-        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
-        if (!errorMessage || !errorMessage.errorMessage) {
-          error = 'There is a server Error.';
-        } else {
-          error = errorMessage.errorMessage;
-        }
+        // console.log(err);
+        // let error, errorMessage;
+        // (err && typeof err._body == 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
+        // if (!errorMessage || !errorMessage.errorMessage) {
+        //   error = 'There is a server Error.';
+        // } else {
+        //   error = errorMessage.errorMessage;
+        // }
+        this.error = err;
+        const error = this.error;
         this.ngRedux.dispatch({type: SESSION_CREATE_FAILED, error });
+      },
+      () => {
+        // lipat route
       }
     );
   }

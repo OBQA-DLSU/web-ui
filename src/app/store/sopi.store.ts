@@ -1,4 +1,4 @@
-import { ISopi } from '../interfaces/sopi/sopi.interface';
+import { ISopiView } from '../interfaces/sopi/sopi-view.interface';
 import {
   SOPI_CREATE_ATTEMPT,
   SOPI_CREATE_FAILED,
@@ -13,7 +13,7 @@ import {
 import * as sopi from './pure-functions/sopi.functions';
 
 export interface ISopiStore {
-  sopis: ISopi[];
+  sopis: ISopiView[];
   error: string;
 }
 

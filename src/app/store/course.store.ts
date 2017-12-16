@@ -1,4 +1,4 @@
-import { IProgramCourse } from '../interfaces/programCourse/program-course.interface';
+import { ICourseView } from '../interfaces/course/course-view.interface';
 import {
   COURSE_CREATE_ATTEMPT,
   COURSE_CREATE_FULFILLED,
@@ -14,17 +14,17 @@ import {
   COURSE_DELETE_FULFILLED
 } from './action/course.actions';
 import * as course from './pure-functions/course.functions';
-export interface IProgramCourseStore {
-  courses: Array<IProgramCourse>;
+export interface ICourseStore {
+  courses: Array<ICourseView>;
   error: string;
 }
 
-export const COURSE_INITIAL_STATE: IProgramCourseStore = {
+export const COURSE_INITIAL_STATE: ICourseStore = {
   courses: [],
   error: ''
 }
 
-export function courseReducer(state: IProgramCourseStore = COURSE_INITIAL_STATE, action): IProgramCourseStore {
+export function courseReducer(state: ICourseStore = COURSE_INITIAL_STATE, action): ICourseStore {
   switch (action.type){
     case COURSE_CREATE_ATTEMPT: return course.courseCreateAttempt(state, action);
     case COURSE_CREATE_FULFILLED: return course.courseCreateFulfilled(state, action);

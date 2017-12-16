@@ -4,7 +4,8 @@ import * as Redux from 'redux';
 import { Subscription } from 'rxjs/Subscription';
 
 import { IAppState } from '../app.store';
-import { ISopi } from '../../interfaces/sopi/sopi.interface';
+import { ISopiView } from '../../interfaces/sopi/sopi-view.interface';
+import { IProgramSopi } from '../../interfaces/programSopi/program-sopi.interface';
 import { SopiService } from '../../services/sopi.service';
 import {
   SOPI_CREATE_ATTEMPT,
@@ -43,10 +44,11 @@ export class SopiActionCreator implements OnDestroy {
     (this.deleteSopiSubscription) ? this.deleteSopiSubscription.unsubscribe() : null;
   }
 
-  CreateSopi (programId: number, sopi: ISopi) {
+  CreateSopi (programId: number, sopi: ISopiView) {
     this.createSopiSubscription = this.sopiService.CreateSopi(programId, sopi)
+    .map(data => this.programSopiToView(data))
     .subscribe(
-      (sopi: ISopi) => {
+      (sopi: ISopiView) => {
         this.ngRedux.dispatch({ type: SOPI_CREATE_FULFILLED, payload: sopi });
       }, err => {
         let error, errorMessage;
@@ -64,8 +66,13 @@ export class SopiActionCreator implements OnDestroy {
 
   GetSopi (programId: number) {
     this.getSopiSubscription = this.sopiService.GetSopi(programId)
+    .map(data => {
+      let newData: ISopiView[];
+      newData = data.map(d => this.programSopiToView(d));
+      return newData;
+    })
     .subscribe(
-      (sopis: ISopi[]) => {
+      (sopis: ISopiView[]) => {
         this.ngRedux.dispatch({ type: SOPI_GET_FULFILLED, payload: sopis });
       }, err => {
         let error, errorMessage;
@@ -80,10 +87,11 @@ export class SopiActionCreator implements OnDestroy {
     );
   }
 
-  UpdateSopi (id: number, sopi: ISopi) {
+  UpdateSopi (id: number, sopi: ISopiView) {
     this.updateSopiSubscription = this.sopiService.UpdateSopi(id, sopi)
+    .map(data => this.programSopiToView(data))
     .subscribe(
-      (sopi: ISopi) => {
+      (sopi: ISopiView) => {
         this.ngRedux.dispatch({ type: SOPI_UPDATE_FULFILLED, payload: sopi });
       }, err => {
         let error, errorMessage;
@@ -100,8 +108,9 @@ export class SopiActionCreator implements OnDestroy {
 
   DeleteSopi (id: number) {
     this.deleteSopiSubscription = this.sopiService.DeleteSopi(id)
+    .map(data => this.programSopiToView(data))
     .subscribe(
-      (sopi: ISopi) => {
+      (sopi: ISopiView) => {
         this.ngRedux.dispatch({ type: SOPI_DELETE_FULFILLED, payload: sopi });
       }, err => {
         let error, errorMessage;
@@ -115,4 +124,18 @@ export class SopiActionCreator implements OnDestroy {
       }
     );
   }
+
+  // functions
+  private programSopiToView: Function = (data: IProgramSopi): ISopiView => {
+    let newData: ISopiView;
+    newData = {
+      id: data.id,
+      code: data.sopi.code,
+      so: data.sopi.so.code,
+      description: data.description,
+      programId: data.programId,
+      program: data.program.name
+    };
+    return newData;
+  };
 }

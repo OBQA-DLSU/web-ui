@@ -13,7 +13,7 @@ export const courseCreateFulfilled = (state, action) => {
   return tassign(state, {
     courses: [
       ...state.courses,
-      action.course
+      action.payload
     ],
     error: ''
   });
@@ -34,9 +34,9 @@ export const courseUpdateAttempt = (state, action) => {
 };
 
 export const courseUpdateFulfilled = (state, action) => {
-  const index = _.find(state.courses, 'id', action.course.id);
+  const index = _.find(state.courses, 'id', action.payload.id);
   let newArray = state.courses.slice();
-  newArray.splice(index, 0, action.course);
+  newArray.splice(index, 0, action.payload);
 
   return tassign(state, {
     courses: newArray,
@@ -81,7 +81,7 @@ export const courseDeleteAttempt = (state, action) => {
 };
 
 export const courseDeleteFulfilled = (state, action) => {
-  const index = _.find(state.courses, 'id', action.course.id);
+  const index = _.find(state.courses, 'id', action.payload.id);
   const newArray = _.remove(state.courses, (n) => {
     return n.id !== index;
   });

@@ -1,7 +1,8 @@
+import { ISo } from './so.interface';
 export interface ISopi {
   id?: number;
-  so: string;
-  code: string;
-  description: string;
-  programId: number;
+  soId?: number;
+  so?: ISo;
+  code?: string;
+  description?: string;
 }

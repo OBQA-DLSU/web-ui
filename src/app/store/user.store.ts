@@ -8,8 +8,7 @@ import {
 } from './action/user.action';
 
 export interface IUserStore extends IUser {
-  error: string;
-  toggleSignUp: boolean;
+  error: string
 }
 export const USER_INITIAL_STATE: IUserStore = {
   id: null,
@@ -18,8 +17,7 @@ export const USER_INITIAL_STATE: IUserStore = {
   fname: '',
   lname: '',
   email: '',
-  error: '',
-  toggleSignUp: false
+  error: ''
 }
 
 export function userReducer(state: IUserStore = USER_INITIAL_STATE, action): IUserStore {
