@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
+import { SessionActionCreator } from '../store/action-creators/session.actioncreator';
 
 declare const $: any;
 
@@ -73,8 +74,8 @@ export const ROUTES: RouteInfo[] = [{
 	icontype: 'image',
 	collapse: 'pages',
 	children: [
-		{ path: 'sign-in', title: 'Sign-in Page', ab: 'LP' },
-		{ path: 'register', title: 'Register Page', ab: 'RP' },
+		{ path: 'sign-in', title: 'Sign-in Page', ab: 'SP' },
+		{ path: 'sign-up', title: 'Sign-up Page', ab: 'SP' },
 		{ path: 'user', title: 'User Page', ab: 'UP' }
 	]
 }, {
@@ -91,6 +92,8 @@ export const ROUTES: RouteInfo[] = [{
 
 export class SidebarComponent implements OnInit {
 	public menuItems: any[];
+	constructor(private sessionActionCreator: SessionActionCreator){
+	}
 
 	isMobileMenu() {
 		if ($(window).width() > 991) {
@@ -114,5 +117,8 @@ export class SidebarComponent implements OnInit {
 			bool = true;
 		}
 		return bool;
+	}
+	onSignOut() {
+		this.sessionActionCreator.SessionDestroy();
 	}
 }

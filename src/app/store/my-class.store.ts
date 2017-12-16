@@ -20,12 +20,12 @@ export interface IMyClassStore {
   error: string;
 }
 
-export const MY_CLASS_INITIAL_STORE: IMyClassStore = {
+export const MY_CLASS_INITIAL_STATE: IMyClassStore = {
   myClasses: [],
   error: ''
 }
 
-export function myClassReducer (state: IMyClassStore = MY_CLASS_INITIAL_STORE, action) {
+export function myClassReducer (state: IMyClassStore = MY_CLASS_INITIAL_STATE, action) {
   switch (action.type) {
     case MY_CLASS_CREATE_ATTEMPT: return myClass.myClassCreateAttempt(state, action);
     case MY_CLASS_CREATE_FAILED: return myClass.myClassCreateFailed(state, action);
