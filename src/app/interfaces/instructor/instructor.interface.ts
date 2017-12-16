@@ -8,3 +8,4 @@ export interface IInstructor {
   programId?: number;
   program: IProgram;
 }
+

@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { CourseService } from '../../services/course.service';
 import { IAppState } from '../app.store';
 import { ICourse } from '../../interfaces/course/course.interface';
+import { IProgramCourse } from '../../interfaces/programCourse/program-course.interface';
 import {
   COURSE_CREATE_ATTEMPT,
   COURSE_CREATE_FAILED,
@@ -42,10 +43,10 @@ export class CourseActionCreator implements OnDestroy {
     (this.deleteCourseSubscription) ? this.deleteCourseSubscription.unsubscribe() : null;
   }
   
-  CreateCourse (course: ICourse, programId: number) {
-    this.createCourseSubscription = this.courseService.CreateCourse(programId, course)
+  CreateCourse (course: ICourse, programId: number, toBeAssessed: boolean) {
+    this.createCourseSubscription = this.courseService.CreateCourse(programId, course, toBeAssessed)
     .subscribe(
-      (course: ICourse) => {
+      (course: IProgramCourse) => {
         this.ngRedux.dispatch({type: COURSE_CREATE_FULFILLED, payload: course});
       }, err => {
         let error, errorMessage;
@@ -64,7 +65,7 @@ export class CourseActionCreator implements OnDestroy {
   GetCourse (programId: number) {
     this.getCourseSubscription = this.courseService.GetCourse(programId)
     .subscribe(
-      (courses: ICourse[]) => {
+      (courses: IProgramCourse[]) => {
         this.ngRedux.dispatch({type: COURSE_GET_FULFILLED, payload: courses});
       }, err => {
         let error, errorMessage;
@@ -83,7 +84,7 @@ export class CourseActionCreator implements OnDestroy {
   UpdateCourse (id: number, course: ICourse) {
     this.updateCourseSubscription = this.courseService.UpdateCourse(id, course)
     .subscribe(
-      (course: ICourse) => {
+      (course: IProgramCourse) => {
         this.ngRedux.dispatch({type: COURSE_UPDATE_FULFILLED, payload: course});
       }, err => {
         let error, errorMessage;
