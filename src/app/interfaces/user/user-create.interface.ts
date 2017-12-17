@@ -1,6 +1,8 @@
-import { IUser } from './user.interface';
-
-export interface IUserCreate extends IUser {
+export interface IUserCreate {
+  email: string;
+  fname: string;
+  lname: string;
+  idNumber: number;
   password: string;
   confirmation: string;
   invitationCode: string;

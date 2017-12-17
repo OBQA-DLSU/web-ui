@@ -2,8 +2,7 @@ import { tassign } from 'tassign';
 
 export const toggleUserCreate = (state, action) => {
   return tassign(state, {
-    ...state,
-    toggleSignup: true
+    ...state
   });
 };
 
@@ -15,22 +14,14 @@ export const userCreateAttempt = (state, action) => {
 
 export const userCreateFulfilled = (state, action) => {
   return tassign(state, {
-    id: action.id,
-    idNumber: action.idNumber,
-    role: action.role,
-    program: action.program,
-    fname: action.fname,
-    lname: action.lname,
-    email: action.email,
-    error: '',
-    toggleSignup: false
+    user: action.payload.user,
+    error: ''
   });
 };
 
 export const userCreateFailed = (state, action) => {
   return tassign(state, {
-    ...state,
-    error: action.error,
-    toggleSignup: true
+    user: state.user,
+    error: action.error
   });
 };

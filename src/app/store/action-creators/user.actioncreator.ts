@@ -5,9 +5,11 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { IAppState } from '../app.store';
 import { AuthenticationService } from '../../services/authentication.service';
+import { DialogService } from '../../services/dialog.service';
 import { IUserCreate } from '../../interfaces/user/user-create.interface';
 import { ISession } from '../../interfaces/session/session.interface';
 import { USER_CREATE_FULFILLED, USER_CREATE_FAILED, TOGGLE_USER_CREATE } from '../action/user.action';
+import { SESSION_CREATE_FULFILLED } from 'app/store/action/session.actions';
 
 @Injectable()
 
@@ -15,9 +17,12 @@ export class UserActionCreator implements OnDestroy {
 
   private signup: Subscription = null;
 
+  private errorMessage: string = null;
+
   constructor (
     private ngRedux: NgRedux<IAppState>,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private dialogService: DialogService
   ) {}
 
   ngOnDestroy() {
@@ -29,10 +34,20 @@ export class UserActionCreator implements OnDestroy {
     .subscribe(
       (session: ISession) => {
         this.authenticationService.SessionSave(session);
-        this.ngRedux.dispatch({type: USER_CREATE_FAILED, payload: session.user });
+        this.ngRedux.dispatch({type: USER_CREATE_FULFILLED, payload: session });
+        this.ngRedux.dispatch({type: SESSION_CREATE_FULFILLED, payload: session });
       }, err => {
-        console.log(err);
-        this.ngRedux.dispatch({type: USER_CREATE_FAILED, err});
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: USER_CREATE_FAILED, error: this.errorMessage });
+          this.dialogService.showSwal('error-message', {
+            title: 'Signup Error!',
+            text: this.errorMessage
+          });
+        }
+      },
+      () => {
+        this.errorMessage = null;
       }
     );
   }
