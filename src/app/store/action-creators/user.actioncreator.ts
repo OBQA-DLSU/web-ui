@@ -17,6 +17,8 @@ export class UserActionCreator implements OnDestroy {
 
   private signup: Subscription = null;
 
+  private errorMessage: string = null;
+
   constructor (
     private ngRedux: NgRedux<IAppState>,
     private authenticationService: AuthenticationService,
@@ -35,12 +37,17 @@ export class UserActionCreator implements OnDestroy {
         this.ngRedux.dispatch({type: USER_CREATE_FULFILLED, payload: session });
         this.ngRedux.dispatch({type: SESSION_CREATE_FULFILLED, payload: session });
       }, err => {
-        console.log(err);
-        this.ngRedux.dispatch({type: USER_CREATE_FAILED, err});
-        this.dialogService.showSwal('error-message',{
-          title: 'Signup Error!',
-          text: 'There is an error while Signing up'
-        });
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: USER_CREATE_FAILED, error: this.errorMessage });
+          this.dialogService.showSwal('error-message', {
+            title: 'Signup Error!',
+            text: this.errorMessage
+          });
+        }
+      },
+      () => {
+        this.errorMessage = null;
       }
     );
   }
