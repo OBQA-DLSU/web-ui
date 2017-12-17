@@ -4,6 +4,7 @@ import { UserActionCreator } from './user.actioncreator';
 import { SessionActionCreator } from './session.actioncreator';
 import { CourseActionCreator } from './course.actioncreator';
 import { MyClassActionCreator } from './my-class.actioncreator';
+import { MiscActionCreator } from './misc.actioncreator';
 
 @NgModule({
   imports: [],
@@ -17,7 +18,8 @@ export class ActionCreatorModule {
         UserActionCreator,
         SessionActionCreator,
         CourseActionCreator,
-        MyClassActionCreator
+        MyClassActionCreator,
+        MiscActionCreator
       ]
     }
   }

@@ -39,5 +39,13 @@ export const AppRoutes: Routes = [
       path: 'pages',
       loadChildren: './pages/pages.module#PagesModule'
     }]
+  }, {
+    path: '',
+    redirectTo: 'pages/sign-in',
+    pathMatch: 'full'
+  }, {
+    path: '**',
+    redirectTo: 'pages/sign-in',
+    pathMatch: 'full'
   }
 ];

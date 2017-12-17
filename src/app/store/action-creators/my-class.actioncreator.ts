@@ -32,6 +32,8 @@ export class MyClassActionCreator implements OnDestroy {
   private updateMyClassSubscription: Subscription = null;
   private deleteMyClassSubscription: Subscription = null;
 
+  private errorMessage: string = null;
+
   constructor (
     private ngRedux: NgRedux<IAppState>,
     private myClassService: MyClassService
@@ -52,15 +54,14 @@ export class MyClassActionCreator implements OnDestroy {
       (myClasses: IMyClass[]) => {
         this.ngRedux.dispatch({type: MY_CLASS_GET_FULFILLED, payload: myClasses});
       }, err => {
-        let error, errorMessage;
-        console.log(typeof err._body);
-        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
-        if (!errorMessage || !errorMessage.errorMessage) {
-          error = 'There is a server Error.';
-        } else {
-          error = errorMessage.errorMessage;
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: MY_CLASS_GET_FAILED, error: this.errorMessage });
+          // put error mesage here.
         }
-        this.ngRedux.dispatch({type: MY_CLASS_GET_FAILED, error });
+      },
+      () => {
+        this.errorMessage = null;
       }
     );
   }
@@ -71,15 +72,14 @@ export class MyClassActionCreator implements OnDestroy {
       (myClasses: IMyClass[]) => {
         this.ngRedux.dispatch({type: MY_CLASS_GET_FULFILLED, payload: myClasses});
       }, err => {
-        let error, errorMessage;
-        console.log(typeof err._body);
-        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
-        if (!errorMessage || !errorMessage.errorMessage) {
-          error = 'There is a server Error.';
-        } else {
-          error = errorMessage.errorMessage;
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: MY_CLASS_GET_FAILED, error: this.errorMessage });
+          // put error mesage here.
         }
-        this.ngRedux.dispatch({type: MY_CLASS_GET_FAILED, error });
+      },
+      () => {
+        this.errorMessage = null;
       }
     );
   }
@@ -90,15 +90,14 @@ export class MyClassActionCreator implements OnDestroy {
       (myClasses: IMyClass[]) => {
         this.ngRedux.dispatch({type: MY_CLASS_GET_FULFILLED, payload: myClasses});
       }, err => {
-        let error, errorMessage;
-        console.log(typeof err._body);
-        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
-        if (!errorMessage || !errorMessage.errorMessage) {
-          error = 'There is a server Error.';
-        } else {
-          error = errorMessage.errorMessage;
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: MY_CLASS_GET_FAILED, error: this.errorMessage });
+          // put error mesage here.
         }
-        this.ngRedux.dispatch({type: MY_CLASS_GET_FAILED, error });
+      },
+      () => {
+        this.errorMessage = null;
       }
     );
   }
@@ -109,15 +108,14 @@ export class MyClassActionCreator implements OnDestroy {
       (myClass: IMyClass) => {
         this.ngRedux.dispatch({ type: MY_CLASS_CREATE_FULFILLED, payload: myClass });
       }, err => {
-        let error, errorMessage;
-        console.log(typeof err._body);
-        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
-        if (!errorMessage || !errorMessage.errorMessage) {
-          error = 'There is a server Error.';
-        } else {
-          error = errorMessage.errorMessage;
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: MY_CLASS_CREATE_FAILED, error: this.errorMessage });
+          // put error mesage here.
         }
-        this.ngRedux.dispatch({type: MY_CLASS_CREATE_FAILED, error });
+      },
+      () => {
+        this.errorMessage = null;
       }
     );
   }
@@ -128,15 +126,14 @@ export class MyClassActionCreator implements OnDestroy {
       (myClass: IMyClass) => {
         this.ngRedux.dispatch({ type: MY_CLASS_UPDATE_FULFILLED, payload: myClass });
       }, err => {
-        let error, errorMessage;
-        console.log(typeof err._body);
-        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
-        if (!errorMessage || !errorMessage.errorMessage) {
-          error = 'There is a server Error.';
-        } else {
-          error = errorMessage.errorMessage;
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: MY_CLASS_UPDATE_FAILED, error: this.errorMessage });
+          // put error mesage here.
         }
-        this.ngRedux.dispatch({type: MY_CLASS_UPDATE_FAILED, error });
+      },
+      () => {
+        this.errorMessage = null;
       }
     );
   }
@@ -147,15 +144,14 @@ export class MyClassActionCreator implements OnDestroy {
       (myClass: IMyClass) => {
         this.ngRedux.dispatch({ type: MY_CLASS_DELETE_FULFILLED, payload: myClass });
       }, err => {
-        let error, errorMessage;
-        console.log(typeof err._body);
-        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
-        if (!errorMessage || !errorMessage.errorMessage) {
-          error = 'There is a server Error.';
-        } else {
-          error = errorMessage.errorMessage;
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: MY_CLASS_DELETE_FAILED, error: this.errorMessage });
+          // put error mesage here.
         }
-        this.ngRedux.dispatch({type: MY_CLASS_DELETE_FAILED, error });
+      },
+      () => {
+        this.errorMessage = null;
       }
     );
   }
