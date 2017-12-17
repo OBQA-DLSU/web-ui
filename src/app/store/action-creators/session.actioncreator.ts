@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { IAppState } from '../app.store';
 import { AuthenticationService } from '../../services/authentication.service';
 import { IUserCreate } from '../../interfaces/user/user-create.interface';
+import { DialogService } from '../../services/dialog.service';
 import { ISession } from '../../interfaces/session/session.interface';
 import { ISessionCreate } from '../../interfaces/session/session-create.interface';
 import { 
@@ -28,7 +29,8 @@ export class SessionActionCreator implements OnDestroy {
   constructor (
     private ngRedux: NgRedux<IAppState>,
     private authenticationService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private dialogService: DialogService
   ) {}
 
   ngOnDestroy () {
@@ -45,7 +47,10 @@ export class SessionActionCreator implements OnDestroy {
         this.errorMessage = err._body;
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: SESSION_CREATE_FAILED, error: this.errorMessage });
-          // put error mesage here.
+          this.dialogService.showSwal('error-message', {
+            title: 'Signin Error!',
+            text: 'Email or Password is incorrect.'
+          });
         }
       },
       () => {
@@ -57,8 +62,15 @@ export class SessionActionCreator implements OnDestroy {
 
   SessionCheck () {
     const session: ISession = this.authenticationService.SessionRead();
-    (!session) ? this.ngRedux.dispatch({type: SESSION_CHECK_FAILED, error:`Session has Expired.` })
-    : this.ngRedux.dispatch({type: SESSION_CHECK_FULFILLED, payload: session});
+    if (!session) { 
+      this.ngRedux.dispatch({type: SESSION_CHECK_FAILED, error:`Session has Expired.` });
+      this.dialogService.showSwal('error-message', {
+        title: 'Your Session Has Expired!',
+        text: 'Please Sigin in.'
+      });
+    } else {
+      this.ngRedux.dispatch({type: SESSION_CHECK_FULFILLED, payload: session});
+    }
   }
 
   SessionDestroy () {
