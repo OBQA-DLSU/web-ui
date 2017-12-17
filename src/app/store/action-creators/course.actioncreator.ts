@@ -31,6 +31,8 @@ export class CourseActionCreator implements OnDestroy {
   private updateCourseSubscription: Subscription = null;
   private deleteCourseSubscription: Subscription = null;
 
+  private errorMessage: string = null;
+
   constructor (
     private ngRedux: NgRedux<IAppState>,
     private courseService: CourseService
@@ -50,15 +52,14 @@ export class CourseActionCreator implements OnDestroy {
       (course: ICourseView) => {
         this.ngRedux.dispatch({type: COURSE_CREATE_FULFILLED, payload: course});
       }, err => {
-        let error, errorMessage;
-        console.log(typeof err._body);
-        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
-        if (!errorMessage || !errorMessage.errorMessage) {
-          error = 'There is a server Error.';
-        } else {
-          error = errorMessage.errorMessage;
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: COURSE_CREATE_FAILED, error: this.errorMessage });
+          // put error mesage here.
         }
-        this.ngRedux.dispatch({type: COURSE_CREATE_FAILED, error });
+      },
+      () => {
+        this.errorMessage = null;
       }
     );
   }
@@ -74,15 +75,14 @@ export class CourseActionCreator implements OnDestroy {
       (courses: ICourseView[]) => {
         this.ngRedux.dispatch({type: COURSE_GET_FULFILLED, payload: courses});
       }, err => {
-        let error, errorMessage;
-        console.log(typeof err._body);
-        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
-        if (!errorMessage || !errorMessage.errorMessage) {
-          error = 'There is a server Error.';
-        } else {
-          error = errorMessage.errorMessage;
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: COURSE_GET_FAILED, error: this.errorMessage });
+          // put error mesage here.
         }
-        this.ngRedux.dispatch({type: COURSE_GET_FAILED, error });
+      },
+      () => {
+        this.errorMessage = null;
       }
     );
   }
@@ -94,15 +94,14 @@ export class CourseActionCreator implements OnDestroy {
       (course: ICourseView) => {
         this.ngRedux.dispatch({type: COURSE_UPDATE_FULFILLED, payload: course});
       }, err => {
-        let error, errorMessage;
-        console.log(typeof err._body);
-        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
-        if (!errorMessage || !errorMessage.errorMessage) {
-          error = 'There is a server Error.';
-        } else {
-          error = errorMessage.errorMessage;
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: COURSE_UPDATE_FAILED, error: this.errorMessage });
+          // put error mesage here.
         }
-        this.ngRedux.dispatch({type: COURSE_UPDATE_FAILED, error });
+      },
+      () => {
+        this.errorMessage = null;
       }
     );
   }
@@ -114,15 +113,14 @@ export class CourseActionCreator implements OnDestroy {
       (course: ICourseView) => {
         this.ngRedux.dispatch({ type: COURSE_DELETE_FULFILLED, paylaod: course });
       }, err => {
-        let error, errorMessage;
-        console.log(typeof err._body);
-        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
-        if (!errorMessage || !errorMessage.errorMessage) {
-          error = 'There is a server Error.';
-        } else {
-          error = errorMessage.errorMessage;
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: COURSE_DELETE_FAILED, error: this.errorMessage });
+          // put error mesage here.
         }
-        this.ngRedux.dispatch({type: COURSE_DELETE_FAILED, error });
+      },
+      () => {
+        this.errorMessage = null;
       }
     );
   }

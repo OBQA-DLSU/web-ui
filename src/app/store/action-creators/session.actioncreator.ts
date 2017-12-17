@@ -24,7 +24,7 @@ import {
 export class SessionActionCreator implements OnDestroy {
 
   private signin: Subscription = null;
-  private error: any;
+  private errorMessage: string = null;
   constructor (
     private ngRedux: NgRedux<IAppState>,
     private authenticationService: AuthenticationService,
@@ -42,19 +42,14 @@ export class SessionActionCreator implements OnDestroy {
         this.authenticationService.SessionSave(session);
         this.ngRedux.dispatch({type: SESSION_CREATE_FULFILLED, payload: session});
       }, err => {
-        // console.log(err);
-        // let error, errorMessage;
-        // (err && typeof err._body == 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
-        // if (!errorMessage || !errorMessage.errorMessage) {
-        //   error = 'There is a server Error.';
-        // } else {
-        //   error = errorMessage.errorMessage;
-        // }
-        this.error = err;
-        const error = this.error;
-        this.ngRedux.dispatch({type: SESSION_CREATE_FAILED, error });
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: SESSION_CREATE_FAILED, error: this.errorMessage });
+          // put error mesage here.
+        }
       },
       () => {
+        this.errorMessage = null;
         this.router.navigate(['./dashboard']);
       }
     );
@@ -62,7 +57,7 @@ export class SessionActionCreator implements OnDestroy {
 
   SessionCheck () {
     const session: ISession = this.authenticationService.SessionRead();
-    (!session) ? this.ngRedux.dispatch({type: SESSION_CHECK_FAILED, payload:{error: `Session Expired.`}})
+    (!session) ? this.ngRedux.dispatch({type: SESSION_CHECK_FAILED, error:`Session has Expired.` })
     : this.ngRedux.dispatch({type: SESSION_CHECK_FULFILLED, payload: session});
   }
 

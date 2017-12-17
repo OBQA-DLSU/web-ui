@@ -32,6 +32,8 @@ export class SopiActionCreator implements OnDestroy {
   private updateSopiSubscription: Subscription = null;
   private deleteSopiSubscription: Subscription = null;
 
+  private errorMessage: string = null;
+
   constructor (
     private ngRedux: NgRedux<IAppState>,
     private sopiService: SopiService
@@ -51,15 +53,14 @@ export class SopiActionCreator implements OnDestroy {
       (sopi: ISopiView) => {
         this.ngRedux.dispatch({ type: SOPI_CREATE_FULFILLED, payload: sopi });
       }, err => {
-        let error, errorMessage;
-        console.log(typeof err._body);
-        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
-        if (!errorMessage || !errorMessage.errorMessage) {
-          error = 'There is a server Error.';
-        } else {
-          error = errorMessage.errorMessage;
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: SOPI_CREATE_FAILED, error: this.errorMessage });
+          // put error mesage here.
         }
-        this.ngRedux.dispatch({type: SOPI_CREATE_FAILED, error });
+      },
+      () => {
+        this.errorMessage = null;
       }
     );
   }
@@ -75,14 +76,14 @@ export class SopiActionCreator implements OnDestroy {
       (sopis: ISopiView[]) => {
         this.ngRedux.dispatch({ type: SOPI_GET_FULFILLED, payload: sopis });
       }, err => {
-        let error, errorMessage;
-        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
-        if (!errorMessage || !errorMessage.errorMessage) {
-          error = 'There is a server Error.';
-        } else {
-          error = errorMessage.errorMessage;
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: SOPI_GET_FAILED, error: this.errorMessage });
+          // put error mesage here.
         }
-        this.ngRedux.dispatch({type: SOPI_GET_FAILED, error });
+      },
+      () => {
+        this.errorMessage = null;
       }
     );
   }
@@ -94,14 +95,14 @@ export class SopiActionCreator implements OnDestroy {
       (sopi: ISopiView) => {
         this.ngRedux.dispatch({ type: SOPI_UPDATE_FULFILLED, payload: sopi });
       }, err => {
-        let error, errorMessage;
-        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
-        if (!errorMessage || !errorMessage.errorMessage) {
-          error = 'There is a server Error.';
-        } else {
-          error = errorMessage.errorMessage;
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: SOPI_UPDATE_FAILED, error: this.errorMessage });
+          // put error mesage here.
         }
-        this.ngRedux.dispatch({type: SOPI_UPDATE_FAILED, error });
+      },
+      () => {
+        this.errorMessage = null;
       }
     );
   }
@@ -113,14 +114,14 @@ export class SopiActionCreator implements OnDestroy {
       (sopi: ISopiView) => {
         this.ngRedux.dispatch({ type: SOPI_DELETE_FULFILLED, payload: sopi });
       }, err => {
-        let error, errorMessage;
-        (typeof err._body === 'string') ? errorMessage = JSON.parse(err._body) : errorMessage = null;
-        if (!errorMessage || !errorMessage.errorMessage) {
-          error = 'There is a server Error.';
-        } else {
-          error = errorMessage.errorMessage;
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: SOPI_DELETE_FAILED, error: this.errorMessage });
+          // put error mesage here.
         }
-        this.ngRedux.dispatch({type: SOPI_DELETE_FAILED, error });
+      },
+      () => {
+        this.errorMessage = null;
       }
     );
   }
