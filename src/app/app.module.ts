@@ -54,6 +54,7 @@ import { rootReducer, INITIAL_STATE, IAppState } from './store/app.store';
 import { ServiceModule } from './services/service.module';
 import { ActionCreatorModule } from './store/action-creators/action-creator.module';
 import { ComponentModule } from 'app/components/component.module';
+import { SessionGuard } from 'app/guards/session.guard';
 
 
 @NgModule({
@@ -108,6 +109,9 @@ export class MaterialModule {}
         SidebarModule,
         NavbarModule,
         FooterModule
+    ],
+    providers: [
+      SessionGuard
     ],
     declarations: [
         AppComponent,

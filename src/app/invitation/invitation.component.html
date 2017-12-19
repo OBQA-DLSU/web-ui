@@ -4,11 +4,60 @@
       <div class="col-md-12">
         <div class="col-md-12">
           <div class="card">
-              <dynamic-form
-                [config]="config"
-                #form="dynamicForm"
-                (submit)="submit($event)">
-              </dynamic-form>
+            <div class="card-header card-header-icon" data-background-color="green">
+              <i class="material-icons">add</i>
+            </div>
+            <div class="card-content">
+              <h4 class="card-title">invitationForm</h4>
+              <div>
+                <div [formGroup]="invitationForm">
+                  <div formArrayName="invitationItems"
+                    *ngFor="let item of invitationForm.get('invitationItems').controls; let i = index;">
+                    <div [formGroupName]="i">
+                      <div class="form-group label-floating col-md-3">
+                        <label class="control-label">Email
+                          <span class="star">*</span>
+                        </label>
+                        <input type="text" class="form-control" formControlName="email">
+                      </div>
+                        <!-- <input type="text" class="form-control" formControlName="programId"> -->
+                      <div class="col-md-5">
+                        <mat-form-field ngClass="form-group label-floating">
+                          <mat-select placeholder="Program" name="programId" formControlName="programId">
+                            <mat-option *ngFor="let program of programs" [value]="program.id">
+                              {{ program.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-2">
+                        <mat-form-field ngClass="form-group label-floating">
+                          <mat-select placeholder="Invite as.." name="isStudent" formControlName="isStudent">
+                            <mat-option *ngFor="let s of isStudentOptions" [value]="s.isStudent">
+                              {{ s.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-2">
+                        <mat-form-field ngClass="form-group label-floating">
+                          <mat-select placeholder="Admin?" name="isAdmin" formControlName="isAdmin">
+                            <mat-option *ngFor="let a of isAdminOptions" [value]="a.isAdmin">
+                              {{ a.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-md-12">
+                <button [disabled]="isInviteLimit()" [ngClass]="{'btn': true ,'btn-primary': isInviteLimit, 'btn-disabled': !isInviteLimit }" (click)="addItem()">Add</button>
+                <button [disabled]="!invitationForm.valid" [ngClass]="{'btn': true ,'btn-info': invitationForm.valid, 'btn-disabled': !invitationForm.valid }" (click)="submit()">Submit</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

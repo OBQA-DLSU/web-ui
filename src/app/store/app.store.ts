@@ -4,12 +4,14 @@ import { USER_INITIAL_STATE, userReducer as user, IUserStore } from './user.stor
 import { COURSE_INITIAL_STATE, courseReducer as courses, ICourseStore } from './course.store';
 import { MY_CLASS_INITIAL_STATE, myClassReducer as myClasses, IMyClassStore } from './my-class.store';
 import { MISC_INITIAL_STATE, miscReducer as misc, IMiscStore } from './misc.store';
+import { INVITE_INITIAL_STATE, inviteReducer as invite, IInviteStore } from './invite.store';
 export interface IAppState {
   session: ISessionStore;
   user: IUserStore;
   courses: ICourseStore;
   myClasses: IMyClassStore;
   misc: IMiscStore;
+  invite: IInviteStore;
 }
 
 export const INITIAL_STATE: IAppState = {
@@ -17,7 +19,8 @@ export const INITIAL_STATE: IAppState = {
   user: USER_INITIAL_STATE,
   courses: COURSE_INITIAL_STATE,
   myClasses: MY_CLASS_INITIAL_STATE,
-  misc: MISC_INITIAL_STATE
+  misc: MISC_INITIAL_STATE,
+  invite: INVITE_INITIAL_STATE
 }
 
 export const rootReducer = combineReducers<IAppState>({
@@ -25,5 +28,6 @@ export const rootReducer = combineReducers<IAppState>({
   user,
   courses,
   myClasses,
-  misc
+  misc,
+  invite
 });

@@ -5,4 +5,5 @@ export interface ICourseView {
   programId?: number;
   program?: string;
   description?: string;
+  toBeAssessed?: boolean;
 }
