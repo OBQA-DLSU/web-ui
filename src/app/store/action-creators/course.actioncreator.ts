@@ -72,7 +72,7 @@ export class CourseActionCreator implements OnDestroy {
       return newData;
     })
     .subscribe(
-      (courses: ICourseView[]) => {
+      (courses: any[]) => {
         this.ngRedux.dispatch({type: COURSE_GET_FULFILLED, payload: courses});
       }, err => {
         this.errorMessage = err._body;
@@ -133,7 +133,8 @@ export class CourseActionCreator implements OnDestroy {
       name: data.course.name,
       description: data.description,
       program: data.program.name,
-      programId: data.programId
+      programId: data.programId,
+      toBeAssessed: data.toBeAssessed
     };
     return newData;
   };
