@@ -25,7 +25,7 @@ export const SESSION_INITIAL_STATE: ISessionStore = {
     instructor: [],
     student: []
   },
-  token: '',
+  token: null,
   error: null
 }
 

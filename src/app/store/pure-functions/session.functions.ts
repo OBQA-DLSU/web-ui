@@ -50,7 +50,7 @@ export const sessionCheckFailed = (state, action) => {
 export const sessionDestroy = (state, action) => {
   return tassign(state, {
     user: null,
-    token: '',
+    token: null,
     error: null
   });
 };
