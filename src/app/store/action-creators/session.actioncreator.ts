@@ -64,10 +64,6 @@ export class SessionActionCreator implements OnDestroy {
     const session: ISession = this.authenticationService.SessionRead();
     if (!session) { 
       this.ngRedux.dispatch({type: SESSION_CHECK_FAILED, error:`Session has Expired.` });
-      this.dialogService.showSwal('error-message', {
-        title: 'Your Session Has Expired!',
-        text: 'Please Sigin in.'
-      });
     } else {
       this.ngRedux.dispatch({type: SESSION_CHECK_FULFILLED, payload: session});
     }
