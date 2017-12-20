@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs/Subscription';
 
 import { IAppState } from '../app.store';
 import { ISopiView } from '../../interfaces/sopi/sopi-view.interface';
-import { IProgramSopi } from '../../interfaces/programSopi/program-sopi.interface';
+import { IProgramSopi } from './../../interfaces/programSopi/program-sopi.interface';
 import { SopiService } from '../../services/sopi.service';
 import {
   SOPI_CREATE_ATTEMPT,
