@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let row of tableDataArray">
+          <tr *ngFor="let row of newTableDataArray">
             <td *ngFor="let r of tableHeaderName">{{ row[r] }}</td>
             <td *ngIf="actionsEnabled()" class="text-right">
               <button *ngIf="actionEdit" class="btn btn-simple btn-warning btn-icon edit"  matTooltip="Edit" [matTooltipPosition]="'left'">
@@ -34,6 +34,19 @@
         </tbody>
         </table>
       </div>
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li class="page-item">
+            <a class="page-link" class="btn btn-info" (click)="onFirst()">First</a>
+          </li>
+          <li class="page-item" *ngFor="let item of pagesToShow; let i = index" [attr.data-index]="i">
+            <a class="page-link" class="btn btn-info" (click)="onChangePage(i)">{{i+1}}</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" class="btn btn-info" (click)="onLast()">Last</a>
+          </li>
+        </ul>
+      </nav>
     </div>
     <!-- end content-->
   </div>

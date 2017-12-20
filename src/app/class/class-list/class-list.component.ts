@@ -23,6 +23,81 @@ export class ClassListComponent implements OnInit {
       "id":"3",
       "class": "FLAS",
       "description": "s"
+    },
+    {
+      "id":"1",
+      "class": "CHE",
+      "description": "s"
+    },
+    {
+      "id":"2",
+      "class": "ELECGE",
+      "description": "s"
+    },
+    {
+      "id":"3",
+      "class": "FLAS",
+      "description": "s"
+    },
+    {
+      "id":"1",
+      "class": "CHE",
+      "description": "s"
+    },
+    {
+      "id":"2",
+      "class": "ELECGE",
+      "description": "s"
+    },
+    {
+      "id":"3",
+      "class": "FLAS",
+      "description": "s"
+    },
+    {
+      "id":"1",
+      "class": "CHE",
+      "description": "s"
+    },
+    {
+      "id":"2",
+      "class": "ELECGE",
+      "description": "s"
+    },
+    {
+      "id":"3",
+      "class": "FLAS",
+      "description": "s"
+    },
+    {
+      "id":"1",
+      "class": "CHE",
+      "description": "s"
+    },
+    {
+      "id":"2",
+      "class": "ELECGE",
+      "description": "s"
+    },
+    {
+      "id":"3",
+      "class": "FLAS",
+      "description": "s"
+    },
+    {
+      "id":"1",
+      "class": "CHE",
+      "description": "s"
+    },
+    {
+      "id":"2",
+      "class": "ELECGE",
+      "description": "s"
+    },
+    {
+      "id":"3",
+      "class": "FLAS",
+      "description": "s"
     }
   ];
 
