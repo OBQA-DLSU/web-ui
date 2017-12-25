@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from
 import { select } from '@angular-redux/store';
 import { Subscription } from 'rxjs/Subscription';
 import { CourseActionCreator } from '../../store/action-creators/course.actioncreator';
+import { WEB_API_URL } from '../../config/web-api-address';
 declare var $: any;
 
 
@@ -15,9 +16,11 @@ export class AddCourseComponent implements OnInit, OnDestroy {
 
   // code, name, description => body
   // toBeAssessed, programId => params
+  
   private userSubscription: Subscription = null;
   private programId: number = 5;
   private courseForm: FormGroup;
+  private uploadUrl: string = `${WEB_API_URL}/api/course/bulk/${this.programId}`;
   @select(s => s.session.user) user;
   constructor(
     private formBuilder: FormBuilder,

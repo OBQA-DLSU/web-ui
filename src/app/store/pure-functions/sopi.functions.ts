@@ -11,7 +11,7 @@ export const sopiCreateFulfilled = (state, action) => {
   return tassign(state, {
     sopis: [
       ...state.sopis,
-      action.sopi
+      action.payload
     ],
     error: ''
   });
@@ -32,10 +32,9 @@ export const sopiUpdateAttempt = (state, action) => {
 };
 
 export const sopiUpdateFulfilled = (state, action) => {
-  const index = _.find(state.sopis, 'id', action.sopi.id);
+  const index = _.findIndex(state.sopis, (c) => { return c.id == action.payload.id });
   let newArray = state.sopis.slice();
-  newArray.splice(index, 0, action.sopi);
-
+  newArray.splice(index, 1, action.payload);
   return tassign(state, {
     sopis: newArray,
     error: ''
@@ -58,7 +57,7 @@ export const sopiGetAttempt = (state, action) => {
 
 export const sopiGetFulfilled = (state, action) => {
   return tassign(state, {
-    sopis: action.sopis,
+    sopis: action.payload,
     error: ''
   });
 };
@@ -78,9 +77,8 @@ export const sopiDeleteAttempt = (state, action) => {
 };
 
 export const sopiDeleteFulfilled = (state, action) => {
-  const index = _.find(state.sopis, 'id', action.sopi.id);
   const newArray = _.remove(state.sopis, (n) => {
-    return n.id !== index;
+    return n.id != action.payload.id;
   });
   return tassign(state, {
     sopis: newArray,

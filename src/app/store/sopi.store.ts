@@ -8,7 +8,10 @@ import {
   SOPI_GET_FULFILLED,
   SOPI_UPDATE_ATTEMPT,
   SOPI_UPDATE_FAILED,
-  SOPI_UPDATE_FULFILLED
+  SOPI_UPDATE_FULFILLED,
+  SOPI_DELETE_ATTEMPT,
+  SOPI_DELETE_FULFILLED,
+  SOPI_DELETE_FAILED
 } from './action/sopi.actions';
 import * as sopi from './pure-functions/sopi.functions';
 
@@ -33,6 +36,9 @@ export function sopiReducer (state: ISopiStore = SOPI_INITIAL_STORE, action) {
     case SOPI_UPDATE_ATTEMPT: return sopi.sopiUpdateAttempt(state, action);
     case SOPI_UPDATE_FAILED: return sopi.sopiUpdateFailed(state, action);
     case SOPI_UPDATE_FULFILLED: return sopi.sopiUpdateFulfilled(state, action);
+    case SOPI_DELETE_ATTEMPT: return sopi.sopiDeleteAttempt(state, action);
+    case SOPI_DELETE_FAILED: return sopi.sopiDeleteFailed(state, action);
+    case SOPI_DELETE_FULFILLED: return sopi.sopiDeleteFulfilled(state, action);
   }
   return state;
 }
