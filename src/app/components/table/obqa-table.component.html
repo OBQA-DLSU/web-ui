@@ -23,11 +23,11 @@
           <tr *ngFor="let row of tableDataArray">
             <td *ngFor="let r of tableHeaderName">{{ row[r] }}</td>
             <td *ngIf="actionsEnabled()" class="text-right">
-              <button *ngIf="actionEdit" class="btn btn-simple btn-warning btn-icon edit"  matTooltip="Edit" [matTooltipPosition]="'left'">
+              <button *ngIf="actionEdit" (click)="onEditClick(row)" class="btn btn-simple btn-warning btn-icon edit"  matTooltip="Edit" [matTooltipPosition]="'left'">
                 <i class="material-icons">edit</i>
               </button>
-              <button *ngIf="actionDelete" class="btn btn-simple btn-danger btn-icon remove"  matTooltip="Remove" [matTooltipPosition]="'left'">
-                  <i class="material-icons">delete</i>
+              <button *ngIf="actionDelete" (click)="onDeleteClick(row)" class="btn btn-simple btn-danger btn-icon remove"  matTooltip="Remove" [matTooltipPosition]="'left'">
+                <i class="material-icons">delete</i>
               </button>
             </td>
           </tr>
