@@ -7,6 +7,7 @@ import { IAppState } from '../app.store';
 import { ISopiView } from '../../interfaces/sopi/sopi-view.interface';
 import { IProgramSopi } from '../../interfaces/programSopi/program-sopi.interface';
 import { SopiService } from '../../services/sopi.service';
+import { DialogService } from '../../services/dialog.service';
 import {
   SOPI_CREATE_ATTEMPT,
   SOPI_CREATE_FAILED,
@@ -36,7 +37,8 @@ export class SopiActionCreator implements OnDestroy {
 
   constructor (
     private ngRedux: NgRedux<IAppState>,
-    private sopiService: SopiService
+    private sopiService: SopiService,
+    private dialogService: DialogService
   ) {}
 
   ngOnDestroy () {
@@ -52,11 +54,14 @@ export class SopiActionCreator implements OnDestroy {
     .subscribe(
       (sopi: ISopiView) => {
         this.ngRedux.dispatch({ type: SOPI_CREATE_FULFILLED, payload: sopi });
+        this.dialogService.showSwal('success-message', {
+          title:  'Successful Course Creation',
+          text: `${sopi.code} was successfully Created.`
+        });
       }, err => {
         this.errorMessage = err._body;
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: SOPI_CREATE_FAILED, error: this.errorMessage });
-          // put error mesage here.
         }
       },
       () => {
@@ -94,6 +99,10 @@ export class SopiActionCreator implements OnDestroy {
     .subscribe(
       (sopi: ISopiView) => {
         this.ngRedux.dispatch({ type: SOPI_UPDATE_FULFILLED, payload: sopi });
+        this.dialogService.showSwal('success-message', {
+          title:  'Successful Course Update',
+          text: `${sopi.code} was successfully Updated.`
+        });
       }, err => {
         this.errorMessage = err._body;
         if (this.errorMessage && typeof this.errorMessage === 'string') {
@@ -107,12 +116,15 @@ export class SopiActionCreator implements OnDestroy {
     );
   }
 
-  DeleteSopi (id: number) {
+  DeleteSopi (id: number, sopi: ISopiView) {
     this.deleteSopiSubscription = this.sopiService.DeleteSopi(id)
-    .map(data => this.programSopiToView(data))
     .subscribe(
-      (sopi: ISopiView) => {
-        this.ngRedux.dispatch({ type: SOPI_DELETE_FULFILLED, payload: sopi });
+      (data) => {
+        this.ngRedux.dispatch({ type: SOPI_DELETE_FULFILLED, payload: data });
+        this.dialogService.showSwal('success-message', {
+          title:  'Successful SOPI Deletion',
+          text: `${sopi.code} was successfully deleted.`
+        });
       }, err => {
         this.errorMessage = err._body;
         if (this.errorMessage && typeof this.errorMessage === 'string') {
