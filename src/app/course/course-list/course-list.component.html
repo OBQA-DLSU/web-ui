@@ -8,6 +8,8 @@
         [tableDataArray]="(courses | async)"
         [tableHeaderName]="dataNames"
         [tableHeaderAlias]="dataNameAlias"
+        (clickEdit)="onClickEdit($event)"
+        (clickDelete)="onClickDelete($event)"
       ></app-obqa-table>
     </div>
   </div>
