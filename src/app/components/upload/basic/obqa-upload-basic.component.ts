@@ -20,7 +20,6 @@ export class ObqaUploadBasicComponent implements OnInit {
 	ngOnInit() {
 		this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
 		this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-			console.log("ImageUpload:uploaded:", item, status, response);
 			alert(response);
 		};
 	}
@@ -31,7 +30,6 @@ export class ObqaUploadBasicComponent implements OnInit {
     this.headers.append('Access-Control-Allow-Origin','*');
     const options = new RequestOptions({headers: this.headers});
 		let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#file');
-		// console.log("iam+ " + inputEl);
 		let fileCount: number = inputEl.files.length;
 		let formData = new FormData();
 		if (fileCount > 0) { // a file was selected

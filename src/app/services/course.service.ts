@@ -37,7 +37,7 @@ export class CourseService {
   DeleteCourse (id: number): Observable<IProgramCourse> {
     const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    return this.http.delete(`${this.courseUrl}/programCourse/${id}`, options)
+    return this.http.delete(`${this.courseUrl}programCourse/${id}`, options)
     .map(response => response.json())
   }
 
