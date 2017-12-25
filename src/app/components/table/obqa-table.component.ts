@@ -24,7 +24,7 @@ export class ObqaTableComponent implements OnInit {
 
   private newTableDataArray:Array<object>;
   private page:number; // current page
-  private perPage:number = 10; // data per page
+  private perPage:number = 5; // data per page
   private pageNumber:number; // number of page
   private pagesToShow:number; // number of page between prev and next btn
   private count:number; // number of data of all pages
