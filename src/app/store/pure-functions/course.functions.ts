@@ -34,7 +34,6 @@ export const courseUpdateAttempt = (state, action) => {
 };
 
 export const courseUpdateFulfilled = (state, action) => {
-  const { courses } = state;
   const index = _.findIndex(state.courses, (c) => { return c.id == action.payload.id });
   let newArray = state.courses.slice();
   newArray.splice(index, 1, action.payload);

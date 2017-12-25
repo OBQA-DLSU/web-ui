@@ -27,7 +27,6 @@ export class CourseListComponent implements OnInit, OnDestroy {
 
   private dataNames = ['id', 'code', 'name', 'description', 'toBeAssessed'];
   private dataNameAlias = ['ID', 'Code', 'Name', 'Description', 'To Be Assessed?'];
-  private editCourseForm: FormGroup;
   private dialogRef: any;
   private dialogRefSubscription: Subscription = null;
   private toDelete: boolean;
@@ -58,7 +57,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
 
   async onClickDelete(data) {
     let x = await swal({
-      title: 'Are you sure you?',
+      title: 'Are you sure?',
       text: `You are about to delete ${data.code} in the list of Courses.`,
       type: 'warning',
       showCancelButton: true,
