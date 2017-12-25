@@ -1,4 +1,6 @@
 import { tassign } from 'tassign';
+import * as _ from 'lodash';
+
 export const sessionCreateAttempt = (state, action) => {
   return tassign(state, {
     user: state.user,
