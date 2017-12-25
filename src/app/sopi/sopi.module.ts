@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../app.module';
 
 import { SopiRoutes } from './sopi.routing';
-import { SopiListComponent } from './sopi-list/sopi-list.component';
+import { SopiListComponent, EditSopiDialog } from './sopi-list/sopi-list.component';
 import { AddSopiComponent } from './add-sopi/add-sopi.component';
 import { ComponentModule } from './../components/component.module';
 
@@ -18,6 +18,14 @@ import { ComponentModule } from './../components/component.module';
     MaterialModule,
     ComponentModule
   ],
-  declarations: [SopiListComponent,AddSopiComponent]
+  declarations: [
+    SopiListComponent,
+    AddSopiComponent,
+    EditSopiDialog
+  ],
+  entryComponents: [
+    EditSopiDialog
+  ]
+
 })
 export class SopiModule { }

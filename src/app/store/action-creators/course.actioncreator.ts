@@ -53,11 +53,15 @@ export class CourseActionCreator implements OnDestroy {
     .subscribe(
       (course: ICourseView) => {
         this.ngRedux.dispatch({type: COURSE_CREATE_FULFILLED, payload: course});
+        this.dialogService.showSwal('success-message', {
+          title:  'Successful Course Creation',
+          text: `${course.code} was successfully Created.`
+        });
       }, err => {
         this.errorMessage = err._body;
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: COURSE_CREATE_FAILED, error: this.errorMessage });
-          // put error mesage here.
+          
         }
       },
       () => {
@@ -80,7 +84,6 @@ export class CourseActionCreator implements OnDestroy {
         this.errorMessage = err._body;
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: COURSE_GET_FAILED, error: this.errorMessage });
-          // put error mesage here.
         }
       },
       () => {
