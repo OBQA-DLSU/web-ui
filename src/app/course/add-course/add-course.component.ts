@@ -33,13 +33,12 @@ export class AddCourseComponent implements OnInit, OnDestroy {
     });
     this.userSubscription = this.user.subscribe(
       result => {
-        console.log(result);
+        
       }
     );
   }
 
   ngOnDestroy() {
-    console.log('destroy');
     (this.userSubscription)? this.userSubscription.unsubscribe() : null; 
   }
 

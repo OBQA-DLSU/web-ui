@@ -24,7 +24,6 @@ export class SessionGuard implements CanActivate, OnDestroy {
     private dialogService: DialogService,
     private router: Router
   ) {
-    console.log('constructor');
     this.tokenSubscription = this.token.subscribe(
       token => {
         if (!token) {
@@ -39,7 +38,6 @@ export class SessionGuard implements CanActivate, OnDestroy {
   }
 
   ngOnDestroy () {
-    console.log('Destroyed');
     (this.tokenSubscription)? this.tokenSubscription.unsubscribe() : null;
   }
 

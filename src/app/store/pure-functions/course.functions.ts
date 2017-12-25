@@ -59,7 +59,6 @@ export const courseGetAttempt = (state, action) => {
 };
 
 export const courseGetFulfilled = (state, action) => {
-  console.log(action);
   return tassign(state, {
     courses: action.payload,
     error: ''
@@ -81,9 +80,8 @@ export const courseDeleteAttempt = (state, action) => {
 };
 
 export const courseDeleteFulfilled = (state, action) => {
-  const index = _.find(state.courses, 'id', action.payload.id);
   const newArray = _.remove(state.courses, (n) => {
-    return n.id !== index;
+    return n.id != action.payload.id;
   });
   return tassign(state, {
     courses: newArray,
@@ -97,3 +95,4 @@ export const courseDeleteFailed = (state, action) => {
     error: action.error
   });
 };
+
