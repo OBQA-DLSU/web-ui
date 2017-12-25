@@ -9,7 +9,6 @@ import { ObqaTableComponent } from './table/obqa-table.component';
 import { FormComponent } from './form/form.component';
 import { ObqaUploadBasicComponent } from './upload/basic/obqa-upload-basic.component';
 import { ObqaInputBasicComponent } from './input/basic/obqa-input-basic.component';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -29,7 +28,8 @@ import { ObqaInputBasicComponent } from './input/basic/obqa-input-basic.componen
     ObqaUploadBasicComponent,
     FileSelectDirective,
     ObqaInputBasicComponent
-  ]
+  ],
+  entryComponents: []
 })
 export class ComponentModule {
 }

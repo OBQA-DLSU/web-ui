@@ -6,7 +6,6 @@ import { MaterialModule } from '../app.module';
 
 import { InvitationComponent } from './invitation.component';
 import { InvitationRoutes } from './invitation.routing';
-import { DynamicFormModule } from './../obqa-forms/dynamic-form.module';
 
 @NgModule({
   imports: [
@@ -14,8 +13,7 @@ import { DynamicFormModule } from './../obqa-forms/dynamic-form.module';
     RouterModule.forChild(InvitationRoutes),
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
-    DynamicFormModule
+    MaterialModule
   ],
   declarations: [InvitationComponent]
 })
