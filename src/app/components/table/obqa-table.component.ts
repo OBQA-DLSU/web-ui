@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { NgClass, NgFor, NgIf } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 declare interface DataTable {
   headerRow: string[];
@@ -20,8 +21,17 @@ export class ObqaTableComponent implements OnInit {
   @Input() tableDataArray: Array<object>;
   @Input() tableHeaderName: Array<string>;
   @Input() tableHeaderAlias: Array<string>;
-  
-  ngOnInit () {}
+  @Output() clickEdit = new EventEmitter<any>();
+  @Output() clickDelete = new EventEmitter<any>();
+
+
+  constructor (
+    private formBuilder: FormBuilder
+  ) {}
+
+  ngOnInit () {
+
+  }
 
   actionsEnabled (): boolean {
     return (this.actionDelete || this.actionEdit) ? true : false;
@@ -29,6 +39,14 @@ export class ObqaTableComponent implements OnInit {
 
   dataCount (): number {
     return (this.tableDataArray) ? this.tableDataArray.length : 0;
+  }
+
+  onEditClick (data) {
+    this.clickEdit.emit(data);
+  }
+
+  onDeleteClick (data) {
+    this.clickDelete.emit(data);
   }
 
 }

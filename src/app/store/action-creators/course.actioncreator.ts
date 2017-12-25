@@ -45,8 +45,8 @@ export class CourseActionCreator implements OnDestroy {
     (this.deleteCourseSubscription) ? this.deleteCourseSubscription.unsubscribe() : null;
   }
   
-  CreateCourse (course: ICourseView, programId: number, toBeAssessed: boolean) {
-    this.createCourseSubscription = this.courseService.CreateCourse(programId, course, toBeAssessed)
+  CreateCourse (course: ICourseView, programId: number) {
+    this.createCourseSubscription = this.courseService.CreateCourse(programId, course)
     .map(data => this.programCourseToView(data))
     .subscribe(
       (course: ICourseView) => {
