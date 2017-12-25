@@ -4,9 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../app.module';
 
-
 import { CourseRoutes } from './course.routing';
-import { CourseListComponent } from './course-list/course-list.component';
+import { CourseListComponent, EditCourseDialog  } from './course-list/course-list.component';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { ComponentModule } from 'app/components/component.module';
 
@@ -20,6 +19,13 @@ import { ComponentModule } from 'app/components/component.module';
     MaterialModule,
     ComponentModule
   ],
-  declarations: [CourseListComponent, AddCourseComponent]
+  declarations: [
+    CourseListComponent,
+    AddCourseComponent,
+    EditCourseDialog
+  ],
+  entryComponents: [
+    EditCourseDialog
+  ]
 })
 export class CourseModule { }

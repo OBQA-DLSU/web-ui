@@ -1,5 +1,5 @@
 import { tassign } from 'tassign';
-import { lodash as _ } from 'lodash';
+import * as _ from 'lodash';
 
 
 
@@ -34,10 +34,10 @@ export const courseUpdateAttempt = (state, action) => {
 };
 
 export const courseUpdateFulfilled = (state, action) => {
-  const index = _.find(state.courses, 'id', action.payload.id);
+  const { courses } = state;
+  const index = _.findIndex(state.courses, (c) => { return c.id == action.payload.id });
   let newArray = state.courses.slice();
-  newArray.splice(index, 0, action.payload);
-
+  newArray.splice(index, 1, action.payload);
   return tassign(state, {
     courses: newArray,
     error: ''
@@ -59,7 +59,6 @@ export const courseGetAttempt = (state, action) => {
 };
 
 export const courseGetFulfilled = (state, action) => {
-  console.log(action);
   return tassign(state, {
     courses: action.payload,
     error: ''
@@ -81,9 +80,8 @@ export const courseDeleteAttempt = (state, action) => {
 };
 
 export const courseDeleteFulfilled = (state, action) => {
-  const index = _.find(state.courses, 'id', action.payload.id);
   const newArray = _.remove(state.courses, (n) => {
-    return n.id !== index;
+    return n.id != action.payload.id;
   });
   return tassign(state, {
     courses: newArray,
@@ -97,3 +95,4 @@ export const courseDeleteFailed = (state, action) => {
     error: action.error
   });
 };
+

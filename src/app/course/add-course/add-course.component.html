@@ -46,6 +46,9 @@
                   </label>
                 </div>
               </div>
+              <div class="col-md-12">
+                <button [disabled]="!courseForm.valid" [ngClass]="{'btn': true ,'btn-info': courseForm.valid, 'btn-disabled': !courseForm.valid }" (click)="submit()">Submit</button>
+              </div>
             </form>
           </div>
           <div class="col-md-6">

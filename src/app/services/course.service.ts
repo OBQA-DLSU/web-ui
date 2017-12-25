@@ -20,10 +20,10 @@ export class CourseService {
     .map(response => response.json())
   }
 
-  CreateCourse (programId:number, course: ICourseView, toBeAssessed: boolean): Observable<IProgramCourse> {
+  CreateCourse (programId:number, course: ICourseView): Observable<IProgramCourse> {
     const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    return this.http.post(this.courseUrl+`${programId}/${toBeAssessed}`, course, options)
+    return this.http.post(this.courseUrl+`${programId}/${course.toBeAssessed}`, course, options)
     .map(response => response.json())
   }
 
@@ -37,7 +37,7 @@ export class CourseService {
   DeleteCourse (id: number): Observable<IProgramCourse> {
     const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    return this.http.delete(`${this.courseUrl}/programCourse/${id}`, options)
+    return this.http.delete(`${this.courseUrl}programCourse/${id}`, options)
     .map(response => response.json())
   }
 

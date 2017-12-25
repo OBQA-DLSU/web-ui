@@ -1,0 +1,2 @@
+export const SEND_INVITES_FULFILLED: string = 'SEND_INVITES_FULFILLED';
+export const SEND_INVITES_FAILED: string = 'SEND_INVITES_FAILED';

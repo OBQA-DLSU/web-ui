@@ -1,4 +1,6 @@
 import { tassign } from 'tassign';
+import * as _ from 'lodash';
+
 export const sessionCreateAttempt = (state, action) => {
   return tassign(state, {
     user: state.user,
@@ -50,7 +52,7 @@ export const sessionCheckFailed = (state, action) => {
 export const sessionDestroy = (state, action) => {
   return tassign(state, {
     user: null,
-    token: '',
+    token: null,
     error: null
   });
 };

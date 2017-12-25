@@ -4,6 +4,7 @@ import * as Redux from 'redux';
 import { Subscription } from 'rxjs/Subscription';
 
 import { CourseService } from '../../services/course.service';
+import { DialogService } from '../../services/dialog.service';
 import { IAppState } from '../app.store';
 import { ICourseView } from '../../interfaces/course/course-view.interface';
 import { IProgramCourse } from '../../interfaces/programCourse/program-course.interface';
@@ -35,7 +36,8 @@ export class CourseActionCreator implements OnDestroy {
 
   constructor (
     private ngRedux: NgRedux<IAppState>,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private dialogService: DialogService
   ) {}
 
   ngOnDestroy () {
@@ -45,8 +47,8 @@ export class CourseActionCreator implements OnDestroy {
     (this.deleteCourseSubscription) ? this.deleteCourseSubscription.unsubscribe() : null;
   }
   
-  CreateCourse (course: ICourseView, programId: number, toBeAssessed: boolean) {
-    this.createCourseSubscription = this.courseService.CreateCourse(programId, course, toBeAssessed)
+  CreateCourse (course: ICourseView, programId: number) {
+    this.createCourseSubscription = this.courseService.CreateCourse(programId, course)
     .map(data => this.programCourseToView(data))
     .subscribe(
       (course: ICourseView) => {
@@ -72,7 +74,7 @@ export class CourseActionCreator implements OnDestroy {
       return newData;
     })
     .subscribe(
-      (courses: ICourseView[]) => {
+      (courses: any[]) => {
         this.ngRedux.dispatch({type: COURSE_GET_FULFILLED, payload: courses});
       }, err => {
         this.errorMessage = err._body;
@@ -93,6 +95,10 @@ export class CourseActionCreator implements OnDestroy {
     .subscribe(
       (course: ICourseView) => {
         this.ngRedux.dispatch({type: COURSE_UPDATE_FULFILLED, payload: course});
+        this.dialogService.showSwal('success-message', {
+          title:  'Successful Course Update',
+          text: `${course.code} was successfully Updated.`
+        });
       }, err => {
         this.errorMessage = err._body;
         if (this.errorMessage && typeof this.errorMessage === 'string') {
@@ -106,17 +112,19 @@ export class CourseActionCreator implements OnDestroy {
     );
   }
 
-  DeleteCourse (id: number) {
+  DeleteCourse (id: number, course: ICourseView) {
     this.deleteCourseSubscription = this.courseService.DeleteCourse(id)
-    .map(data => this.programCourseToView(data))
     .subscribe(
-      (course: ICourseView) => {
-        this.ngRedux.dispatch({ type: COURSE_DELETE_FULFILLED, paylaod: course });
+      (data) => {
+        this.ngRedux.dispatch({ type: COURSE_DELETE_FULFILLED, payload: data });
+        this.dialogService.showSwal('success-message', {
+          title:  'Successful Course Deletion',
+          text: `${course.code} was successfully deleted.`
+        });
       }, err => {
         this.errorMessage = err._body;
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: COURSE_DELETE_FAILED, error: this.errorMessage });
-          // put error mesage here.
         }
       },
       () => {
@@ -133,7 +141,8 @@ export class CourseActionCreator implements OnDestroy {
       name: data.course.name,
       description: data.description,
       program: data.program.name,
-      programId: data.programId
+      programId: data.programId,
+      toBeAssessed: data.toBeAssessed
     };
     return newData;
   };

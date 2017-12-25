@@ -1,5 +1,5 @@
 import { tassign } from 'tassign';
-import { lodash as _ } from 'lodash';
+import * as _ from 'lodash';
 
 export const sopiCreateAttempt = (state, action) => {
   return tassign(state, {

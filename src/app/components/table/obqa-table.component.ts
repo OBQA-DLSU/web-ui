@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import * as _ from 'lodash';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 declare interface DataTable {
   headerRow: string[];
@@ -21,6 +22,8 @@ export class ObqaTableComponent implements OnInit {
   @Input() tableDataArray: Array<object>;
   @Input() tableHeaderName: Array<string>;
   @Input() tableHeaderAlias: Array<string>;
+  @Output() clickEdit = new EventEmitter<any>();
+  @Output() clickDelete = new EventEmitter<any>();
 
   private newTableDataArray:Array<object>;
   private page:number; // current page
@@ -28,6 +31,10 @@ export class ObqaTableComponent implements OnInit {
   private pageNumber:number; // number of page
   private pagesToShow:number; // number of page between prev and next btn
   private count:number; // number of data of all pages
+
+  constructor (
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit () {
     this.getInitialData();
@@ -69,12 +76,7 @@ export class ObqaTableComponent implements OnInit {
   }
   onChangePage(value) {
     this.page = value;
-    // this.ngAfterViewInit();
     this.getNewData();
-  }
-  
-  getListOfpage (perPage) {
-    return new Array(perPage);
   }
 
   actionsEnabled (): boolean {
@@ -83,6 +85,14 @@ export class ObqaTableComponent implements OnInit {
 
   dataCount (): number {
     return (this.tableDataArray) ? this.tableDataArray.length : 0;
+  }
+
+  onEditClick (data) {
+    this.clickEdit.emit(data);
+  }
+
+  onDeleteClick (data) {
+    this.clickDelete.emit(data);
   }
 
 }
