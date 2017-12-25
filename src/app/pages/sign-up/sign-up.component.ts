@@ -1,4 +1,5 @@
 import { select } from '@angular-redux/store';
+import { NgClass } from '@angular/common';
 import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -89,7 +90,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
     if (this.signUpForm.valid) {
       this.userActionCreator.CreateUser(this.signUpForm.value);
     } else {
-      
     }
   }
 }

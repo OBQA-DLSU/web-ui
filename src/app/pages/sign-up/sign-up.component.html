@@ -44,33 +44,15 @@
             <form [formGroup]="signUpForm" (submit)="submit()">
               <div class="card card-login card-hidden">
                 <div class="card-header text-center" data-background-color="green">
-                  <h4 class="card-title">Sign up: {{ myInvtiationCode | async }}</h4>
+                  <h4 class="card-title">Sign up:</h4>
                 </div>
                 <div class="card-content">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                          <i class="material-icons">info</i>
-                        </span>
-                        <div class="form-group label-floating">
-                            <label class="control-label" for="invitationCode" [attr.for]="idd">Invitation Code <span class="star">*</span>
-                            </label>
-                          
-                            <div class="form-group">
-                              <input class="form-control"
-                                formControlName="invitationCode" 
-                                type="invitationCode"
-                                #input id="invitationCode"
-                                placeholder=""
-                              />
-                            </div>
-                          </div>
-                      </div>
                   <div class="input-group">
                     <span class="input-group-addon">
                       <i class="material-icons">info</i>
                     </span>
                     <app-obqa-input-basic 
-                      length="20" 
+                      length="12" 
                       formControlName="email" 
                       [c]="signUpForm.controls.email" 
                       [optional]="true"
@@ -85,7 +67,7 @@
                       <i class="material-icons">info</i>
                     </span>
                     <app-obqa-input-basic 
-                      length="20" 
+                      length="12" 
                       formControlName="fname" 
                       [c]="signUpForm.controls.fname" 
                       [optional]="true"
@@ -100,7 +82,7 @@
                       <i class="material-icons">info</i>
                     </span>
                     <app-obqa-input-basic 
-                      length="20" 
+                      length="12" 
                       formControlName="lname" 
                       [c]="signUpForm.controls.lname" 
                       [optional]="true"
@@ -115,14 +97,14 @@
                         <i class="material-icons">info</i>
                       </span>
                       <app-obqa-input-basic 
-                        length="20" 
+                        length="12" 
                         formControlName="idNumber" 
                         [c]="signUpForm.controls.idNumber" 
                         [optional]="true"
                         idd="idNumber" 
                         placeholder=""
                         type="text" 
-                        text="ID Number:">
+                        text="ID Code:">
                       </app-obqa-input-basic>
                     </div>
                   <div class="input-group">
@@ -130,7 +112,7 @@
                       <i class="material-icons">info</i>
                     </span>
                     <app-obqa-input-basic 
-                      length="20" 
+                      length="12" 
                       formControlName="password" 
                       [c]="signUpForm.controls.password" 
                       [optional]="true"
@@ -145,19 +127,40 @@
                       <i class="material-icons">info</i>
                     </span>
                     <app-obqa-input-basic 
-                      length="20" 
+                      length="12" 
                       formControlName="confirmation" 
                       [c]="signUpForm.controls.confirmation" 
                       [optional]="true"
                       idd="confirmation" 
                       placeholder=""
                       type="password" 
-                      text="Confirmation:">
+                      text="Retype Password:">
                     </app-obqa-input-basic>
+                  </div>
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <i class="material-icons">info</i>
+                    </span>
+                    <div class="form-group label-floating">
+                      <label class="control-label" for="invitationCode" [attr.for]="idd">Invitation Code <span class="star">*</span>
+                      </label>
+                      <div class="form-group">
+                        <input class="form-control"
+                          formControlName="invitationCode" 
+                          type="invitationCode"
+                          #input id="invitationCode"
+                          placeholder=""
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="footer text-center">
-                  <button type="submit" class="btn btn-rose btn-simple btn-wd btn-lg">Sign-Up</button>
+                  <button type="submit" [ngClass]="{
+                    'btn-info': signUpForm.valid,
+                    'btn-disabled': !signUpForm.valid,
+                    'btn btn-wd btn-lg': true
+                  }" [disabled]="!signUpForm.valid">Sign-Up</button>
                 </div>
               </div>
             </form>
