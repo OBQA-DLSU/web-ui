@@ -24,7 +24,7 @@ export class ObqaTableComponent implements OnInit {
 
   private newTableDataArray:Array<object>;
   private page:number; // current page
-  private perPage:number; // data per page
+  private perPage:number = 10; // data per page
   private pageNumber:number; // number of page
   private pagesToShow:number; // number of page between prev and next btn
   private count:number; // number of data of all pages
@@ -34,9 +34,8 @@ export class ObqaTableComponent implements OnInit {
   }
 
   getInitialData() {
-    // set initial value
+    // set current page initial value
     this.page=0;
-    this.perPage=5;
 
     // Slice the Initial Array by per-page value
     let createTableDataArray = _.chunk(this.tableDataArray, this.perPage);
@@ -44,6 +43,7 @@ export class ObqaTableComponent implements OnInit {
     // get a page of array  
     this.newTableDataArray = createTableDataArray[this.page];
 
+    // count the number of pagination buttons
     this.pagesToShow = _.map(createTableDataArray);
   }
 
@@ -71,6 +71,10 @@ export class ObqaTableComponent implements OnInit {
     this.page = value;
     // this.ngAfterViewInit();
     this.getNewData();
+  }
+  
+  getListOfpage (perPage) {
+    return new Array(perPage);
   }
 
   actionsEnabled (): boolean {
