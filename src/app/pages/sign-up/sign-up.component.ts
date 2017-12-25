@@ -89,7 +89,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     if (this.signUpForm.valid) {
       this.userActionCreator.CreateUser(this.signUpForm.value);
     } else {
-      console.log('waring');
+      
     }
   }
 }
