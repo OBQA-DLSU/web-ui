@@ -26,7 +26,7 @@ export class ClassListComponent implements OnInit, OnDestroy {
   private dataNameAlias = ['ID', 'Course', 'Term', 'A.Y.', 'Cycle'];
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('session')).user;
-    this.myClassActionCreator.GetMyClassWithFilter('instructorId',this.user.instructor[0].id.toString());
+    this.myClassActionCreator.GetMyClassWithFilter('instructorId','1');
   }
 
   ngOnDestroy() {}

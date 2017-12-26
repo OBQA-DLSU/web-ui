@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <div class="col-md-12">
           <div class="card">
-            <form [formGroup]="sopiForm">
+            <form [formGroup]="sopiForm" (submit)="onSubmit()">
               <div class="card-header card-header-icon" data-background-color="green">
                 <i class="material-icons">add</i>
               </div>
@@ -41,8 +41,12 @@
                   text="Description:"
                 ></app-obqa-input-basic>
               </div>
-              <div class="col-md-12">
-                <button [disabled]="!sopiForm.valid" [ngClass]="{'btn': true ,'btn-info': sopiForm.valid, 'btn-disabled': !sopiForm.valid }" (click)="submit()">Submit</button>
+              <div class="footer text-center">
+                <button type="submit" [ngClass]="{
+                  'btn-success': sopiForm.valid,
+                  'btn-disabled': !sopiForm.valid,
+                  'btn btn-wd btn-lg': true
+                }" [disabled]="!sopiForm.valid">Submit</button>
               </div>
             </form>
           </div>
