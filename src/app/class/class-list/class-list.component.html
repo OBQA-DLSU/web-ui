@@ -2,12 +2,14 @@
   <div class="container-fluid">
     <div class="row">
       <app-obqa-table
-        tableTitle="Class List"
+        tableTitle="Course List"
         [actionDelete]="true"
-        [actionEdit]="true"
-        [tableDataArray]="data"
+        [actionMore]="true"
+        [tableDataArray]="(myClasses | async)"
         [tableHeaderName]="dataNames"
         [tableHeaderAlias]="dataNameAlias"
+        (clickEdit)="onClickEdit($event)"
+        (clickDelete)="onClickDelete($event)"
       ></app-obqa-table>
     </div>
   </div>

@@ -6,8 +6,6 @@ import { Subscription } from 'rxjs/Subscription';
 import swal from 'sweetalert2';
 import { CourseActionCreator } from '../../store/action-creators/course.actioncreator';
 
-
-
 declare var $: any;
 
 @Component({
