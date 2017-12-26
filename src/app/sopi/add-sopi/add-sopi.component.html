@@ -11,7 +11,7 @@
               <div class="card-content">
                 <h4 class="card-title">Add New Sopi</h4>
                 <app-obqa-input-basic
-                  length="12"
+                  length="6"
                   formControlName="code"
                   [c]="sopiForm.controls.code"
                   [optional]="true"
@@ -19,6 +19,16 @@
                   placeholder=""
                   type="text"
                   text="SOPI Code:"
+                ></app-obqa-input-basic>
+                <app-obqa-input-basic
+                  length="6"
+                  formControlName="so"
+                  [c]="sopiForm.controls.so"
+                  [optional]="true"
+                  idd="name"
+                  placeholder=""
+                  type="text"
+                  text="SO Code:"
                 ></app-obqa-input-basic>
                 <app-obqa-input-basic
                   length="12"
@@ -47,7 +57,7 @@
               </div>
               <div class="card-content">
                 <h4 class="card-title">Upload .xls File</h4>
-                <app-obqa-upload-basic fileAlias="file" [URL]="uploadUrl"></app-obqa-upload-basic>
+                <app-obqa-upload-basic fileAlias="sopi" [URL]="uploadUrl"></app-obqa-upload-basic>
               </div>
             </div>
           </div>

@@ -1,13 +1,24 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
-import { SopiActionCreator } from './../../store/action-creators/sopi.actioncreator';
+import { select } from '@angular-redux/store';
+import { Subscription } from 'rxjs/Subscription';
+import { SopiActionCreator } from '../../store/action-creators/sopi.actioncreator';
+import { WEB_API_URL } from '../../config/web-api-address';
+declare var $: any;
 
 @Component({
   selector: 'app-add-sopi',
   templateUrl: './add-sopi.component.html'
 })
-export class AddSopiComponent implements OnInit {
+export class AddSopiComponent implements OnInit, OnDestroy {
+
+  
+  private userSubscription: Subscription = null;
+  private programId: number = 5;
   private sopiForm: FormGroup;
+  private uploadUrl: string = `${WEB_API_URL}/api/sopi/bulk/${this.programId}`;
+  
+  @select(s => s.session.user) user;
   constructor(
     private formBuilder: FormBuilder,
     private sopiActionCreator: SopiActionCreator
@@ -16,15 +27,24 @@ export class AddSopiComponent implements OnInit {
   ngOnInit() {
     this.sopiForm = this.formBuilder.group({
       code: [null, Validators.required],
-      description: [null, Validators]
+      so: [null, Validators.required],
+      description: [null, Validators.required]
     });
+    this.userSubscription = this.user.subscribe(
+      result => {
+        
+      }
+    );
   }
-  
-  onSubmit() {
+
+  ngOnDestroy() {
+    (this.userSubscription)? this.userSubscription.unsubscribe() : null; 
+  }
+
+  submit (event) {
     if (this.sopiForm.valid) {
-      // this.sopiActionCreator.CreateSopi(programID, this.sopiForm.value);
+      this.sopiActionCreator.CreateSopi(this.programId, this.sopiForm.value);
     }
-    console.log(this.sopiForm.value);
   }
 
 }
