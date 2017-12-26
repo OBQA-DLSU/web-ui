@@ -6,7 +6,9 @@ import {
   SESSION_DESTROY_FULFILLED,
   SESSION_CHECK_ATTEMPT,
   SESSION_CHECK_FULFILLED,
-  SESSION_CHECK_FAILED
+  SESSION_CHECK_FAILED,
+  SESSION_UPDATE_FAILED,
+  SESSION_UPDATE_FULFILLED
 } from './action/session.actions';
 import * as session from './pure-functions/session.functions';
 export interface ISessionStore extends ISession {
@@ -14,17 +16,11 @@ export interface ISessionStore extends ISession {
 }
 
 export const SESSION_INITIAL_STATE: ISessionStore = {
-  user: {
-    id: null,
-    idNumber: '',
-    roleId: null,
-    role: null,
-    fname: '',
-    lname: '',
-    email: '',
-    instructor: [],
-    student: []
-  },
+  user: null,
+  isStudent: null,
+  isAdmin: null,
+  programId: null,
+  program: null,
   token: null,
   error: null
 }
@@ -38,6 +34,8 @@ export function sessionReducer(state: ISessionStore = SESSION_INITIAL_STATE, act
     case SESSION_CHECK_ATTEMPT: return session.sessionCheckAttempt(state, action);
     case SESSION_CHECK_FULFILLED: return session.sessionCheckFulfilled(state, action);
     case SESSION_CHECK_FAILED: return session.sessionCheckFailed(state, action);
+    case SESSION_UPDATE_FAILED: return session.sessionUpdateFailed(state, action);
+    case SESSION_UPDATE_FULFILLED: return session.sessionUpdateFulfilled(state, action);
   }
   return state;
 };

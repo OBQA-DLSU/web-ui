@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import { IUserCreate } from '../interfaces/user/user-create.interface';
 import { ISessionCreate } from '../interfaces/session/session-create.interface';
 import { ISession } from '../interfaces/session/session.interface';
+import { IProgram } from '../interfaces/program/program.interface';
 
 import { WEB_API_URL } from '../config/web-api-address';
 
@@ -41,6 +42,20 @@ export class AuthenticationService {
 
   SessionDestroy(): void {
     localStorage.clear();
+  }
+
+  SessionUpdate(isStudent: boolean, isAdmin: boolean, programId: number, program: IProgram): ISession {
+    const previousSession: ISession = this.SessionRead();
+    let newSession: ISession = {
+      user: previousSession.user,
+      isStudent,
+      isAdmin,
+      programId,
+      program,
+      token: previousSession.token
+    };
+    this.SessionSave(newSession);
+    return newSession;
   }
 
 }
