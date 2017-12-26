@@ -1,4 +1,4 @@
-import { IMyClass } from '../interfaces/myClass/my-class.interface';
+import { IMyClassView } from '../interfaces/myClass/my-class-view.interface';
 import {
   MY_CLASS_CREATE_ATTEMPT,
   MY_CLASS_CREATE_FAILED,
@@ -16,7 +16,7 @@ import {
 import * as myClass from './pure-functions/my-class.functions';
 
 export interface IMyClassStore {
-  myClasses: IMyClass[];
+  myClasses: IMyClassView[];
   error: string;
 }
 

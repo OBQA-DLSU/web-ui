@@ -12,6 +12,7 @@ declare interface DataTable {
   selector: 'app-obqa-table',
   templateUrl: './obqa-table.component.html'
 })
+
 export class ObqaTableComponent implements OnInit {
 
   @Input() tableTitle:string;
