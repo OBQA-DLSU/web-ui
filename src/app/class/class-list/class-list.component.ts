@@ -31,4 +31,8 @@ export class ClassListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {}
 
+  onClickMore(event) {
+    console.log(event);
+  }
+
 }
