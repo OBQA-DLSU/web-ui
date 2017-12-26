@@ -14,17 +14,20 @@ declare interface DataTable {
   selector: 'app-obqa-table',
   templateUrl: './obqa-table.component.html'
 })
+
 export class ObqaTableComponent implements OnInit {
 
   @Input() tableTitle:string;
   @Input() actionDelete: boolean;
   @Input() actionEdit: boolean;
+  @Input() actionMore: boolean;
   @Input() actionViewDetail: boolean;
   @Input() tableDataArray: Observable<any[]>;
   @Input() tableHeaderName: Array<string>;
   @Input() tableHeaderAlias: Array<string>;
   @Output() clickEdit = new EventEmitter<any>();
   @Output() clickDelete = new EventEmitter<any>();
+  @Output() clickMore = new EventEmitter<any>();
 
   private newTableDataArray:any[];
   private currentPage:number = 0; // page number
@@ -83,7 +86,7 @@ export class ObqaTableComponent implements OnInit {
    this.currentPage = this.pagesToShow - 1;
   }
 
-  // up for this line of codes
+  //
   // dataCount (): number {
   //   return (this.tableDataArray) ? this.tableDataArray.length : 0;
   // }
@@ -94,6 +97,10 @@ export class ObqaTableComponent implements OnInit {
 
   onDeleteClick (data) {
     this.clickDelete.emit(data);
+  }
+
+  onMoreClick (data) {
+    this.clickMore.emit(data);
   }
 
 }

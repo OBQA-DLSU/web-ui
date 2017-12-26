@@ -7,5 +7,6 @@ export interface IInstructor {
   user?: IUser;
   programId?: number;
   program: IProgram;
+  userId?: number;
 }
 

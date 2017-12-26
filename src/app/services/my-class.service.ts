@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { IMyClass } from '../interfaces/myClass/my-class.interface';
+import { IMyClassView } from '../interfaces/myClass/my-class-view.interface';
 
 import { WEB_API_URL } from '../config/web-api-address';
 
@@ -15,6 +16,27 @@ export class MyClassService {
   ) { }
 
   private myClassUrl: string = `${WEB_API_URL}/api/myClass/`;
+
+  GetOneMyClass (id: number): Observable<IMyClass> {
+    const headers = new Headers({ 'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+    return this.http.get(`${this.myClassUrl}/programMyClass/${id}`, options)
+    .map(response => response.json())
+  }
+
+  UpdateMyClass (id: number, myClass: IMyClassView): Observable<IMyClass> {
+    const headers = new Headers({ 'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+    return this.http.put(`${this.myClassUrl}/programMyClass/${id}`, myClass, options)
+    .map(response => response.json())
+  }
+
+  DeleteMyClass (id: number): Observable<any> {
+    const headers = new Headers({ 'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+    return this.http.delete(`${this.myClassUrl}/programMyClass/${id}`, options)
+    .map(response => response.json())
+  }
 
   GetMyClassPerProgramWithFilter (programId: number, filterName: string, filterValue: string): Observable<IMyClass[]> {
     const headers = new Headers({ 'Content-Type': 'application/json'});
@@ -37,24 +59,17 @@ export class MyClassService {
     .map(response => response.json())
   }
 
-  CreateMyClass (programId: number, myClass: IMyClass): Observable<IMyClass> {
+  GetMyClass (programId: number): Observable<IMyClass[]> {
+    const headers = new Headers({ 'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+    return this.http.get(`${this.myClassUrl}/${programId}`, options)
+    .map(response => response.json())
+  }
+
+  CreateMyClass (programId: number, myClass: IMyClassView): Observable<IMyClass> {
     const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
     return this.http.post(`${this.myClassUrl}/${programId}`, myClass, options)
-    .map(response => response.json())
-  }
-
-  UpdateMyClass (id: number, myClass: IMyClass): Observable<IMyClass> {
-    const headers = new Headers({ 'Content-Type': 'application/json'});
-    const options = new RequestOptions({headers: headers});
-    return this.http.put(`${this.myClassUrl}/${id}`, myClass, options)
-    .map(response => response.json())
-  }
-
-  DeleteMyClass (id: number): Observable<IMyClass> {
-    const headers = new Headers({ 'Content-Type': 'application/json'});
-    const options = new RequestOptions({headers: headers});
-    return this.http.delete(`${this.myClassUrl}/${id}`, options)
     .map(response => response.json())
   }
 

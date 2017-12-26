@@ -29,6 +29,9 @@
           <tr *ngFor="let row of newTableDataArray">
             <td *ngFor="let r of tableHeaderName">{{ row[r] }}</td>
             <td *ngIf="actionsEnabled()" class="text-right">
+              <button *ngIf="actionMore" (click)="onMoreClick(row)" class="btn btn-simple btn-warning btn-icon edit"  matTooltip="More" [matTooltipPosition]="'left'">
+                <i class="material-icons">more</i>
+              </button>
               <button *ngIf="actionEdit" (click)="onEditClick(row)" class="btn btn-simple btn-warning btn-icon edit"  matTooltip="Edit" [matTooltipPosition]="'left'">
                 <i class="material-icons">edit</i>
               </button>
