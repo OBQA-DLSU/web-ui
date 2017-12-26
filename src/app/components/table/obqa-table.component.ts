@@ -76,12 +76,19 @@ export class ObqaTableComponent implements OnInit {
   }
 
   onPrev() {
-    this.currentPage--;
+    if (this.currentPage !== 0){
+      this.currentPage--;
+    }
   }
 
   onNext() {
-    this.currentPage++;
+    if ( this.currentPage >= (this.pagesToShow - 1)) {
+
+    } else {
+      this.currentPage++;
+    }
   }
+
   onLast() {
    this.currentPage = this.pagesToShow - 1;
   }
