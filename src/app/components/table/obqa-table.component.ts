@@ -93,11 +93,6 @@ export class ObqaTableComponent implements OnInit {
    this.currentPage = this.pagesToShow - 1;
   }
 
-  //
-  // dataCount (): number {
-  //   return (this.tableDataArray) ? this.tableDataArray.length : 0;
-  // }
-
   onEditClick (data) {
     this.clickEdit.emit(data);
   }
