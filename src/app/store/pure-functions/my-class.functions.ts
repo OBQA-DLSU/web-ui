@@ -11,7 +11,7 @@ export const myClassCreateFulfilled = (state, action) => {
   return tassign(state, {
     myClasses: [
       ...state.myClasses,
-      action.myClass
+      action.payload
     ],
     error: ''
   });
@@ -32,10 +32,9 @@ export const myClassUpdateAttempt = (state, action) => {
 };
 
 export const myClassUpdateFulfilled = (state, action) => {
-  const index = _.find(state.myClasses, 'id', action.myClass.id);
+  const index = _.findIndex(state.myClasses, (c) => { return c.id == action.payload.id });
   let newArray = state.myClasses.slice();
-  newArray.splice(index, 0, action.myClass);
-
+  newArray.splice(index, 1, action.payload);
   return tassign(state, {
     myClasses: newArray,
     error: ''
@@ -58,7 +57,7 @@ export const myClassGetAttempt = (state, action) => {
 
 export const myClassGetFulfilled = (state, action) => {
   return tassign(state, {
-    myClasses: action.myClasses,
+    myClasses: action.payload,
     error: ''
   });
 };
@@ -78,9 +77,8 @@ export const myClassDeleteAttempt = (state, action) => {
 };
 
 export const myClassDeleteFulfilled = (state, action) => {
-  const index = _.find(state.myClasses, 'id', action.myClass.id);
   const newArray = _.remove(state.myClasses, (n) => {
-    return n.id !== index;
+    return n.id != action.payload.id;
   });
   return tassign(state, {
     myClasses: newArray,

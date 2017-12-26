@@ -4,8 +4,10 @@ import * as Redux from 'redux';
 import { Subscription } from 'rxjs/Subscription';
 
 import { MyClassService } from '../../services/my-class.service';
+import { DialogService } from '../../services/dialog.service';
 import { IAppState } from '../app.store';
 import { IMyClass} from '../../interfaces/myClass/my-class.interface';
+import { IMyClassView } from '../../interfaces/myClass/my-class-view.interface';
 import {
   MY_CLASS_CREATE_ATTEMPT,
   MY_CLASS_CREATE_FAILED,
@@ -31,12 +33,15 @@ export class MyClassActionCreator implements OnDestroy {
   private createMyClassSubscription: Subscription = null;
   private updateMyClassSubscription: Subscription = null;
   private deleteMyClassSubscription: Subscription = null;
+  private getOneMyClassSubscription: Subscription = null;
+  private getMyClassSubscription: Subscription = null;
 
   private errorMessage: string = null;
 
   constructor (
     private ngRedux: NgRedux<IAppState>,
-    private myClassService: MyClassService
+    private myClassService: MyClassService,
+    private dialogService: DialogService
   ) {}
 
   ngOnDestroy () {
@@ -46,12 +51,106 @@ export class MyClassActionCreator implements OnDestroy {
     (this.createMyClassSubscription) ? this.createMyClassSubscription.unsubscribe() : null;
     (this.updateMyClassSubscription) ? this.updateMyClassSubscription.unsubscribe() : null;
     (this.deleteMyClassSubscription) ? this.deleteMyClassSubscription.unsubscribe() : null;
+    (this.getOneMyClassSubscription) ? this.getOneMyClassSubscription.unsubscribe() : null;
+    (this.getMyClassSubscription) ? this.getMyClassSubscription.unsubscribe() : null;
+  }
+
+  GetOneMyClass(id: number) {
+    this.getOneMyClassSubscription = this.myClassService.GetOneMyClass(id)
+    .map(data => this.myClassToView(data))
+    .subscribe(
+      (myClass: IMyClassView) => {
+        const myClasses = [myClass];
+        this.ngRedux.dispatch({type: MY_CLASS_GET_FULFILLED, payload: myClasses});
+      }, err => {
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: MY_CLASS_GET_FAILED, error: this.errorMessage });
+        }
+      },
+      () => {
+        this.errorMessage = null;
+      }
+    );
+  }
+
+  UpdateMyClass(id: number, myClass: IMyClassView) {
+    this.updateMyClassSubscription = this.myClassService.UpdateMyClass(id, myClass)
+    .map(data => this.myClassToView(data))
+    .subscribe(
+      (myClass: IMyClassView) => {
+        this.ngRedux.dispatch({ type: MY_CLASS_UPDATE_FULFILLED, payload: myClass });
+        this.dialogService.showSwal('success-message', {
+          title:  'Successful Class Update',
+          text: `Class ID: ${myClass.id} was successfully Updated.`
+        });
+      }, err => {
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: MY_CLASS_UPDATE_FAILED, error: this.errorMessage });
+          // put error mesage here.
+        }
+      },
+      () => {
+        this.errorMessage = null;
+      }
+    );
+  }
+
+  DeleteMyClass(id: number, myClass: IMyClassView) {
+    this.deleteMyClassSubscription = this.myClassService.DeleteMyClass(id)
+    .subscribe(
+      (id) => {
+        this.ngRedux.dispatch({ type: MY_CLASS_DELETE_FULFILLED, payload: id });
+        this.dialogService.showSwal('success-message', {
+          title:  'Successful Class Deletion',
+          text: `Class ID: ${myClass.id} was successfully deleted.`
+        });
+      }, err => {
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: MY_CLASS_DELETE_FAILED, error: this.errorMessage });
+          
+        }
+      },
+      () => {
+        this.errorMessage = null;
+      }
+    );
+  }
+
+  GetMyClass (id: number) {
+    this.getMyClassSubscription = this.myClassService.GetMyClass(id)
+    .map(data => {
+      let newData: IMyClassView[];
+      newData = data.map(d => this.myClassToView(d))
+      return newData;
+    })
+    .subscribe(
+      (myClasses: IMyClassView[]) => {
+        this.ngRedux.dispatch({type: MY_CLASS_GET_FULFILLED, payload: myClasses});
+      }, err => {
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: MY_CLASS_GET_FAILED, error: this.errorMessage });
+          // put error mesage here.
+        }
+      },
+      () => {
+        this.errorMessage = null;
+      }
+    );
   }
 
   GetMyClassPerProgramWithFilter(programId: number, filterName: string, filterValue: string) {
     this.getMyClassPerProgramWithFilterSubscription = this.myClassService.GetMyClassPerProgramWithFilter(programId, filterName, filterValue)
+    .map(data => {
+      let newData: IMyClassView[];
+      newData = data.map(d => this.myClassToView(d))
+      return newData;
+    })
     .subscribe(
-      (myClasses: IMyClass[]) => {
+      (myClasses: IMyClassView[]) => {
         this.ngRedux.dispatch({type: MY_CLASS_GET_FULFILLED, payload: myClasses});
       }, err => {
         this.errorMessage = err._body;
@@ -68,8 +167,13 @@ export class MyClassActionCreator implements OnDestroy {
 
   GetMyClassWithFilter(filterName: string, filterValue: string) {
     this.getMyClassWithFilterSubscription = this.myClassService.GetMyClassWithFilter(filterName, filterValue)
+    .map(data => {
+      let newData: IMyClassView[];
+      newData = data.map(d => this.myClassToView(d))
+      return newData;
+    })
     .subscribe(
-      (myClasses: IMyClass[]) => {
+      (myClasses: IMyClassView[]) => {
         this.ngRedux.dispatch({type: MY_CLASS_GET_FULFILLED, payload: myClasses});
       }, err => {
         this.errorMessage = err._body;
@@ -86,8 +190,13 @@ export class MyClassActionCreator implements OnDestroy {
 
   GetMyClassAll() {
     this.getMyClassAllSubscription = this.myClassService.GetMyClassAll()
+    .map(data => {
+      let newData: IMyClassView[];
+      newData = data.map(d => this.myClassToView(d))
+      return newData;
+    })
     .subscribe(
-      (myClasses: IMyClass[]) => {
+      (myClasses: IMyClassView[]) => {
         this.ngRedux.dispatch({type: MY_CLASS_GET_FULFILLED, payload: myClasses});
       }, err => {
         this.errorMessage = err._body;
@@ -102,7 +211,7 @@ export class MyClassActionCreator implements OnDestroy {
     );
   }
 
-  CreateMyClass(programId: number, myClass: IMyClass) {
+  CreateMyClass(programId: number, myClass: IMyClassView) {
     this.createMyClassSubscription = this.myClassService.CreateMyClass(programId, myClass)
     .subscribe(
       (myClass: IMyClass) => {
@@ -120,40 +229,33 @@ export class MyClassActionCreator implements OnDestroy {
     );
   }
 
-  UpdateMyClass(id: number, myClass: IMyClass) {
-    this.updateMyClassSubscription = this.myClassService.UpdateMyClass(id, myClass)
-    .subscribe(
-      (myClass: IMyClass) => {
-        this.ngRedux.dispatch({ type: MY_CLASS_UPDATE_FULFILLED, payload: myClass });
-      }, err => {
-        this.errorMessage = err._body;
-        if (this.errorMessage && typeof this.errorMessage === 'string') {
-          this.ngRedux.dispatch({ type: MY_CLASS_UPDATE_FAILED, error: this.errorMessage });
-          // put error mesage here.
-        }
+  // functions
+  private myClassToView: Function = (data: IMyClass): IMyClassView => {
+    let newData: IMyClassView;
+    newData = {
+      id: data.id,
+      instructorId: data.instructorId,
+      instructor: {
+        id: data.instructor.id,
+        programId: data.instructor.programId,
+        userId: data.instructor.programId,
+        isAdmin: data.instructor.isAdmin,
+        idNumber: data.instructor.user.idNumber,
+        email: data.instructor.user.email,
+        lname: data.instructor.user.lname,
+        fname: data.instructor.user.fname
       },
-      () => {
-        this.errorMessage = null;
-      }
-    );
-  }
-
-  DeleteMyClass(id: number) {
-    this.deleteMyClassSubscription = this.myClassService.DeleteMyClass(id)
-    .subscribe(
-      (myClass: IMyClass) => {
-        this.ngRedux.dispatch({ type: MY_CLASS_DELETE_FULFILLED, payload: myClass });
-      }, err => {
-        this.errorMessage = err._body;
-        if (this.errorMessage && typeof this.errorMessage === 'string') {
-          this.ngRedux.dispatch({ type: MY_CLASS_DELETE_FAILED, error: this.errorMessage });
-          // put error mesage here.
-        }
-      },
-      () => {
-        this.errorMessage = null;
-      }
-    );
-  }
+      programId: data.programId,
+      program: data.program.name,
+      programCourseId: data.programCourseId,
+      course: data.programCourse.course.code,
+      term: data.term,
+      academicYear: data.academicYear,
+      cycle: data.cycle,
+      students: data.myClassStudents,
+      assessments: data.myClassAssessments
+    };
+    return newData;
+  };
 
 }
