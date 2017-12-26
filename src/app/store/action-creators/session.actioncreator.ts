@@ -55,7 +55,7 @@ export class SessionActionCreator implements OnDestroy {
       },
       () => {
         this.errorMessage = null;
-        this.router.navigate(['./dashboard']);
+        this.router.navigate(['./pages/authentication']);
       }
     );
   }
