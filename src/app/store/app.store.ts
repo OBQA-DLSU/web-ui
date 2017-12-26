@@ -6,6 +6,8 @@ import { SOPI_INITIAL_STORE, sopiReducer as sopis, ISopiStore } from './sopi.sto
 import { MY_CLASS_INITIAL_STATE, myClassReducer as myClasses, IMyClassStore } from './my-class.store';
 import { MISC_INITIAL_STATE, miscReducer as misc, IMiscStore } from './misc.store';
 import { INVITE_INITIAL_STATE, inviteReducer as invite, IInviteStore } from './invite.store';
+import { INSTRUCTOR_INITIAL_STATE, instructorReducer as instructors, IInstructorStore } from './instructor.store';
+
 export interface IAppState {
   session: ISessionStore;
   user: IUserStore;
@@ -14,6 +16,7 @@ export interface IAppState {
   myClasses: IMyClassStore;
   misc: IMiscStore;
   invite: IInviteStore;
+  instructors: IInstructorStore;
 }
 
 export const INITIAL_STATE: IAppState = {
@@ -23,7 +26,8 @@ export const INITIAL_STATE: IAppState = {
   sopis: SOPI_INITIAL_STORE,
   myClasses: MY_CLASS_INITIAL_STATE,
   misc: MISC_INITIAL_STATE,
-  invite: INVITE_INITIAL_STATE
+  invite: INVITE_INITIAL_STATE,
+  instructors: INSTRUCTOR_INITIAL_STATE
 }
 
 export const rootReducer = combineReducers<IAppState>({
@@ -33,5 +37,6 @@ export const rootReducer = combineReducers<IAppState>({
   sopis,
   myClasses,
   misc,
-  invite
+  invite,
+  instructors
 });
