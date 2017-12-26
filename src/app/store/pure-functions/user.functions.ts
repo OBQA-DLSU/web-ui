@@ -26,3 +26,24 @@ export const userCreateFailed = (state, action) => {
     error: action.error
   });
 };
+
+export const userSigninFulfilled = (state, action) => {
+  return tassign(state, {
+    user: action.payload,
+    error: ''
+  })
+};
+
+export const userSigninFailed = (state, action) => {
+  return tassign(state, {
+    user: null,
+    error: action.error
+  });
+};
+
+export const userSessionDestroy = (state, action) => {
+  return tassign(state, {
+    user: null,
+    error: ''
+  });
+};
