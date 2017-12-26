@@ -4,7 +4,7 @@ import { IRole } from '../role/role.interface';
 
 export interface IUser {
   id?: number;
-  idNumber?: string;
+  idNumber: string;
   role?: IRole;
   roleId?: number;
   instructor?: IInstructor[];
