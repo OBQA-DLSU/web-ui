@@ -18,13 +18,14 @@ export class ObqaTableComponent implements OnInit {
   @Input() tableTitle:string;
   @Input() actionDelete: boolean;
   @Input() actionEdit: boolean;
+  @Input() actionMore: boolean;
   @Input() actionViewDetail: boolean;
   @Input() tableDataArray: Array<object>;
   @Input() tableHeaderName: Array<string>;
   @Input() tableHeaderAlias: Array<string>;
   @Output() clickEdit = new EventEmitter<any>();
   @Output() clickDelete = new EventEmitter<any>();
-
+  @Output() clickMore = new EventEmitter<any>();
 
   constructor (
     private formBuilder: FormBuilder
@@ -48,6 +49,10 @@ export class ObqaTableComponent implements OnInit {
 
   onDeleteClick (data) {
     this.clickDelete.emit(data);
+  }
+
+  onMoreClick (data) {
+    this.clickMore.emit(data);
   }
 
 }
