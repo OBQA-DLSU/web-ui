@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LockComponent } from './lock/lock.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { AuthFilterComponent } from './sign-in/auth-filter/auth-filter.component';
 
 export const PagesRoutes: Routes = [
 
@@ -20,6 +21,9 @@ export const PagesRoutes: Routes = [
     }, {
       path: 'sign-up/:code',
       component: SignUpComponent
+    }, {
+      path: 'authentication',
+      component: AuthFilterComponent
     }]
   }
 ];

@@ -66,7 +66,7 @@ export class SessionActionCreator implements OnDestroy {
       },
       () => {
         this.errorMessage = null;
-        this.router.navigate(['./dashboard']);
+        this.router.navigate(['./pages/authentication']);
       }
     );
   }
@@ -89,6 +89,7 @@ export class SessionActionCreator implements OnDestroy {
   SessionUpdate () {
     const session = JSON.parse(localStorage.getItem('session'));
     this.ngRedux.dispatch({ type: SESSION_UPDATE_FULFILLED, payload: session });
+    this.router.navigate(['./dashboard']);
   }
 
   SessionDestroy () {
