@@ -12,7 +12,6 @@ declare var $: any;
 
 export class AuthFilterComponent implements OnInit {
   private authSelectionForm: FormGroup;
-  private tempSession: object;
 
   @select(s => s.session) session;
   constructor(
@@ -21,9 +20,6 @@ export class AuthFilterComponent implements OnInit {
   ){}
 
   ngOnInit() {
-    this.session.subscribe(
-      data => this.tempSession
-    );
     this.authSelectionForm = this.formBuilder.group({
       programId: [null, Validators.required],
       isStudent: [false, Validators.required]
@@ -36,17 +32,16 @@ export class AuthFilterComponent implements OnInit {
   }
 
   submit(event){
-    console.log(event.value);
-    // this.session.subscribe(
-    //   (session => {
-    //     const isStudent = event.isStudent;
-    //     const programId = Number(event.programId);
-    //     let index = _.findIndex(session.user.instructors, (d) => { return d.programId === programId});
-    //     let isAdmin = session.user.instructors[index].isAdmin;
-    //     let program = session.user.instructors[index].program;
-    //     this.sessionActionCreator.SessionUpdate(isStudent, isAdmin, programId, program);
-    //   })
-    // );
-    // console.log(JSON.parse(localStorage.getItem('session')));
+    this.session.subscribe(
+      (session => {
+        const isStudent = event.value.isStudent;
+        const programId = Number(event.value.programId);
+        let index = _.findIndex(session.user.instructors, (d) => { return d.programId === programId});
+        let isAdmin = session.user.instructors[index].isAdmin;
+        let program = session.user.instructors[index].program;
+        this.sessionActionCreator.SessionUpdateLocalStorage(isStudent, isAdmin, programId, program);
+      })
+    );
+    this.sessionActionCreator.SessionUpdate();
   }
 }
