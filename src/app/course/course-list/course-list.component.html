@@ -3,8 +3,8 @@
     <div class="row">
       <app-obqa-table
         tableTitle="Course List"
-        [actionDelete]="true"
-        [actionEdit]="true"
+        [actionDelete]="(isAdmin | async)"
+        [actionEdit]="(isAdmin | async)"
         [tableDataArray]="(courses)"
         [tableHeaderName]="dataNames"
         [tableHeaderAlias]="dataNameAlias"

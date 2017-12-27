@@ -53,7 +53,7 @@ export const sessionCheckFulfilled = (state, action) => {
   return tassign(state, {
     isStudent: action.payload.isStudent,
     isAdmin: action.payload.isAdmin,
-    programId: action.payload.prgramId,
+    programId: action.payload.programId,
     program: action.payload.program,
     user: action.payload.user,
     token: action.payload.token,

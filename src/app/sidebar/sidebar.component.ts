@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { SessionActionCreator } from '../store/action-creators/session.actioncreator';
-
+import { INSTRUCTOR_ROUTES } from './instructor-menu.constant';
+import { select } from '@angular-redux/store';
+import { Subscription } from 'rxjs/Subscription';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 declare const $: any;
 
 //Metadata
@@ -85,12 +88,15 @@ export const ROUTES: RouteInfo[] = [{
 	icontype: 'dashboard'
 }
 ];
+
 @Component({
 	selector: 'app-sidebar-cmp',
 	templateUrl: 'sidebar.component.html',
 })
 
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnDestroy {
+	@select(s => s.session.isAdmin) isAdmin;
+	public isAdminSubscription: Subscription = null;
 	public menuItems: any[];
 	constructor(private sessionActionCreator: SessionActionCreator){
 	}
@@ -103,7 +109,16 @@ export class SidebarComponent implements OnInit {
 	};
 
 	ngOnInit() {
-		this.menuItems = ROUTES.filter(menuItem => menuItem);
+		this.isAdminSubscription = this.isAdmin
+		.subscribe(
+			isAdmin => {
+				if (isAdmin) { this.menuItems = ROUTES.filter(menuItem => menuItem); }
+				else { this.menuItems = INSTRUCTOR_ROUTES.filter(menuItem => menuItem); }
+			}
+		);
+	}
+	ngOnDestroy() {
+		(this.isAdminSubscription) ? this.isAdminSubscription.unsubscribe() : null;
 	}
 	updatePS(): void {
 		if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
