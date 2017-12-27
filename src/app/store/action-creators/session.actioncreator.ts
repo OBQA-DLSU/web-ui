@@ -83,7 +83,7 @@ export class SessionActionCreator implements OnDestroy {
   }
 
   SessionUpdateLocalStorage (isStudent: boolean, isAdmin: boolean, programId: number, program: IProgram) {
-    const session = this.authenticationService.SessionUpdate(isStudent, isAdmin, programId, program);
+    const session = this.authenticationService.SessionUpdate(isStudent, isAdmin, programId);
   }
 
   SessionUpdate () {
