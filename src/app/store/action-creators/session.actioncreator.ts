@@ -82,14 +82,18 @@ export class SessionActionCreator implements OnDestroy {
     }
   }
 
-  SessionUpdate (isStudent: boolean, isAdmin: boolean, programId: number, program: IProgram) {
+  SessionUpdateLocalStorage (isStudent: boolean, isAdmin: boolean, programId: number, program: IProgram) {
     const session = this.authenticationService.SessionUpdate(isStudent, isAdmin, programId, program);
+  }
+
+  SessionUpdate () {
+    const session = JSON.parse(localStorage.getItem('session'));
     this.ngRedux.dispatch({ type: SESSION_UPDATE_FULFILLED, payload: session });
   }
 
   SessionDestroy () {
     this.authenticationService.SessionDestroy();
-    this.ngRedux.dispatch({type: SESSION_DESTROY_FULFILLED});
+    this.ngRedux.dispatch({ type: SESSION_DESTROY_FULFILLED });
     this.ngRedux.dispatch({ type: USER_SESSION_DESTROY });
   }
 }
