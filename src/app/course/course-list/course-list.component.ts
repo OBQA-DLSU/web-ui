@@ -15,7 +15,8 @@ declare var $: any;
 export class CourseListComponent implements OnInit, OnDestroy {
 
   @select(s => s.courses.courses) courses;
-  private programId: number = 5;
+  @select(s => s.session.programId) programId;
+  @select(s => s.session.isAdmin) isAdmin;
 
   constructor(
     private courseActionCreator: CourseActionCreator,
@@ -28,13 +29,18 @@ export class CourseListComponent implements OnInit, OnDestroy {
   private dialogRef: any;
   private dialogRefSubscription: Subscription = null;
   private toDelete: boolean;
+  private progamIdSubscription: Subscription = null;
 
   ngOnInit() {
-    this.courseActionCreator.GetCourse(this.programId);
+    this.progamIdSubscription = this.programId.subscribe(
+      programId => this.courseActionCreator.GetCourse(programId),
+      err => null
+    );
   }
 
   ngOnDestroy() {
     (this.dialogRefSubscription) ? this.dialogRefSubscription.unsubscribe() : null;
+    (this.progamIdSubscription) ? this.progamIdSubscription.unsubscribe() : null;
   }
 
   onClickEdit(data) {
