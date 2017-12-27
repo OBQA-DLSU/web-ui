@@ -9,6 +9,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { LockComponent } from './lock/lock.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ComponentModule } from '../components/component.module';
+import { ForgotPasswordComponent } from './sign-in/forgot-password/forgot-password.component';
+import { BufferPageComponent } from './sign-in/buffer-page/buffer-page.component';
 
 @NgModule({
   imports: [
@@ -21,7 +23,9 @@ import { ComponentModule } from '../components/component.module';
   declarations: [
     SignInComponent,
     SignUpComponent,
-    LockComponent
+    LockComponent,
+    ForgotPasswordComponent,
+    BufferPageComponent
   ]
 })
 
