@@ -6,46 +6,27 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-            <form [formGroup]="authSelectionForm" (submit)="submit()">
+            <form [formGroup]="authSelectionForm">
               <div class="card card-login card-hidden">
                 <div class="card-header text-center" data-background-color="green">
-                  <h4 class="card-title">Select Program</h4>
+                  <h4 class="card-title">Sign In</h4>
                 </div>
                 <div class="card-content">
-                  <!-- <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="material-icons">face</i>
-                    </span>
-                    <div class="radio">
-                      <label>
-                        <input type="radio" name="isStudent" formControlName="isStudent"> Student
-                      </label>
-                      <label>
-                        <input type="radio" name="isStudent" checked="true"> Faculty
-                      </label>
-                    </div>
-                  </div> -->
                   <div class="input-group">
                     <span class="input-group-addon">
                       <i class="material-icons">info</i>
                     </span>
-                    <div class="col-md-10 col-sm-3">
-                      <mat-select style="padding-top: 8px;" formControlName="programId">
-                        <mat-option *ngFor="let i of (session | async).user.instructors" value="{{i.program.id}}">{{i.program.name}}</mat-option>
-                      </mat-select>
-                    </div>
-                  </div>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="material-icons">info</i>
-                    </span>
-                    <div class="col-md-12 col-sm-12"  style="padding-top: 13px;font-size: 16px">
-                      <label><span>You Selected: {{program}}</span></label>
+                    <div>
+                      <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
+                        <mat-select placeholder="Select an Program"  formControlName="programId">
+                            <mat-option *ngFor="let i of (session | async).user.instructors" value="{{i.program.id}}">{{i.program.name}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
                     </div>
                   </div>
                 </div>
                 <div class="footer text-center">
-                  <button type="submit" class="btn btn-rose btn-simple btn-wd btn-lg">Confirm</button>
+                  <button (click)="submit(authSelectionForm)" class="btn btn-rose btn-simple btn-wd btn-lg">Confirm</button>
                 </div>
               </div>
             </form>

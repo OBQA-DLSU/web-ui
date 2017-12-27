@@ -10,6 +10,8 @@ import { LockComponent } from './lock/lock.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ComponentModule } from '../components/component.module';
 import { AuthFilterComponent } from './sign-in/auth-filter/auth-filter.component';
+import { ForgotPasswordComponent } from './sign-in/forgot-password/forgot-password.component';
+import { BufferPageComponent } from './sign-in/buffer-page/buffer-page.component';
 
 @NgModule({
   imports: [
@@ -24,7 +26,9 @@ import { AuthFilterComponent } from './sign-in/auth-filter/auth-filter.component
     SignInComponent,
     SignUpComponent,
     LockComponent,
-    AuthFilterComponent
+    AuthFilterComponent,
+    ForgotPasswordComponent,
+    BufferPageComponent
   ]
 })
 

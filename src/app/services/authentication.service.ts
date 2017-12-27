@@ -15,6 +15,7 @@ export class AuthenticationService {
 
   constructor(private http:Http) { }
   
+  private authUrl: string = `${WEB_API_URL}/api/auth/`;
   private signUpUrl: string = `${WEB_API_URL}/api/auth/signup`;
   private signInUrl: string = `${WEB_API_URL}/api/auth/signin`;
 
@@ -56,6 +57,13 @@ export class AuthenticationService {
     };
     this.SessionSave(newSession);
     return newSession;
+  }
+
+  ForgotPassword(email: string) {
+    const headers = new Headers({ 'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+    return this.http.post(`${this.authUrl}password`, { email }, options)
+    .map(response => response.json())
   }
 
 }
