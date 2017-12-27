@@ -1,41 +1,33 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
-import { select } from '@angular-redux/store'; 
-
-import { SessionActionCreator } from '../../store/action-creators/session.actioncreator';
-import { MiscActionCreator } from '../../store/action-creators/misc.actioncreator';
+import { MiscActionCreator } from '../../../store/action-creators/misc.actioncreator';
 declare var $: any;
-import { ISessionCreate } from '../../interfaces/session/session-create.interface';
-@Component({
-  selector: 'app-sign-in-cmp',
-  templateUrl: './sign-in.component.html'
-})
 
-export class SignInComponent implements OnInit {
-  @select(s => s.misc.toggleForgotPassword) toggleForgotPassword;
-  @select(s => s.misc.signInBufferPage) signInBufferPage;
+@Component({
+  selector: 'app-forgot-password',
+  templateUrl: './forgot-password.component.html'
+})
+export class ForgotPasswordComponent implements OnInit {
+
   test: Date = new Date();
   private toggleButton: any;
   private sidebarVisible: boolean;
   private nativeElement: Node;
 
-  private signInForm: FormGroup;
+  private forgotPasswordForm: FormGroup;
 
   constructor(
     private element: ElementRef,
     private formBuilder: FormBuilder,
-    private sessionActionCreator: SessionActionCreator,
     private miscActionCreator: MiscActionCreator
-  ) 
-    {
+  ) {
     this.nativeElement = element.nativeElement;
     this.sidebarVisible = false;
   }
 
   ngOnInit() {
-    this.signInForm = this.formBuilder.group({
-      email: [null, Validators.required],
-      password: [null, Validators.required]
+    this.forgotPasswordForm = this.formBuilder.group({
+      email: [null, Validators.required]
     });
     var navbar: HTMLElement = this.element.nativeElement;
     this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
@@ -62,15 +54,17 @@ export class SignInComponent implements OnInit {
     }
   }
   submit(){
-    if (this.signInForm.valid) {
-      this.sessionActionCreator.SessionCreate(this.signInForm.value);
+    if (this.forgotPasswordForm.valid) {
+      this.miscActionCreator.ForgotPassword(this.forgotPasswordForm.value.email);
+      this.ngOnInit();
     } else {
-      alert('Invalid form');
+      
     }
   }
 
-  forgotPasswordToggle() {
+  toggleSignin(){
     this.miscActionCreator.ToggleForgotPassword();
     this.ngOnInit();
   }
+
 }
