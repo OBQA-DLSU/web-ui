@@ -41,7 +41,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-            <form [formGroup]="signInForm" (submit)="submit()">
+            <form *ngIf="!(toggleForgotPassword | async) && !(signInBufferPage | async)" [formGroup]="signInForm" (submit)="submit()">
               <div class="card card-login card-hidden">
                 <div class="card-header text-center" data-background-color="green">
                   <h4 class="card-title">Sign in</h4>
@@ -64,9 +64,16 @@
                 </div>
                 <div class="footer text-center">
                   <button type="submit" class="btn btn-rose btn-simple btn-wd btn-lg">Sign-in</button>
+                  <p><a (click)="forgotPasswordToggle()">forgot password?</a></p>
                 </div>
               </div>
             </form>
+            <ng-container *ngIf="(toggleForgotPassword | async) && !(signInBufferPage | async)">
+              <app-forgot-password></app-forgot-password>
+            </ng-container>
+            <ng-container *ngIf="(signInBufferPage | async)">
+              <app-buffer-page></app-buffer-page>
+            </ng-container>
           </div>
         </div>
       </div>
