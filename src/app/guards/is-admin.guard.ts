@@ -7,51 +7,51 @@ import { SessionActionCreator } from '../store/action-creators/session.actioncre
 import { select } from '@angular-redux/store';
 
 @Injectable()
-export class SessionGuard implements CanActivate, CanActivateChild, OnDestroy {
+export class IsAdminGuard implements CanActivate, CanActivateChild, OnDestroy {
   // canActivate(
   //   next: ActivatedRouteSnapshot,
   //   state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
   //   return true;
   // }
 
-  @select(s => s.session.token) token
+  @select(s => s.session.isAdmin) isAdmin;
 
-  private tokenSubscription: Subscription = null;
-  private session: boolean = false;
+  private isAdminSubscription: Subscription = null;
+  private admin: boolean = false;
 
   constructor (
     private sessionActionCreator: SessionActionCreator,
     private dialogService: DialogService,
     private router: Router
   ) {
-    this.tokenSubscription = this.token.subscribe(
+    this.isAdminSubscription = this.isAdmin.subscribe(
       token => {
         if (!token) {
-          this.session = false;
+          this.admin = false;
         } else {
-          this.session = true;
+          this.admin = true;
         }
       }, err => {
-        this.session = false;
+        this.admin = false;
       }
     );
   }
 
-  ngOnDestroy () {
-    (this.tokenSubscription)? this.tokenSubscription.unsubscribe() : null;
+  ngOnDestroy() {
+    (this.isAdminSubscription) ? this.isAdminSubscription.unsubscribe() : null;
   }
-
+  
   canActivate (
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ): Observable<boolean> | Promise<boolean> | boolean {
     this.sessionActionCreator.SessionCheck();
-    if (!this.session) {
+    if (!this.admin) {
       this.dialogService.showSwal('error-message', {
-        title: 'Your Session Has Expired!',
-        text: 'Please Sigin in.'
+        title: 'Content unavailable!',
+        text: 'Sorry, this content is not available for you.'
       });
-      this.router.navigate(['./pages/sign-in']);
+      this.router.navigate(['./dashboard']);
     } else {
       return true;
     }
@@ -62,12 +62,12 @@ export class SessionGuard implements CanActivate, CanActivateChild, OnDestroy {
     state: RouterStateSnapshot,
   ): Observable<boolean> | Promise<boolean> | boolean {
     this.sessionActionCreator.SessionCheck();
-    if (!this.session) {
+    if (!this.admin) {
       this.dialogService.showSwal('error-message', {
-        title: 'Your Session Has Expired!',
-        text: 'Please Sigin in.'
+        title: 'Content unavailable!',
+        text: 'Sorry, this content is not available for you.'
       });
-      this.router.navigate(['./pages/sign-in']);
+      this.router.navigate(['./dashboard']);
     } else {
       return true;
     }
