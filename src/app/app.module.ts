@@ -56,6 +56,7 @@ import { ServiceModule } from './services/service.module';
 import { ActionCreatorModule } from './store/action-creators/action-creator.module';
 import { ComponentModule } from 'app/components/component.module';
 import { SessionGuard } from 'app/guards/session.guard';
+import { IsAdminGuard } from 'app/guards/is-admin.guard';
 
 
 @NgModule({
@@ -112,7 +113,8 @@ export class MaterialModule {}
         FooterModule
     ],
     providers: [
-      SessionGuard
+      SessionGuard,
+      IsAdminGuard
     ],
     declarations: [
         AppComponent,
