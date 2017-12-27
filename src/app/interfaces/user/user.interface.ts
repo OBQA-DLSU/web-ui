@@ -7,8 +7,8 @@ export interface IUser {
   idNumber: string;
   role?: IRole;
   roleId?: number;
-  instructor?: IInstructor[];
-  student?: IStudent[];
+  instructors?: IInstructor[];
+  students?: IStudent[];
   fname?: string;
   lname?: string;
   email: string;

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import * as _ from 'lodash';
 
 import { IUserCreate } from '../interfaces/user/user-create.interface';
 import { ISessionCreate } from '../interfaces/session/session-create.interface';
@@ -45,14 +46,15 @@ export class AuthenticationService {
     localStorage.clear();
   }
 
-  SessionUpdate(isStudent: boolean, isAdmin: boolean, programId: number, program: IProgram): ISession {
+  SessionUpdate(isStudent: boolean, isAdmin: boolean, programId: number): ISession {
     const previousSession: ISession = this.SessionRead();
+    const index = _.findIndex(previousSession.user.instructors, (i) => { return i.programId == programId; });
     let newSession: ISession = {
       user: previousSession.user,
       isStudent,
       isAdmin,
       programId,
-      program,
+      program: previousSession.user.instructors[index].program,
       token: previousSession.token
     };
     this.SessionSave(newSession);
