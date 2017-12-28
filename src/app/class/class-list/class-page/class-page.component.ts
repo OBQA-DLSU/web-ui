@@ -20,16 +20,6 @@ export class ClassPageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private miscActionCreator: MiscActionCreator
   ) { }
-  private data = [
-    {
-      "id":"1",
-      "name": "Juan Dela Cruz",
-      "description": "description 1"
-    }
-  ];
-
-  private dataNames = ['id', 'name', 'description'];
-  private dataNameAlias = ['ID', 'Assessment', 'Description'];
   ngOnInit() {
   this.routeSubscription = this.activatedRoute.params
   .subscribe(params => {
