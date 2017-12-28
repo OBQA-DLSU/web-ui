@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, Inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { select } from '@angular-redux/store';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
@@ -19,7 +20,8 @@ export class ClassListComponent implements OnInit, OnDestroy {
   private user: IUser;
 
   constructor(
-    private myClassActionCreator: MyClassActionCreator
+    private myClassActionCreator: MyClassActionCreator,
+    private router: Router
   ) { }
 
   private dataNames = ['id', 'course', 'term', 'academicYear', 'cycle'];
@@ -30,5 +32,10 @@ export class ClassListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {}
+
+  onMoreClick(data) {
+    console.log(data.id);
+    this.router.navigate(['./class/class-details/'+data.id]);
+  }
 
 }

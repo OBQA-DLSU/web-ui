@@ -4,13 +4,70 @@
       <div class="col-md-12">
         <div class="col-md-12">
           <div class="card">
-            <app-form
-              formLabel="Add New Class"
-              [numberOfInputs]="formDetails"
-              [inputLabel]="inputLabel"
-              [inputClass]="inputClass"
-              [inputType]="inputType"
-            ></app-form>
+            <form [formGroup]="myClassForm" (submit)="submit($event)">
+              <div class="card-header card-header-icon" data-background-color="green">
+                <i class="material-icons">add</i>
+              </div>
+              <div class="card-content">
+                <h4 class="card-title">Add New Class-admin view {{programId}}</h4>
+                <div class="col-md-4">
+                  <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
+                    <mat-select placeholder="Academic Year"  formControlName="academicYear">
+                        <mat-option value="2017-2018">2017-2018</mat-option>
+                        <mat-option value="2018-2019">2018-2019</mat-option>
+                        <mat-option value="2019-2020">2019-2020</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
+                    <mat-select placeholder="Term"  formControlName="term">
+                        <mat-option value="1">Term 1</mat-option>
+                        <mat-option value="2">Term 2</mat-option>
+                        <mat-option value="3">Term 3</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
+                    <mat-select placeholder="Cycle"  formControlName="cycle">
+                        <mat-option value="1">1</mat-option>
+                        <mat-option value="2">2</mat-option>
+                        <mat-option value="3">3</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
+                    <mat-select placeholder="Select Program"  formControlName="programCourseId">
+                        <mat-option *ngFor="let i of (courses | async)" value="{{i.id}}">{{i.code}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field ngClass="form-group label-floating">
+                    <mat-select placeholder="Select Instructor"  formControlName="instructorId">
+                        <mat-option *ngFor="let i of (instructors | async)" value="{{i.id}}">{{i.lname}}, {{i.fname}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <button type="submit" [disabled]="!myClassForm.valid" [ngClass]="{'btn': true ,'btn-info': myClassForm.valid, 'btn-disabled': !myClassForm.valid }">Submit</button>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header card-header-icon" data-background-color="green">
+                <i class="material-icons">folder</i>
+              </div>
+              <div class="card-content">
+                <h4 class="card-title">Upload .xls File</h4>
+                <app-obqa-upload-basic fileAlias="file" [URL]="uploadUrl"></app-obqa-upload-basic>
+              </div>
+            </div>
           </div>
         </div>
       </div>
