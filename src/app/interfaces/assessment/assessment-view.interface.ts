@@ -1,3 +1,5 @@
+import { IImprovementPlanSuggestion } from "app/interfaces/assessment/improvement-plan-suggestion.interface";
+
 export interface IAssessmentView {
   id?: number;
   assessmentLevel?: number;
@@ -15,4 +17,5 @@ export interface IAssessmentView {
   program?: string;
   sopi?: string;
   course?: string;
+  improvementPlanSuggestions?: IImprovementPlanSuggestion[]
 }
