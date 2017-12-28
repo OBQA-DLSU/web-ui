@@ -9,6 +9,7 @@ import { MyClassService } from './my-class.service';
 import { InvitationService } from './invitation.service';
 import { DialogService } from './dialog.service';
 import { InstructorService } from './instructor.service';
+import { AssessmentService } from './assessment.service';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ export class ServiceModule {
         MyClassService,
         InvitationService,
         DialogService,
-        InstructorService
+        InstructorService,
+        AssessmentService
       ]
     }
   }
