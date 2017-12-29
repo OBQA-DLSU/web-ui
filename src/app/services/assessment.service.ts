@@ -18,14 +18,14 @@ export class AssessmentService {
   GetAssessment (programId: number): Observable<IAssessment[]> {
     const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    return this.http.get(`${this.assessmentUrl}/${programId}`, options)
+    return this.http.get(`${this.assessmentUrl}/programAssessment/${programId}`, options)
     .map(response => response.json())
   }
 
   CreateAssessment (programId: number, assessment: IAssessmentView): Observable<IAssessment> {
     const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    return this.http.post(`${this.assessmentUrl}/${programId}`, assessment, options)
+    return this.http.post(`${this.assessmentUrl}/programAssessment/${programId}`, assessment, options)
     .map(response => response.json())
   }
 

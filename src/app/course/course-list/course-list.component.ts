@@ -29,10 +29,10 @@ export class CourseListComponent implements OnInit, OnDestroy {
   private dialogRef: any;
   private dialogRefSubscription: Subscription = null;
   private toDelete: boolean;
-  private progamIdSubscription: Subscription = null;
+  private programIdSubscription: Subscription = null;
 
   ngOnInit() {
-    this.progamIdSubscription = this.programId.subscribe(
+    this.programIdSubscription = this.programId.subscribe(
       programId => this.courseActionCreator.GetCourse(programId),
       err => null
     );
@@ -40,7 +40,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     (this.dialogRefSubscription) ? this.dialogRefSubscription.unsubscribe() : null;
-    (this.progamIdSubscription) ? this.progamIdSubscription.unsubscribe() : null;
+    (this.programIdSubscription) ? this.programIdSubscription.unsubscribe() : null;
   }
 
   onClickEdit(data) {
