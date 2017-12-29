@@ -2,7 +2,9 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
 import * as Redux from 'redux';
 import { Subscription } from 'rxjs/Subscription';
-
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/expand';
 import { AssessmentService } from '../../services/assessment.service';
 import { DialogService } from '../../services/dialog.service';
 import { IAppState } from '../app.store';
@@ -228,8 +230,8 @@ export class AssessmentActionCreator implements OnDestroy {
   }
 
   // functions
-  private assessmentToView: Function = (data: IAssessment): IAssessmentView => {
-    let newData: IAssessmentView;
+  private assessmentToView: Function = (data: IAssessment): any => {
+    let newData: any;
     newData = {
       id: data.id,
       assessmentLevel: data.assessmentLevel,
@@ -244,10 +246,9 @@ export class AssessmentActionCreator implements OnDestroy {
       programId: data.programId,
       programSopiId: data.programSopiId,
       programCourseId: data.programCourseId,
-      program: data.program.name,
-      sopi: data.programSopi.sopi.code,
-      course: data.programCourse.course.code,
-      improvementPlanSuggestions: data.improvementPlanSuggestions
+      program: data['program.name'],
+      sopi: data['programSopi.sopi.code'],
+      course: data['programCourse.course.code']
     };
     return newData;
   };
