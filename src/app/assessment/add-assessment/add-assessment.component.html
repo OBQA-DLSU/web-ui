@@ -4,11 +4,96 @@
       <div class="col-md-12">
         <div class="col-md-12">
           <div class="card">
-              <dynamic-form
-                [config]="config"
-                #form="dynamicForm"
-                (submit)="submit($event)">
-              </dynamic-form>
+            <form [formGroup]="assessmentForm">
+              <div class="card-header card-header-icon" data-background-color="green">
+                <i class="material-icons">add</i>
+              </div>
+              <div class="card-content">
+                <h4 class="card-title">Add New Course</h4>
+                <div class="form-group label-floating col-md-3">
+                  <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
+                    <mat-select placeholder="Course" formControlName="programCourseId">
+                      <mat-option *ngFor="let c of (courses | async)" [value]="c.id">{{c.code}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="form-group label-floating col-md-2">
+                  <mat-form-field style="width:100px !important;" ngClass="form-group label-floating">
+                    <mat-select placeholder="SOPI" formControlName="programSopiId">
+                      <mat-option *ngFor="let c of (sopis | async)" [value]="c.id">{{c.code}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="form-group label-floating col-md-3">
+                  <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
+                    <mat-select placeholder="A.Y" formControlName="academicYear">
+                      <mat-option *ngFor="let c of academicYear" [value]="c.value">{{c.label}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="form-group label-floating col-md-2">
+                  <mat-form-field style="width:100px !important;" ngClass="form-group label-floating">
+                    <mat-select placeholder="Term" formControlName="term">
+                      <mat-option *ngFor="let c of term" [value]="c.value">{{c.label}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="form-group label-floating col-md-2">
+                  <mat-form-field style="width:100px !important;" ngClass="form-group label-floating">
+                    <mat-select placeholder="Cycle" formControlName="cycle">
+                      <mat-option *ngFor="let c of cycle" [value]="c.value">{{c.label}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="form-group label-floating col-md-3">
+                  <label class="control-label" for="description">Assessment Level
+                    <span class="star">*</span>
+                  </label>
+                  <div class="form-group">
+                    <input formControlName="assessmentLevel" class="form-control" type="text" id="assessmentLevel" placeholder="level..">
+                  </div>
+                </div>
+                <div class="form-group label-floating col-md-3">
+                  <label class="control-label" for="description">Target
+                    <span class="star">*</span>
+                  </label>
+                  <div class="form-group">
+                    <input formControlName="target" class="form-control" type="text" id="target" placeholder="target..">
+                  </div>
+                </div>
+                <div class="form-group label-floating col-md-3">
+                  <label class="control-label" for="description">Passing Grade
+                    <span class="star">*</span>
+                  </label>
+                  <div class="form-group">
+                    <input formControlName="passingGrade" class="form-control" type="text" id="passingGrade" placeholder="passing grade..">
+                  </div>
+                </div>
+                <div class="form-group label-floating col-md-12">
+                  <label class="control-label" for="description">Assessment Task
+                    <span class="star">*</span>
+                  </label>
+                  <div class="form-group">
+                    <input formControlName="assessmentTask" class="form-control" type="text" id="assessmentTask" placeholder="Assessment task..">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <button [disabled]="!assessmentForm.valid" [ngClass]="{'btn': true ,'btn-info': assessmentForm.valid, 'btn-disabled': !assessmentForm.valid }"
+                  (click)="submit()">Submit</button>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header card-header-icon" data-background-color="green">
+                <i class="material-icons">folder</i>
+              </div>
+              <div class="card-content">
+                <h4 class="card-title">Upload .xls File</h4>
+                <app-obqa-upload-basic fileAlias="assessment" [URL]="uploadUrl"></app-obqa-upload-basic>
+              </div>
+            </div>
           </div>
         </div>
       </div>

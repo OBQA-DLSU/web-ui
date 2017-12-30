@@ -16,8 +16,11 @@ import { IUser } from '../../interfaces/user/user.interface';
 export class ClassListComponent implements OnInit, OnDestroy {
 
   @select(s => s.myClasses.myClasses) myClasses;
-  private programId: number = 5;
+  @select(s => s.session) session;
   private user: IUser;
+  private instructorId: string; //string is required as parameter
+  private programId: number;
+
 
   constructor(
     private myClassActionCreator: MyClassActionCreator,
@@ -28,14 +31,12 @@ export class ClassListComponent implements OnInit, OnDestroy {
   private dataNameAlias = ['ID', 'Course', 'Term', 'A.Y.', 'Cycle'];
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('session')).user;
-    this.myClassActionCreator.GetMyClassWithFilter('instructorId', '1');
+    this.myClassActionCreator.GetMyClassWithFilter('instructorId','1');
   }
 
   ngOnDestroy() {}
 
   onMoreClick(data) {
-    console.log(data.id);
     this.router.navigate(['./class/class-details/'+data.id]);
   }
 

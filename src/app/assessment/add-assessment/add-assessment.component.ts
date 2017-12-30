@@ -1,71 +1,79 @@
-import { Component, OnInit } from '@angular/core';
-import { FieldConfig } from './../../obqa-forms/models/field-config.interface';
-import { Validators } from '@angular/forms';
+import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
+import { select } from '@angular-redux/store';
+import { Subscription } from 'rxjs/Subscription';
+import { 
+  AssessmentActionCreator,
+  CourseActionCreator,
+  SopiActionCreator
+} from '../../store/action-creators';
+import {
+  WEB_API_URL,
+  ACADEMIC_YEAR,
+  TERM,
+  CYCLE
+} from '../../config';
+declare var $: any;
 
 @Component({
-  selector: 'app-add-assessment',
-  templateUrl: './add-assessment.component.html',
-  styles: []
+  selector: 'app-add-course',
+  templateUrl: './add-assessment.component.html'
 })
-export class AddAssessmentComponent implements OnInit {
 
-  constructor() { }
-  config: FieldConfig[] = [
-    {
-      type: 'input',
-      label: 'Assessment',
-      class: 'col-md-6 form-control',
-      name: 'assessment',
-      placeholder: '',
-      validation: [Validators.required, Validators.minLength(4)]
-    },
-    {
-      type: 'input',
-      label: 'Description',
-      class: 'col-md-6 form-control',
-      name: 'description',
-      placeholder: '',
-      validation: [Validators.required, Validators.minLength(10)]
-    },
-    {
-      type: 'select',
-      label: 'Favourite Food',
-      class: 'btn btn-primary col-md-3 dropdown-toggle',
-      name: 'food',
-      options: ['Pizza', 'Hot Dogs', 'Knakworstje', 'Coffee'],
-      placeholder: 'Select an option',
-      validation: [Validators.required]
-    },
-    {
-      label: 'Submit',
-      class: 'btn btn-primary col-md-3',
-      name: 'submit',
-      type: 'button'
-    }
-  ];
-  private formDetails = [
-    {
-      "inputLabel": "Assessment Name",
-      "inputClass": "form-group label-floating col-md-6",
-      "inputType": "text"
-    },
-    {
-      "inputLabel": "details here",
-      "inputClass": "form-group label-floating col-md-6",
-      "inputType": "text"
-    },
-    {
-      "inputLabel": "Description",
-      "inputClass": "form-group label-floating col-md-12",
-      "inputType": "text"
-    }
-  ]
+export class AddAssessmentComponent implements OnInit, OnDestroy {
 
-  private inputLabel = ['inputLabel'];
-  private inputClass = ['inputClass'];
-  private inputType = ['inputType'];
+  // private uploadUrl: string = `${WEB_API_URL}/api/assessment/bulk/${this.programId}`;
+  @select(s => s.session.programId) programId;
+  @select(s => s.courses.courses) courses;
+  @select(s => s.sopis.sopis) sopis;
+  private programIdSubscription: Subscription = null;
+  private assessmentForm: FormGroup;
+  private academicYear: any[] = ACADEMIC_YEAR;
+  private term: any[] = TERM;
+  private cycle: any[] = CYCLE;
+  constructor(
+    private formBuilder: FormBuilder,
+    private assessmentActionCreator: AssessmentActionCreator,
+    private sopiActionCreator: SopiActionCreator,
+    private courseActionCreator: CourseActionCreator
+  ) {
 
-  ngOnInit() {
+    this.programIdSubscription = this.programId.subscribe(
+      programId => {
+        this.sopiActionCreator.GetSopi(programId);
+        this.courseActionCreator.GetCourse(programId);
+      }
+    );
   }
 
+  ngOnInit() {
+    this.assessmentForm = this.formBuilder.group({
+      programSopiId: [null, Validators.required],
+      programCourseId: [null, Validators.required],
+      assessmentLevel: [null, Validators.required],
+      target: [null, Validators.required],
+      assessmentTask: [null, Validators.required],
+      passingGrade: [null, Validators.required],
+      performance: [null],
+      improvementPlan: [null],
+      term: [null, Validators.required],
+      academicYear: [null, Validators.required],
+      cycle: [null, Validators.required],
+    });
+  }
+
+  ngOnDestroy() {
+    (this.programIdSubscription) ? this.programIdSubscription.unsubscribe() : null;
+  }
+
+  submit (event) {
+    if (this.assessmentForm.valid) {
+      this.programIdSubscription = this.programId.subscribe(
+        programId => {
+          this.assessmentActionCreator.CreateAssessment(programId, this.assessmentForm.value);
+          this.ngOnInit();
+        }
+      );
+    }
+  }
 }
