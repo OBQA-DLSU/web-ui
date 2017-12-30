@@ -7,6 +7,7 @@ import { MyClassActionCreator } from './my-class.actioncreator';
 import { SessionActionCreator } from './session.actioncreator';
 import { SopiActionCreator } from './sopi.actioncreator';
 import { UserActionCreator } from './user.actioncreator';
+import { StudentActionCreator } from './student.actioncreator';
 
 export {
   AssessmentActionCreator,
@@ -17,5 +18,6 @@ export {
   MyClassActionCreator,
   SessionActionCreator,
   SopiActionCreator,
-  UserActionCreator
+  UserActionCreator,
+  StudentActionCreator
 };
