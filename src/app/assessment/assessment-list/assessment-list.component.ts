@@ -167,5 +167,4 @@ export class EditAssessmentDialog implements OnInit, OnDestroy {
       this.dialogRef.close();
     }
   }
-
 }
