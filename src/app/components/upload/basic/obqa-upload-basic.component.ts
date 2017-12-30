@@ -3,6 +3,7 @@ import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
+import { DialogService } from '../../../services';
 // const URL = 'http://127.0.0.1:5000/api/course/bulk/5';
 
 @Component({
@@ -20,11 +21,13 @@ export class ObqaUploadBasicComponent implements OnInit {
 	ngOnInit() {
 		this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
 		this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-			alert(response);
+
 		};
 	}
 
-	constructor(private http: Http, private el: ElementRef) { }
+	constructor(
+		private http: Http, private el: ElementRef
+	) { }
 
 	upload() {
     this.headers.append('Access-Control-Allow-Origin','*');
@@ -39,7 +42,8 @@ export class ObqaUploadBasicComponent implements OnInit {
 			this.http
 				.post(this.URL, formData, options).map((res: any) => res).subscribe(
 				(success) => {
-					alert('Upload Success!');
+					
+					this.ngOnInit();
 				},
 				(error) => alert('Upload Error')
 				);
