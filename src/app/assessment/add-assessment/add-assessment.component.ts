@@ -22,7 +22,7 @@ declare var $: any;
 
 export class AddAssessmentComponent implements OnInit, OnDestroy {
 
-  // private uploadUrl: string = `${WEB_API_URL}/api/assessment/bulk/${this.programId}`;
+  private uploadUrl: string;;
   @select(s => s.session.programId) programId;
   @select(s => s.courses.courses) courses;
   @select(s => s.sopis.sopis) sopis;
@@ -42,6 +42,7 @@ export class AddAssessmentComponent implements OnInit, OnDestroy {
       programId => {
         this.sopiActionCreator.GetSopi(programId);
         this.courseActionCreator.GetCourse(programId);
+        this.uploadUrl = `${WEB_API_URL}/api/assessment/bulk/${programId}`;
       }
     );
   }

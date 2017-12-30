@@ -15,6 +15,6 @@ export interface IMyClass {
   term: number;
   academicYear: string;
   cycle: number;
-  myClassStudents: Array<IMyClassStudent[]>;
-  myClassAssessments: Array<IMyClassAssessment[]>;
+  myClassStudents: IMyClassStudent[];
+  myClassAssessments: IMyClassAssessment[];
 }
