@@ -193,7 +193,7 @@ export class AssessmentActionCreator implements OnDestroy {
         this.ngRedux.dispatch({type: ASSESSMENT_UPDATE_FULFILLED, payload: assessment});
         this.dialogService.showSwal('success-message', {
           title:  'Successful Assessment Update',
-          text: `$Assessment ID: {assessment.id} was successfully Updated.`
+          text: `Assessment ID: ${assessment.id} was successfully Updated.`
         });
       }, err => {
         this.errorMessage = err._body;
