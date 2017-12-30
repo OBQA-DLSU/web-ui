@@ -28,7 +28,6 @@ export class CourseListComponent implements OnInit, OnDestroy {
   private dataNameAlias = ['ID', 'Code', 'Name', 'Description', 'To Be Assessed?'];
   private dialogRef: any;
   private dialogRefSubscription: Subscription = null;
-  private toDelete: boolean;
   private programIdSubscription: Subscription = null;
 
   ngOnInit() {
