@@ -7,7 +7,8 @@ import { MaterialModule } from '../app.module';
 import { AddClassComponent } from './add-class/add-class.component';
 import { ClassListComponent } from './class-list/class-list.component';
 import { ClassRoutes } from './class.routing';
-import { ComponentModule } from './../components/component.module'
+import { ComponentModule } from './../components/component.module';
+import { ClassPageComponent } from './class-list/class-page/class-page.component'
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { ComponentModule } from './../components/component.module'
     MaterialModule,
     ComponentModule
   ],
-  declarations: [ AddClassComponent, ClassListComponent]
+  declarations: [ AddClassComponent, ClassListComponent, ClassPageComponent]
 })
 export class ClassModule { }
