@@ -14,10 +14,10 @@ export class ClassPageComponent implements OnInit {
 
   @select(s => s.misc.myClassId) myClassIdCode;
   @select(s => s.students.myClassStudents.myClassStudents) myClassStudents;
-  
+
   private routeSubscription: Subscription;
-  private myClassId:any = null;
-  
+  private myClassId: any = null;
+
   private dataNames = ['studentId', 'status'];
   private dataNameAlias = ['Student ID', 'Status'];
 
@@ -27,12 +27,11 @@ export class ClassPageComponent implements OnInit {
     private studentActionCreator: StudentActionCreator
   ) { }
   ngOnInit() {
-  this.routeSubscription = this.activatedRoute.params
-  .subscribe(params => {
-    this.myClassId = params.id;
-    this.miscActionCreator.StoreMyClassId(params.id);
-  })
-  this.studentActionCreator.getMyClassStudent(this.myClassId);
+    this.routeSubscription = this.activatedRoute.params
+      .subscribe(params => {
+        this.myClassId = params.id;
+        this.miscActionCreator.StoreMyClassId(params.id);
+      })
   }
 
 }
