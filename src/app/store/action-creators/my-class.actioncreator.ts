@@ -216,6 +216,10 @@ export class MyClassActionCreator implements OnDestroy {
     .subscribe(
       (myClass: IMyClass) => {
         this.ngRedux.dispatch({ type: MY_CLASS_CREATE_FULFILLED, payload: myClass });
+        this.dialogService.showSwal('success-message', {
+          title:  'Successful Class Add',
+          text: `Class ID: ${myClass.id} was successfully added.`
+        });
       }, err => {
         this.errorMessage = err._body;
         if (this.errorMessage && typeof this.errorMessage === 'string') {
