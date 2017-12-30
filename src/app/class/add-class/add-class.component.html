@@ -11,29 +11,29 @@
               <div class="card-content">
                 <h4 class="card-title">Add New Class</h4>
                 <div class="col-md-4">
-                  <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
+                  <mat-form-field style="width:100% !important;" ngClass="form-group label-floating">
                     <mat-select placeholder="Academic Year"  formControlName="academicYear">
                       <mat-option *ngFor="let i of (academicYearData)" value="{{i.value}}">{{i.name}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
                 <div class="col-md-4">
-                  <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
+                  <mat-form-field style="width:100% !important;" ngClass="form-group label-floating">
                     <mat-select placeholder="Term"  formControlName="term">
                         <mat-option *ngFor="let i of (termData)" value="{{i.value}}">{{i.name}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
                 <div class="col-md-4">
-                  <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
+                  <mat-form-field style="width:100% !important;" ngClass="form-group label-floating">
                     <mat-select placeholder="Cycle"  formControlName="cycle">
                       <mat-option *ngFor="let i of (cycleData)" value="{{i.value}}">{{i.name}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
                 <div class="col-md-4">
-                  <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
-                    <mat-select placeholder="Select Program"  formControlName="programCourseId">
+                  <mat-form-field style="width:100% !important;" ngClass="form-group label-floating">
+                    <mat-select placeholder="Course"  formControlName="courseId">
                         <mat-option *ngFor="let i of (courses | async)" value="{{i.id}}">{{i.code}}</mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -41,14 +41,14 @@
                 </div>
                 <div class="col-md-4" *ngIf="isAdmin">
                   <mat-form-field ngClass="form-group label-floating">
-                    <mat-select placeholder="Select Instructor"  formControlName="instructorId">
+                    <mat-select placeholder="Instructor"  formControlName="instructorId">
                         <mat-option *ngFor="let i of (instructors | async)" value="{{i.id}}">{{i.lname}}, {{i.fname}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
-              </div>
-              <div class="col-md-4">
-                <button type="submit" [disabled]="!myClassForm.valid" [ngClass]="{'btn': true ,'btn-info': myClassForm.valid, 'btn-disabled': !myClassForm.valid }">Submit</button>
+                <div class="col-md-12">
+                  <button type="submit" [disabled]="!myClassForm.valid" [ngClass]="{'btn': true ,'btn-info': myClassForm.valid, 'btn-disabled': !myClassForm.valid }">Submit</button>
+                </div>
               </div>
             </form>
           </div>

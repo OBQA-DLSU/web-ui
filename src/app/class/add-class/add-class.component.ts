@@ -75,7 +75,7 @@ export class AddClassComponent implements OnInit {
       term: [null, Validators.required],
       academicYear: [null, Validators.required],
       cycle: [null, Validators.required],
-      programCourseId: [null, Validators.required],
+      courseId: [null, Validators.required],
       instructorId: [this.instructorId, Validators.required]
     });
   }
@@ -83,6 +83,7 @@ export class AddClassComponent implements OnInit {
   submit() {
     if(this.myClassForm.valid) {
       this.myClassActionCreator.CreateMyClass(this.programId, this.myClassForm.value);
+      this.ngOnInit();
     }
   }
 
