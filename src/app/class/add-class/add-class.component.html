@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-md-4">
                   <mat-form-field style="width:100% !important;" ngClass="form-group label-floating">
-                    <mat-select placeholder="Course"  formControlName="courseId">
+                    <mat-select placeholder="Course"  formControlName="programCourseId">
                         <mat-option *ngFor="let i of (courses | async)" value="{{i.id}}">{{i.code}}</mat-option>
                     </mat-select>
                   </mat-form-field>
