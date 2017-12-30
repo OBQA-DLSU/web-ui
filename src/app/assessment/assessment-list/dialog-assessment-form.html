@@ -1,0 +1,81 @@
+<form [formGroup]="assessmentEditForm" (ngSubmit)="onSubmit()">
+  <h2 mat-dialog-title>Edit Assessment ID: {{data.id}}</h2>
+  <mat-dialog-content>
+    <div class="form-group label-floating col-md-3">
+      <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
+        <mat-select placeholder="Course"  formControlName="programCourseId">
+          <mat-option *ngFor="let c of (courses | async)" [value]="c.id">{{c.code}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-group label-floating col-md-2">
+      <mat-form-field style="width:100px !important;" ngClass="form-group label-floating">
+        <mat-select placeholder="SOPI"  formControlName="programSopiId">
+          <mat-option *ngFor="let c of (sopis | async)" [value]="c.id">{{c.code}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-group label-floating col-md-3">
+      <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
+        <mat-select placeholder="A.Y" formControlName="academicYear">
+          <mat-option *ngFor="let c of academicYear" [value]="c.value">{{c.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-group label-floating col-md-2">
+      <mat-form-field style="width:100px !important;" ngClass="form-group label-floating">
+        <mat-select placeholder="Term" formControlName="term">
+          <mat-option *ngFor="let c of term" [value]="c.value">{{c.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-group label-floating col-md-2">
+      <mat-form-field style="width:100px !important;" ngClass="form-group label-floating">
+        <mat-select placeholder="Cycle" formControlName="cycle">
+          <mat-option *ngFor="let c of cycle" [value]="c.value">{{c.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-group label-floating col-md-3">
+      <label class="control-label" for="description">Assessment Level<span class="star">*</span>
+      </label>
+      <div class="form-group">
+        <input formControlName="assessmentLevel" class="form-control" type="text" id="assessmentLevel" placeholder="level..">
+      </div>
+    </div>
+    <div class="form-group label-floating col-md-3">
+      <label class="control-label" for="description">Target<span class="star">*</span>
+      </label>
+      <div class="form-group">
+        <input formControlName="target" class="form-control" type="text" id="target" placeholder="target..">
+      </div>
+    </div>
+    <div class="form-group label-floating col-md-3">
+      <label class="control-label" for="description">Passing Grade<span class="star">*</span>
+      </label>
+      <div class="form-group">
+        <input formControlName="passingGrade" class="form-control" type="text" id="passingGrade" placeholder="passing grade..">
+      </div>
+    </div>
+    <div class="form-group label-floating col-md-12">
+      <label class="control-label" for="description">Assessment Task<span class="star">*</span>
+      </label>
+      <div class="form-group">
+        <input formControlName="assessmentTask" class="form-control" type="text" id="assessmentTask" placeholder="Assessment task..">
+      </div>
+    </div>
+    <div class="form-group label-floating col-md-12">
+      <label class="control-label" for="description">Improvement Plan<span class="star">*</span>
+      </label>
+      <div class="form-group">
+        <textarea formControlName="improvementPlan" class="form-control" type="textarea" id="improvementPlan" placeholder="Improvement plan..">
+        </textarea>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button type="button" mat-dialog-close>Cancel</button>
+    <!-- Can optionally provide a result for the closing dialog. -->
+    <button mat-button type="submit">Submit</button>
+  </mat-dialog-actions>
+</form>
