@@ -5,6 +5,7 @@ import { INSTRUCTOR_ROUTES } from './instructor-menu.constant';
 import { select } from '@angular-redux/store';
 import { Subscription } from 'rxjs/Subscription';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Router } from '@angular/router';
 declare const $: any;
 
 //Metadata
@@ -95,11 +96,13 @@ export const ROUTES: RouteInfo[] = [{
 })
 
 export class SidebarComponent implements OnInit, OnDestroy {
-	@select(s => s.session.isAdmin) isAdmin;
-	public isAdminSubscription: Subscription = null;
+	@select(s => s.session) session;
+	public sessionSubscription: Subscription = null;
 	public menuItems: any[];
-	constructor(private sessionActionCreator: SessionActionCreator){
-	}
+	constructor(
+		private sessionActionCreator: SessionActionCreator,
+		private router: Router
+	){}
 
 	isMobileMenu() {
 		if ($(window).width() > 991) {
@@ -108,8 +111,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
 		return true;
 	};
 
+	isAdmin(data) {
+		let isAdmin = data.isAdmin;
+		return isAdmin;
+	}
+
 	ngOnInit() {
-		this.isAdminSubscription = this.isAdmin
+		this.sessionSubscription = this.session
+		.map(data => this.isAdmin(data))
 		.subscribe(
 			isAdmin => {
 				if (isAdmin) { this.menuItems = ROUTES.filter(menuItem => menuItem); }
@@ -118,7 +127,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 		);
 	}
 	ngOnDestroy() {
-		(this.isAdminSubscription) ? this.isAdminSubscription.unsubscribe() : null;
+		(this.sessionSubscription) ? this.sessionSubscription.unsubscribe() : null;
 	}
 	updatePS(): void {
 		if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
@@ -133,6 +142,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
 		}
 		return bool;
 	}
+	redirectToProfile() {
+    this.router.navigate(['/profile']);
+  }
 	onSignOut() {
 		this.sessionActionCreator.SessionDestroy();
 	}

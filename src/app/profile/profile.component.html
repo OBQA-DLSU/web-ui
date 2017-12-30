@@ -1,0 +1,52 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="green">
+            <i class="material-icons">assignment</i>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">My Profile</h4>
+            <div class="toolbar">
+              <!--        Here you can write extra buttons/actions for the toolbar              -->
+            </div>
+            <form *ngIf="user | async">
+              <div class="row">
+                <div class="row col-md-12" *ngIf="enableEdit">
+                  <div class="col-md-5">
+                    <div class="form-group label-floating">
+                      <label class="control-label">ID Number:</label>
+                      <input type="text" class="form-control" disabled value="{{(user | async).id}}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row col-md-12">
+                  <div class="col-md-5">
+                    <div class="form-group label-floating">
+                      <label class="control-label">Name:</label>
+                      <input type="text" class="form-control" disabled value="{{(user | async).fname}} {{(user | async).lname}}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row col-md-12">
+                  <div class="col-md-4">
+                    <div class="form-group label-floating">
+                      <label class="control-label">Email address</label>
+                      <input type="email" class="form-control" disabled value="{{(user | async).email}}">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button (click)="onChangePassword()" class="btn btn-info pull-right">Change Password</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+          <!-- end content-->
+        </div>
+        <!--  end card  -->
+      </div>
+      <!-- end col-md-12 -->
+    </div>
+  </div>
+</div>
