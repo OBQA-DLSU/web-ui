@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { select } from '@angular-redux/store';
 import { ActivatedRoute } from '@angular/router';
-import { IStudentView } from './../../../interfaces/student/student-view.interface';
 import { MiscActionCreator, StudentActionCreator } from '../../../store/action-creators/index';
 
 @Component({

@@ -8,7 +8,6 @@ import { DialogService } from '../../services/dialog.service';
 import { IAppState } from '../app.store';
 import { IMyClass} from '../../interfaces/myClass/my-class.interface';
 import { IMyClassView } from '../../interfaces/myClass/my-class-view.interface';
-import { IStudentView } from './../../interfaces/student/student-view.interface';
 import { GET_MY_CLASS_STUDENT_ATTEMPT,
          GET_MY_CLASS_STUDENT_FULFILLED,
          GET_MY_CLASS_STUDENT_REJECT
