@@ -17,7 +17,7 @@
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="classRecord">
-                <div class="col-md-6">
+              <div class="col-md-6" *ngIf="!myClassStudents">
                   <ul class="timeline timeline-simple">
                     <li class="timeline-inverted">
                       <div class="timeline-badge danger">
@@ -33,6 +33,18 @@
                       </div>
                     </li>
                   </ul>
+                </div>
+                <div class="row" *ngIf="myClassStudents">
+                  <app-obqa-table
+                    tableTitle="Class List"
+                    [actionDelete]="true"
+                    [tableDataArray]="(myClassStudents)"
+                    [tableHeaderName]="dataNames"
+                    [tableHeaderAlias]="dataNameAlias"
+                    (clickEdit)="onClickEdit($event)"
+                    (clickDelete)="onClickDelete($event)"
+                    (clickMore)="onMoreClick($event)"
+                  ></app-obqa-table>
                 </div>
               </div>
               <div class="tab-pane" id="evidence">

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { select } from '@angular-redux/store';
 import { ActivatedRoute } from '@angular/router';
-import { MiscActionCreator } from '../../../store/action-creators/misc.actioncreator';
+import { IStudentView } from './../../../interfaces/student/student-view.interface';
+import { MiscActionCreator, StudentActionCreator } from '../../../store/action-creators/index';
 
 @Component({
   selector: 'app-class-page',
@@ -12,13 +13,18 @@ import { MiscActionCreator } from '../../../store/action-creators/misc.actioncre
 export class ClassPageComponent implements OnInit {
 
   @select(s => s.misc.myClassId) myClassIdCode;
+  @select(s => s.students.myClassStudents.myClassStudents) myClassStudents;
   
   private routeSubscription: Subscription;
-  private myClassId: string;
+  private myClassId:any = null;
   
+  private dataNames = ['studentId', 'status'];
+  private dataNameAlias = ['Student ID', 'Status'];
+
   constructor(
     private activatedRoute: ActivatedRoute,
-    private miscActionCreator: MiscActionCreator
+    private miscActionCreator: MiscActionCreator,
+    private studentActionCreator: StudentActionCreator
   ) { }
   ngOnInit() {
   this.routeSubscription = this.activatedRoute.params
@@ -26,6 +32,7 @@ export class ClassPageComponent implements OnInit {
     this.myClassId = params.id;
     this.miscActionCreator.StoreMyClassId(params.id);
   })
+  this.studentActionCreator.getMyClassStudent(this.myClassId);
   }
 
 }
