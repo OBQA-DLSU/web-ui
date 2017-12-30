@@ -75,7 +75,7 @@ export class AddClassComponent implements OnInit {
       term: [null, Validators.required],
       academicYear: [null, Validators.required],
       cycle: [null, Validators.required],
-      CourseId: [null, Validators.required],
+      courseId: [null, Validators.required],
       instructorId: [this.instructorId, Validators.required]
     });
   }
