@@ -37,7 +37,8 @@ export class ClassListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {}
 
   onMoreClick(data) {
-    this.router.navigate(['./class/class-details/'+data.id]);
+    console.log(data.id);
+    this.router.navigate([`./class/class-details/${data.id}`]);
   }
 
 }
