@@ -1,26 +1,44 @@
-import { IMyClassView } from '../interfaces/myClass/my-class-view.interface';
+import { IStudentView } from '../interfaces/student/student-view.interface';
 import {
-  GET_MY_CLASS_STUDENT_ATTEMPT,
-  GET_MY_CLASS_STUDENT_FULFILLED,
-  GET_MY_CLASS_STUDENT_REJECT
+  STUDENT_CREATE_ATTEMPT,
+  STUDENT_CREATE_FULFILLED,
+  STUDENT_CREATE_FAILED,
+  STUDENT_DELETE_ATTEMPT,
+  STUDENT_DELETE_FAILED,
+  STUDENT_DELETE_FULFILLED,
+  STUDENT_GET_ATTEMPT,
+  STUDENT_GET_FAILED,
+  STUDENT_GET_FULFILLED,
+  STUDENT_UPDATE_ATTEMPT,
+  STUDENT_UPDATE_FAILED,
+  STUDENT_UPDATE_FULFILLED
 } from './action/student.action';
-import * as myStudent from './pure-functions/student.functions';
+import * as student from './pure-functions/student.functions';
 
-export interface IMyStudentStore {
-  myClassStudents: IMyClassView[];
+export interface IStudentStore {
+  students: IStudentView[];
   error: string;
 }
 
-export const MY_CLASS_STUDENT_INITIAL_STATE: IMyStudentStore = {
-  myClassStudents: [],
+export const STUDENT_INITIAL_STATE: IStudentStore = {
+  students: [],
   error: ''
 }
 
-export function myStudentReducer (state: IMyStudentStore = MY_CLASS_STUDENT_INITIAL_STATE, action) {
+export function studentReducer (state: IStudentStore = STUDENT_INITIAL_STATE, action) {
   switch (action.type) {
-    case GET_MY_CLASS_STUDENT_ATTEMPT: return myStudent.getMyClassStudentAttempt(state, action);
-    case GET_MY_CLASS_STUDENT_FULFILLED: return myStudent.getMyClassStudentFulfilled(state, action);
-    case GET_MY_CLASS_STUDENT_REJECT: return myStudent.getMyClassStudentFailed(state, action);
+    case STUDENT_CREATE_ATTEMPT: return student.studentCreateAttempt(state, action);
+    case STUDENT_CREATE_FAILED: return student.studentCreateFailed(state, action);
+    case STUDENT_CREATE_FULFILLED: return student.studentCreateFulfilled(state, action);
+    case STUDENT_GET_ATTEMPT: return student.studentGetAttempt(state, action);
+    case STUDENT_GET_FAILED: return student.studentGetFailed(state, action);
+    case STUDENT_GET_FULFILLED: return student.studentGetFulfilled(state, action);
+    case STUDENT_UPDATE_ATTEMPT: return student.studentUpdateAttempt(state, action);
+    case STUDENT_UPDATE_FAILED: return student.studentUpdateFailed(state, action);
+    case STUDENT_UPDATE_FULFILLED: return student.studentUpdateFulfilled(state, action);
+    case STUDENT_DELETE_ATTEMPT: return student.studentDeleteAttempt(state, action);
+    case STUDENT_DELETE_FAILED: return student.studentDeleteFailed(state, action);
+    case STUDENT_DELETE_FULFILLED: return student.studentDeleteFulfilled(state, action);
   }
   return state;
 }
