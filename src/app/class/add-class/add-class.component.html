@@ -13,27 +13,21 @@
                 <div class="col-md-4">
                   <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
                     <mat-select placeholder="Academic Year"  formControlName="academicYear">
-                        <mat-option value="2017-2018">2017-2018</mat-option>
-                        <mat-option value="2018-2019">2018-2019</mat-option>
-                        <mat-option value="2019-2020">2019-2020</mat-option>
+                      <mat-option *ngFor="let i of (academicYearData)" value="{{i.value}}">{{i.name}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
                 <div class="col-md-4">
                   <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
                     <mat-select placeholder="Term"  formControlName="term">
-                        <mat-option value="1">Term 1</mat-option>
-                        <mat-option value="2">Term 2</mat-option>
-                        <mat-option value="3">Term 3</mat-option>
+                        <mat-option *ngFor="let i of (termData)" value="{{i.value}}">{{i.name}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
                 <div class="col-md-4">
                   <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
                     <mat-select placeholder="Cycle"  formControlName="cycle">
-                        <mat-option value="1">1</mat-option>
-                        <mat-option value="2">2</mat-option>
-                        <mat-option value="3">3</mat-option>
+                      <mat-option *ngFor="let i of (cycleData)" value="{{i.value}}">{{i.name}}</mat-option>
                     </mat-select>
                   </mat-form-field>
                 </div>
