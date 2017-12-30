@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
-import { CourseActionCreator } from '../../store/action-creators/course.actioncreator';
 import { InstructorActionCreator } from '../../store/action-creators/instructor.actioncreator';
 import { select } from '@angular-redux/store';
-import { MyClassActionCreator } from '../../store/action-creators/my-class.actioncreator';
+import { MyClassActionCreator, CourseActionCreator } from '../../store/action-creators/index';
+import { ACADEMIC_YEAR, CYCLE, TERM } from '../../config';
 
 @Component({
   selector: 'app-add-class',
@@ -18,42 +18,9 @@ export class AddClassComponent implements OnInit {
   private isAdmin: boolean;
   private instructorId: number;
   private myClassForm: FormGroup;
-  private academicYearData = [
-    {
-      value: '2017-2018',
-      name: '2017-2018'
-    }, {
-      value: '2018-2019',
-      name: '2018-2019'
-    }, {
-      value: '2019-2020',
-      name: '2019-2020'
-    }
-  ];
-  private termData = [
-    {
-      value: 1,
-      name: 'Term 1'
-    }, {
-      value: 2,
-      name: 'Term 2'
-    }, {
-      value: 3,
-      name: 'Term 3'
-    }
-  ];
-  private cycleData = [
-    {
-      value: 1,
-      name: 'Cycle 1'
-    }, {
-      value: 2,
-      name: 'Cycle 2'
-    }, {
-      value: 3,
-      name: 'Cycle 3'
-    }
-  ];
+  private academicYearData = ACADEMIC_YEAR;
+  private termData = TERM;
+  private cycleData = CYCLE;
   constructor(
     private courseActionCreator: CourseActionCreator,
     private instructorActionCreator: InstructorActionCreator,
@@ -75,7 +42,7 @@ export class AddClassComponent implements OnInit {
       term: [null, Validators.required],
       academicYear: [null, Validators.required],
       cycle: [null, Validators.required],
-      courseId: [null, Validators.required],
+      programCourseId: [null, Validators.required],
       instructorId: [this.instructorId, Validators.required]
     });
   }
