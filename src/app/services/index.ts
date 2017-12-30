@@ -7,6 +7,7 @@ import { InvitationService } from './invitation.service';
 import { MyClassService } from './my-class.service';
 import { SopiService } from './sopi.service';
 import { ServiceModule } from './service.module';
+import { StudentService } from './student.service';
 
 export {
   AssessmentService,
@@ -17,5 +18,6 @@ export {
   InvitationService,
   MyClassService,
   SopiService,
-  ServiceModule
+  ServiceModule,
+  StudentService
 };

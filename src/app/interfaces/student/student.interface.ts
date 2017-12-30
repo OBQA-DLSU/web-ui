@@ -6,5 +6,5 @@ export interface IStudent {
   isAdmin?: boolean;
   user?: IUser;
   programId?: number;
-  program: IProgram;
+  program?: IProgram;
 }
