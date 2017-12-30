@@ -13,8 +13,10 @@ import { MyClassActionCreator } from '../../store/action-creators/my-class.actio
 export class AddClassComponent implements OnInit {
   @select(s => s.courses.courses) courses;
   @select(s => s.instructors.instructors) instructors;
-  @select(s => s.session.program) program;
+  @select(s => s.session) session;
   private programId: number;
+  private isAdmin: boolean;
+  private instructorId: number;
   private myClassForm: FormGroup;
   private academicYearData = [
     {
@@ -60,9 +62,11 @@ export class AddClassComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.program.subscribe(
-    (program => {
-      this.programId = program.id;
+    this.session.subscribe(
+    (session => {
+      this.programId = session.program.id;
+      this.isAdmin = session.isAdmin;
+      this.instructorId = session.user.instructors[0].id;
     })
     );
     this.courseActionCreator.GetCourse(this.programId);
@@ -72,7 +76,7 @@ export class AddClassComponent implements OnInit {
       academicYear: [null, Validators.required],
       cycle: [null, Validators.required],
       programCourseId: [null, Validators.required],
-      instructorId: [null, Validators.required]
+      instructorId: [this.instructorId, Validators.required]
     });
   }
 
