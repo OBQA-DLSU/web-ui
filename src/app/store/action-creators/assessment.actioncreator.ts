@@ -5,8 +5,10 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/expand';
-import { AssessmentService } from '../../services/assessment.service';
-import { DialogService } from '../../services/dialog.service';
+import {
+  AssessmentService,
+  DialogService
+} from '../../services/';
 import { IAppState } from '../app.store';
 import {
   ASSESSMENT_CREATE_ATTEMPT,
