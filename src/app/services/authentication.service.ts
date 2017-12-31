@@ -54,6 +54,7 @@ export class AuthenticationService {
       isStudent,
       isAdmin,
       programId,
+      instructorId: previousSession.user.instructors[index].id,
       program: previousSession.user.instructors[index].program,
       token: previousSession.token
     };
