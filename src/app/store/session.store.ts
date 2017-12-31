@@ -23,6 +23,7 @@ export const SESSION_INITIAL_STATE: ISessionStore = {
   isStudent: null,
   isAdmin: null,
   programId: null,
+  instructorId: null,
   program: null,
   token: null,
   error: null
