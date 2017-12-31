@@ -31,13 +31,49 @@ export class ClassListComponent implements OnInit, OnDestroy {
   private dataNameAlias = ['ID', 'Course', 'Term', 'A.Y.', 'Cycle'];
 
   ngOnInit() {
-    this.myClassActionCreator.GetMyClassWithFilter('instructorId','1');
+    this.session.subscribe(
+      (session => {
+        this.instructorId = session.instructorId;
+        (this.instructorId)
+        ? this.myClassActionCreator.GetMyClassWithFilter('instructorId', this.instructorId) : null;
+      })
+    );
   }
 
   ngOnDestroy() {}
 
   onMoreClick(data) {
     this.router.navigate([`/class/class-details/${data.id}`]);
+  }
+
+  async onClickDelete(data) {
+    let x = await swal({
+      title: 'Are you sure?',
+      text: `You are about to delete Class ID: ${data.id}, ${data.course}, Term: ${data.term}, Academic Year ${data.academicYear}.`,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: false
+    }).then(function (data) {
+      if (data.value) { return true; }
+    }, function (dismiss) {
+      // dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+      if (dismiss === 'cancel') {
+        swal({
+          title: 'Cancelled',
+          text: 'The Class has not been deleted.',
+          type: 'error',
+          confirmButtonClass: 'btn btn-info',
+          buttonsStyling: false
+        });
+      }
+    }).catch(swal.noop);
+    if (x) {
+      this.myClassActionCreator.DeleteMyClass(data.id, data);
+    }
   }
 
 }

@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { select } from '@angular-redux/store';
 import { ActivatedRoute } from '@angular/router';
 import { MiscActionCreator, StudentActionCreator } from '../../../store/action-creators/index';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-class-page',
@@ -12,13 +13,13 @@ import { MiscActionCreator, StudentActionCreator } from '../../../store/action-c
 export class ClassPageComponent implements OnInit {
 
   @select(s => s.misc.myClassId) myClassIdCode;
-  @select(s => s.students.myClassStudents.myClassStudents) myClassStudents;
+  @select(s => s.students.students) students;
 
   private routeSubscription: Subscription;
-  private myClassId: any = null;
-
-  private dataNames = ['studentId', 'status'];
-  private dataNameAlias = ['Student ID', 'Status'];
+  private myClassId: number = null;
+  private studentsData: any;
+  private dataNames = ['studentId', 'lname', 'fname', 'email'];
+  private dataNameAlias = ['Student ID', 'Lastname', 'Firstname', 'Email'];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -30,7 +31,8 @@ export class ClassPageComponent implements OnInit {
       .subscribe(params => {
         this.myClassId = params.id;
         this.miscActionCreator.StoreMyClassId(params.id);
-      })
+        (params.id) ? this.studentActionCreator.GetMyClassStudent(params.id) : null;
+      });
   }
 
 }
