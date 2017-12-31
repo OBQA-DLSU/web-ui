@@ -1,67 +1,72 @@
 <div class="main-content">
-  <div class="container-fluid">
+  <div class="container-fluid" *ngIf="(students | async) && (students | async).length !== 0">
     <div class="row">
-      <div class="col-md-12">
-        <div class="card" style="margin: 0;">
-          <div class="card-content">
-            <ul class="nav nav-pills nav-pills-primary">
-              <li class="active">
-                <a href="#classRecord" data-toggle="tab">Class Record</a>
-              </li>
-              <li>
-                <a href="#evidence" data-toggle="tab">Evidence</a>
-              </li>
-              <li>
-                <a href="#pill3" data-toggle="tab">Options</a>
-              </li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="classRecord">
-              <div class="col-md-6" *ngIf="!myClassStudents">
-                  <ul class="timeline timeline-simple">
-                    <li class="timeline-inverted">
-                      <div class="timeline-badge danger">
-                        <i class="material-icons">card_travel</i>
-                      </div>
-                      <div class="timeline-panel">
-                        <div class="timeline-heading">
-                          <span class="label label-danger">No record</span>
-                        </div>
-                        <div class="timeline-body">
-                          <p>No record found for this class {{ myClassId }}</p>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
+      <app-obqa-table
+        tableTitle="Student List"
+        [actionDelete]="true"
+        [tableDataArray]="(students)"
+        [tableHeaderName]="dataNames"
+        [tableHeaderAlias]="dataNameAlias"
+        (clickEdit)="onClickEdit($event)"
+        (clickDelete)="onClickDelete($event)"
+        (clickMore)="onMoreClick($event)"
+      ></app-obqa-table>
+    </div>
+    </div>
+    <!-- Display no record found if there no students -->
+    <div class="col-md-12" *ngIf="(students | async).length === 0">
+      <div class="card" style="margin: 0;">
+        <div class="card-header card-header-icon" data-background-color="green">
+          <i class="material-icons">assignment</i>
+        </div>
+        <div class="card-content">
+        <div class="col-md-12">
+          <ul class="timeline timeline-simple">
+            <li class="timeline-inverted">
+              <div class="timeline-badge danger">
+                <i class="material-icons">card_travel</i>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <span class="label label-danger">No record</span>
                 </div>
-                <div class="row" *ngIf="myClassStudents">
-                  <app-obqa-table
-                    tableTitle="Class List"
-                    [actionDelete]="true"
-                    [tableDataArray]="(myClassStudents)"
-                    [tableHeaderName]="dataNames"
-                    [tableHeaderAlias]="dataNameAlias"
-                    (clickEdit)="onClickEdit($event)"
-                    (clickDelete)="onClickDelete($event)"
-                    (clickMore)="onMoreClick($event)"
-                  ></app-obqa-table>
+                <div class="timeline-body">
+                  <p>No student record found for this class. Class ID: {{ myClassId }}</p>
                 </div>
               </div>
-              <div class="tab-pane" id="evidence">
-                Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time
-                schemas.
-                <br />
-                <br />Dramatically maintain clicks-and-mortar solutions without functional solutions.
-              </div>
-              <div class="tab-pane" id="pill3">
-                Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer
-                service with robust ideas.
-                <br />
-                <br />Dynamically innovate resource-leveling customer service for state of the art customer service.
-              </div>
-            </div>
-          </div>
+            </li>
+          </ul>
+        </div>
         </div>
       </div>
     </div>
+    <!--Class Details Page tabs 1. Class Record 2. Evidence Tab -->
+
+<div class="col-md-12">
+    <div class="card">
+      <div class="card-content">
+        <div class="row col-md-12">
+          <ul class="nav nav-pills nav-pills-primary">
+            <li class="active">
+              <a href="#classRecord" data-toggle="tab">Class Details</a>
+            </li>
+            <li>
+              <a href="#evidence" data-toggle="tab">Evidence</a>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-content">
+          <div class="tab-pane active" id="classRecord">
+          <div class="col-md-6">
+            <div class="col-md-12">
+              <h4>Class Details Tab</h4>
+            </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="evidence">
+            <h4>Evidence Tab</h4>
+          </div>
+        </div>
+    </div>
   </div>
+</div>
