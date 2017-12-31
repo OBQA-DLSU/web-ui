@@ -101,7 +101,7 @@ export class SessionActionCreator implements OnDestroy {
     this.authenticationService.SessionDestroy();
     this.ngRedux.dispatch({ type: SESSION_DESTROY_FULFILLED });
     this.ngRedux.dispatch({ type: USER_SESSION_DESTROY });
-    this.router.navigate(['./pages/sign-in']);
+    this.router.navigate(['/pages/sign-in']);
   }
 
   ChangePassword (email: string, password: string, newPassword: string, confirmation: string) {
