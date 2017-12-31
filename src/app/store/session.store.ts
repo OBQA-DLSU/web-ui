@@ -8,7 +8,10 @@ import {
   SESSION_CHECK_FULFILLED,
   SESSION_CHECK_FAILED,
   SESSION_UPDATE_FAILED,
-  SESSION_UPDATE_FULFILLED
+  SESSION_UPDATE_FULFILLED,
+  SESSION_PASSWORD_CHAGE_FULFILLED,
+  SESSION_PASSWORD_CHANGE_ATTEMPT,
+  SESSION_PASSWORD_CHANGE_FAILED
 } from './action/session.actions';
 import * as session from './pure-functions/session.functions';
 export interface ISessionStore extends ISession {
@@ -36,6 +39,9 @@ export function sessionReducer(state: ISessionStore = SESSION_INITIAL_STATE, act
     case SESSION_CHECK_FAILED: return session.sessionCheckFailed(state, action);
     case SESSION_UPDATE_FAILED: return session.sessionUpdateFailed(state, action);
     case SESSION_UPDATE_FULFILLED: return session.sessionUpdateFulfilled(state, action);
+    case SESSION_PASSWORD_CHANGE_ATTEMPT: return session.sessionPasswordChangeAttempt(state, action);
+    case SESSION_PASSWORD_CHAGE_FULFILLED: return session.sessionPasswordChangeFulfilled(state, action);
+    case SESSION_PASSWORD_CHANGE_FAILED: return session.sessionPasswordChangeFailed(state, action);
   }
   return state;
 };

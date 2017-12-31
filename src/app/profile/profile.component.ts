@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
-
+import { SessionActionCreator } from '../store/action-creators';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -14,7 +14,8 @@ export class ProfileComponent implements OnInit {
   @select(s => s.user.user) user;
   constructor(
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private sessionActionCreator: SessionActionCreator
   ) {}
   private dialogRef: any;
   private dialogRefSubscription: Subscription = null;
@@ -35,10 +36,13 @@ export class ProfileComponent implements OnInit {
     });
 
     this.dialogRefSubscription = this.dialogRef.afterClosed().subscribe(result => {
+      const newData = JSON.parse(result);
+      const { email, password, newPassword, confirmation } = newData;
       if (!result) {
       } else {
-        const newData = JSON.parse(result);
         console.log(newData);
+        console.log(result);
+        this.sessionActionCreator.ChangePassword(email, password, newPassword, confirmation);
       }
     });
   }
@@ -60,11 +64,10 @@ export class ChangePasswordDialog implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    console.log(this.data);
     this.changePasswordForm = this.formBuilder.group({
       password: [null, Validators.required],
       newPassword: [null, Validators.required],
-      confirmPassword: [null, Validators.required],
+      confirmation: [null, Validators.required],
       email: [this.data, Validators.required]
     });
   }
