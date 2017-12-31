@@ -7,8 +7,8 @@
       <div class="nav-center">
         <ul class="nav nav-pills nav-pills-danger nav-pills-icons" role="tablist">
           <!--
-        color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
-    -->
+              color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+          -->
           <li>
             <a href="#studentGrades" role="tab" data-toggle="tab">
               <i class="material-icons">info</i> Student Grades
@@ -58,19 +58,11 @@
               </p>
             </div>
             <div class="card-content">
-            <!-- Student details table !-->
-            <div class="container-fluid" *ngIf="(students | async) && (students | async).length !== 0">
+              <!-- Student details table !-->
+              <div class="container-fluid" *ngIf="(students | async) && (students | async).length !== 0">
                 <div class="row">
-                  <app-obqa-table
-                    tableTitle=""
-                    [actionDelete]="true"
-                    [tableDataArray]="(students)"
-                    [tableHeaderName]="dataNames"
-                    [tableHeaderAlias]="dataNameAlias"
-                    (clickEdit)="onClickEdit($event)"
-                    (clickDelete)="onClickDelete($event)"
-                    (clickMore)="onMoreClick($event)"
-                  ></app-obqa-table>
+                  <app-obqa-table tableTitle="" [actionDelete]="true" [tableDataArray]="(students)" [tableHeaderName]="dataNames" [tableHeaderAlias]="dataNameAlias"
+                    (clickEdit)="onClickEdit($event)" (clickDelete)="onClickDelete($event)" (clickMore)="onMoreClick($event)"></app-obqa-table>
                 </div>
               </div>
               <!-- Display no record found if there no students -->
