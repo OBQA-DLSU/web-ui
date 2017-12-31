@@ -108,3 +108,39 @@ export const sessionUpdateFailed = (state, action) => {
     error: action.error
   });
 };
+
+export const sessionPasswordChangeAttempt = (state, action) => {
+  return tassign(state, {
+    user: state.user,
+    isStudent: state.isStudent,
+    isAdmin: state.isAdmin,
+    programId: state.programId,
+    program: state.program,
+    token: state.token,
+    error: ''
+  });
+};
+
+export const sessionPasswordChangeFulfilled = (state, action) => {
+  return tassign(state, {
+    user: state.user,
+    isStudent: state.isStudent,
+    isAdmin: state.isAdmin,
+    programId: state.programId,
+    program: state.program,
+    token: action.payload.token,
+    error: ''
+  });
+};
+
+export const sessionPasswordChangeFailed = (state, action) => {
+  return tassign(state, {
+    user: state.user,
+    isStudent: state.isStudent,
+    isAdmin: state.isAdmin,
+    programId: state.programId,
+    program: state.program,
+    token: state.token,
+    error: action.error
+  });
+};

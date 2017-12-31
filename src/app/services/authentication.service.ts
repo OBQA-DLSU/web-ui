@@ -68,4 +68,12 @@ export class AuthenticationService {
     .map(response => response.json())
   }
 
+  ChangePassword(email: string, password: string, newPassword: string, confirmation: string): Observable<ISession> {
+    const headers = new Headers({ 'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+    return this.http.put(`${this.authUrl}password`, {email, password, newPassword, confirmation}, options)
+    .map(response => response.json())
+  }
+
 }
+
