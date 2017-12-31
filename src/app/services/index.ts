@@ -8,6 +8,7 @@ import { MyClassService } from './my-class.service';
 import { SopiService } from './sopi.service';
 import { ServiceModule } from './service.module';
 import { StudentService } from './student.service';
+import { AssessmentDiscussionService } from './assessment-discussion.service';
 
 export {
   AssessmentService,
@@ -19,5 +20,6 @@ export {
   MyClassService,
   SopiService,
   ServiceModule,
-  StudentService
+  StudentService,
+  AssessmentDiscussionService
 };

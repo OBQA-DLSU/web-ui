@@ -1,7 +1,7 @@
 import { IProgram } from '../program/program.interface';
 import { IProgramSopi } from '../programSopi/program-sopi.interface';
 import { IProgramCourse } from '../programCourse/program-course.interface';
-import { IImprovementPlanSuggestion } from './improvement-plan-suggestion.interface';
+import { IAssessmentDiscussion } from './assessment-discussion.interface';
 export interface IAssessment {
   id?: number;
   assessmentLevel?: number;
@@ -19,5 +19,5 @@ export interface IAssessment {
   program?: IProgram;
   programSopi?: IProgramSopi;
   programCourse?: IProgramCourse;
-  improvementPlanSuggestions?: IImprovementPlanSuggestion[];
+  improvementPlanSuggestions?: IAssessmentDiscussion[];
 }
