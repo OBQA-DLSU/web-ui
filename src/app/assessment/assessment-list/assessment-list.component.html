@@ -1,16 +1,25 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <app-obqa-table
-        tableTitle="Assessment List"
-        [actionDelete]="(isAdmin | async)"
-        [actionEdit]="(isAdmin | async)"
-        [tableDataArray]="(assessments)"
-        [tableHeaderName]="dataNames"
-        [tableHeaderAlias]="dataNameAlias"
-        (clickEdit)="onClickEdit($event)"
-        (clickDelete)="onClickDelete($event)"
-      ></app-obqa-table>
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="green">
+            <i class="material-icons">assignment</i>
+          </div>
+          <app-obqa-table
+            tableTitle="Assessment List"
+            [actionDelete]="(isAdmin | async)"
+            [actionEdit]="(isAdmin | async)"
+            [tableDataArray]="(assessments)"
+            [tableHeaderName]="dataNames"
+            [tableHeaderAlias]="dataNameAlias"
+            (clickEdit)="onClickEdit($event)"
+            (clickDelete)="onClickDelete($event)"
+          ></app-obqa-table>
+          <!-- end content-->
+        </div>
+        <!--  end card  -->
+      </div>
     </div>
   </div>
 </div>

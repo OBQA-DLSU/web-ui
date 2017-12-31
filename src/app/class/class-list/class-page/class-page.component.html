@@ -1,72 +1,129 @@
 <div class="main-content">
-  <div class="container-fluid" *ngIf="(students | async) && (students | async).length !== 0">
-    <div class="row">
-      <app-obqa-table
-        tableTitle="Student List"
-        [actionDelete]="true"
-        [tableDataArray]="(students)"
-        [tableHeaderName]="dataNames"
-        [tableHeaderAlias]="dataNameAlias"
-        (clickEdit)="onClickEdit($event)"
-        (clickDelete)="onClickDelete($event)"
-        (clickMore)="onMoreClick($event)"
-      ></app-obqa-table>
-    </div>
-    </div>
-    <!-- Display no record found if there no students -->
-    <div class="col-md-12" *ngIf="(students | async).length === 0">
-      <div class="card" style="margin: 0;">
-        <div class="card-header card-header-icon" data-background-color="green">
-          <i class="material-icons">assignment</i>
+
+  <!--Class Details Page tabs 1. Student Grades 2. Student Details 3. Evidence Tab -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="nav-center">
+        <ul class="nav nav-pills nav-pills-danger nav-pills-icons" role="tablist">
+          <!--
+        color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+    -->
+          <li>
+            <a href="#studentGrades" role="tab" data-toggle="tab">
+              <i class="material-icons">info</i> Student Grades
+            </a>
+          </li>
+          <li class="active">
+            <a href="#studentDetails" role="tab" data-toggle="tab">
+              <i class="material-icons">location_on</i> Student Details
+            </a>
+          </li>
+          <li>
+            <a href="#evidence" role="tab" data-toggle="tab">
+              <i class="material-icons">gavel</i> Evidence
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="tab-content">
+
+        <!--Student Grades Tab !-->
+        <div class="tab-pane" id="studentGrades">
+          <div class="card">
+            <div class="card-header card-header-icon" data-background-color="green">
+              <i class="material-icons">assignment</i>
+            </div>
+            <div class="card-header">
+              <h4 class="card-title">Student Grades Page</h4>
+              <p class="category">
+                More information here
+              </p>
+            </div>
+            <div class="card-content">
+            </div>
+          </div>
         </div>
-        <div class="card-content">
-        <div class="col-md-12">
-          <ul class="timeline timeline-simple">
-            <li class="timeline-inverted">
-              <div class="timeline-badge danger">
-                <i class="material-icons">card_travel</i>
-              </div>
-              <div class="timeline-panel">
-                <div class="timeline-heading">
-                  <span class="label label-danger">No record</span>
+
+        <!--Student Details Tab !-->
+        <div class="tab-pane active" id="studentDetails">
+          <div class="card">
+            <div class="card-header card-header-icon" data-background-color="green">
+              <i class="material-icons">assignment</i>
+            </div>
+            <div class="card-header">
+              <h4 class="card-title">Student Details Page</h4>
+              <p class="category">
+                More information here
+              </p>
+            </div>
+            <div class="card-content">
+            <!-- Student details table !-->
+            <div class="container-fluid" *ngIf="(students | async) && (students | async).length !== 0">
+                <div class="row">
+                  <app-obqa-table
+                    tableTitle=""
+                    [actionDelete]="true"
+                    [tableDataArray]="(students)"
+                    [tableHeaderName]="dataNames"
+                    [tableHeaderAlias]="dataNameAlias"
+                    (clickEdit)="onClickEdit($event)"
+                    (clickDelete)="onClickDelete($event)"
+                    (clickMore)="onMoreClick($event)"
+                  ></app-obqa-table>
                 </div>
-                <div class="timeline-body">
-                  <p>No student record found for this class. Class ID: {{ myClassId }}</p>
+              </div>
+              <!-- Display no record found if there no students -->
+              <div class="col-md-12" *ngIf="(students | async).length === 0">
+                <div class="card" style="margin: 0;">
+                  <div class="card-content">
+                    <div class="col-md-12">
+                      <ul class="timeline timeline-simple">
+                        <li class="timeline-inverted">
+                          <div class="timeline-badge danger">
+                            <i class="material-icons">card_travel</i>
+                          </div>
+                          <div class="timeline-panel">
+                            <div class="timeline-heading">
+                              <span class="label label-danger">No record</span>
+                            </div>
+                            <div class="timeline-body">
+                              <p>No student record found for this class. Class ID: {{ myClassId }}</p>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
+
+        <!--Evidence Tab !-->
+        <div class="tab-pane" id="evidence">
+          <div class="card">
+            <div class="card-header card-header-icon" data-background-color="green">
+              <i class="material-icons">assignment</i>
+            </div>
+            <div class="card-header">
+              <h4 class="card-title">Legal info of the product</h4>
+              <p class="category">
+                More information here
+              </p>
+            </div>
+            <div class="card-content">
+              Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer
+              service with robust ideas.
+              <br />
+              <br />Dynamically innovate resource-leveling customer service for state of the art customer service.
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <!--Class Details Page tabs 1. Class Record 2. Evidence Tab -->
-
-<div class="col-md-12">
-    <div class="card">
-      <div class="card-content">
-        <div class="row col-md-12">
-          <ul class="nav nav-pills nav-pills-primary">
-            <li class="active">
-              <a href="#classRecord" data-toggle="tab">Class Details</a>
-            </li>
-            <li>
-              <a href="#evidence" data-toggle="tab">Evidence</a>
-            </li>
-          </ul>
-        </div>
-        <div class="tab-content">
-          <div class="tab-pane active" id="classRecord">
-          <div class="col-md-6">
-            <div class="col-md-12">
-              <h4>Class Details Tab</h4>
-            </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="evidence">
-            <h4>Evidence Tab</h4>
-          </div>
-        </div>
-    </div>
   </div>
+
+
 </div>
