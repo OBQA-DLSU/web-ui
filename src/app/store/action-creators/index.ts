@@ -8,6 +8,7 @@ import { SessionActionCreator } from './session.actioncreator';
 import { SopiActionCreator } from './sopi.actioncreator';
 import { UserActionCreator } from './user.actioncreator';
 import { StudentActionCreator } from './student.actioncreator';
+import { AssessmentDiscussionActionCreator } from './assessment-discussion.actioncreator';
 
 export {
   AssessmentActionCreator,
@@ -19,5 +20,6 @@ export {
   SessionActionCreator,
   SopiActionCreator,
   UserActionCreator,
-  StudentActionCreator
+  StudentActionCreator,
+  AssessmentDiscussionActionCreator
 };
