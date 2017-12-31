@@ -59,7 +59,7 @@ export const sessionCheckFulfilled = (state, action) => {
     isAdmin: action.payload.isAdmin,
     programId: action.payload.programId,
     program: action.payload.program,
-    instructorId: state.instructorId,
+    instructorId: action.payload.instructorId,
     user: action.payload.user,
     token: action.payload.token,
     error: ''
