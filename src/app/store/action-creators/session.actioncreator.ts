@@ -20,7 +20,10 @@ import {
   SESSION_CHECK_FAILED,
   SESSION_DESTROY_FULFILLED,
   SESSION_UPDATE_FULFILLED,
-  SESSION_UPDATE_FAILED
+  SESSION_UPDATE_FAILED,
+  SESSION_PASSWORD_CHAGE_FULFILLED,
+  SESSION_PASSWORD_CHANGE_FAILED,
+  SESSION_PASSWORD_CHANGE_ATTEMPT
 } from '../action/session.actions';
 
 import {
@@ -34,6 +37,7 @@ import {
 export class SessionActionCreator implements OnDestroy {
 
   private signin: Subscription = null;
+  private changePasswordSubscription: Subscription = null;
   private errorMessage: string = null;
   constructor (
     private ngRedux: NgRedux<IAppState>,
@@ -44,6 +48,7 @@ export class SessionActionCreator implements OnDestroy {
 
   ngOnDestroy () {
     (this.signin) ? this.signin.unsubscribe() : null;
+    (this.changePasswordSubscription) ? this.changePasswordSubscription.unsubscribe() : null;
   }
 
   SessionCreate (sessionCreate: ISessionCreate) {
@@ -97,4 +102,30 @@ export class SessionActionCreator implements OnDestroy {
     this.ngRedux.dispatch({ type: SESSION_DESTROY_FULFILLED });
     this.ngRedux.dispatch({ type: USER_SESSION_DESTROY });
   }
+
+  ChangePassword (email: string, password: string, newPassword: string, confirmation: string) {
+    console.log(email, password, newPassword, confirmation);
+    this.changePasswordSubscription = this.authenticationService.ChangePassword(email, password, newPassword, confirmation)
+    .subscribe(
+      (session: ISession) => {
+        this.ngRedux.dispatch({ type: SESSION_PASSWORD_CHAGE_FULFILLED, payload: session });
+        this.dialogService.showSwal('success-message', {
+          title:  'Success!',
+          text: `Your password was changed..`
+        });
+      }, err => {
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: SESSION_PASSWORD_CHANGE_FAILED, error: this.errorMessage });
+          this.dialogService.showSwal('error-message', {
+            title: 'Password was not changed.',
+            text: `Error: ${this.errorMessage}`
+          });
+        }
+      }, () => {
+        this.errorMessage = null;
+      }
+    );
+  }
+
 }
