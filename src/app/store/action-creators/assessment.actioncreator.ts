@@ -22,7 +22,9 @@ import {
   ASSESSMENT_GET_FULFILLED,
   ASSESSMENT_UPDATE_ATTEMPT,
   ASSESSMENT_UPDATE_FAILED,
-  ASSESSMENT_UPDATE_FULFILLED
+  ASSESSMENT_UPDATE_FULFILLED,
+  ASSESSMENT_SELECT_FAILED,
+  ASSESSMENT_SELECT_FULFILLED
 } from '../action/assessment.actions';
 import { IAssessmentView } from '../../interfaces/assessment/assessment-view.interface';
 import { IAssessment } from '../../interfaces/assessment/assessment.interface';
@@ -61,7 +63,7 @@ export class AssessmentActionCreator implements OnDestroy {
     this.getAssessmentSubscription = this.assessmentService.GetAssessment(programId)
     .map(data => {
       let newData: IAssessmentView[];
-      newData = data.map(d => this.assessmentToView(d))
+      newData = data.map(d => this.assessmentToViewFlat(d))
       return newData;
     })
     .subscribe(
@@ -81,7 +83,7 @@ export class AssessmentActionCreator implements OnDestroy {
 
   CreateAssessment (programId: number, assessment: IAssessmentView) {
     this.createAssessmentSubscription = this.assessmentService.CreateAssessment(programId, assessment)
-    .map(data => this.assessmentToView(data))
+    .map(data => this.assessmentToViewFlat(data))
     .subscribe(
       (assessment: IAssessmentView) => {
         this.ngRedux.dispatch({ type: ASSESSMENT_CREATE_FULFILLED, payload: assessment });
@@ -106,7 +108,7 @@ export class AssessmentActionCreator implements OnDestroy {
     this.getFilteredAssessmentByProgramSubscription = this.assessmentService.GetFilteredAssessmentByProgram(programId, filterName, filterValue)
     .map(data => {
       let newData: IAssessmentView[];
-      newData = data.map(d => this.assessmentToView(d))
+      newData = data.map(d => this.assessmentToViewFlat(d))
       return newData;
     })
     .subscribe(
@@ -128,7 +130,7 @@ export class AssessmentActionCreator implements OnDestroy {
     this.getAllAssessmentSubscription = this.assessmentService.GetAllAssessment()
     .map(data => {
       let newData: IAssessmentView[];
-      newData = data.map(d => this.assessmentToView(d))
+      newData = data.map(d => this.assessmentToViewFlat(d))
       return newData;
     })
     .subscribe(
@@ -150,7 +152,7 @@ export class AssessmentActionCreator implements OnDestroy {
     this.getFilteredAssessmentSubscription = this.assessmentService.GetFilteredAssessment(filterName, filterValue)
     .map(data => {
       let newData: IAssessmentView[];
-      newData = data.map(d => this.assessmentToView(d))
+      newData = data.map(d => this.assessmentToViewFlat(d))
       return newData;
     })
     .subscribe(
@@ -170,7 +172,7 @@ export class AssessmentActionCreator implements OnDestroy {
 
   GetOneAssessment (id: number) {
     this.getOneAssessmentSubscription = this.assessmentService.GetOneAssessment(id)
-    .map(data => this.assessmentToView(data))
+    .map(data => this.assessmentToViewFlat(data))
     .subscribe(
       (assessment: IAssessmentView) => {
         const assessments = [assessment];
@@ -189,7 +191,7 @@ export class AssessmentActionCreator implements OnDestroy {
 
   UpdateAssessment (id: number, assessment: IAssessmentView) {
     this.updateAssessmentSubscription = this.assessmentService.UpdateAssessment(id, assessment)
-    .map(data => this.assessmentToView(data))
+    .map(data => this.assessmentToViewFlat(data))
     .subscribe(
       (assessment: IAssessmentView) => {
         this.ngRedux.dispatch({type: ASSESSMENT_UPDATE_FULFILLED, payload: assessment});
@@ -231,8 +233,26 @@ export class AssessmentActionCreator implements OnDestroy {
     );
   }
 
+  SelectAssessment (id: number) {
+    this.getOneAssessmentSubscription = this.assessmentService.GetOneAssessment(id)
+    .map(data => this.assessmentToView(data))
+    .subscribe(
+      (assessment: IAssessmentView) => {
+        this.ngRedux.dispatch({ type: ASSESSMENT_SELECT_FULFILLED, payload: assessment });
+      }, err => {
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: ASSESSMENT_SELECT_FAILED, error: this.errorMessage });
+        }
+      },
+      () => {
+        this.errorMessage = null;
+      }
+    );
+  }
+
   // functions
-  private assessmentToView: Function = (data: IAssessment): any => {
+  private assessmentToViewFlat: Function = (data: IAssessment): any => {
     let newData: any;
     newData = {
       id: data.id,
@@ -255,4 +275,26 @@ export class AssessmentActionCreator implements OnDestroy {
     return newData;
   };
 
+  private assessmentToView: Function = (data: IAssessment): any => {
+    let newData: any;
+    newData = {
+      id: data.id,
+      assessmentLevel: data.assessmentLevel,
+      assessmentTask: data.assessmentTask,
+      target: data.target,
+      passingGrade: data.passingGrade,
+      performance: data.performance,
+      improvementPlan: data.improvementPlan,
+      term: data.term,
+      academicYear: data.academicYear,
+      cycle: data.cycle,
+      programId: data.programId,
+      programSopiId: data.programSopiId,
+      programCourseId: data.programCourseId,
+      program: data.program.name,
+      sopi: data.programSopi.sopi.code,
+      course: data.programCourse.course.code
+    };
+    return newData;
+  }
 }
