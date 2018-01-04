@@ -19,5 +19,5 @@ export interface IAssessment {
   program?: IProgram;
   programSopi?: IProgramSopi;
   programCourse?: IProgramCourse;
-  improvementPlanSuggestions?: IAssessmentDiscussion[];
+  assessmentDiscussions?: IAssessmentDiscussion[];
 }

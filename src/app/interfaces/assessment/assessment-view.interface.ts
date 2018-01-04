@@ -1,3 +1,4 @@
+import { IAssessmentDiscussionView } from './assessment-discussion-view.interface';
 export interface IAssessmentView {
   id?: number;
   assessmentLevel?: number;
@@ -15,4 +16,5 @@ export interface IAssessmentView {
   program?: string;
   sopi?: string;
   course?: string;
+  assessmentDiscussions?: IAssessmentDiscussionView[]
 }

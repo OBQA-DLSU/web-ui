@@ -48,7 +48,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     .subscribe(params => {
       this.invitationCode = params.code;
       this.miscActionCreator.StoreInvitationCode(params.code);
-    })
+    });
     var navbar: HTMLElement = this.element.nativeElement;
     this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
 

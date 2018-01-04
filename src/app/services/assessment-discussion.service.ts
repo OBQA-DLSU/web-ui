@@ -12,7 +12,7 @@ export class AssessmentDiscussionService {
     private http: Http
   ) { }
 
-  private assessmentDiscussionUrl: string = `${WEB_API_URL}/assessmentDiscussion`;
+  private assessmentDiscussionUrl: string = `${WEB_API_URL}/api/assessmentDiscussion`;
 
   GetAssessmentDiscussion (assessmentId: number): Observable<IAssessmentDiscussion[]> {
     const headers = new Headers({ 'Content-Type': 'application/json'});
