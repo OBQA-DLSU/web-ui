@@ -5,11 +5,13 @@
         tableTitle="Assessment List"
         [actionDelete]="(isAdmin | async)"
         [actionEdit]="(isAdmin | async)"
+        [actionMore]="true"
         [tableDataArray]="(assessments)"
         [tableHeaderName]="dataNames"
         [tableHeaderAlias]="dataNameAlias"
         (clickEdit)="onClickEdit($event)"
         (clickDelete)="onClickDelete($event)"
+        (clickMore)="onClickMore($event)"
       ></app-obqa-table>
     </div>
   </div>

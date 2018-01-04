@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, Inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { select } from '@angular-redux/store';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
@@ -10,8 +11,7 @@ import { SopiActionCreator } from '../../store/action-creators/sopi.actioncreato
 import { CYCLE, ACADEMIC_YEAR, TERM } from '../../config';
 @Component({
   selector: 'app-assessment-list',
-  templateUrl: './assessment-list.component.html',
-  styles: []
+  templateUrl: './assessment-list.component.html'
 })
 export class AssessmentListComponent implements OnInit, OnDestroy {
 
@@ -26,7 +26,8 @@ export class AssessmentListComponent implements OnInit, OnDestroy {
     private assessmentActionCreator: AssessmentActionCreator,
     public dialog: MatDialog,
     private sopiActionCreator: SopiActionCreator,
-    private courseActionCreator: CourseActionCreator
+    private courseActionCreator: CourseActionCreator,
+    private router: Router
   ) { }
 
   private dataNames = [
@@ -83,6 +84,10 @@ export class AssessmentListComponent implements OnInit, OnDestroy {
         this.assessmentActionCreator.UpdateAssessment(newData.id, newData);
       }
     });
+  }
+
+  onClickMore (data) {
+    this.router.navigate([`/assessment/discussion/${data.id}`]);
   }
 
   async onClickDelete(data) {
