@@ -8,7 +8,7 @@
     <input class="form-control" type="{{type}}" #input id="{{idd}}" placeholder="{{pH}}" (blur)="onChange($event, input.value)">
     <!--Loop through errors-->
     <div *ngIf="!c.pristine && !c.valid">
-      <p *ngFor="let error of errors" >{{error}}</p>
+      <p *ngFor="let error of errors"style="color: red;" >{{error}}</p>
     </div>
   </div>
 </div>
