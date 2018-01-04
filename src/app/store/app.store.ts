@@ -9,6 +9,7 @@ import { INVITE_INITIAL_STATE, inviteReducer as invite, IInviteStore } from './i
 import { INSTRUCTOR_INITIAL_STATE, instructorReducer as instructors, IInstructorStore } from './instructor.store';
 import { ASSESSMENT_INITIAL_STORE, assessmentReducer as assessments, IAssessmentStore } from './assessment.store';
 import { STUDENT_INITIAL_STATE, studentReducer as students, IStudentStore } from './student.store';
+import { ASSESSMENT_DISCUSSION_INITIAL_STORE, assessmentDiscussionReducer as assessmentDiscussions, IAssessmentDiscussionStore } from './assessment-discussion.store';
 
 export interface IAppState {
   session: ISessionStore;
@@ -21,6 +22,7 @@ export interface IAppState {
   instructors: IInstructorStore;
   assessments: IAssessmentStore;
   students: IStudentStore;
+  assessmentDiscussions: IAssessmentDiscussionStore;
 }
 
 export const INITIAL_STATE: IAppState = {
@@ -33,7 +35,8 @@ export const INITIAL_STATE: IAppState = {
   invite: INVITE_INITIAL_STATE,
   instructors: INSTRUCTOR_INITIAL_STATE,
   assessments: ASSESSMENT_INITIAL_STORE,
-  students: STUDENT_INITIAL_STATE
+  students: STUDENT_INITIAL_STATE,
+  assessmentDiscussions: ASSESSMENT_DISCUSSION_INITIAL_STORE
 }
 
 export const rootReducer = combineReducers<IAppState>({
@@ -46,5 +49,6 @@ export const rootReducer = combineReducers<IAppState>({
   invite,
   instructors,
   assessments,
-  students
+  students,
+  assessmentDiscussions
 });
