@@ -15,6 +15,7 @@ export const assessmentCreateFulfilled = (state, action) => {
       ...state.assessments,
       action.payload
     ],
+    selectedAssessment: state.selectedAssessment,
     error: ''
   });
 };
@@ -29,6 +30,7 @@ export const assessmentCreateFailed = (state, action) => {
 export const assessmentUpdateAttempt = (state, action) => {
   return tassign(state, {
     assessments: state.assessments,
+    selectedAssessment: state.selectedAssessment,
     error: ''
   });
 };
@@ -39,6 +41,7 @@ export const assessmentUpdateFulfilled = (state, action) => {
   newArray.splice(index, 1, action.payload);
   return tassign(state, {
     assessments: newArray,
+    selectedAssessment: state.selectedAssessment,
     error: ''
   });
 };
@@ -46,6 +49,7 @@ export const assessmentUpdateFulfilled = (state, action) => {
 export const assessmentUpdateFailed = (state, action) => {
   return tassign(state, {
     assessments: state.assessments,
+    selectedAssessment: state.selectedAssessment,
     error: action.error
   });
 };
@@ -53,6 +57,7 @@ export const assessmentUpdateFailed = (state, action) => {
 export const assessmentGetAttempt = (state, action) => {
   return tassign(state, {
     assessments: state.assessments,
+    selectedAssessment: state.selectedAssessment,
     error: ''
   });
 };
@@ -60,6 +65,7 @@ export const assessmentGetAttempt = (state, action) => {
 export const assessmentGetFulfilled = (state, action) => {
   return tassign(state, {
     assessments: action.payload,
+    selectedAssessment: state.selectedAssessment,
     error: ''
   });
 };
@@ -67,6 +73,7 @@ export const assessmentGetFulfilled = (state, action) => {
 export const assessmentGetFailed = (state, action) => {
   return tassign(state, {
     assessments: state.assessments,
+    selectedAssessment: state.selectedAssessment,
     error: action.error
   });
 };
@@ -74,6 +81,7 @@ export const assessmentGetFailed = (state, action) => {
 export const assessmentDeleteAttempt = (state, action) => {
   return tassign(state, {
     assessments: state.assessments,
+    selectedAssessment: state.selectedAssessment,
     error: ''
   });
 };
@@ -84,6 +92,7 @@ export const assessmentDeleteFulfilled = (state, action) => {
   });
   return tassign(state, {
     assessments: newArray,
+    selectedAssessment: state.selectedAssessment,
     error: ''
   });
 };
@@ -91,7 +100,23 @@ export const assessmentDeleteFulfilled = (state, action) => {
 export const assessmentDeleteFailed = (state, action) => {
   return tassign(state, {
     assessments: state.assessments,
+    selectedAssessment: state.selectedAssessment,
     error: action.error
   });
 };
 
+export const assessmentSelectFulfilled = (state, action) => {
+  return tassign(state, {
+    assessments: state.assessments,
+    selectedAssessment: action.payload,
+    error: ''
+  });
+};
+
+export const assessmentSelectFailed = (state, action) => {
+  return tassign(state, {
+    assessments: state.assessments,
+    selectedAssessment: state.selectedAssessment,
+    error: action.error
+  });
+};
