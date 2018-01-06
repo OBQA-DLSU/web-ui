@@ -8,13 +8,13 @@
   },
   "scripts": {
     "heroku-prebuild": "npm install -g http-server @angular/cli@latest",
-    "start": "ng build --env=prod && http-server dist/",
+    "start": "http-server dist/",
     "ng": "ng",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --env=prod"
+    "postinstall": "ng build"
   },
   "private": true,
   "dependencies": {
