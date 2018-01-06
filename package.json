@@ -82,7 +82,8 @@
     "@types/jasmine": "2.5.38",
     "@types/jquery": "1.10.31",
     "tslint": "4.5.0",
-    "@types/node": "6.0.73"
+    "@types/node": "6.0.73",
+    "typescript": "^2.3.4"
   },
   "devDependencies": {
     "@angular/cli": "^1.6.3",
