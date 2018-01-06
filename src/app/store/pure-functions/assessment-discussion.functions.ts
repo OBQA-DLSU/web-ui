@@ -12,8 +12,8 @@ export const assessmentDiscussionCreateAttempt = (state, action) => {
 export const assessmentDiscussionCreateFulfilled = (state, action) => {
   return tassign(state, {
     assessmentDiscussions: [
-      ...state.assessmentDiscussions,
-      action.payload
+      action.payload,
+      ...state.assessmentDiscussions
     ],
     error: ''
   });
