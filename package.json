@@ -7,7 +7,7 @@
     "url": "https://github.com/creativetimofficial/material-dashboard-pro-angular.git"
   },
   "scripts": {
-    "heroku-prebuild": "npm install -g http-server @angular/cli@latest",
+    "heroku-prebuild": "npm install -g http-server",
     "start": "http-server dist/",
     "ng": "ng",
     "build": "ng build",
