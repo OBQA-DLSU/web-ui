@@ -1,3 +1,36 @@
-<p>
-  assessment-discussion works!
-</p>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-text" data-background-color="green">
+            <h5>Assessment Discussions</h5>
+          </div>
+          <div class="card-content discussion-wrapper">
+
+              <h4 class="card-title">Discussions</h4>
+                
+              <div class="discussion-content">
+                  <div *ngFor="let data of (assessmentDiscussions | async)" class="discussion-item">
+                    <app-card-comment
+                      [commentId]="data.id"
+                      commentContent="{{data.discussion}}"
+                      commentAuthor="{{data.fname}} {{data.lname}}"
+                      commentAuthorIdNumber="{{data.idNumber}}"
+                    ></app-card-comment>
+                  </div>
+              </div>
+          </div>
+          <div class="card-content">
+            <form [formGroup]="discussionForm">
+                <input formControlName="discussion" class="form-control" type="texarea">
+                <div class="footer">
+                  <button type="button" class="btn btn-success btn-lg" (click)="submitComment()">Comment</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
