@@ -3,19 +3,22 @@ import {
   GET_INVITATION_CODE_FULFILLED,
   TOGGLE_FORGOT_PASSWORD,
   SIGN_IN_BUFFER_PAGE_OFF,
-  SIGN_IN_BUFFER_PAGE_ON
+  SIGN_IN_BUFFER_PAGE_ON,
+  UPDATE_PAGE_TITLE_FULFILLED
 } from './action/misc.actions';
 import * as misc from './pure-functions/misc.functions';
 export interface IMiscStore {
   invitationCode: string;
   toggleForgotPassword: boolean;
   signInBufferPage: boolean;
+  pageTitle: string;
 }
 
 export const MISC_INITIAL_STATE: IMiscStore= {
   invitationCode: '',
   toggleForgotPassword: false,
-  signInBufferPage: false
+  signInBufferPage: false,
+  pageTitle: 'Dashboard'
 }
 
 export function miscReducer(state: IMiscStore = MISC_INITIAL_STATE, action): IMiscStore {
@@ -24,6 +27,7 @@ export function miscReducer(state: IMiscStore = MISC_INITIAL_STATE, action): IMi
     case TOGGLE_FORGOT_PASSWORD: return misc.toggleForgotPassword(state, action);
     case SIGN_IN_BUFFER_PAGE_OFF: return misc.signInBufferPageOff(state, action);
     case SIGN_IN_BUFFER_PAGE_ON: return misc.signInBufferPageOn(state, action);
+    case UPDATE_PAGE_TITLE_FULFILLED: return misc.updatePageTitleFulfilled(state, action);
   }
   return state;
 };

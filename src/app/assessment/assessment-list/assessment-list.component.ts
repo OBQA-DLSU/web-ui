@@ -5,9 +5,12 @@ import { select } from '@angular-redux/store';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 import swal from 'sweetalert2';
-import { AssessmentActionCreator } from '../../store/action-creators/assessment.actioncreator';
-import { CourseActionCreator } from '../../store/action-creators/course.actioncreator';
-import { SopiActionCreator } from '../../store/action-creators/sopi.actioncreator'
+import {
+  AssessmentActionCreator,
+  CourseActionCreator,
+  MiscActionCreator,
+  SopiActionCreator
+} from '../../store/action-creators'
 import { CYCLE, ACADEMIC_YEAR, TERM } from '../../config';
 @Component({
   selector: 'app-assessment-list',
@@ -27,6 +30,7 @@ export class AssessmentListComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private sopiActionCreator: SopiActionCreator,
     private courseActionCreator: CourseActionCreator,
+    private miscActionCreator: MiscActionCreator,
     private router: Router
   ) { }
 
@@ -56,6 +60,7 @@ export class AssessmentListComponent implements OnInit, OnDestroy {
   ];
 
   ngOnInit() {
+    this.miscActionCreator.UpdatePageTitle('Assessment List');
     this.programIdSubscription = this.programId.subscribe(
       programId => {
         this.assessmentActionCreator.GetAssessment(programId);

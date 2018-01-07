@@ -5,7 +5,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { 
   AssessmentActionCreator,
   CourseActionCreator,
-  SopiActionCreator
+  SopiActionCreator,
+  MiscActionCreator
 } from '../../store/action-creators';
 import {
   WEB_API_URL,
@@ -35,7 +36,8 @@ export class AddAssessmentComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private assessmentActionCreator: AssessmentActionCreator,
     private sopiActionCreator: SopiActionCreator,
-    private courseActionCreator: CourseActionCreator
+    private courseActionCreator: CourseActionCreator,
+    private miscActionCreator: MiscActionCreator
   ) {
 
     this.programIdSubscription = this.programId.subscribe(
@@ -48,6 +50,7 @@ export class AddAssessmentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.miscActionCreator.UpdatePageTitle('Add Assessment');
     this.assessmentForm = this.formBuilder.group({
       programSopiId: [null, Validators.required],
       programCourseId: [null, Validators.required],

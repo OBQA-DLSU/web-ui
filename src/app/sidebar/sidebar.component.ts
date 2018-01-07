@@ -73,14 +73,13 @@ export const ROUTES: RouteInfo[] = [{
 	]
 }, {
 	path: '/pages',
-	title: 'Pages',
+	title: 'Options',
 	type: 'sub',
 	icontype: 'image',
 	collapse: 'pages',
 	children: [
-		{ path: 'sign-in', title: 'Sign-in Page', ab: 'SP' },
-		{ path: 'sign-up', title: 'Sign-up Page', ab: 'SP' },
-		{ path: 'user', title: 'User Page', ab: 'UP' }
+		{ path: 'lock', title: 'Lock', ab: 'L' },
+		{ path: 'authentication', title: 'Role Change', ab: 'RC'}
 	]
 }, {
 	path: '/invitation',
