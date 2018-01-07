@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { MiscActionCreator } from '../store/action-creators';
 declare const $: any;
 
 @Component({
@@ -6,9 +7,13 @@ declare const $: any;
 	templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
-	// constructor(private navbarTitleService: NavbarTitleService, private notificationService: NotificationService) { }
-	ngOnInit () {
+	
+	constructor (
+		private miscActionCreator: MiscActionCreator
+	) {}
 
+	ngOnInit () {
+		this.miscActionCreator.UpdatePageTitle('Dashboard');
 	}
 
 	ngAfterViewInit () {

@@ -1,10 +1,10 @@
 {
   "name": "md-angular-cli-pro",
   "version": "1.4.0",
-  "license": "http://md-pro-angular.creative-tim.com/documentation/tutorial",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/creativetimofficial/material-dashboard-pro-angular.git"
+    "url": "https://github.com/OBQA-DLSU/web-ui.git"
   },
   "scripts": {
     "heroku-prebuild": "npm install -g http-server",
@@ -19,7 +19,8 @@
   "private": true,
   "dependencies": {
     "@agm/core": "^1.0.0-beta.0",
-    "@angular-redux/store": "^6.6.0",
+    "@angular-redux/router": "^6.4.1",
+    "@angular-redux/store": "^6.0.0",
     "@angular/animations": "^4.4.6",
     "@angular/cdk": "^2.0.0-beta.12",
     "@angular/cli": "^1.6.3",

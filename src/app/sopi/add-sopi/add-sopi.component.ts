@@ -2,7 +2,10 @@ import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { select } from '@angular-redux/store';
 import { Subscription } from 'rxjs/Subscription';
-import { SopiActionCreator } from '../../store/action-creators/sopi.actioncreator';
+import {
+  SopiActionCreator,
+  MiscActionCreator
+} from '../../store/action-creators';
 import { WEB_API_URL } from '../../config/web-api-address';
 declare var $: any;
 
@@ -21,10 +24,12 @@ export class AddSopiComponent implements OnInit, OnDestroy {
   @select(s => s.session.user) user;
   constructor(
     private formBuilder: FormBuilder,
-    private sopiActionCreator: SopiActionCreator
+    private sopiActionCreator: SopiActionCreator,
+    private miscActionCreator: MiscActionCreator
   ) { }
 
   ngOnInit() {
+    this.miscActionCreator.UpdatePageTitle('Add SOPI');
     this.sopiForm = this.formBuilder.group({
       code: [null, Validators.required],
       so: [null, Validators.required],

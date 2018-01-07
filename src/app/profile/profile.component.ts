@@ -4,7 +4,10 @@ import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
-import { SessionActionCreator } from '../store/action-creators';
+import {
+  SessionActionCreator,
+  MiscActionCreator
+} from '../store/action-creators';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -15,6 +18,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
+    private miscActionCreator: MiscActionCreator,
     private sessionActionCreator: SessionActionCreator
   ) {}
   private dialogRef: any;
@@ -22,6 +26,7 @@ export class ProfileComponent implements OnInit {
   private email: string;
 
   ngOnInit() {
+    this.miscActionCreator.UpdatePageTitle('Profile');
     this.user.subscribe(
       (data => {
         this.email = data.email;

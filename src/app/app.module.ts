@@ -40,6 +40,7 @@ import {
   MatStepperModule,
 } from '@angular/material';
 import { NgRedux, NgReduxModule, DevToolsExtension } from '@angular-redux/store';
+import { NgReduxRouterModule, NgReduxRouter } from '@angular-redux/router';
 
 import { AppComponent } from './app.component';
 
@@ -101,6 +102,7 @@ export class MaterialModule {}
         CommonModule,
         BrowserAnimationsModule,
         NgReduxModule,
+        NgReduxRouterModule,
         FormsModule,
         RouterModule.forRoot(AppRoutes, { useHash: true }),
         ServiceModule.forRoot(),
@@ -124,8 +126,12 @@ export class MaterialModule {}
     bootstrap:    [ AppComponent ]
 })
 export class AppModule {
-  constructor(ngRedux: NgRedux<IAppState>, devTools:DevToolsExtension){
+  constructor(
+    ngRedux: NgRedux<IAppState>,
+    ngReduxRouter: NgReduxRouter,
+    devTools:DevToolsExtension){
     const enhancers = isDevMode() ? [devTools.enhancer()] : [];
     ngRedux.configureStore( rootReducer, INITIAL_STATE, [], enhancers );
+    ngReduxRouter.initialize();
   }
 }

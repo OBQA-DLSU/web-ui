@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { select } from '@angular-redux/store';
 import { ActivatedRoute } from '@angular/router';
-import { MiscActionCreator, StudentActionCreator } from '../../../store/action-creators/index';
+import {
+  MiscActionCreator,
+  StudentActionCreator
+} from '../../../store/action-creators';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -27,6 +30,7 @@ export class ClassPageComponent implements OnInit {
     private studentActionCreator: StudentActionCreator
   ) { }
   ngOnInit() {
+    this.miscActionCreator.UpdatePageTitle('Class Details');
     this.routeSubscription = this.activatedRoute.params
       .subscribe(params => {
         this.myClassId = params.id;
