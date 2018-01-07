@@ -5,13 +5,14 @@ import { AddSopiComponent } from './add-sopi/add-sopi.component';
 export const SopiRoutes: Routes = [
   {
     path: '',
-    children: [{
-      path: 'list',
-      component: SopiListComponent
-    }]},{
-    path: '',
-    children: [{
-      path: 'add-sopi',
-      component: AddSopiComponent
-  }]}
+    children: [
+      {
+        path: 'list',
+        component: SopiListComponent
+      }, {
+        path: 'add-sopi',
+        component: AddSopiComponent
+      }
+    ]
+  }
 ];

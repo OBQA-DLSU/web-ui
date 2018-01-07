@@ -5,7 +5,10 @@ import { select } from '@angular-redux/store';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 import swal from 'sweetalert2';
-import { MyClassActionCreator } from '../../store/action-creators/my-class.actioncreator';
+import {
+  MyClassActionCreator,
+  MiscActionCreator
+} from '../../store/action-creators';
 import { IUser } from '../../interfaces/user/user.interface';
 
 @Component({
@@ -24,6 +27,7 @@ export class ClassListComponent implements OnInit, OnDestroy {
 
   constructor(
     private myClassActionCreator: MyClassActionCreator,
+    private miscActionCreator: MiscActionCreator,
     private router: Router
   ) { }
 
@@ -31,6 +35,7 @@ export class ClassListComponent implements OnInit, OnDestroy {
   private dataNameAlias = ['ID', 'Course', 'Term', 'A.Y.', 'Cycle'];
 
   ngOnInit() {
+    this.miscActionCreator.UpdatePageTitle('Class List');
     this.session.subscribe(
       (session => {
         this.instructorId = session.instructorId;

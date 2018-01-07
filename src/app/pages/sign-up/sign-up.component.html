@@ -8,27 +8,27 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/#/dashboard">MD Pro Angular</a>
+        <a class="navbar-brand" href="/#/dashboard">OBQA System</a>
       </div>
       <div class="collapse navbar-collapse" id="menu-example">
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="/dashboard">
+            <a href="/#/dashboard">
               <i class="material-icons">dashboard</i> Dashboard
             </a>
           </li>
-          <li class="">
-            <a href="/pages/register">
-              <i class="material-icons">person_add</i> Register
+          <li class="active">
+            <a href="/#/pages/sign-up">
+              <i class="material-icons">person_add</i> Sign-up
             </a>
           </li>
-          <li class=" active ">
-            <a href="/pages/sign-in">
+          <li class="">
+            <a href="/#/pages/sign-in">
               <i class="material-icons">fingerprint</i> Sign-in
             </a>
           </li>
           <li class="">
-            <a href="/pages/lock">
+            <a href="/#/pages/lock">
               <i class="material-icons">lock_open</i> Lock
             </a>
           </li>
@@ -40,59 +40,66 @@
     <div class="content">
       <div class="container">
         <div class="row">
-          <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
+          <div class="col-md-8 col-sm-6 col-md-offset-2 col-sm-offset-3">
             <form [formGroup]="signUpForm" (submit)="submit()">
               <div class="card card-login card-hidden">
                 <div class="card-header text-center" data-background-color="green">
                   <h4 class="card-title">Sign up:</h4>
                 </div>
-                <div class="card-content">
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="material-icons">info</i>
-                    </span>
-                    <app-obqa-input-basic 
-                      length="12" 
-                      formControlName="email" 
-                      [c]="signUpForm.controls.email" 
-                      [optional]="true"
-                      idd="email" 
-                      placeholder=""
-                      type="email" 
-                      text="Email:">
-                    </app-obqa-input-basic>
+                <div class="card-content col-md-12">
+                  <div class="col-md-6">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="material-icons">info</i>
+                      </span>
+                      <app-obqa-input-basic 
+                        length="12" 
+                        formControlName="email" 
+                        [c]="signUpForm.controls.email" 
+                        [optional]="true"
+                        idd="email" 
+                        placeholder=""
+                        type="email" 
+                        text="Email:">
+                      </app-obqa-input-basic>
+                    </div>
                   </div>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="material-icons">info</i>
-                    </span>
-                    <app-obqa-input-basic 
-                      length="12" 
-                      formControlName="fname" 
-                      [c]="signUpForm.controls.fname" 
-                      [optional]="true"
-                      idd="fname" 
-                      placeholder=""
-                      type="text" 
-                      text="Firstname:">
-                    </app-obqa-input-basic>
+                  <div class="col-md-6">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="material-icons">info</i>
+                      </span>
+                      <app-obqa-input-basic 
+                        length="12" 
+                        formControlName="fname" 
+                        [c]="signUpForm.controls.fname" 
+                        [optional]="true"
+                        idd="fname" 
+                        placeholder=""
+                        type="text" 
+                        text="Firstname:">
+                      </app-obqa-input-basic>
+                    </div>
                   </div>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="material-icons">info</i>
-                    </span>
-                    <app-obqa-input-basic 
-                      length="12" 
-                      formControlName="lname" 
-                      [c]="signUpForm.controls.lname" 
-                      [optional]="true"
-                      idd="lname" 
-                      placeholder=""
-                      type="text" 
-                      text="Lastname:">
-                    </app-obqa-input-basic>
+                  <div class="col-md-6">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="material-icons">info</i>
+                      </span>
+                      <app-obqa-input-basic 
+                        length="12" 
+                        formControlName="lname" 
+                        [c]="signUpForm.controls.lname" 
+                        [optional]="true"
+                        idd="lname" 
+                        placeholder=""
+                        type="text" 
+                        text="Lastname:">
+                      </app-obqa-input-basic>
+                    </div>
                   </div>
-                  <div class="input-group">
+                  <div class="col-md-6">
+                    <div class="input-group">
                       <span class="input-group-addon">
                         <i class="material-icons">info</i>
                       </span>
@@ -107,35 +114,40 @@
                         text="ID Code:">
                       </app-obqa-input-basic>
                     </div>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="material-icons">info</i>
-                    </span>
-                    <app-obqa-input-basic 
-                      length="12" 
-                      formControlName="password" 
-                      [c]="signUpForm.controls.password" 
-                      [optional]="true"
-                      idd="password" 
-                      placeholder=""
-                      type="password" 
-                      text="Password:">
-                    </app-obqa-input-basic>
                   </div>
-                  <div class="input-group">
-                    <span class="input-group-addon">
-                      <i class="material-icons">info</i>
-                    </span>
-                    <app-obqa-input-basic 
-                      length="12" 
-                      formControlName="confirmation" 
-                      [c]="signUpForm.controls.confirmation" 
-                      [optional]="true"
-                      idd="confirmation" 
-                      placeholder=""
-                      type="password" 
-                      text="Retype Password:">
-                    </app-obqa-input-basic>
+                  <div class="col-md-6">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="material-icons">info</i>
+                      </span>
+                      <app-obqa-input-basic 
+                        length="12" 
+                        formControlName="password" 
+                        [c]="signUpForm.controls.password" 
+                        [optional]="true"
+                        idd="password" 
+                        placeholder=""
+                        type="password" 
+                        text="Password:">
+                      </app-obqa-input-basic>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        <i class="material-icons">info</i>
+                      </span>
+                      <app-obqa-input-basic 
+                        length="12" 
+                        formControlName="confirmation" 
+                        [c]="signUpForm.controls.confirmation" 
+                        [optional]="true"
+                        idd="confirmation" 
+                        placeholder=""
+                        type="password" 
+                        text="Retype Password:">
+                      </app-obqa-input-basic>
+                    </div>
                   </div>
                   <div class="input-group">
                     <span class="input-group-addon">
@@ -171,7 +183,7 @@
     <footer class="footer">
       <div class="container">
         <nav class="pull-left">
-          <ul>
+          <!-- <ul>
             <li>
               <a href="#">
                 Home
@@ -192,11 +204,11 @@
                 Blog
               </a>
             </li>
-          </ul>
+          </ul> -->
         </nav>
         <p class="copyright pull-right">
           &copy; {{test | date: 'yyyy'}}
-          <a href="https://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+          <a href="">DLSU</a>, Outcomes-based Quality Assurance
         </p>
       </div>
     </footer>

@@ -3,7 +3,10 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 import swal from 'sweetalert2';
-import { SopiActionCreator } from '../../store/action-creators/sopi.actioncreator';
+import {
+  MiscActionCreator,
+  SopiActionCreator
+} from '../../store/action-creators';
 import { ISopiView } from '../../interfaces/sopi/sopi-view.interface';
 import { select } from '@angular-redux/store';
 declare var $: any;
@@ -16,6 +19,7 @@ export class SopiListComponent implements OnInit, OnDestroy {
 
   constructor (
     private sopiActionCreator: SopiActionCreator,
+    private miscActionCreator: MiscActionCreator,
     public dialog: MatDialog
   ) { }
 
@@ -27,6 +31,7 @@ export class SopiListComponent implements OnInit, OnDestroy {
   private programId: number = 5;
 
   ngOnInit () {
+    this.miscActionCreator.UpdatePageTitle('SOPI list');
     this.sopiActionCreator.GetSopi(this.programId);
     
   }

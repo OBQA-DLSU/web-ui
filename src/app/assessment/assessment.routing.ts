@@ -6,14 +6,11 @@ import { AssessmentDiscussionComponent } from './assessment-list/assessment-disc
 export const AssessmentRoutes: Routes = [
   {
     path: '',
-    children: [{
-      path: 'list',
-      component: AssessmentListComponent
-    }]
-  }, {
-    path: '',
     children: [
       {
+        path: 'list',
+        component: AssessmentListComponent
+      }, {
         path: 'add-assessment',
         component: AddAssessmentComponent
       }, {

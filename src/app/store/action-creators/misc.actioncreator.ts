@@ -11,7 +11,8 @@ import {
   GET_MY_CLASS_ID_FULFILLED,
   TOGGLE_FORGOT_PASSWORD,
   SIGN_IN_BUFFER_PAGE_ON,
-  SIGN_IN_BUFFER_PAGE_OFF
+  SIGN_IN_BUFFER_PAGE_OFF,
+  UPDATE_PAGE_TITLE_FULFILLED
 } from '../action/misc.actions';
 
 @Injectable()
@@ -62,5 +63,9 @@ export class MiscActionCreator implements OnDestroy {
         });
       }
     );
+  }
+
+  UpdatePageTitle (title: string) {
+    this.ngRedux.dispatch({ type: UPDATE_PAGE_TITLE_FULFILLED, payload: title });
   }
 }

@@ -2,7 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { InstructorActionCreator } from '../../store/action-creators/instructor.actioncreator';
 import { select } from '@angular-redux/store';
-import { MyClassActionCreator, CourseActionCreator } from '../../store/action-creators/index';
+import {
+  MiscActionCreator,
+  MyClassActionCreator,
+  CourseActionCreator
+} from '../../store/action-creators/index';
 import { ACADEMIC_YEAR, CYCLE, TERM } from '../../config';
 
 @Component({
@@ -25,10 +29,12 @@ export class AddClassComponent implements OnInit {
     private courseActionCreator: CourseActionCreator,
     private instructorActionCreator: InstructorActionCreator,
     private myClassActionCreator: MyClassActionCreator,
+    private miscActionCreator: MiscActionCreator,
     private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.miscActionCreator.UpdatePageTitle('Add Class');
     this.session.subscribe(
     (session => {
       this.programId = session.program.id;

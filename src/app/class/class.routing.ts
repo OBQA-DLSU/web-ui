@@ -6,23 +6,16 @@ import { ClassPageComponent } from './class-list/class-page/class-page.component
 export const ClassRoutes: Routes = [
   {
     path: '',
-    children: [{
-      path: 'list',
-      component: ClassListComponent
-    }]},{
-    path: '',
-    children: [{
-      path: 'add-class',
-      component: AddClassComponent
-  }]},{
-    path: '',
-    children: [{
-      path: 'class-details',
-      component: ClassPageComponent
-  }]},{
-    path: '',
-    children: [{
-      path: 'class-details/:id',
-      component: ClassPageComponent
-  }]}
+    children: [
+      {
+        path: 'list',
+        component: ClassListComponent
+      }, {
+        path: 'add-class',
+        component: AddClassComponent
+      }, {
+        path: 'class-details/:id',
+        component: ClassPageComponent
+      }
+  ]}
 ];

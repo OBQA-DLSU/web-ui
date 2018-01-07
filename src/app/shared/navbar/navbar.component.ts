@@ -1,7 +1,9 @@
-import { Component, OnInit, Renderer, ViewChild, ElementRef, Directive } from '@angular/core';
+import { Component, OnInit, OnDestroy, Renderer, ViewChild, ElementRef, Directive } from '@angular/core';
 import { ROUTES } from '../.././sidebar/sidebar.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { select } from '@angular-redux/store';
+import { Subscription } from 'rxjs/Subscription';
 const misc: any = {
 	navbar_menu_visible: 0,
 	active_collapse: true,
@@ -14,16 +16,21 @@ declare var $: any;
 	templateUrl: 'navbar.component.html'
 })
 
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
 	private listTitles: any[];
 	location: Location;
 	private nativeElement: Node;
 	private toggleButton: any;
 	private sidebarVisible: boolean;
-
+	private pageTitleSubscription: Subscription = null;
 	@ViewChild('app-navbar-cmp') button: any;
-
-	constructor(location: Location, private renderer: Renderer, private element: ElementRef) {
+	@select(s => s.misc.pageTitle) pageTitle;
+	constructor(
+		location: Location,
+		private renderer: Renderer,
+		private element: ElementRef,
+		private activatedRoute: ActivatedRoute
+	) {
 		this.location = location;
 		this.nativeElement = element.nativeElement;
 		this.sidebarVisible = false;
@@ -93,6 +100,11 @@ export class NavbarComponent implements OnInit {
 			}, 1000);
 		});
 	}
+
+	ngOnDestroy () {
+		(this.pageTitleSubscription) ? this.pageTitleSubscription.unsubscribe() : null;
+	}
+
 	onResize(event) {
 		if ($(window).width() > 991) {
 			return false;

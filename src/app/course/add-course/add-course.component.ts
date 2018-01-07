@@ -2,7 +2,10 @@ import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { select } from '@angular-redux/store';
 import { Subscription } from 'rxjs/Subscription';
-import { CourseActionCreator } from '../../store/action-creators/course.actioncreator';
+import {
+  CourseActionCreator,
+  MiscActionCreator
+} from '../../store/action-creators';
 import { WEB_API_URL } from '../../config/web-api-address';
 declare var $: any;
 
@@ -24,10 +27,12 @@ export class AddCourseComponent implements OnInit, OnDestroy {
   @select(s => s.session.user) user;
   constructor(
     private formBuilder: FormBuilder,
-    private courseActionCreator: CourseActionCreator
+    private courseActionCreator: CourseActionCreator,
+    private miscActionCreator: MiscActionCreator
   ) { }
 
   ngOnInit() {
+    this.miscActionCreator.UpdatePageTitle('Add Course');
     this.courseForm = this.formBuilder.group({
       code: [null, Validators.required],
       name: [null, Validators.required],
