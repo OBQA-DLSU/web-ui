@@ -68,7 +68,7 @@ export class ObqaTableComponent implements OnInit {
   }
 
   actionsEnabled (): boolean {
-    return (this.actionDelete || this.actionEdit) ? true : false;
+    return (this.actionDelete || this.actionEdit || this.actionMore) ? true : false;
   }
 
   onFirst() {
