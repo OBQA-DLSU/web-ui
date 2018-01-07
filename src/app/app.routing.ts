@@ -49,7 +49,7 @@ export const AppRoutes: Routes = [
     pathMatch: 'full'
   }, {
     path: '**',
-    redirectTo: 'pages/sign-in',
+    redirectTo: 'dashboard',
     pathMatch: 'full'
   }
 ];

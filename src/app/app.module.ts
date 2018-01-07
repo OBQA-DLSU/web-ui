@@ -102,7 +102,7 @@ export class MaterialModule {}
         BrowserAnimationsModule,
         NgReduxModule,
         FormsModule,
-        RouterModule.forRoot(AppRoutes),
+        RouterModule.forRoot(AppRoutes, { useHash: true }),
         ServiceModule.forRoot(),
         ActionCreatorModule.forRoot(),
         HttpModule,
