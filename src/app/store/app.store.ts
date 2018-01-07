@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { routerReducer as router } from '@angular-redux/router';
 import { SESSION_INITIAL_STATE, sessionReducer as session, ISessionStore } from './session.store';
 import { USER_INITIAL_STATE, userReducer as user, IUserStore } from './user.store';
 import { COURSE_INITIAL_STATE, courseReducer as courses, ICourseStore } from './course.store';
@@ -40,6 +41,7 @@ export const INITIAL_STATE: IAppState = {
 }
 
 export const rootReducer = combineReducers<IAppState>({
+  router,
   session,
   user,
   courses,

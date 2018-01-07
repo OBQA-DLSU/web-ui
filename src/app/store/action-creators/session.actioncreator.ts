@@ -76,6 +76,29 @@ export class SessionActionCreator implements OnDestroy {
     );
   }
 
+  RenewSession (sessionCreate: ISessionCreate) {
+    this.signin = this.authenticationService.SignIn(sessionCreate)
+    .subscribe(
+      (session: ISession) => {
+        this.authenticationService.SessionSave(session);
+        this.ngRedux.dispatch({type: SESSION_CREATE_FULFILLED, payload: session});
+        this.ngRedux.dispatch({ type: USER_SIGNIN_FULFILLED, payload: session.user});
+      }, err => {
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.dialogService.showSwal('error-message', {
+            title: 'Unlock Error!',
+            text: 'Password is incorrect.'
+          });
+        }
+      },
+      () => {
+        this.errorMessage = null;
+        this.router.navigate(['./pages/authentication']);
+      }
+    );
+  }
+
   SessionCheck () {
     const session: ISession = this.authenticationService.SessionRead();
     if (!session) { 
@@ -98,10 +121,10 @@ export class SessionActionCreator implements OnDestroy {
   }
 
   SessionDestroy () {
+    this.router.navigate(['/pages/sign-in']);
     this.authenticationService.SessionDestroy();
     this.ngRedux.dispatch({ type: SESSION_DESTROY_FULFILLED });
     this.ngRedux.dispatch({ type: USER_SESSION_DESTROY });
-    this.router.navigate(['/pages/sign-in']);
   }
 
   ChangePassword (email: string, password: string, newPassword: string, confirmation: string) {
@@ -128,5 +151,4 @@ export class SessionActionCreator implements OnDestroy {
       }
     );
   }
-
 }

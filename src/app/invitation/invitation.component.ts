@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl, FormArray } from '@angular/forms';
 import { IUserInvite } from '../interfaces/user/user-invite.interface';
-import { InviteActionCreator } from '../store/action-creators/invite.actioncreator';
+import {
+  InviteActionCreator,
+  MiscActionCreator
+} from '../store/action-creators';
 
 @Component({
   selector: 'app-invitation',
@@ -11,6 +14,7 @@ export class InvitationComponent implements OnInit {
 
   constructor (
     private formBuilder: FormBuilder,
+    private miscActionCreator: MiscActionCreator,
     private inviteActionCreator: InviteActionCreator
   ) {}
 
@@ -18,6 +22,7 @@ export class InvitationComponent implements OnInit {
   invitationItems:any = [];
   
   ngOnInit() {
+    this.miscActionCreator.UpdatePageTitle('Invitation');
     this.invitationForm = this.formBuilder.group({
       invitationItems: this.formBuilder.array([ this.createItem() ])
     });

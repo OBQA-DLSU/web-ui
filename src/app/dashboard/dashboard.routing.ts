@@ -9,8 +9,7 @@ export const DashboardRoutes: Routes = [
 		path: '',
 		children: [{
 			path: 'dashboard',
-			component: DashboardComponent,
-			canActivate: [SessionGuard]
+			component: DashboardComponent
 		}]
 	}
 ];

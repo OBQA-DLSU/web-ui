@@ -4,7 +4,10 @@ import { select } from '@angular-redux/store';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 import swal from 'sweetalert2';
-import { CourseActionCreator } from '../../store/action-creators/course.actioncreator';
+import {
+  CourseActionCreator,
+  MiscActionCreator
+} from '../../store/action-creators';
 
 declare var $: any;
 
@@ -20,6 +23,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
 
   constructor(
     private courseActionCreator: CourseActionCreator,
+    private miscActionCreator: MiscActionCreator,
     private formBuilder: FormBuilder,
     public dialog: MatDialog
   ) { }
@@ -31,6 +35,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
   private programIdSubscription: Subscription = null;
 
   ngOnInit() {
+    this.miscActionCreator.UpdatePageTitle('Course List');
     this.programIdSubscription = this.programId.subscribe(
       programId => this.courseActionCreator.GetCourse(programId),
       err => null

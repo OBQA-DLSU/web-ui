@@ -9,16 +9,14 @@ export const CourseRoutes: Routes = [
 
 		path: '',
 		canActivate: [SessionGuard],
-		children: [{
-			path: 'list',
-			component: CourseListComponent
-		}]},{
-		path: '',
-		canActivate: [SessionGuard],
-		children: [{
-			path: 'add-course',
-			component: AddCourseComponent
-		}]
-
+		children: [
+			{
+				path: 'list',
+				component: CourseListComponent
+			}, {
+				path: 'add-course',
+				component: AddCourseComponent
+			}
+		]
 	}
 ];
