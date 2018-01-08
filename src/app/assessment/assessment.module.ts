@@ -8,7 +8,6 @@ import { AssessmentListComponent, EditAssessmentDialog } from './assessment-list
 import { AddAssessmentComponent } from './add-assessment/add-assessment.component';
 import { AssessmentRoutes } from './assessment.routing';
 import { ComponentModule } from './../components/component.module';
-import { DynamicFormModule } from './../obqa-forms/dynamic-form.module';
 import { AssessmentDiscussionComponent } from './assessment-list/assessment-discussion/assessment-discussion.component';
 
 @NgModule({
@@ -18,8 +17,7 @@ import { AssessmentDiscussionComponent } from './assessment-list/assessment-disc
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    ComponentModule,
-    DynamicFormModule
+    ComponentModule
   ],
   declarations: [
     AssessmentListComponent,

@@ -1,16 +1,23 @@
-<div class="main-content">
-  <div class="container-fluid">
-    <div class="row">
-      <app-obqa-table
-        tableTitle="Course List"
-        [actionDelete]="(isAdmin | async)"
-        [actionEdit]="(isAdmin | async)"
-        [tableDataArray]="(courses)"
-        [tableHeaderName]="dataNames"
-        [tableHeaderAlias]="dataNameAlias"
-        (clickEdit)="onClickEdit($event)"
-        (clickDelete)="onClickDelete($event)"
-      ></app-obqa-table>
+<div *ngIf="true; else render" class="loader">
+  <svg class="circular" viewBox="25 25 50 50">
+    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+  </svg>
+</div>
+<ng-template #render>
+  <div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <app-obqa-table
+          tableTitle="Course List"
+          [actionDelete]="(isAdmin | async)"
+          [actionEdit]="(isAdmin | async)"
+          [tableDataArray]="(courses)"
+          [tableHeaderName]="dataNames"
+          [tableHeaderAlias]="dataNameAlias"
+          (clickEdit)="onClickEdit($event)"
+          (clickDelete)="onClickDelete($event)"
+        ></app-obqa-table>
+      </div>
     </div>
   </div>
-</div>
+</ng-template>
