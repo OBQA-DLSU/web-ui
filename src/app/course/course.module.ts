@@ -8,7 +8,7 @@ import { CourseRoutes } from './course.routing';
 import { CourseListComponent, EditCourseDialog  } from './course-list/course-list.component';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { ComponentModule } from 'app/components/component.module';
-
+import { SpinnerDirective, SpinnerComponent, DirectiveModule } from '../directives';
 
 @NgModule({
   imports: [
@@ -17,15 +17,18 @@ import { ComponentModule } from 'app/components/component.module';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    ComponentModule
+    ComponentModule,
+    DirectiveModule
   ],
   declarations: [
     CourseListComponent,
     AddCourseComponent,
-    EditCourseDialog
+    EditCourseDialog,
+    SpinnerDirective
   ],
   entryComponents: [
-    EditCourseDialog
+    EditCourseDialog,
+    SpinnerComponent
   ]
 })
 export class CourseModule { }
