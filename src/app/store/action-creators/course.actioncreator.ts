@@ -22,6 +22,7 @@ import {
   COURSE_DELETE_FAILED,
   COURSE_DELETE_FULFILLED
 } from '../action/course.actions';
+import { MiscActionCreator } from './misc.actioncreator';
 
 @Injectable()
 
@@ -37,7 +38,8 @@ export class CourseActionCreator implements OnDestroy {
   constructor (
     private ngRedux: NgRedux<IAppState>,
     private courseService: CourseService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private miscActionCreator: MiscActionCreator
   ) {}
 
   ngOnDestroy () {
@@ -71,6 +73,7 @@ export class CourseActionCreator implements OnDestroy {
   }
 
   GetCourse (programId: number) {
+    this.miscActionCreator.LoadSpinner();
     this.getCourseSubscription = this.courseService.GetCourse(programId)
     .map(data => {
       let newData: ICourseView[];
@@ -85,9 +88,11 @@ export class CourseActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: COURSE_GET_FAILED, error: this.errorMessage });
         }
+        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
+        this.miscActionCreator.UnloadSpinner();
       }
     );
   }

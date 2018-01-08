@@ -1,12 +1,7 @@
-<div *ngIf="true; else render" class="loader">
-  <svg class="circular" viewBox="25 25 50 50">
-    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
-  </svg>
-</div>
-<ng-template #render>
+<div>
   <div class="main-content">
     <div class="container-fluid">
-      <div class="row">
+      <div *appspinner="(spinner | async)" class="row">
         <app-obqa-table
           tableTitle="Course List"
           [actionDelete]="(isAdmin | async)"
@@ -20,4 +15,4 @@
       </div>
     </div>
   </div>
-</ng-template>
+</div>
