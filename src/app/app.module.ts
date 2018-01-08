@@ -58,7 +58,7 @@ import { ActionCreatorModule } from './store/action-creators/action-creator.modu
 import { ComponentModule } from 'app/components/component.module';
 import { SessionGuard } from 'app/guards/session.guard';
 import { IsAdminGuard } from 'app/guards/is-admin.guard';
-
+import { DirectiveModule } from './directives';
 
 @NgModule({
   exports: [
@@ -106,6 +106,7 @@ export class MaterialModule {}
         FormsModule,
         RouterModule.forRoot(AppRoutes, { useHash: true }),
         ServiceModule.forRoot(),
+        DirectiveModule.forRoot(),
         ActionCreatorModule.forRoot(),
         HttpModule,
         MaterialModule,

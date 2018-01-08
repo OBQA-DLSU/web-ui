@@ -4,3 +4,5 @@ export const TOGGLE_FORGOT_PASSWORD: string = 'TOGGLE_FORGOT_PASSWORD';
 export const SIGN_IN_BUFFER_PAGE_ON: string = 'SIGN_IN_BUFFER_PAGE_ON';
 export const SIGN_IN_BUFFER_PAGE_OFF: string = 'SIGN_IN_BUFFER_PAGE_OFF';
 export const UPDATE_PAGE_TITLE_FULFILLED: string = 'UPDATE_PAGE_TITLE_FULFILLED';
+export const LOAD_SPINNER: string = 'LOAD_SPINNER';
+export const UNLOAD_SPINNER: string = 'UNLOAD_SPINNER';
