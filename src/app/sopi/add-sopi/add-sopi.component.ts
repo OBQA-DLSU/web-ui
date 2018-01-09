@@ -22,6 +22,7 @@ export class AddSopiComponent implements OnInit, OnDestroy {
   private uploadUrl: string = `${WEB_API_URL}/api/sopi/bulk/${this.programId}`;
   
   @select(s => s.session.user) user;
+  @select(s => s.misc.spinner) spinner;
   constructor(
     private formBuilder: FormBuilder,
     private sopiActionCreator: SopiActionCreator,

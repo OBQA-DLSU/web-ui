@@ -10,9 +10,12 @@ import { SpinnerComponent } from './spinner/spinner.component';
     CommonModule,
     HttpModule
   ],
-  exports: [],
+  exports: [
+    SpinnerDirective
+  ],
   declarations: [
-    SpinnerComponent
+    SpinnerComponent,
+    SpinnerDirective
   ]
 })
 export class DirectiveModule {

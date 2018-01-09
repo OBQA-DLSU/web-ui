@@ -15,6 +15,7 @@ import {
 })
 export class ProfileComponent implements OnInit {
   @select(s => s.user.user) user;
+  @select(s => s.misc.spinner) spinner;
   constructor(
     private formBuilder: FormBuilder,
     public dialog: MatDialog,

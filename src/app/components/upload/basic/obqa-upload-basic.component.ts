@@ -4,6 +4,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 import { DialogService } from '../../../services';
+import { MiscActionCreator } from '../../../store/action-creators';
 // const URL = 'http://127.0.0.1:5000/api/course/bulk/5';
 
 @Component({
@@ -26,10 +27,13 @@ export class ObqaUploadBasicComponent implements OnInit {
 	}
 
 	constructor(
-		private http: Http, private el: ElementRef
+		private http: Http, private el: ElementRef,
+		private dialogService: DialogService,
+		private miscActionCreator: MiscActionCreator
 	) { }
 
 	upload() {
+		this.miscActionCreator.LoadSpinner();
     this.headers.append('Access-Control-Allow-Origin','*');
     const options = new RequestOptions({headers: this.headers});
 		let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#file');
@@ -42,10 +46,20 @@ export class ObqaUploadBasicComponent implements OnInit {
 			this.http
 				.post(this.URL, formData, options).map((res: any) => res).subscribe(
 				(success) => {
-					
+					this.dialogService.showSwal('success-message', {
+						title:  'Upload Success!',
+						text: `The file was successfully uploaded!`
+					});
 					this.ngOnInit();
 				},
-				(error) => alert('Upload Error')
+				(error) => {
+					this.dialogService.showSwal('error-message', {
+            title: 'Upload Failed.',
+            text: `Sorry there was a problem encountered while uploading your file.`
+          });
+					this.miscActionCreator.UnloadSpinner();
+				},
+				() => this.miscActionCreator.UnloadSpinner()
 				);
 		}
 	}

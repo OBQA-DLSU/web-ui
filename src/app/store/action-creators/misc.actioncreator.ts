@@ -54,15 +54,18 @@ export class MiscActionCreator implements OnDestroy {
   }
 
   ForgotPassword (email: string) {
+    this.LoadSpinner();
     this.forgotPasswordSubscription = this.authenticationService.ForgotPassword(email)
     .subscribe(
       message => {
+        this.UnloadSpinner();
         this.ngRedux.dispatch({ type: SIGN_IN_BUFFER_PAGE_ON });
       },
       error => {
         this.dialogService.showSwal('error-message', {
           title: 'Please try again.'
         });
+        this.UnloadSpinner();
       }
     );
   }
