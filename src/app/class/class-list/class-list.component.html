@@ -1,17 +1,19 @@
 <div class="main-content">
   <div class="container-fluid">
-    <div class="row">
-      <app-obqa-table
-        tableTitle="Class List"
-        [actionDelete]="true"
-        [actionMore]="true"
-        [tableDataArray]="(myClasses)"
-        [tableHeaderName]="dataNames"
-        [tableHeaderAlias]="dataNameAlias"
-        (clickEdit)="onClickEdit($event)"
-        (clickDelete)="onClickDelete($event)"
-        (clickMore)="onMoreClick($event)"
-      ></app-obqa-table>
+    <div *appspinner="(spinner | async)">
+      <div class="row">
+        <app-obqa-table
+          tableTitle="Class List"
+          [actionDelete]="true"
+          [actionMore]="true"
+          [tableDataArray]="(myClasses)"
+          [tableHeaderName]="dataNames"
+          [tableHeaderAlias]="dataNameAlias"
+          (clickEdit)="onClickEdit($event)"
+          (clickDelete)="onClickDelete($event)"
+          (clickMore)="onMoreClick($event)"
+        ></app-obqa-table>
+      </div>
     </div>
   </div>
 </div>

@@ -26,6 +26,7 @@ import {
   ASSESSMENT_SELECT_FAILED,
   ASSESSMENT_SELECT_FULFILLED
 } from '../action/assessment.actions';
+import { MiscActionCreator } from './misc.actioncreator';
 import { IAssessmentView } from '../../interfaces/assessment/assessment-view.interface';
 import { IAssessment } from '../../interfaces/assessment/assessment.interface';
 
@@ -46,7 +47,8 @@ export class AssessmentActionCreator implements OnDestroy {
   constructor (
     private ngRedux: NgRedux<IAppState>,
     private assessmentService: AssessmentService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private miscActionCreator: MiscActionCreator
   ) {}
 
   ngOnDestroy () {
@@ -60,6 +62,7 @@ export class AssessmentActionCreator implements OnDestroy {
   }
 
   GetAssessment (programId: number) {
+    this.miscActionCreator.LoadSpinner();
     this.getAssessmentSubscription = this.assessmentService.GetAssessment(programId)
     .map(data => {
       let newData: IAssessmentView[];
@@ -74,19 +77,23 @@ export class AssessmentActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: ASSESSMENT_GET_FAILED, error: this.errorMessage });
         }
+        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
+        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   CreateAssessment (programId: number, assessment: IAssessmentView) {
+    this.miscActionCreator.LoadSpinner();
     this.createAssessmentSubscription = this.assessmentService.CreateAssessment(programId, assessment)
     .map(data => this.assessmentToViewFlat(data))
     .subscribe(
       (assessment: IAssessmentView) => {
         this.ngRedux.dispatch({ type: ASSESSMENT_CREATE_FULFILLED, payload: assessment });
+        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Successful Assessment Creation',
           text: `You successfully Added a new Assessment.`
@@ -97,6 +104,7 @@ export class AssessmentActionCreator implements OnDestroy {
           this.ngRedux.dispatch({ type: ASSESSMENT_CREATE_FAILED, error: this.errorMessage });
           
         }
+        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
@@ -105,6 +113,7 @@ export class AssessmentActionCreator implements OnDestroy {
   }
 
   GetFilteredAssessmentByProgram (programId: number, filterName: string, filterValue: string) {
+    this.miscActionCreator.LoadSpinner();
     this.getFilteredAssessmentByProgramSubscription = this.assessmentService.GetFilteredAssessmentByProgram(programId, filterName, filterValue)
     .map(data => {
       let newData: IAssessmentView[];
@@ -119,14 +128,17 @@ export class AssessmentActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: ASSESSMENT_GET_FAILED, error: this.errorMessage });
         }
+        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
+        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   GetAllAssessment () {
+    this.miscActionCreator.LoadSpinner();
     this.getAllAssessmentSubscription = this.assessmentService.GetAllAssessment()
     .map(data => {
       let newData: IAssessmentView[];
@@ -141,14 +153,17 @@ export class AssessmentActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: ASSESSMENT_GET_FAILED, error: this.errorMessage });
         }
+        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
+        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   GetFilteredAssessment (filterName: string, filterValue: string) {
+    this.miscActionCreator.LoadSpinner();
     this.getFilteredAssessmentSubscription = this.assessmentService.GetFilteredAssessment(filterName, filterValue)
     .map(data => {
       let newData: IAssessmentView[];
@@ -163,14 +178,17 @@ export class AssessmentActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: ASSESSMENT_GET_FAILED, error: this.errorMessage });
         }
+        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
+        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   GetOneAssessment (id: number) {
+    this.miscActionCreator.LoadSpinner();
     this.getOneAssessmentSubscription = this.assessmentService.GetOneAssessment(id)
     .map(data => this.assessmentToViewFlat(data))
     .subscribe(
@@ -182,19 +200,23 @@ export class AssessmentActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: ASSESSMENT_GET_FAILED, error: this.errorMessage });
         }
+        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
+        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   UpdateAssessment (id: number, assessment: IAssessmentView) {
+    this.miscActionCreator.LoadSpinner();
     this.updateAssessmentSubscription = this.assessmentService.UpdateAssessment(id, assessment)
     .map(data => this.assessmentToViewFlat(data))
     .subscribe(
       (assessment: IAssessmentView) => {
         this.ngRedux.dispatch({type: ASSESSMENT_UPDATE_FULFILLED, payload: assessment});
+        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Successful Assessment Update',
           text: `Assessment ID: ${assessment.id} was successfully Updated.`
@@ -205,6 +227,7 @@ export class AssessmentActionCreator implements OnDestroy {
           this.ngRedux.dispatch({ type: ASSESSMENT_UPDATE_FAILED, error: this.errorMessage });
           // put error mesage here.
         }
+        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
@@ -213,10 +236,12 @@ export class AssessmentActionCreator implements OnDestroy {
   }
 
   DeleteAssessment (id: number) {
+    this.miscActionCreator.LoadSpinner();
     this.deleteAssessmentSubscription = this.assessmentService.DeleteAssessment(id)
     .subscribe(
       (data) => {
         this.ngRedux.dispatch({ type: ASSESSMENT_DELETE_FULFILLED, payload: data });
+        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Successful Assessment Deletion',
           text: `Assessment ID: ${id} was successfully deleted.`
@@ -229,11 +254,13 @@ export class AssessmentActionCreator implements OnDestroy {
       },
       () => {
         this.errorMessage = null;
+        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   SelectAssessment (id: number) {
+    this.miscActionCreator.LoadSpinner();
     this.getOneAssessmentSubscription = this.assessmentService.GetOneAssessment(id)
     .map(data => this.assessmentToView(data))
     .subscribe(
@@ -244,9 +271,11 @@ export class AssessmentActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: ASSESSMENT_SELECT_FAILED, error: this.errorMessage });
         }
+        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
+        this.miscActionCreator.UnloadSpinner();
       }
     );
   }

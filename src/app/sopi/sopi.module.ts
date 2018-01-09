@@ -8,6 +8,7 @@ import { SopiRoutes } from './sopi.routing';
 import { SopiListComponent, EditSopiDialog } from './sopi-list/sopi-list.component';
 import { AddSopiComponent } from './add-sopi/add-sopi.component';
 import { ComponentModule } from './../components/component.module';
+import { DirectiveModule, SpinnerComponent } from '../directives';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { ComponentModule } from './../components/component.module';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    ComponentModule
+    ComponentModule,
+    DirectiveModule
   ],
   declarations: [
     SopiListComponent,
@@ -24,7 +26,8 @@ import { ComponentModule } from './../components/component.module';
     EditSopiDialog
   ],
   entryComponents: [
-    EditSopiDialog
+    EditSopiDialog,
+    SpinnerComponent
   ]
 
 })

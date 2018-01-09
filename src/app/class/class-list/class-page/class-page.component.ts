@@ -17,6 +17,7 @@ export class ClassPageComponent implements OnInit {
 
   @select(s => s.misc.myClassId) myClassIdCode;
   @select(s => s.students.students) students;
+  @select(s => s.misc.spinner) spinner;
 
   private routeSubscription: Subscription;
   private myClassId: number = null;

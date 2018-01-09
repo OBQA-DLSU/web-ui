@@ -1,18 +1,20 @@
 <div class="main-content">
   <div class="container-fluid">
-    <div class="row">
-      <app-obqa-table
-        tableTitle="Assessment List"
-        [actionDelete]="(isAdmin | async)"
-        [actionEdit]="(isAdmin | async)"
-        actionMore="true"
-        [tableDataArray]="(assessments)"
-        [tableHeaderName]="dataNames"
-        [tableHeaderAlias]="dataNameAlias"
-        (clickEdit)="onClickEdit($event)"
-        (clickDelete)="onClickDelete($event)"
-        (clickMore)="onClickMore($event)"
-      ></app-obqa-table>
+    <div *appspinner="(spinner | async)">
+      <div class="row">
+        <app-obqa-table
+          tableTitle="Assessment List"
+          [actionDelete]="(isAdmin | async)"
+          [actionEdit]="(isAdmin | async)"
+          actionMore="true"
+          [tableDataArray]="(assessments)"
+          [tableHeaderName]="dataNames"
+          [tableHeaderAlias]="dataNameAlias"
+          (clickEdit)="onClickEdit($event)"
+          (clickDelete)="onClickDelete($event)"
+          (clickMore)="onClickMore($event)"
+        ></app-obqa-table>
+      </div>
     </div>
   </div>
 </div>

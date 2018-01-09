@@ -9,6 +9,7 @@ import { AddAssessmentComponent } from './add-assessment/add-assessment.componen
 import { AssessmentRoutes } from './assessment.routing';
 import { ComponentModule } from './../components/component.module';
 import { AssessmentDiscussionComponent } from './assessment-list/assessment-discussion/assessment-discussion.component';
+import { DirectiveModule, SpinnerComponent } from '../directives';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { AssessmentDiscussionComponent } from './assessment-list/assessment-disc
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    ComponentModule
+    ComponentModule,
+    DirectiveModule
   ],
   declarations: [
     AssessmentListComponent,
@@ -26,7 +28,8 @@ import { AssessmentDiscussionComponent } from './assessment-list/assessment-disc
     AssessmentDiscussionComponent
   ],
   entryComponents: [
-    EditAssessmentDialog
+    EditAssessmentDialog,
+    SpinnerComponent
   ]
 })
 export class AssessmentModule { }

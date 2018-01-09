@@ -27,6 +27,7 @@ export class AddAssessmentComponent implements OnInit, OnDestroy {
   @select(s => s.session.programId) programId;
   @select(s => s.courses.courses) courses;
   @select(s => s.sopis.sopis) sopis;
+  @select(s => s.misc.spinner) spinner;
   private programIdSubscription: Subscription = null;
   private assessmentForm: FormGroup;
   private academicYear: any[] = ACADEMIC_YEAR;

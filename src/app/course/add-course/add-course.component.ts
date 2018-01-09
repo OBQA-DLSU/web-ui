@@ -25,6 +25,7 @@ export class AddCourseComponent implements OnInit, OnDestroy {
   private courseForm: FormGroup;
   private uploadUrl: string = `${WEB_API_URL}/api/course/bulk/${this.programId}`;
   @select(s => s.session.user) user;
+  @select(s => s.misc.spinner) spinner;
   constructor(
     private formBuilder: FormBuilder,
     private courseActionCreator: CourseActionCreator,

@@ -6,6 +6,7 @@ import { MaterialModule } from '../app.module';
 
 import { ProfileRoutes } from './profile.routing';
 import { ProfileComponent, ChangePasswordDialog } from './profile.component';
+import { DirectiveModule, SpinnerComponent } from '../directives';
 
 @NgModule({
   imports: [
@@ -13,11 +14,13 @@ import { ProfileComponent, ChangePasswordDialog } from './profile.component';
     ReactiveFormsModule,
     CommonModule,
     MaterialModule,
-    RouterModule.forChild(ProfileRoutes)
+    RouterModule.forChild(ProfileRoutes),
+    DirectiveModule
   ],
   declarations: [ProfileComponent, ChangePasswordDialog],
   entryComponents: [
-    ChangePasswordDialog
+    ChangePasswordDialog,
+    SpinnerComponent
   ]
 })
 export class ProfileModule { }

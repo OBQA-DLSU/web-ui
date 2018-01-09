@@ -21,6 +21,7 @@ declare var $: any;
 export class SignUpComponent implements OnInit, OnDestroy {
 
   @select(s => s.misc.invitationCode) myInvitationCode;
+  @select(s => s.misc.spinner) spinner;
 
   private routeSubscription: Subscription;
   private invitationCode: string;

@@ -1,16 +1,18 @@
 <div class="main-content">
   <div class="container-fluid">
-    <div class="row">
-      <app-obqa-table
-        tableTitle="Sopi List"
-        [actionDelete]="true"
-        [actionEdit]="true"
-        [tableDataArray]="(sopis)"
-        [tableHeaderName]="dataNames"
-        [tableHeaderAlias]="dataNameAlias"
-        (clickEdit)="onClickEdit($event)"
-        (clickDelete)="onClickDelete($event)"
-      ></app-obqa-table>
+    <div *appspinner="(spinner | async)">
+      <div class="row">
+        <app-obqa-table
+          tableTitle="Sopi List"
+          [actionDelete]="true"
+          [actionEdit]="true"
+          [tableDataArray]="(sopis)"
+          [tableHeaderName]="dataNames"
+          [tableHeaderAlias]="dataNameAlias"
+          (clickEdit)="onClickEdit($event)"
+          (clickDelete)="onClickDelete($event)"
+        ></app-obqa-table>
+      </div>
     </div>
   </div>
 </div>

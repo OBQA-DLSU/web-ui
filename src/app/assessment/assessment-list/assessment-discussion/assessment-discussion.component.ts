@@ -20,6 +20,7 @@ export class AssessmentDiscussionComponent implements OnInit, OnDestroy {
   private discussionForm: FormGroup;
   @select(s => s.session.instructorId) instructorId;
   @select(s => s.assessmentDiscussions.assessmentDiscussions) assessmentDiscussions;
+  @select(s => s.misc.spinner) spinner;
 
   constructor(
     private assessmentActionCreator: AssessmentActionCreator,

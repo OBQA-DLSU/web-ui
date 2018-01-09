@@ -8,7 +8,8 @@ import { AddClassComponent } from './add-class/add-class.component';
 import { ClassListComponent } from './class-list/class-list.component';
 import { ClassRoutes } from './class.routing';
 import { ComponentModule } from './../components/component.module';
-import { ClassPageComponent } from './class-list/class-page/class-page.component'
+import { ClassPageComponent } from './class-list/class-page/class-page.component';
+import { DirectiveModule, SpinnerComponent } from '../directives';
 
 @NgModule({
   imports: [
@@ -17,8 +18,16 @@ import { ClassPageComponent } from './class-list/class-page/class-page.component
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    ComponentModule
+    ComponentModule,
+    DirectiveModule
   ],
-  declarations: [ AddClassComponent, ClassListComponent, ClassPageComponent]
+  declarations: [
+    AddClassComponent,
+    ClassListComponent,
+    ClassPageComponent
+  ],
+  entryComponents: [
+    SpinnerComponent
+  ]
 })
 export class ClassModule { }
