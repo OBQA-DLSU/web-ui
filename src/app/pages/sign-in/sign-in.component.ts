@@ -64,6 +64,7 @@ export class SignInComponent implements OnInit {
   }
   submit(){
     if (this.signInForm.valid) {
+      this.ngOnInit();
       this.sessionActionCreator.SessionCreate(this.signInForm.value);
     } else {
       alert('Invalid form');
