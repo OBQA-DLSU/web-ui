@@ -14,6 +14,7 @@ import { ISessionCreate } from '../../interfaces/session/session-create.interfac
 export class SignInComponent implements OnInit {
   @select(s => s.misc.toggleForgotPassword) toggleForgotPassword;
   @select(s => s.misc.signInBufferPage) signInBufferPage;
+  @select(s => s.misc.spinner) spinner;
   test: Date = new Date();
   private toggleButton: any;
   private sidebarVisible: boolean;

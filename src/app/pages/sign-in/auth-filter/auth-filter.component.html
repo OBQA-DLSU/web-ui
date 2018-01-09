@@ -4,7 +4,7 @@
   <div class="full-page login-page" filter-color="black">
     <div class="content">
       <div class="container">
-        <div class="row">
+        <div *appspinner="(spinner | async)" class="row">
           <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
             <form [formGroup]="authSelectionForm">
               <div class="card card-login card-hidden">

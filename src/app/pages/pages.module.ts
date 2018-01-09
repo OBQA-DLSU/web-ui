@@ -12,7 +12,7 @@ import { ComponentModule } from '../components/component.module';
 import { AuthFilterComponent } from './sign-in/auth-filter/auth-filter.component';
 import { ForgotPasswordComponent } from './sign-in/forgot-password/forgot-password.component';
 import { BufferPageComponent } from './sign-in/buffer-page/buffer-page.component';
-
+import { DirectiveModule, SpinnerComponent } from '../directives';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,7 +20,8 @@ import { BufferPageComponent } from './sign-in/buffer-page/buffer-page.component
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    ComponentModule
+    ComponentModule,
+    DirectiveModule
   ],
   declarations: [
     SignInComponent,
@@ -29,6 +30,9 @@ import { BufferPageComponent } from './sign-in/buffer-page/buffer-page.component
     AuthFilterComponent,
     ForgotPasswordComponent,
     BufferPageComponent
+  ],
+  entryComponents: [
+    SpinnerComponent
   ]
 })
 

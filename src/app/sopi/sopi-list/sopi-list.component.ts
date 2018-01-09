@@ -24,6 +24,7 @@ export class SopiListComponent implements OnInit, OnDestroy {
   ) { }
 
   @select(s => s.sopis.sopis) sopis;
+  @select(s => s.misc.spinner) spinner;
   private dataNames = ['id', 'code', 'so', 'description'];
   private dataNameAlias = ['ID', 'SOPI Code', 'SO', 'Description'];
   private dialogRef: any;
