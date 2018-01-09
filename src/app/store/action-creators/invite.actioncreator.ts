@@ -12,6 +12,7 @@ import {
   SEND_INVITES_FULFILLED
 } from '../action/invite.actions';
 import { DialogService } from 'app/services/dialog.service';
+import { MiscActionCreator } from './misc.actioncreator';
 
 @Injectable()
 
@@ -23,7 +24,8 @@ export class InviteActionCreator implements OnDestroy {
   constructor (
     private ngRedux: NgRedux<IAppState>,
     private invitationService: InvitationService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private miscActionCreator: MiscActionCreator
   ) {}
 
   ngOnDestroy() {
@@ -31,10 +33,12 @@ export class InviteActionCreator implements OnDestroy {
   }
 
   SendGroupInvite(userInvites) {
+    this.miscActionCreator.LoadSpinner();
     this.inviteSubscription = this.invitationService.Invite(userInvites)
     .subscribe(
       result => {
         this.ngRedux.dispatch({ type: SEND_INVITES_FULFILLED, payload: result });
+        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message',{
           title: 'Invitation Sent!',
           text: 'Congratulations! Your invitation has successfully sent!'
@@ -48,6 +52,7 @@ export class InviteActionCreator implements OnDestroy {
             text: 'Your invitation was not successfully sent.'
           });
         }
+        this.miscActionCreator.UnloadSpinner();
       }
     );
   }

@@ -16,6 +16,7 @@ declare var $: any;
 
 export class LockComponent implements OnInit, OnDestroy {
 	@select(s => s.user.user) user;
+	@select(s => s.misc.spinner) spinner;
 	test: Date = new Date();
 	private userSubscription: Subscription = null;
 	private unlockForm: FormGroup;

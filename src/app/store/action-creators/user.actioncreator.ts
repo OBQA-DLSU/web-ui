@@ -10,6 +10,7 @@ import { IUserCreate } from '../../interfaces/user/user-create.interface';
 import { ISession } from '../../interfaces/session/session.interface';
 import { USER_CREATE_FULFILLED, USER_CREATE_FAILED, TOGGLE_USER_CREATE } from '../action/user.action';
 import { SESSION_CREATE_FULFILLED } from 'app/store/action/session.actions';
+import { MiscActionCreator } from './misc.actioncreator';
 
 @Injectable()
 
@@ -22,7 +23,8 @@ export class UserActionCreator implements OnDestroy {
   constructor (
     private ngRedux: NgRedux<IAppState>,
     private authenticationService: AuthenticationService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private miscActionCreator: MiscActionCreator
   ) {}
 
   ngOnDestroy() {
@@ -30,6 +32,7 @@ export class UserActionCreator implements OnDestroy {
   }
 
   CreateUser (user: IUserCreate) {
+    this.miscActionCreator.LoadSpinner();
     this.signup = this.authenticationService.SignUp(user)
     .subscribe(
       (session: ISession) => {
@@ -45,9 +48,11 @@ export class UserActionCreator implements OnDestroy {
             text: this.errorMessage
           });
         }
+        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
+        this.miscActionCreator.UnloadSpinner();
       }
     );
   }

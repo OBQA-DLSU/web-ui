@@ -8,7 +8,7 @@ import { CourseRoutes } from './course.routing';
 import { CourseListComponent, EditCourseDialog  } from './course-list/course-list.component';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { ComponentModule } from 'app/components/component.module';
-import { SpinnerDirective, SpinnerComponent, DirectiveModule } from '../directives';
+import { SpinnerComponent, DirectiveModule } from '../directives';
 
 @NgModule({
   imports: [
@@ -23,8 +23,7 @@ import { SpinnerDirective, SpinnerComponent, DirectiveModule } from '../directiv
   declarations: [
     CourseListComponent,
     AddCourseComponent,
-    EditCourseDialog,
-    SpinnerDirective
+    EditCourseDialog
   ],
   entryComponents: [
     EditCourseDialog,

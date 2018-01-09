@@ -14,6 +14,7 @@ export class AuthFilterComponent implements OnInit {
   private authSelectionForm: FormGroup;
 
   @select(s => s.session) session;
+  @select(s => s.misc.spinner) spinner;
   constructor(
     private formBuilder: FormBuilder,
     private sessionActionCreator: SessionActionCreator

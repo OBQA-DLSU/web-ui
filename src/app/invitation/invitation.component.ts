@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl, FormArray } from '@angular/forms';
+import { select } from '@angular-redux/store';
 import { IUserInvite } from '../interfaces/user/user-invite.interface';
 import {
   InviteActionCreator,
@@ -11,6 +12,8 @@ import {
   templateUrl: './invitation.component.html'
 })
 export class InvitationComponent implements OnInit {
+
+  @select(s => s.misc.spinner) spinner;
 
   constructor (
     private formBuilder: FormBuilder,

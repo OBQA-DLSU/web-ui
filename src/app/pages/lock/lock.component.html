@@ -47,12 +47,14 @@
             </a>
           </div>
           <div class="card-content">
-            <h4 class="card-title">{{ (user | async).fname }} {{(user | async).lname}}</h4>
-            <div class="form-group label-floating">
-              <form [formGroup]="unlockForm">
-                <label class="control-label">Enter Password</label>
-                <input type="password" class="form-control" formControlName="password">
-              </form>
+            <div *appspinner="(spinner | async)">
+              <h4 class="card-title">{{ (user | async).fname }} {{(user | async).lname}}</h4>
+              <div class="form-group label-floating">
+                <form [formGroup]="unlockForm">
+                  <label class="control-label">Enter Password</label>
+                  <input type="password" class="form-control" formControlName="password">
+                </form>
+              </div>
             </div>
           </div>
           <div class="card-footer">
