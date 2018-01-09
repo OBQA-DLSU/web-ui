@@ -26,6 +26,7 @@ import {
 import { IAppState } from '../app.store';
 import { IAssessmentDiscussion } from 'app/interfaces/assessment/assessment-discussion.interface';
 import { IAssessmentDiscussionView } from 'app/interfaces/assessment/assessment-discussion-view.interface';
+import { MiscActionCreator } from './misc.actioncreator';
 
 @Injectable()
 
@@ -41,7 +42,8 @@ export class AssessmentDiscussionActionCreator implements OnDestroy {
   constructor (
     private ngRedux: NgRedux<IAppState>,
     private assessmentDiscussionService: AssessmentDiscussionService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private miscActionCreator: MiscActionCreator
   ) {}
 
   ngOnDestroy () {
@@ -53,6 +55,7 @@ export class AssessmentDiscussionActionCreator implements OnDestroy {
   }
 
   GetAssessmentDiscussion (assessmentId: number) {
+    this.miscActionCreator.LoadSpinner();
     this.getAssessmentDiscussionSubscription = this.assessmentDiscussionService.GetAssessmentDiscussion(assessmentId)
     .map(data => this.sortByTime(data))
     .map(data => {
@@ -68,14 +71,17 @@ export class AssessmentDiscussionActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: ASSESSMENT_DISCUSSION_GET_FAILED, error: this.errorMessage });
         }
+        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
+        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   CreateAssessmentDiscusssion (assessmentId: number, assessmentDiscussion: IAssessmentDiscussion) {
+    this.miscActionCreator.LoadSpinner();
     this.createAssessmentDiscussionSubscription = this.assessmentDiscussionService.CreateAssessmentDiscussion(assessmentId, assessmentDiscussion)
     .map(data => this.assessmentDiscussionToView(data))
     .subscribe(
@@ -86,14 +92,17 @@ export class AssessmentDiscussionActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: ASSESSMENT_DISCUSSION_CREATE_FAILED, error: this.errorMessage });
         }
+        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
+        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   GetOneAssessmentDiscussion (id: number) {
+    this.miscActionCreator.LoadSpinner();
     this.getOneAssessmentDiscussionSubsscription = this.assessmentDiscussionService.GetOneAssessmentDiscussion(id)
     .map(data => this.assessmentDiscussionToView(data))
     .subscribe(
@@ -105,14 +114,17 @@ export class AssessmentDiscussionActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: ASSESSMENT_DISCUSSION_GET_FAILED, error: this.errorMessage });
         }
+        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
+        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   UpdateAssessmentDiscussion (id: number, assessmentDiscussion) {
+    this.miscActionCreator.LoadSpinner();
     this.updateAssessmentDiscussionSubscription = this.assessmentDiscussionService.UpdateAssessmentDiscussion(id, assessmentDiscussion)
     .map(data => this.assessmentDiscussionToView(data))
     .subscribe(
@@ -123,14 +135,17 @@ export class AssessmentDiscussionActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: ASSESSMENT_DISCUSSION_UPDATE_FAILED, error: this.errorMessage });
         }
+        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
+        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   DeleteAssessmentDiscussion (id: number) {
+    this.miscActionCreator.LoadSpinner();
     this.deleteAssessmentDiscussionSubscription = this.assessmentDiscussionService.DeleteAssessmentDiscussion(id)
     .map(data => this.assessmentDiscussionToView(data))
     .subscribe(
@@ -141,9 +156,11 @@ export class AssessmentDiscussionActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: ASSESSMENT_DISCUSSION_DELETE_FAILED, error: this.errorMessage });
         }
+        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
+        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
