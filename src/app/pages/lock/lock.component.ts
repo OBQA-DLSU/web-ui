@@ -54,8 +54,8 @@ export class LockComponent implements OnInit, OnDestroy {
 	}
 
 	onUnlock () {
-		this.ngOnInit();
 		this.sessionActionCreator.RenewSession(this.unlockForm.value);
+		this.ngOnInit();
 	}
 
 }
