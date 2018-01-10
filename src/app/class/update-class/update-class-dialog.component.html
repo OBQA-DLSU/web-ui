@@ -1,0 +1,45 @@
+<form [formGroup]="myClassEditForm" (ngSubmit)="onSubmit()">
+  <h2 mat-dialog-title>EDIT CLASS ID: {{data.id}}</h2>
+  <mat-dialog-content>
+    <div class="form-group label-floating col-md-6">
+      <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
+        <mat-select placeholder="Academic Year"  formControlName="academicYear">
+          <mat-option *ngFor="let i of (academicYear)" [value]="i.value">{{i.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-group label-floating col-md-6">
+      <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
+        <mat-select placeholder="Term"  formControlName="term">
+          <mat-option *ngFor="let i of term" [value]="i.value">{{i.label}}</mat-option>
+      </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-group label-floating col-md-6">
+      <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
+        <mat-select placeholder="Cycle"  formControlName="cycle">
+          <mat-option *ngFor="let i of (cycle)" [value]="i.value">{{i.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-group label-floating col-md-6">
+      <mat-form-field style="width:200px !important;" ngClass="form-group label-floating">
+        <mat-select placeholder="Course"  formControlName="programCourseId">
+          <mat-option *ngFor="let c of (courses | async)" [value]="c.id">{{c.code}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div *ngIf="isAdmin" class="form-group label-floating col-md-12">
+      <mat-form-field style="width:400px !important;" ngClass="form-group label-floating">
+        <mat-select placeholder="Instructor"  formControlName="instructorId">
+          <mat-option *ngFor="let i of (instructors | async)" [value]="i.id">{{i.lname}}, {{i.fname}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button type="button" mat-dialog-close>Cancel</button>
+    <!-- Can optionally provide a result for the closing dialog. -->
+    <button mat-button type="submit">Submit</button>
+  </mat-dialog-actions>
+</form>

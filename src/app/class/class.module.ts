@@ -10,6 +10,7 @@ import { ClassRoutes } from './class.routing';
 import { ComponentModule } from './../components/component.module';
 import { ClassPageComponent } from './class-list/class-page/class-page.component';
 import { DirectiveModule, SpinnerComponent } from '../directives';
+import { UpdateClassDialogComponent } from './update-class/update-class-dialog.component';
 
 @NgModule({
   imports: [
@@ -24,10 +25,12 @@ import { DirectiveModule, SpinnerComponent } from '../directives';
   declarations: [
     AddClassComponent,
     ClassListComponent,
-    ClassPageComponent
+    ClassPageComponent,
+    UpdateClassDialogComponent
   ],
   entryComponents: [
-    SpinnerComponent
+    SpinnerComponent,
+    UpdateClassDialogComponent
   ]
 })
 export class ClassModule { }
