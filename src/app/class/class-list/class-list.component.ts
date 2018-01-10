@@ -7,9 +7,12 @@ import { Subscription } from 'rxjs/Subscription';
 import swal from 'sweetalert2';
 import {
   MyClassActionCreator,
-  MiscActionCreator
+  MiscActionCreator,
+  InstructorActionCreator,
+  CourseActionCreator
 } from '../../store/action-creators';
 import { IUser } from '../../interfaces/user/user.interface';
+import { UpdateClassDialogComponent } from '../update-class/update-class-dialog.component';
 
 @Component({
   selector: 'app-class-list',
@@ -24,11 +27,15 @@ export class ClassListComponent implements OnInit, OnDestroy {
   private user: IUser;
   private instructorId: string; //string is required as parameter
   private programId: number;
-
+  private dialogRef: any;
+  private dialogRefSubscription: Subscription = null;
 
   constructor(
+    public dialog: MatDialog,
     private myClassActionCreator: MyClassActionCreator,
     private miscActionCreator: MiscActionCreator,
+    private courseActionCreator: CourseActionCreator,
+    private instructorActionCreator: InstructorActionCreator,
     private router: Router
   ) { }
 
@@ -40,8 +47,11 @@ export class ClassListComponent implements OnInit, OnDestroy {
     this.session.subscribe(
       (session => {
         this.instructorId = session.instructorId;
-        (this.instructorId)
-        ? this.myClassActionCreator.GetMyClassWithFilter('instructorId', this.instructorId) : null;
+        if (this.instructorId) {
+          this.myClassActionCreator.GetMyClassWithFilter('instructorId', this.instructorId);
+          this.courseActionCreator.GetCourse(session.programId);
+          this.instructorActionCreator.GetInstructor(session.programId);
+        }
       })
     );
   }
@@ -50,6 +60,21 @@ export class ClassListComponent implements OnInit, OnDestroy {
 
   onMoreClick(data) {
     this.router.navigate([`/class/class-details/${data.id}`]);
+  }
+
+  onClickEdit(data) {
+    this.dialogRef = this.dialog.open(UpdateClassDialogComponent, {
+      width: '500px',
+      data: { ...data }
+    });
+
+    this.dialogRefSubscription = this.dialogRef.afterClosed().subscribe(result => {
+      if (!result) {
+      } else {
+        const newData = JSON.parse(result);
+        this.myClassActionCreator.UpdateMyClass(newData.id, newData);
+      }
+    });
   }
 
   async onClickDelete(data) {
