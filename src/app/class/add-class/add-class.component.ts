@@ -7,7 +7,7 @@ import {
   MyClassActionCreator,
   CourseActionCreator
 } from '../../store/action-creators/index';
-import { ACADEMIC_YEAR, CYCLE, TERM } from '../../config';
+import { ACADEMIC_YEAR, CYCLE, TERM, WEB_API_URL } from '../../config';
 
 @Component({
   selector: 'app-add-class',
@@ -26,6 +26,7 @@ export class AddClassComponent implements OnInit {
   private academicYearData = ACADEMIC_YEAR;
   private termData = TERM;
   private cycleData = CYCLE;
+  private uploadUrl: string;
   constructor(
     private courseActionCreator: CourseActionCreator,
     private instructorActionCreator: InstructorActionCreator,
@@ -41,6 +42,7 @@ export class AddClassComponent implements OnInit {
       this.programId = session.program.id;
       this.isAdmin = session.isAdmin;
       this.instructorId = session.user.instructors[0].id;
+      this.uploadUrl = `${WEB_API_URL}/api/myClass/bulk/${session.program.id}`;
     })
     );
     this.courseActionCreator.GetCourse(this.programId);

@@ -6,3 +6,5 @@ export const SIGN_IN_BUFFER_PAGE_OFF: string = 'SIGN_IN_BUFFER_PAGE_OFF';
 export const UPDATE_PAGE_TITLE_FULFILLED: string = 'UPDATE_PAGE_TITLE_FULFILLED';
 export const LOAD_SPINNER: string = 'LOAD_SPINNER';
 export const UNLOAD_SPINNER: string = 'UNLOAD_SPINNER';
+export const FILE_UPLOAD_FULFILLED: string = 'FILE_UPLOAD_FULFILLED';
+export const FILE_UPLOAD_FAILED: string = 'FILE_UPLOAD_FAILED';
