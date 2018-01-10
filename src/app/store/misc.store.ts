@@ -6,7 +6,8 @@ import {
   SIGN_IN_BUFFER_PAGE_ON,
   UPDATE_PAGE_TITLE_FULFILLED,
   LOAD_SPINNER,
-  UNLOAD_SPINNER
+  UNLOAD_SPINNER,
+  FILE_UPLOAD_FULFILLED
 } from './action/misc.actions';
 import * as misc from './pure-functions/misc.functions';
 export interface IMiscStore {
@@ -14,6 +15,7 @@ export interface IMiscStore {
   toggleForgotPassword: boolean;
   signInBufferPage: boolean;
   pageTitle: string;
+  uploadResult: any;
   spinner: boolean;
 }
 
@@ -22,6 +24,7 @@ export const MISC_INITIAL_STATE: IMiscStore= {
   toggleForgotPassword: false,
   signInBufferPage: false,
   pageTitle: 'Dashboard',
+  uploadResult: null,
   spinner: false
 }
 
@@ -34,6 +37,7 @@ export function miscReducer(state: IMiscStore = MISC_INITIAL_STATE, action): IMi
     case UPDATE_PAGE_TITLE_FULFILLED: return misc.updatePageTitleFulfilled(state, action);
     case LOAD_SPINNER: return misc.loadSpinner(state, action);
     case UNLOAD_SPINNER: return misc.unloadSpinner(state, action);
+    case FILE_UPLOAD_FULFILLED: return misc.fileUploadFulfilled(state, action);
   }
   return state;
 };

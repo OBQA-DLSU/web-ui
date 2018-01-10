@@ -44,11 +44,13 @@ export class ObqaUploadBasicComponent implements OnInit {
 				formData.append(this.fileAlias, inputEl.files.item(i));
 			}
 			this.http
-				.post(this.URL, formData, options).map((res: any) => res).subscribe(
-				(success) => {
+				.post(this.URL, formData, options)
+				.map((res: any) => res.json()).subscribe(
+				(result) => {
+					this.miscActionCreator.FileUploadFulfilled(result);
 					this.dialogService.showSwal('success-message', {
 						title:  'Upload Success!',
-						text: `The file was successfully uploaded!`
+						text: `Succeeded Entry: ${result.success.length}, Failed Entry: ${result.error.length}.`
 					});
 					this.ngOnInit();
 				},
@@ -63,5 +65,4 @@ export class ObqaUploadBasicComponent implements OnInit {
 				);
 		}
 	}
-
 }
