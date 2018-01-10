@@ -8,6 +8,7 @@ import {
   TERM,
   CYCLE
 } from '../../config';
+import { Subscription } from 'rxjs/Subscription';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class UpdateClassDialogComponent implements OnInit, OnDestroy {
   private cycle: any[] = CYCLE;
   private term: any[] = TERM;
   private isAdmin: boolean;
+  private sessionSubscription: Subscription = null;
   constructor(
     public dialogRef: MatDialogRef<UpdateClassDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -31,7 +33,7 @@ export class UpdateClassDialogComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.session.subscribe(
+    this.sessionSubscription = this.session.subscribe(
       session => {
         this.isAdmin = session.isAdmin;
       }
@@ -47,7 +49,7 @@ export class UpdateClassDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-
+    (this.sessionSubscription) ? this.sessionSubscription.unsubscribe() : null;
   }
 
   onNoClick(): void {
