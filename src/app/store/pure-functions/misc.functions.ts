@@ -7,6 +7,7 @@ export const getInvitationCodeFulfilled = (state, action) => {
     toggleForgotPassword: false,
     signInBufferPage: state.signInBufferPage,
     pageTitle: state.pageTitle,
+    uploadResult: state.uploadResult,
     spinner: false
   });
 };
@@ -17,6 +18,7 @@ export const toggleForgotPassword = (state, action) => {
     toggleForgotPassword: (state.toggleForgotPassword) ? false : true,
     signInBufferPage: state.signInBufferPage,
     pageTitle: state.pageTitle,
+    uploadResult: state.uploadResult,
     spinner: false
   });
 };
@@ -27,6 +29,7 @@ export const signInBufferPageOn = (state, action) => {
     toggleForgotPassword: false,
     signInBufferPage: true,
     pageTitle: state.pageTitle,
+    uploadResult: state.uploadResult,
     spinner: false
   });
 };
@@ -37,6 +40,7 @@ export const signInBufferPageOff = (state, action) => {
     toggleForgotPassword: false,
     signInBufferPage: false,
     pageTitle: state.pageTitle,
+    uploadResult: state.uploadResult,
     spinner: false
   });
 };
@@ -47,6 +51,7 @@ export const updatePageTitleFulfilled = (state, action) => {
     toggleForgotPassword: state.toggleForgotPassword,
     signInBufferPage: state.signInBufferPage,
     pageTitle: action.payload,
+    uploadResult: state.uploadResult,
     spinner: false
   });
 };
@@ -56,7 +61,8 @@ export const loadSpinner = (state, action) => {
     invitationCode: state.invitationCode,
     toggleForgotPassword: state.toggleForgotPassword,
     signInBufferPage: state.signInBufferPage,
-    pageTitle: state.payload,
+    pageTitle: state.pageTitle,
+    uploadResult: state.uploadResult,
     spinner: true
   });
 };
@@ -66,7 +72,19 @@ export const unloadSpinner = (state, action) => {
     invitationCode: state.invitationCode,
     toggleForgotPassword: state.toggleForgotPassword,
     signInBufferPage: state.signInBufferPage,
-    pageTitle: state.payload,
+    pageTitle: state.pageTitle,
+    uploadResult: state.uploadResult,
     spinner: false
   });
 };
+
+export const fileUploadFulfilled = (state, action) => {
+  return tassign(state, {
+    invitationCode: state.invitationCode,
+    toggleForgotPassword: state.toggleForgotPassword,
+    signInBufferPage: state.signInBufferPage,
+    pageTitle: state.pageTitle,
+    uploadResult: action.payload,
+    spinner: false
+  });
+}

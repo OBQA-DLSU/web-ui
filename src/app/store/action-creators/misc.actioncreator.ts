@@ -14,7 +14,8 @@ import {
   SIGN_IN_BUFFER_PAGE_OFF,
   UPDATE_PAGE_TITLE_FULFILLED,
   LOAD_SPINNER,
-  UNLOAD_SPINNER
+  UNLOAD_SPINNER,
+  FILE_UPLOAD_FULFILLED
 } from '../action/misc.actions';
 
 @Injectable()
@@ -80,5 +81,9 @@ export class MiscActionCreator implements OnDestroy {
 
   UnloadSpinner () {
     this.ngRedux.dispatch({ type: UNLOAD_SPINNER });
+  }
+
+  FileUploadFulfilled (result) {
+    this.ngRedux.dispatch({ type: FILE_UPLOAD_FULFILLED, payload: result });
   }
 }
