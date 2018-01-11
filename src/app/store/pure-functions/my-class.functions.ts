@@ -13,6 +13,7 @@ export const myClassCreateFulfilled = (state, action) => {
       ...state.myClasses,
       action.payload
     ],
+    selectedClass: state.selectedClass,
     error: ''
   });
 };
@@ -24,9 +25,34 @@ export const myClassCreateFailed = (state, action) => {
   });
 };
 
+export const myClassSelectAttempt = (state, action) => {
+  return tassign(state, {
+    myClasses: state.myClasses,
+    selectedClass: state.selectedClass,
+    error: ''
+  });
+};
+
+export const myClassSelectFulfilled = (state, action) => {
+  return tassign(state, {
+    myClasses: state.myClasses,
+    selectedClass: action.payload,
+    error: ''
+  });
+};
+
+export const myClassSelectFailed = (state, action) => {
+  return tassign(state, {
+    myClasses: state.myClasses,
+    selectedClass: state.selectedClass,
+    error: action.error
+  });
+};
+
 export const myClassUpdateAttempt = (state, action) => {
   return tassign(state, {
     myClasses: state.myClasses,
+    selectedClass: state.selectedClass,
     error: ''
   });
 };
@@ -37,6 +63,7 @@ export const myClassUpdateFulfilled = (state, action) => {
   newArray.splice(index, 1, action.payload);
   return tassign(state, {
     myClasses: newArray,
+    selectedClass: state.selectedClass,
     error: ''
   });
 };
@@ -44,6 +71,7 @@ export const myClassUpdateFulfilled = (state, action) => {
 export const myClassUpdateFailed = (state, action) => {
   return tassign(state, {
     myClasses: state.myClasses,
+    selectedClass: state.selectedClass,
     error: action.error
   });
 };
@@ -51,6 +79,7 @@ export const myClassUpdateFailed = (state, action) => {
 export const myClassGetAttempt = (state, action) => {
   return tassign(state, {
     myClasses: state.myClasses,
+    selectedClass: state.selectedClass,
     error: ''
   });
 };
@@ -58,6 +87,7 @@ export const myClassGetAttempt = (state, action) => {
 export const myClassGetFulfilled = (state, action) => {
   return tassign(state, {
     myClasses: action.payload,
+    selectedClass: state.selectedClass,
     error: ''
   });
 };
@@ -65,6 +95,7 @@ export const myClassGetFulfilled = (state, action) => {
 export const myClassGetFailed = (state, action) => {
   return tassign(state, {
     myClasses: state.myClasses,
+    selectedClass: state.selectedClass,
     error: action.error
   });
 };
@@ -72,6 +103,7 @@ export const myClassGetFailed = (state, action) => {
 export const myClassDeleteAttempt = (state, action) => {
   return tassign(state, {
     myClasses: state.myClasses,
+    selectedClass: state.selectedClass,
     error: ''
   });
 };
@@ -82,6 +114,7 @@ export const myClassDeleteFulfilled = (state, action) => {
   });
   return tassign(state, {
     myClasses: newArray,
+    selectedClass: state.selectedClass,
     error: ''
   });
 };
@@ -89,6 +122,7 @@ export const myClassDeleteFulfilled = (state, action) => {
 export const myClassDeleteFailed = (state, action) => {
   return tassign(state, {
     myClasses: state.myClasses,
+    selectedClass: state.selectedClass,
     error: action.error
   });
 };
