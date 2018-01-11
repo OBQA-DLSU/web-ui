@@ -8,9 +8,11 @@ import { AddClassComponent } from './add-class/add-class.component';
 import { ClassListComponent } from './class-list/class-list.component';
 import { ClassRoutes } from './class.routing';
 import { ComponentModule } from './../components/component.module';
-import { ClassPageComponent } from './class-list/class-page/class-page.component';
+import { ClassPageComponent } from './class-page/class-page.component';
 import { DirectiveModule, SpinnerComponent } from '../directives';
 import { UpdateClassDialogComponent } from './update-class/update-class-dialog.component';
+import { ClassDetailsComponent } from './class-details/class-details.component';
+import { ClassRecordComponent } from './class-record/class-record.component';
 
 @NgModule({
   imports: [
@@ -26,7 +28,9 @@ import { UpdateClassDialogComponent } from './update-class/update-class-dialog.c
     AddClassComponent,
     ClassListComponent,
     ClassPageComponent,
-    UpdateClassDialogComponent
+    UpdateClassDialogComponent,
+    ClassDetailsComponent,
+    ClassRecordComponent
   ],
   entryComponents: [
     SpinnerComponent,

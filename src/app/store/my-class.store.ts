@@ -11,17 +11,22 @@ import {
   MY_CLASS_GET_FULFILLED,
   MY_CLASS_UPDATE_ATTEMPT,
   MY_CLASS_UPDATE_FAILED,
-  MY_CLASS_UPDATE_FULFILLED
+  MY_CLASS_UPDATE_FULFILLED,
+  MY_CLASS_SELECT_FULFILLED,
+  MY_CLASS_SELECT_ATTEMPT,
+  MY_CLASS_SELECT_FAILED
 } from './action/my-class.actions';
 import * as myClass from './pure-functions/my-class.functions';
 
 export interface IMyClassStore {
   myClasses: IMyClassView[];
+  selectedClass: IMyClassView;
   error: string;
 }
 
 export const MY_CLASS_INITIAL_STATE: IMyClassStore = {
   myClasses: [],
+  selectedClass: null,
   error: ''
 }
 
@@ -39,6 +44,9 @@ export function myClassReducer (state: IMyClassStore = MY_CLASS_INITIAL_STATE, a
     case MY_CLASS_DELETE_ATTEMPT: return myClass.myClassDeleteAttempt(state, action);
     case MY_CLASS_DELETE_FAILED: return myClass.myClassDeleteFailed(state, action);
     case MY_CLASS_DELETE_FULFILLED: return myClass.myClassDeleteFulfilled(state, action);
+    case MY_CLASS_SELECT_ATTEMPT: return myClass.myClassSelectAttempt(state, action);
+    case MY_CLASS_SELECT_FAILED: return myClass.myClassSelectFailed(state, action);
+    case MY_CLASS_SELECT_FULFILLED: return myClass.myClassSelectFulfilled(state, action);
   }
   return state;
 }

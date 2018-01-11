@@ -10,6 +10,7 @@ import { FormComponent } from './form/form.component';
 import { ObqaUploadBasicComponent } from './upload/basic/obqa-upload-basic.component';
 import { ObqaInputBasicComponent } from './input/basic/obqa-input-basic.component';
 import { CardCommentComponent } from './card/card-comment/card-comment.component';
+import { ObqaTableSimpleComponent } from './table/obqa-table-simple/obqa-table-simple.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { CardCommentComponent } from './card/card-comment/card-comment.component
     ObqaUploadBasicComponent,
     FileSelectDirective,
     ObqaInputBasicComponent,
-    CardCommentComponent
+    CardCommentComponent,
+    ObqaTableSimpleComponent
   ],
   declarations: [
     ObqaTableComponent,
@@ -32,7 +34,8 @@ import { CardCommentComponent } from './card/card-comment/card-comment.component
     ObqaUploadBasicComponent,
     FileSelectDirective,
     ObqaInputBasicComponent,
-    CardCommentComponent
+    CardCommentComponent,
+    ObqaTableSimpleComponent
   ],
   entryComponents: []
 })

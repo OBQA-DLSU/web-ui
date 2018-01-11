@@ -20,7 +20,10 @@ import {
   MY_CLASS_GET_FULFILLED,
   MY_CLASS_UPDATE_ATTEMPT,
   MY_CLASS_UPDATE_FAILED,
-  MY_CLASS_UPDATE_FULFILLED
+  MY_CLASS_UPDATE_FULFILLED,
+  MY_CLASS_SELECT_ATTEMPT,
+  MY_CLASS_SELECT_FAILED,
+  MY_CLASS_SELECT_FULFILLED
 } from '../action/my-class.actions';
 import { MiscActionCreator } from './misc.actioncreator';
 
@@ -63,12 +66,11 @@ export class MyClassActionCreator implements OnDestroy {
     .map(data => this.myClassToView(data))
     .subscribe(
       (myClass: IMyClassView) => {
-        const myClasses = [myClass];
-        this.ngRedux.dispatch({type: MY_CLASS_GET_FULFILLED, payload: myClasses});
+        this.ngRedux.dispatch({type: MY_CLASS_SELECT_FULFILLED, payload: myClass});
       }, err => {
         this.errorMessage = err._body;
         if (this.errorMessage && typeof this.errorMessage === 'string') {
-          this.ngRedux.dispatch({ type: MY_CLASS_GET_FAILED, error: this.errorMessage });
+          this.ngRedux.dispatch({ type: MY_CLASS_SELECT_FAILED, error: this.errorMessage });
         }
         this.miscActionCreator.UnloadSpinner();
       },
