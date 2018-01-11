@@ -8,7 +8,6 @@ import { DialogService } from '../../services/dialog.service';
 import { IAppState } from '../app.store';
 import {
   GET_INVITATION_CODE_FULFILLED,
-  GET_MY_CLASS_ID_FULFILLED,
   TOGGLE_FORGOT_PASSWORD,
   SIGN_IN_BUFFER_PAGE_ON,
   SIGN_IN_BUFFER_PAGE_OFF,
@@ -37,9 +36,6 @@ export class MiscActionCreator implements OnDestroy {
 
   StoreInvitationCode (code: string) {
     this.ngRedux.dispatch({type: GET_INVITATION_CODE_FULFILLED, payload: code});
-  }
-  StoreMyClassId (myClassId: string) {
-    this.ngRedux.dispatch({type: GET_MY_CLASS_ID_FULFILLED, payload: myClassId});
   }
 
   ToggleForgotPassword () {
