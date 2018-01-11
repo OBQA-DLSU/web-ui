@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { NgClass, NgIf } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 import { select } from '@angular-redux/store';
 import { ActivatedRoute } from '@angular/router';
 import {
   MiscActionCreator,
+  MyClassActionCreator,
   StudentActionCreator
-} from '../../../store/action-creators';
+} from '../../store/action-creators';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -15,7 +17,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ClassPageComponent implements OnInit {
 
-  @select(s => s.misc.myClassId) myClassIdCode;
+  @select(s => s.myClass.selectedClass) selectedClass;
   @select(s => s.students.students) students;
   @select(s => s.misc.spinner) spinner;
 
@@ -28,6 +30,7 @@ export class ClassPageComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private miscActionCreator: MiscActionCreator,
+    private myClassActionCreator: MyClassActionCreator,
     private studentActionCreator: StudentActionCreator
   ) { }
   ngOnInit() {
@@ -35,9 +38,8 @@ export class ClassPageComponent implements OnInit {
     this.routeSubscription = this.activatedRoute.params
       .subscribe(params => {
         this.myClassId = params.id;
-        this.miscActionCreator.StoreMyClassId(params.id);
-        (params.id) ? this.studentActionCreator.GetMyClassStudent(params.id) : null;
+        this.myClassActionCreator.GetOneMyClass(params.id);
+        this.studentActionCreator.GetMyClassStudent(params.id);
       });
   }
-
 }
