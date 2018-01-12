@@ -11,7 +11,7 @@ import {
 @Component({
   selector: 'app-assessment-discussion',
   templateUrl: './assessment-discussion.component.html',
-  styleUrls: ['./assessment-discussion.component.css']
+  styleUrls: ['./assessment-discussion.component.scss']
 })
 export class AssessmentDiscussionComponent implements OnInit, OnDestroy {
 

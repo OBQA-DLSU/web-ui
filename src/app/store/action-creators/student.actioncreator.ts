@@ -32,6 +32,7 @@ import { MiscActionCreator } from './misc.actioncreator';
 
 export class StudentActionCreator implements OnDestroy {
 
+  private createMyClassStudentSubscription: Subscription = null;
   private getMyClassStudentSubscription: Subscription = null;
   private getOneMyClassStudentSubscription: Subscription = null;
   private updateMyClassStudentSubscription: Subscription = null;
@@ -47,14 +48,29 @@ export class StudentActionCreator implements OnDestroy {
   ) {}
 
   ngOnDestroy() {
+    (this.createMyClassStudentSubscription) ? this.createMyClassStudentSubscription.unsubscribe() : null;
     (this.getMyClassStudentSubscription) ? this.getMyClassStudentSubscription.unsubscribe() : null;
     (this.getOneMyClassStudentSubscription) ? this.getOneMyClassStudentSubscription.unsubscribe() : null;
     (this.updateMyClassStudentSubscription) ? this.updateMyClassStudentSubscription.unsubscribe() : null;
     (this.deleteMyClassStudentSubscription) ? this.deleteMyClassStudentSubscription.unsubscribe() : null;
   }
 
+  CreateMyClassStudent (myClassId, student: IStudentView) {
+    this.createMyClassStudentSubscription = this.studentService.CreateMyClassStudent(student, myClassId)
+    .map(student => this.myClassStudentToView(student))
+    .subscribe(
+      (student: IStudentView) => {
+        this.ngRedux.dispatch({ type: STUDENT_CREATE_FULFILLED, payload: student });
+      }, err => {
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: STUDENT_CREATE_FAILED, error: this.errorMessage });
+        }
+      }
+    );
+  }
+
   GetMyClassStudent (myClassId: number) {
-    this.miscActionCreator.LoadSpinner();
     this.getMyClassStudentSubscription = this.studentService.GetMyClassStudent(myClassId)
     .map(data => {
       let newData: IMyClassStudentView[];
@@ -69,11 +85,9 @@ export class StudentActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: STUDENT_GET_FAILED, error: this.errorMessage });
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
-        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
