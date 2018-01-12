@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../app.module';
 
+import { StudentModule, AddStudentDialogComponent } from '../student';
+
 import { AddClassComponent } from './add-class/add-class.component';
 import { ClassListComponent } from './class-list/class-list.component';
 import { ClassRoutes } from './class.routing';
@@ -22,7 +24,8 @@ import { ClassRecordComponent } from './class-record/class-record.component';
     ReactiveFormsModule,
     MaterialModule,
     ComponentModule,
-    DirectiveModule
+    DirectiveModule,
+    StudentModule
   ],
   declarations: [
     AddClassComponent,
@@ -34,7 +37,8 @@ import { ClassRecordComponent } from './class-record/class-record.component';
   ],
   entryComponents: [
     SpinnerComponent,
-    UpdateClassDialogComponent
+    UpdateClassDialogComponent,
+    AddStudentDialogComponent
   ]
 })
 export class ClassModule { }
