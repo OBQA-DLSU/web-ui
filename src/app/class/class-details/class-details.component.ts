@@ -1,6 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ElementRef, Inject, OnDestroy } from '@angular/core';
+import { NgSwitch, NgIf, NgFor} from '@angular/common';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { select } from '@angular-redux/store';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
+
+import { AddStudentDialogComponent } from '../../student';
+import {
+  StudentActionCreator
+} from '../../store/action-creators';
 
 @Component({
   selector: 'app-class-details',
@@ -11,31 +20,60 @@ export class ClassDetailsComponent implements OnInit, OnDestroy {
 
   @select(s => s.myClasses.selectedClass) selectedClass;
   @select(s => s.students.students) students;
+  @select(s => s.misc.spinner) spinner;
   private selectedClassData: any;
   private studentData: any;
   private selectedClassSubscription: Subscription = null;
   private studentSubscription: Subscription = null;
+  private dialogRef: any;
+  private dialogRefSubscription: Subscription = null;
+  private routeSubscription: Subscription = null;
 
-  constructor() {
+  constructor(
+    public dialog: MatDialog,
+    private router: Router,
+    private studentActionCreator: StudentActionCreator,
+    private activatedRoute: ActivatedRoute
+  ) {
     this.selectedClassSubscription = this.selectedClass
+      .subscribe(
+        selectedClass => {
+          this.selectedClassData = selectedClass;
+        }
+      );
+    this.studentSubscription = this.students
+      .subscribe(
+        students => this.studentData = students
+      );
+  }
+
+  ngOnInit() {
+    this.routeSubscription = this.activatedRoute.params
     .subscribe(
-      selectedClass => {
-        this.selectedClassData = selectedClass;
-        this.studentSubscription = this.students
-        .subscribe(
-          students => this.studentData = students
-        );
+      params => { 
+        this.studentActionCreator.GetMyClassStudent(params.id);
       }
     );
   }
 
-  ngOnInit() {
-    
+  onAddStudent(myClassId, programId) {
+    this.dialogRef = this.dialog.open(AddStudentDialogComponent, {
+      width: '500px',
+      data: { myClassId, programId }
+    });
+
+    this.dialogRefSubscription = this.dialogRef.afterClosed().subscribe(result => {
+      if (!result) {
+      } else {
+        const newData = JSON.parse(result);
+        this.studentActionCreator.CreateMyClassStudent(newData.myClassId, newData);
+      }
+    });
   }
 
   ngOnDestroy() {
     (this.selectedClassSubscription) ? this.selectedClassSubscription.unsubscribe() : null;
-    (this.studentSubscription) ? this.studentSubscription.unsubscribe() : null;
+    (this.routeSubscription) ? this.routeSubscription.unsubscribe(): null;
   }
 
 }
