@@ -22,6 +22,7 @@ export class ObqaTableComponent implements OnInit {
   @Input() actionEdit: boolean;
   @Input() actionMore: boolean;
   @Input() actionViewDetail: boolean;
+  @Input() paginator: boolean;
   @Input() tableDataArray: Observable<any[]>;
   @Input() tableHeaderName: Array<string>;
   @Input() tableHeaderAlias: Array<string>;
@@ -47,14 +48,17 @@ export class ObqaTableComponent implements OnInit {
         this.newTableDataArray = data
       }
     );
-    
   }
 
   chunker(data, itemPerPage, currentPage) {
-    data = _.chunk(data, itemPerPage);
-    this.pagesToShow = data.length;
-    data = data[currentPage];
-    return data;
+    if (this.paginator) {
+      const chunkedData = _.chunk(data, itemPerPage);
+      this.pagesToShow = chunkedData.length;
+      const dataToRender = chunkedData[currentPage];
+      return dataToRender;
+    } else {
+      return data;
+    }
   }
 
   ngDoCheck () {
