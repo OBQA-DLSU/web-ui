@@ -5,7 +5,8 @@ import * as _ from 'lodash';
 
 export const assessmentDiscussionCreateAttempt = (state, action) => {
   return tassign(state, {
-    ...state
+    ...state,
+    spinner: true
   });
 };
 
@@ -15,6 +16,7 @@ export const assessmentDiscussionCreateFulfilled = (state, action) => {
       action.payload,
       ...state.assessmentDiscussions
     ],
+    spinner: false,
     error: ''
   });
 };
@@ -22,6 +24,7 @@ export const assessmentDiscussionCreateFulfilled = (state, action) => {
 export const assessmentDiscussionCreateFailed = (state, action) => {
   return tassign(state, {
     ...state,
+    spinner: false,
     error: action.error
   });
 };
@@ -29,6 +32,7 @@ export const assessmentDiscussionCreateFailed = (state, action) => {
 export const assessmentDiscussionUpdateAttempt = (state, action) => {
   return tassign(state, {
     assessmentDiscussions: state.assessmentDiscussions,
+    spinner: true,
     error: ''
   });
 };
@@ -39,6 +43,7 @@ export const assessmentDiscussionUpdateFulfilled = (state, action) => {
   newArray.splice(index, 1, action.payload);
   return tassign(state, {
     assessmentDiscussions: newArray,
+    spinner: false,
     error: ''
   });
 };
@@ -46,6 +51,7 @@ export const assessmentDiscussionUpdateFulfilled = (state, action) => {
 export const assessmentDiscussionUpdateFailed = (state, action) => {
   return tassign(state, {
     assessmentDiscussions: state.assessmentDiscussions,
+    spinner: false,
     error: action.error
   });
 };
@@ -53,6 +59,7 @@ export const assessmentDiscussionUpdateFailed = (state, action) => {
 export const assessmentDiscussionGetAttempt = (state, action) => {
   return tassign(state, {
     assessmentDiscussions: state.assessmentDiscussions,
+    spinner: true,
     error: ''
   });
 };
@@ -60,6 +67,7 @@ export const assessmentDiscussionGetAttempt = (state, action) => {
 export const assessmentDiscussionGetFulfilled = (state, action) => {
   return tassign(state, {
     assessmentDiscussions: action.payload,
+    spinner: false,
     error: ''
   });
 };
@@ -67,6 +75,7 @@ export const assessmentDiscussionGetFulfilled = (state, action) => {
 export const assessmentDiscussionGetFailed = (state, action) => {
   return tassign(state, {
     assessmentDiscussions: state.assessmentDiscussions,
+    spinner: false,
     error: action.error
   });
 };
@@ -74,6 +83,7 @@ export const assessmentDiscussionGetFailed = (state, action) => {
 export const assessmentDiscussionDeleteAttempt = (state, action) => {
   return tassign(state, {
     assessmentDiscussions: state.assessmentDiscussions,
+    spinner: true,
     error: ''
   });
 };
@@ -84,6 +94,7 @@ export const assessmentDiscussionDeleteFulfilled = (state, action) => {
   });
   return tassign(state, {
     assessmentDiscussions: newArray,
+    spinner: false,
     error: ''
   });
 };
@@ -91,6 +102,7 @@ export const assessmentDiscussionDeleteFulfilled = (state, action) => {
 export const assessmentDiscussionDeleteFailed = (state, action) => {
   return tassign(state, {
     assessmentDiscussions: state.assessmentDiscussions,
+    spinner: false,
     error: action.error
   });
 };

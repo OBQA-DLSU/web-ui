@@ -12,6 +12,7 @@ import {
   ASSESSMENT_UPDATE_ATTEMPT,
   ASSESSMENT_UPDATE_FAILED,
   ASSESSMENT_UPDATE_FULFILLED,
+  ASSESSMENT_SELECT_ATTEMPT,
   ASSESSMENT_SELECT_FULFILLED,
   ASSESSMENT_SELECT_FAILED
 } from './action/assessment.actions';
@@ -19,12 +20,14 @@ import * as assessment from './pure-functions/assessment.functions';
 export interface IAssessmentStore {
   assessments: Array<IAssessmentView>;
   selectedAssessment: IAssessmentView;
+  spinner: boolean;
   error: string;
 }
 
 export const ASSESSMENT_INITIAL_STORE: IAssessmentStore = {
   assessments: [],
   selectedAssessment: null,
+  spinner: false,
   error: ''
 }
 
@@ -42,6 +45,7 @@ export function assessmentReducer(state: IAssessmentStore = ASSESSMENT_INITIAL_S
     case ASSESSMENT_DELETE_ATTEMPT: return assessment.assessmentDeleteAttempt(state, action);
     case ASSESSMENT_DELETE_FAILED: return assessment.assessmentDeleteFailed(state, action);
     case ASSESSMENT_DELETE_FULFILLED: return assessment.assessmentDeleteFulfilled(state, action);
+    case ASSESSMENT_SELECT_ATTEMPT: return assessment.assessmentSelectAttempt(state, action);
     case ASSESSMENT_SELECT_FAILED: return assessment.assessmentSelectFailed(state, action);
     case ASSESSMENT_SELECT_FULFILLED: return assessment.assessmentSelectFulfilled(state, action);
   }

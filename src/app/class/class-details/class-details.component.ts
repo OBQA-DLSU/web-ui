@@ -20,7 +20,8 @@ export class ClassDetailsComponent implements OnInit, OnDestroy {
 
   @select(s => s.myClasses.selectedClass) selectedClass;
   @select(s => s.students.students) students;
-  @select(s => s.misc.spinner) spinner;
+  @select(s => s.myClasses.spinner) spinner;
+  @select(s => s.students.spinner) studentSpinner;
   private selectedClassData: any;
   private studentData: any;
   private selectedClassSubscription: Subscription = null;

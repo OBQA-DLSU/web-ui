@@ -18,7 +18,7 @@ export class AddClassComponent implements OnInit {
   @select(s => s.courses.courses) courses;
   @select(s => s.instructors.instructors) instructors;
   @select(s => s.session) session;
-  @select(s => s.misc.spinner) spinner;
+  @select(s => s.myClasses.spinner) spinner;
   private programId: number;
   private isAdmin: boolean;
   private instructorId: number;

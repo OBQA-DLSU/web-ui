@@ -12,10 +12,12 @@ import {
 
 export interface IUserStore {
   user: IUser;
+  spinner: boolean;
   error: string
 }
 export const USER_INITIAL_STATE: IUserStore = {
   user: null,
+  spinner: false,
   error: ''
 }
 

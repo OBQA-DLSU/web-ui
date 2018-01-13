@@ -3,7 +3,8 @@ import * as _ from 'lodash';
 
 export const sopiCreateAttempt = (state, action) => {
   return tassign(state, {
-    ...state
+    ...state,
+    spinner: true
   });
 };
 
@@ -13,6 +14,7 @@ export const sopiCreateFulfilled = (state, action) => {
       ...state.sopis,
       action.payload
     ],
+    spinner: false,
     error: ''
   });
 };
@@ -20,6 +22,7 @@ export const sopiCreateFulfilled = (state, action) => {
 export const sopiCreateFailed = (state, action) => {
   return tassign(state, {
     ...state,
+    spinner: false,
     error: action.error
   });
 };
@@ -27,6 +30,7 @@ export const sopiCreateFailed = (state, action) => {
 export const sopiUpdateAttempt = (state, action) => {
   return tassign(state, {
     sopis: state.sopis,
+    spinner: true,
     error: ''
   });
 };
@@ -37,6 +41,7 @@ export const sopiUpdateFulfilled = (state, action) => {
   newArray.splice(index, 1, action.payload);
   return tassign(state, {
     sopis: newArray,
+    spinner: false,
     error: ''
   });
 };
@@ -44,6 +49,7 @@ export const sopiUpdateFulfilled = (state, action) => {
 export const sopiUpdateFailed = (state, action) => {
   return tassign(state, {
     sopis: state.sopis,
+    spinner: false,
     error: action.error
   });
 };
@@ -51,6 +57,7 @@ export const sopiUpdateFailed = (state, action) => {
 export const sopiGetAttempt = (state, action) => {
   return tassign(state, {
     sopis: state.sopis,
+    spinner: true,
     error: ''
   });
 };
@@ -58,6 +65,7 @@ export const sopiGetAttempt = (state, action) => {
 export const sopiGetFulfilled = (state, action) => {
   return tassign(state, {
     sopis: action.payload,
+    spinner: false,
     error: ''
   });
 };
@@ -65,6 +73,7 @@ export const sopiGetFulfilled = (state, action) => {
 export const sopiGetFailed = (state, action) => {
   return tassign(state, {
     sopis: state.sopis,
+    spinner: false,
     error: action.error
   });
 };
@@ -72,6 +81,7 @@ export const sopiGetFailed = (state, action) => {
 export const sopiDeleteAttempt = (state, action) => {
   return tassign(state, {
     sopis: state.sopis,
+    spinner: true,
     error: ''
   });
 };
@@ -82,6 +92,7 @@ export const sopiDeleteFulfilled = (state, action) => {
   });
   return tassign(state, {
     sopis: newArray,
+    spinner: false,
     error: ''
   });
 };
@@ -89,6 +100,7 @@ export const sopiDeleteFulfilled = (state, action) => {
 export const sopiDeleteFailed = (state, action) => {
   return tassign(state, {
     sopis: state.sopis,
+    spinner: false,
     error: action.error
   });
 };

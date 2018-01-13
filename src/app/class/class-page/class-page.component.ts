@@ -17,9 +17,9 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ClassPageComponent implements OnInit {
 
-  @select(s => s.myClass.selectedClass) selectedClass;
+  @select(s => s.myClasses.selectedClass) selectedClass;
   @select(s => s.students.students) students;
-  @select(s => s.misc.spinner) spinner;
+  @select(s => s.myClasses.spinner) spinner;
 
   private routeSubscription: Subscription;
   private myClassId: number = null;

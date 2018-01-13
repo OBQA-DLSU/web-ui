@@ -56,6 +56,7 @@ export class StudentActionCreator implements OnDestroy {
   }
 
   CreateMyClassStudent (myClassId, student: IStudentView) {
+    this.ngRedux.dispatch({ type: STUDENT_CREATE_ATTEMPT });
     this.createMyClassStudentSubscription = this.studentService.CreateMyClassStudent(student, myClassId)
     .map(student => this.myClassStudentToView(student))
     .subscribe(
@@ -71,6 +72,7 @@ export class StudentActionCreator implements OnDestroy {
   }
 
   GetMyClassStudent (myClassId: number) {
+    this.ngRedux.dispatch({ type: STUDENT_GET_ATTEMPT });
     this.getMyClassStudentSubscription = this.studentService.GetMyClassStudent(myClassId)
     .map(data => {
       let newData: IMyClassStudentView[];
@@ -93,7 +95,7 @@ export class StudentActionCreator implements OnDestroy {
   }
 
   GetOneMyClassStudent (id: number) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: STUDENT_GET_ATTEMPT });
     this.getOneMyClassStudentSubscription = this.studentService.GetOneMyClassStudent(id)
     .map(data => this.myClassStudentToView(data))
     .subscribe(
@@ -105,23 +107,20 @@ export class StudentActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: STUDENT_GET_FAILED, error: this.errorMessage });
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
-        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   UpdateMyClassStudent (student: IStudentView, id: number) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: STUDENT_UPDATE_ATTEMPT });
     this.updateMyClassStudentSubscription = this.studentService.UpdateMyClassStudent(student, id)
     .map(data => this.myClassStudentToView(data))
     .subscribe(
       (student: IMyClassStudentView) => {
         this.ngRedux.dispatch({type: STUDENT_UPDATE_FULFILLED, payload: student});
-        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Successful Course Update',
           text: `$Student was successfully Updated.`
@@ -132,7 +131,6 @@ export class StudentActionCreator implements OnDestroy {
           this.ngRedux.dispatch({ type: STUDENT_UPDATE_FAILED, error: this.errorMessage });
           // put error mesage here.
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
@@ -141,12 +139,11 @@ export class StudentActionCreator implements OnDestroy {
   }
 
   DeleteMyClassStudent (id: number) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: STUDENT_DELETE_ATTEMPT });
     this.deleteMyClassStudentSubscription = this.studentService.DeleteMyClassStudent(id)
     .subscribe(
       (data) => {
         this.ngRedux.dispatch({ type: STUDENT_DELETE_FULFILLED, payload: data });
-        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Successful Course Deletion',
           text: `Student was successfully deleted.`
@@ -156,7 +153,6 @@ export class StudentActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: STUDENT_DELETE_FAILED, error: this.errorMessage });
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
-import { SessionActionCreator } from '../store/action-creators/session.actioncreator';
 import { INSTRUCTOR_ROUTES } from './instructor-menu.constant';
 import { select } from '@angular-redux/store';
 import { Subscription } from 'rxjs/Subscription';
@@ -99,7 +98,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
 	public sessionSubscription: Subscription = null;
 	public menuItems: any[];
 	constructor(
-		private sessionActionCreator: SessionActionCreator,
 		private router: Router
 	){}
 
@@ -145,6 +143,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.router.navigate(['/profile']);
   }
 	onSignOut() {
-		this.sessionActionCreator.SessionDestroy();
+		this.router.navigate(['/pages/sign-in']);
 	}
 }
