@@ -9,7 +9,8 @@ import {
   MyClassActionCreator,
   MiscActionCreator,
   InstructorActionCreator,
-  CourseActionCreator
+  CourseActionCreator,
+  TableActionCreator
 } from '../../store/action-creators';
 import { IUser } from '../../interfaces/user/user.interface';
 import { UpdateClassDialogComponent } from '../update-class/update-class-dialog.component';
@@ -24,6 +25,7 @@ export class ClassListComponent implements OnInit, OnDestroy {
   @select(s => s.myClasses.myClasses) myClasses;
   @select(s => s.session) session;
   @select(s => s.myClasses.spinner) spinner;
+  @select(s => s.table.page) page;
   private user: IUser;
   private instructorId: string; //string is required as parameter
   private programId: number;
@@ -36,6 +38,7 @@ export class ClassListComponent implements OnInit, OnDestroy {
     private miscActionCreator: MiscActionCreator,
     private courseActionCreator: CourseActionCreator,
     private instructorActionCreator: InstructorActionCreator,
+    private tableActionCreator: TableActionCreator,
     private router: Router
   ) { }
 
@@ -56,7 +59,9 @@ export class ClassListComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.tableActionCreator.ResetPage();
+  }
 
   onMoreClick(data) {
     this.router.navigate([`/class/class-details/${data.id}`]);

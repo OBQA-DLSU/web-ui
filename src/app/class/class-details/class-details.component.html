@@ -63,13 +63,17 @@
           </div>
           <div class="card-content">
             <div class="list">
-              <div class="list-wrapper">
-                <div *appspinner="(studentSpinner | async)">
-                  <h5 *ngIf="studentData.length === 0; else students">No Student  Listed</h5>
-                  <ng-template #students>
+              <div *appspinner="(studentSpinner | async)">
+                <div *ngIf="studentData.length === 0; else students" class="list-wrapper">
+                  <h5>No Student Listed</h5>
+                  <div class="list-content">
+                  </div>
+                </div>
+                <ng-template #students>
+                  <div class="list-wrapper">
                     <div class="list-content">
                       <div class="material-data-table">
-                        <table class="table table-striped table-no-bordered table-hover" cellspacing="200" width="100%" style="width:100%">
+                        <table class="table table-striped table-no-bordered table-hover " cellspacing="200" width="90%">
                           <thead>
                             <th>ID</th>
                             <th>Email</th>
@@ -87,14 +91,27 @@
                         </table>
                       </div>
                     </div>
-                  </ng-template>
-                </div>
+                  </div>
+                </ng-template>
               </div>
             </div>
-            <button class="btn btn-success" (click)="onAddStudent(selectedClassData.id, selectedClassData.programId)"><i class="material-icons">add</i></button>
+            <button class="btn btn-success" matTooltip="Add Student" (click)="onAddStudent(selectedClassData.id, selectedClassData.programId)">
+              <i class="material-icons">add</i>
+            </button>
           </div>
         </div>
       </section>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header card-header-icon" data-background-color="green">
+            <i class="material-icons">folder</i>
+          </div>
+          <div class="card-content">
+            <h4 class="card-title">Upload List of Students in .xls File</h4>
+            <app-obqa-upload-basic fileAlias="student" [URL]="uploadUrl"></app-obqa-upload-basic>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
