@@ -33,12 +33,10 @@ export class InviteActionCreator implements OnDestroy {
   }
 
   SendGroupInvite(userInvites) {
-    this.miscActionCreator.LoadSpinner();
     this.inviteSubscription = this.invitationService.Invite(userInvites)
     .subscribe(
       result => {
         this.ngRedux.dispatch({ type: SEND_INVITES_FULFILLED, payload: result });
-        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message',{
           title: 'Invitation Sent!',
           text: 'Congratulations! Your invitation has successfully sent!'
@@ -52,7 +50,6 @@ export class InviteActionCreator implements OnDestroy {
             text: 'Your invitation was not successfully sent.'
           });
         }
-        this.miscActionCreator.UnloadSpinner();
       }
     );
   }

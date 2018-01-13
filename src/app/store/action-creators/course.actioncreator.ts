@@ -50,13 +50,11 @@ export class CourseActionCreator implements OnDestroy {
   }
   
   CreateCourse (course: ICourseView, programId: number) {
-    this.miscActionCreator.LoadSpinner();
     this.createCourseSubscription = this.courseService.CreateCourse(programId, course)
     .map(data => this.programCourseToView(data))
     .subscribe(
       (course: ICourseView) => {
         this.ngRedux.dispatch({type: COURSE_CREATE_FULFILLED, payload: course});
-        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Successful Course Creation',
           text: `${course.code} was successfully Created.`
@@ -64,7 +62,6 @@ export class CourseActionCreator implements OnDestroy {
       }, err => {
         this.errorMessage = err._body;
         if (this.errorMessage && typeof this.errorMessage === 'string') {
-          this.miscActionCreator.UnloadSpinner();
           this.ngRedux.dispatch({ type: COURSE_CREATE_FAILED, error: this.errorMessage });
           
         }
@@ -76,7 +73,6 @@ export class CourseActionCreator implements OnDestroy {
   }
 
   GetCourse (programId: number) {
-    this.miscActionCreator.LoadSpinner();
     this.getCourseSubscription = this.courseService.GetCourse(programId)
     .map(data => {
       let newData: ICourseView[];
@@ -91,23 +87,19 @@ export class CourseActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: COURSE_GET_FAILED, error: this.errorMessage });
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
-        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   UpdateCourse (id: number, course: ICourseView) {
-    this.miscActionCreator.LoadSpinner();
     this.updateCourseSubscription = this.courseService.UpdateCourse(id, course)
     .map(data => this.programCourseToView(data))
     .subscribe(
       (course: ICourseView) => {
         this.ngRedux.dispatch({type: COURSE_UPDATE_FULFILLED, payload: course});
-        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Successful Course Update',
           text: `${course.code} was successfully Updated.`
@@ -117,7 +109,6 @@ export class CourseActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: COURSE_UPDATE_FAILED, error: this.errorMessage });
           // put error mesage here.
-          this.miscActionCreator.UnloadSpinner();
         }
       },
       () => {
@@ -127,19 +118,16 @@ export class CourseActionCreator implements OnDestroy {
   }
 
   DeleteCourse (id: number, course: ICourseView) {
-    this.miscActionCreator.LoadSpinner();
     this.deleteCourseSubscription = this.courseService.DeleteCourse(id)
     .subscribe(
       (data) => {
         this.ngRedux.dispatch({ type: COURSE_DELETE_FULFILLED, payload: data });
-        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Successful Course Deletion',
           text: `${course.code} was successfully deleted.`
         });
       }, err => {
         this.errorMessage = err._body;
-        this.miscActionCreator.UnloadSpinner();
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: COURSE_DELETE_FAILED, error: this.errorMessage });
         }

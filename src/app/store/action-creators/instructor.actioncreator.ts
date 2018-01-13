@@ -53,7 +53,6 @@ export class InstructorActionCreator implements OnDestroy {
   }
 
   GetAllInstructor () {
-    this.miscActionCreator.LoadSpinner();
     this.getAllInstructorSubscription = this.instructorService.GetAllInstructor()
     .map(data => {
       let newData: IInstructorView[];
@@ -68,17 +67,14 @@ export class InstructorActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: INSTRUCTOR_GET_FAILED, error: this.errorMessage });
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
-        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
   
   GetInstructor (programId: number) {
-    this.miscActionCreator.LoadSpinner();
     this.getInstructorSubscription = this.instructorService.GetInstructor(programId)
     .map(data => {
       let newData: IInstructorView[];
@@ -93,23 +89,19 @@ export class InstructorActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: INSTRUCTOR_GET_FAILED, error: this.errorMessage });
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
-        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   CreateInstructor (programId: number, instructor: IInstructorView) {
-    this.miscActionCreator.LoadSpinner();
     this.createInstructorSubscription = this.instructorService.CreateInstructor(programId, instructor)
     .map(data => this.instructorToView(data))
     .subscribe(
       (instructor: IInstructorView) => {
         this.ngRedux.dispatch({type: INSTRUCTOR_CREATE_FULFILLED, payload: instructor });
-        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Successfull',
           text: `${instructor.email} was successfully Added.`
@@ -120,7 +112,6 @@ export class InstructorActionCreator implements OnDestroy {
           this.ngRedux.dispatch({ type: INSTRUCTOR_CREATE_FAILED, error: this.errorMessage });
           
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
@@ -129,7 +120,6 @@ export class InstructorActionCreator implements OnDestroy {
   }
 
   GetOneInstructor (id: number) {
-    this.miscActionCreator.LoadSpinner();
     this.getOneInstructorSubscription = this.instructorService.GetOneInstructor(id)
     .map(data => this.instructorToView(data))
     .subscribe(
@@ -141,23 +131,19 @@ export class InstructorActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: INSTRUCTOR_GET_FAILED, error: this.errorMessage });
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
-        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   UpdateInstructor (id: number, instructor: IInstructorView) {
-    this.miscActionCreator.LoadSpinner();
     this.updateInstructorSubscription = this.instructorService.UpdateInstructor(id, instructor)
     .map(data => this.instructorToView(data))
     .subscribe(
       (instructor: IInstructorView) => {
         this.ngRedux.dispatch({type: INSTRUCTOR_UPDATE_FULFILLED, payload: instructor});
-        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Successful Instructor Update',
           text: `${instructor.email} was successfully Updated.`
@@ -171,18 +157,15 @@ export class InstructorActionCreator implements OnDestroy {
       },
       () => {
         this.errorMessage = null;
-        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   DeleteInstructor (id: number, instructor: IInstructorView) {
-    this.miscActionCreator.LoadSpinner();
     this.deleteInstructorSubscription = this.instructorService.DeleteInstructor(id)
     .subscribe(
       (data) => {
         this.ngRedux.dispatch({ type: INSTRUCTOR_DELETE_FULFILLED, payload: data });
-        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Successful',
           text: `${instructor.email} was successfully removed.`
@@ -192,7 +175,6 @@ export class InstructorActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: INSTRUCTOR_DELETE_FAILED, error: this.errorMessage });
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;

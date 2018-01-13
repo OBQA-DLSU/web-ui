@@ -32,7 +32,6 @@ export class UserActionCreator implements OnDestroy {
   }
 
   CreateUser (user: IUserCreate) {
-    this.miscActionCreator.LoadSpinner();
     this.signup = this.authenticationService.SignUp(user)
     .subscribe(
       (session: ISession) => {
@@ -48,11 +47,9 @@ export class UserActionCreator implements OnDestroy {
             text: this.errorMessage
           });
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
-        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
