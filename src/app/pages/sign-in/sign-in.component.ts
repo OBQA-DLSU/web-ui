@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { select } from '@angular-redux/store'; 
 
-import { SessionActionCreator } from '../../store/action-creators/session.actioncreator';
+import { SessionActionCreator } from '../../store/action-creators';
 import { MiscActionCreator } from '../../store/action-creators/misc.actioncreator';
 declare var $: any;
 import { ISessionCreate } from '../../interfaces/session/session-create.interface';
@@ -14,7 +14,7 @@ import { ISessionCreate } from '../../interfaces/session/session-create.interfac
 export class SignInComponent implements OnInit {
   @select(s => s.misc.toggleForgotPassword) toggleForgotPassword;
   @select(s => s.misc.signInBufferPage) signInBufferPage;
-  @select(s => s.misc.spinner) spinner;
+  @select(s => s.session.spinner) spinner;
   test: Date = new Date();
   private toggleButton: any;
   private sidebarVisible: boolean;
@@ -31,6 +31,7 @@ export class SignInComponent implements OnInit {
     {
     this.nativeElement = element.nativeElement;
     this.sidebarVisible = false;
+    this.sessionActionCreator.SessionDestroy();
   }
 
   ngOnInit() {

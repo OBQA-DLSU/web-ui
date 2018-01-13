@@ -51,6 +51,7 @@ export class SopiActionCreator implements OnDestroy {
   }
 
   CreateSopi (programId: number, sopi: ISopiView) {
+    this.ngRedux.dispatch({ type: SOPI_CREATE_ATTEMPT });
     this.createSopiSubscription = this.sopiService.CreateSopi(programId, sopi)
     .map(data => this.programSopiToView(data))
     .subscribe(
@@ -73,6 +74,7 @@ export class SopiActionCreator implements OnDestroy {
   }
 
   GetSopi (programId: number) {
+    this.ngRedux.dispatch({ type: SOPI_GET_ATTEMPT });
     this.getSopiSubscription = this.sopiService.GetSopi(programId)
     .map(data => {
       let newData: ISopiView[];
@@ -96,6 +98,7 @@ export class SopiActionCreator implements OnDestroy {
   }
 
   UpdateSopi (id: number, sopi: ISopiView) {
+    this.ngRedux.dispatch({ type: SOPI_UPDATE_ATTEMPT });
     this.updateSopiSubscription = this.sopiService.UpdateSopi(id, sopi)
     .map(data => this.programSopiToView(data))
     .subscribe(
@@ -119,6 +122,7 @@ export class SopiActionCreator implements OnDestroy {
   }
 
   DeleteSopi (id: number, sopi: ISopiView) {
+    this.ngRedux.dispatch({ type: SOPI_DELETE_ATTEMPT });
     this.deleteSopiSubscription = this.sopiService.DeleteSopi(id)
     .subscribe(
       (data) => {

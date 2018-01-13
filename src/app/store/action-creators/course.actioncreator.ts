@@ -50,6 +50,7 @@ export class CourseActionCreator implements OnDestroy {
   }
   
   CreateCourse (course: ICourseView, programId: number) {
+    this.ngRedux.dispatch({ type: COURSE_CREATE_ATTEMPT });
     this.createCourseSubscription = this.courseService.CreateCourse(programId, course)
     .map(data => this.programCourseToView(data))
     .subscribe(
@@ -73,6 +74,7 @@ export class CourseActionCreator implements OnDestroy {
   }
 
   GetCourse (programId: number) {
+    this.ngRedux.dispatch({ type: COURSE_GET_ATTEMPT });
     this.getCourseSubscription = this.courseService.GetCourse(programId)
     .map(data => {
       let newData: ICourseView[];
@@ -95,6 +97,7 @@ export class CourseActionCreator implements OnDestroy {
   }
 
   UpdateCourse (id: number, course: ICourseView) {
+    this.ngRedux.dispatch({ type: COURSE_UPDATE_ATTEMPT });
     this.updateCourseSubscription = this.courseService.UpdateCourse(id, course)
     .map(data => this.programCourseToView(data))
     .subscribe(
@@ -118,6 +121,7 @@ export class CourseActionCreator implements OnDestroy {
   }
 
   DeleteCourse (id: number, course: ICourseView) {
+    this.ngRedux.dispatch({ type: COURSE_DELETE_ATTEMPT });
     this.deleteCourseSubscription = this.courseService.DeleteCourse(id)
     .subscribe(
       (data) => {

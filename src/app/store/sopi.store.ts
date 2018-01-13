@@ -17,11 +17,13 @@ import * as sopi from './pure-functions/sopi.functions';
 
 export interface ISopiStore {
   sopis: ISopiView[];
+  spinner: boolean;
   error: string;
 }
 
 export const SOPI_INITIAL_STORE: ISopiStore = {
   sopis: [],
+  spinner: false,
   error: ''
 }
 

@@ -23,7 +23,7 @@ export class ClassListComponent implements OnInit, OnDestroy {
 
   @select(s => s.myClasses.myClasses) myClasses;
   @select(s => s.session) session;
-  @select(s => s.misc.spinner) spinner;
+  @select(s => s.myClasses.spinner) spinner;
   private user: IUser;
   private instructorId: string; //string is required as parameter
   private programId: number;

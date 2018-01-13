@@ -56,6 +56,7 @@ export class StudentActionCreator implements OnDestroy {
   }
 
   CreateMyClassStudent (myClassId, student: IStudentView) {
+    this.ngRedux.dispatch({ type: STUDENT_CREATE_ATTEMPT });
     this.createMyClassStudentSubscription = this.studentService.CreateMyClassStudent(student, myClassId)
     .map(student => this.myClassStudentToView(student))
     .subscribe(
@@ -71,6 +72,7 @@ export class StudentActionCreator implements OnDestroy {
   }
 
   GetMyClassStudent (myClassId: number) {
+    this.ngRedux.dispatch({ type: STUDENT_GET_ATTEMPT });
     this.getMyClassStudentSubscription = this.studentService.GetMyClassStudent(myClassId)
     .map(data => {
       let newData: IMyClassStudentView[];
@@ -93,6 +95,7 @@ export class StudentActionCreator implements OnDestroy {
   }
 
   GetOneMyClassStudent (id: number) {
+    this.ngRedux.dispatch({ type: STUDENT_GET_ATTEMPT });
     this.getOneMyClassStudentSubscription = this.studentService.GetOneMyClassStudent(id)
     .map(data => this.myClassStudentToView(data))
     .subscribe(
@@ -112,6 +115,7 @@ export class StudentActionCreator implements OnDestroy {
   }
 
   UpdateMyClassStudent (student: IStudentView, id: number) {
+    this.ngRedux.dispatch({ type: STUDENT_UPDATE_ATTEMPT });
     this.updateMyClassStudentSubscription = this.studentService.UpdateMyClassStudent(student, id)
     .map(data => this.myClassStudentToView(data))
     .subscribe(
@@ -135,6 +139,7 @@ export class StudentActionCreator implements OnDestroy {
   }
 
   DeleteMyClassStudent (id: number) {
+    this.ngRedux.dispatch({ type: STUDENT_DELETE_ATTEMPT });
     this.deleteMyClassStudentSubscription = this.studentService.DeleteMyClassStudent(id)
     .subscribe(
       (data) => {

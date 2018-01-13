@@ -23,6 +23,7 @@ import {
   ASSESSMENT_UPDATE_ATTEMPT,
   ASSESSMENT_UPDATE_FAILED,
   ASSESSMENT_UPDATE_FULFILLED,
+  ASSESSMENT_SELECT_ATTEMPT,
   ASSESSMENT_SELECT_FAILED,
   ASSESSMENT_SELECT_FULFILLED
 } from '../action/assessment.actions';
@@ -62,6 +63,7 @@ export class AssessmentActionCreator implements OnDestroy {
   }
 
   GetAssessment (programId: number) {
+    this.ngRedux.dispatch({ type: ASSESSMENT_GET_ATTEMPT });
     this.getAssessmentSubscription = this.assessmentService.GetAssessment(programId)
     .map(data => {
       let newData: IAssessmentView[];
@@ -84,6 +86,7 @@ export class AssessmentActionCreator implements OnDestroy {
   }
 
   CreateAssessment (programId: number, assessment: IAssessmentView) {
+    this.ngRedux.dispatch({ type: ASSESSMENT_CREATE_ATTEMPT });
     this.createAssessmentSubscription = this.assessmentService.CreateAssessment(programId, assessment)
     .map(data => this.assessmentToViewFlat(data))
     .subscribe(
@@ -107,6 +110,7 @@ export class AssessmentActionCreator implements OnDestroy {
   }
 
   GetFilteredAssessmentByProgram (programId: number, filterName: string, filterValue: string) {
+    this.ngRedux.dispatch({ type: ASSESSMENT_GET_ATTEMPT });
     this.getFilteredAssessmentByProgramSubscription = this.assessmentService.GetFilteredAssessmentByProgram(programId, filterName, filterValue)
     .map(data => {
       let newData: IAssessmentView[];
@@ -129,6 +133,7 @@ export class AssessmentActionCreator implements OnDestroy {
   }
 
   GetAllAssessment () {
+    this.ngRedux.dispatch({ type: ASSESSMENT_GET_ATTEMPT });
     this.getAllAssessmentSubscription = this.assessmentService.GetAllAssessment()
     .map(data => {
       let newData: IAssessmentView[];
@@ -151,6 +156,7 @@ export class AssessmentActionCreator implements OnDestroy {
   }
 
   GetFilteredAssessment (filterName: string, filterValue: string) {
+    this.ngRedux.dispatch({ type: ASSESSMENT_GET_ATTEMPT });
     this.getFilteredAssessmentSubscription = this.assessmentService.GetFilteredAssessment(filterName, filterValue)
     .map(data => {
       let newData: IAssessmentView[];
@@ -173,6 +179,7 @@ export class AssessmentActionCreator implements OnDestroy {
   }
 
   GetOneAssessment (id: number) {
+    this.ngRedux.dispatch({ type: ASSESSMENT_GET_ATTEMPT });
     this.getOneAssessmentSubscription = this.assessmentService.GetOneAssessment(id)
     .map(data => this.assessmentToViewFlat(data))
     .subscribe(
@@ -192,6 +199,7 @@ export class AssessmentActionCreator implements OnDestroy {
   }
 
   UpdateAssessment (id: number, assessment: IAssessmentView) {
+    this.ngRedux.dispatch({ type: ASSESSMENT_UPDATE_ATTEMPT });
     this.updateAssessmentSubscription = this.assessmentService.UpdateAssessment(id, assessment)
     .map(data => this.assessmentToViewFlat(data))
     .subscribe(
@@ -215,6 +223,7 @@ export class AssessmentActionCreator implements OnDestroy {
   }
 
   DeleteAssessment (id: number) {
+    this.ngRedux.dispatch({ type: ASSESSMENT_DELETE_ATTEMPT });
     this.deleteAssessmentSubscription = this.assessmentService.DeleteAssessment(id)
     .subscribe(
       (data) => {
@@ -236,6 +245,7 @@ export class AssessmentActionCreator implements OnDestroy {
   }
 
   SelectAssessment (id: number) {
+    this.ngRedux.dispatch({ type: ASSESSMENT_SELECT_ATTEMPT });
     this.getOneAssessmentSubscription = this.assessmentService.GetOneAssessment(id)
     .map(data => this.assessmentToView(data))
     .subscribe(

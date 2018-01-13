@@ -23,11 +23,11 @@ declare var $: any;
 
 export class AddAssessmentComponent implements OnInit, OnDestroy {
 
-  private uploadUrl: string;;
+  private uploadUrl: string;
   @select(s => s.session.programId) programId;
   @select(s => s.courses.courses) courses;
   @select(s => s.sopis.sopis) sopis;
-  @select(s => s.misc.spinner) spinner;
+  @select(s => s.assessments.spinner) spinner;
   private programIdSubscription: Subscription = null;
   private assessmentForm: FormGroup;
   private academicYear: any[] = ACADEMIC_YEAR;

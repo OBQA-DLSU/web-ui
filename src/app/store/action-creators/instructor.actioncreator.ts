@@ -53,6 +53,7 @@ export class InstructorActionCreator implements OnDestroy {
   }
 
   GetAllInstructor () {
+    this.ngRedux.dispatch({ type: INSTRUCTOR_GET_ATTEMPT });
     this.getAllInstructorSubscription = this.instructorService.GetAllInstructor()
     .map(data => {
       let newData: IInstructorView[];
@@ -75,6 +76,7 @@ export class InstructorActionCreator implements OnDestroy {
   }
   
   GetInstructor (programId: number) {
+    this.ngRedux.dispatch({ type: INSTRUCTOR_GET_ATTEMPT });
     this.getInstructorSubscription = this.instructorService.GetInstructor(programId)
     .map(data => {
       let newData: IInstructorView[];
@@ -97,6 +99,7 @@ export class InstructorActionCreator implements OnDestroy {
   }
 
   CreateInstructor (programId: number, instructor: IInstructorView) {
+    this.ngRedux.dispatch({ type: INSTRUCTOR_CREATE_ATTEMPT });
     this.createInstructorSubscription = this.instructorService.CreateInstructor(programId, instructor)
     .map(data => this.instructorToView(data))
     .subscribe(
@@ -120,6 +123,7 @@ export class InstructorActionCreator implements OnDestroy {
   }
 
   GetOneInstructor (id: number) {
+    this.ngRedux.dispatch({ type: INSTRUCTOR_GET_ATTEMPT });
     this.getOneInstructorSubscription = this.instructorService.GetOneInstructor(id)
     .map(data => this.instructorToView(data))
     .subscribe(
@@ -139,6 +143,7 @@ export class InstructorActionCreator implements OnDestroy {
   }
 
   UpdateInstructor (id: number, instructor: IInstructorView) {
+    this.ngRedux.dispatch({ type: INSTRUCTOR_UPDATE_ATTEMPT });
     this.updateInstructorSubscription = this.instructorService.UpdateInstructor(id, instructor)
     .map(data => this.instructorToView(data))
     .subscribe(
@@ -162,6 +167,7 @@ export class InstructorActionCreator implements OnDestroy {
   }
 
   DeleteInstructor (id: number, instructor: IInstructorView) {
+    this.ngRedux.dispatch({ type: INSTRUCTOR_DELETE_ATTEMPT });
     this.deleteInstructorSubscription = this.instructorService.DeleteInstructor(id)
     .subscribe(
       (data) => {

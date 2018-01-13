@@ -54,6 +54,7 @@ export class SessionActionCreator implements OnDestroy {
   }
 
   SessionCreate (sessionCreate: ISessionCreate) {
+    this.ngRedux.dispatch({ type: SESSION_CHECK_ATTEMPT });
     this.signin = this.authenticationService.SignIn(sessionCreate)
     .subscribe(
       (session: ISession) => {
@@ -79,6 +80,7 @@ export class SessionActionCreator implements OnDestroy {
   }
 
   RenewSession (sessionCreate: ISessionCreate) {
+    this.ngRedux.dispatch({ type: SESSION_CREATE_ATTEMPT });
     this.signin = this.authenticationService.SignIn(sessionCreate)
     .subscribe(
       (session: ISession) => {
@@ -123,13 +125,14 @@ export class SessionActionCreator implements OnDestroy {
   }
 
   SessionDestroy () {
-    this.router.navigate(['/pages/sign-in']);
     this.authenticationService.SessionDestroy();
     this.ngRedux.dispatch({ type: SESSION_DESTROY_FULFILLED });
     this.ngRedux.dispatch({ type: USER_SESSION_DESTROY });
+    this.router.navigate(['/pages/sign-in']);
   }
 
   ChangePassword (email: string, password: string, newPassword: string, confirmation: string) {
+    this.ngRedux.dispatch({ type: SESSION_PASSWORD_CHANGE_ATTEMPT });
     this.changePasswordSubscription = this.authenticationService.ChangePassword(email, password, newPassword, confirmation)
     .subscribe(
       (session: ISession) => {

@@ -55,6 +55,7 @@ export class AssessmentDiscussionActionCreator implements OnDestroy {
   }
 
   GetAssessmentDiscussion (assessmentId: number) {
+    this.ngRedux.dispatch({ type: ASSESSMENT_DISCUSSION_GET_ATTEMPT });
     this.getAssessmentDiscussionSubscription = this.assessmentDiscussionService.GetAssessmentDiscussion(assessmentId)
     .map(data => this.sortByTime(data))
     .map(data => {
@@ -78,6 +79,7 @@ export class AssessmentDiscussionActionCreator implements OnDestroy {
   }
 
   CreateAssessmentDiscusssion (assessmentId: number, assessmentDiscussion: IAssessmentDiscussion) {
+    this.ngRedux.dispatch({ type: ASSESSMENT_DISCUSSION_CREATE_ATTEMPT });
     this.createAssessmentDiscussionSubscription = this.assessmentDiscussionService.CreateAssessmentDiscussion(assessmentId, assessmentDiscussion)
     .map(data => this.assessmentDiscussionToView(data))
     .subscribe(
@@ -96,6 +98,7 @@ export class AssessmentDiscussionActionCreator implements OnDestroy {
   }
 
   GetOneAssessmentDiscussion (id: number) {
+    this.ngRedux.dispatch({ type: ASSESSMENT_DISCUSSION_GET_ATTEMPT });
     this.getOneAssessmentDiscussionSubsscription = this.assessmentDiscussionService.GetOneAssessmentDiscussion(id)
     .map(data => this.assessmentDiscussionToView(data))
     .subscribe(
@@ -115,6 +118,7 @@ export class AssessmentDiscussionActionCreator implements OnDestroy {
   }
 
   UpdateAssessmentDiscussion (id: number, assessmentDiscussion) {
+    this.ngRedux.dispatch({ type: ASSESSMENT_DISCUSSION_UPDATE_ATTEMPT });
     this.updateAssessmentDiscussionSubscription = this.assessmentDiscussionService.UpdateAssessmentDiscussion(id, assessmentDiscussion)
     .map(data => this.assessmentDiscussionToView(data))
     .subscribe(
@@ -133,6 +137,7 @@ export class AssessmentDiscussionActionCreator implements OnDestroy {
   }
 
   DeleteAssessmentDiscussion (id: number) {
+    this.ngRedux.dispatch({ type: ASSESSMENT_DISCUSSION_DELETE_ATTEMPT });
     this.deleteAssessmentDiscussionSubscription = this.assessmentDiscussionService.DeleteAssessmentDiscussion(id)
     .map(data => this.assessmentDiscussionToView(data))
     .subscribe(

@@ -13,7 +13,7 @@ import {
 })
 export class InvitationComponent implements OnInit {
 
-  @select(s => s.misc.spinner) spinner;
+  @select(s => s.invite.spinner) spinner;
 
   constructor (
     private formBuilder: FormBuilder,
