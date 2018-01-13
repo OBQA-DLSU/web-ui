@@ -5,7 +5,8 @@ import * as _ from 'lodash';
 
 export const instructorCreateAttempt = (state, action) => {
   return tassign(state, {
-    ...state
+    ...state,
+    spinner: true
   });
 };
 
@@ -15,6 +16,7 @@ export const instructorCreateFulfilled = (state, action) => {
       ...state.instructors,
       action.payload
     ],
+    spinner: false,
     error: ''
   });
 };
@@ -22,6 +24,7 @@ export const instructorCreateFulfilled = (state, action) => {
 export const instructorCreateFailed = (state, action) => {
   return tassign(state, {
     ...state,
+    spinner: false,
     error: action.error
   });
 };
@@ -29,6 +32,7 @@ export const instructorCreateFailed = (state, action) => {
 export const instructorUpdateAttempt = (state, action) => {
   return tassign(state, {
     instructors: state.instructors,
+    spinner: true,
     error: ''
   });
 };
@@ -39,6 +43,7 @@ export const instructorUpdateFulfilled = (state, action) => {
   newArray.splice(index, 1, action.payload);
   return tassign(state, {
     instructors: newArray,
+    spinner: false,
     error: ''
   });
 };
@@ -46,6 +51,7 @@ export const instructorUpdateFulfilled = (state, action) => {
 export const instructorUpdateFailed = (state, action) => {
   return tassign(state, {
     instructors: state.instructors,
+    spinner: false,
     error: action.error
   });
 };
@@ -53,6 +59,7 @@ export const instructorUpdateFailed = (state, action) => {
 export const instructorGetAttempt = (state, action) => {
   return tassign(state, {
     instructors: state.instructors,
+    spinner: true,
     error: ''
   });
 };
@@ -60,6 +67,7 @@ export const instructorGetAttempt = (state, action) => {
 export const instructorGetFulfilled = (state, action) => {
   return tassign(state, {
     instructors: action.payload,
+    spinner: false,
     error: ''
   });
 };
@@ -67,6 +75,7 @@ export const instructorGetFulfilled = (state, action) => {
 export const instructorGetFailed = (state, action) => {
   return tassign(state, {
     instructors: state.instructors,
+    spinner: false,
     error: action.error
   });
 };
@@ -74,6 +83,7 @@ export const instructorGetFailed = (state, action) => {
 export const instructorDeleteAttempt = (state, action) => {
   return tassign(state, {
     instructors: state.instructors,
+    spinner: true,
     error: ''
   });
 };
@@ -84,6 +94,7 @@ export const instructorDeleteFulfilled = (state, action) => {
   });
   return tassign(state, {
     instructors: newArray,
+    spinner: false,
     error: ''
   });
 };
@@ -91,6 +102,7 @@ export const instructorDeleteFulfilled = (state, action) => {
 export const instructorDeleteFailed = (state, action) => {
   return tassign(state, {
     instructors: state.instructors,
+    spinner: false,
     error: action.error
   });
 };

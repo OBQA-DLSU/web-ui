@@ -54,7 +54,7 @@ export class SessionActionCreator implements OnDestroy {
   }
 
   SessionCreate (sessionCreate: ISessionCreate) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: SESSION_CHECK_ATTEMPT });
     this.signin = this.authenticationService.SignIn(sessionCreate)
     .subscribe(
       (session: ISession) => {
@@ -71,18 +71,16 @@ export class SessionActionCreator implements OnDestroy {
             text: 'Email or Password is incorrect.'
           });
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
-        this.miscActionCreator.UnloadSpinner();
         this.router.navigate(['./pages/authentication']);
       }
     );
   }
 
   RenewSession (sessionCreate: ISessionCreate) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: SESSION_CREATE_ATTEMPT });
     this.signin = this.authenticationService.SignIn(sessionCreate)
     .subscribe(
       (session: ISession) => {
@@ -97,11 +95,9 @@ export class SessionActionCreator implements OnDestroy {
             text: 'Password is incorrect.'
           });
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
-        this.miscActionCreator.UnloadSpinner();
         this.router.navigate(['./pages/authentication']);
       }
     );
@@ -129,19 +125,18 @@ export class SessionActionCreator implements OnDestroy {
   }
 
   SessionDestroy () {
-    this.router.navigate(['/pages/sign-in']);
     this.authenticationService.SessionDestroy();
     this.ngRedux.dispatch({ type: SESSION_DESTROY_FULFILLED });
     this.ngRedux.dispatch({ type: USER_SESSION_DESTROY });
+    this.router.navigate(['/pages/sign-in']);
   }
 
   ChangePassword (email: string, password: string, newPassword: string, confirmation: string) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: SESSION_PASSWORD_CHANGE_ATTEMPT });
     this.changePasswordSubscription = this.authenticationService.ChangePassword(email, password, newPassword, confirmation)
     .subscribe(
       (session: ISession) => {
         this.ngRedux.dispatch({ type: SESSION_PASSWORD_CHAGE_FULFILLED, payload: session });
-        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Success!',
           text: `Your password was changed..`
@@ -155,7 +150,6 @@ export class SessionActionCreator implements OnDestroy {
             text: `Error: ${this.errorMessage}`
           });
         }
-        this.miscActionCreator.UnloadSpinner();
       }, () => {
         this.errorMessage = null;
       }

@@ -16,11 +16,13 @@ import {
 import * as course from './pure-functions/course.functions';
 export interface ICourseStore {
   courses: Array<ICourseView>;
+  spinner: boolean;
   error: string;
 }
 
 export const COURSE_INITIAL_STATE: ICourseStore = {
   courses: [],
+  spinner: false,
   error: ''
 }
 

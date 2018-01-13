@@ -8,6 +8,7 @@ import { InvitationService } from '../../services/invitation.service';
 import { IUserInvite } from '../../interfaces/user/user-invite.interface';
 import { IAppState } from '../app.store';
 import {
+  SEND_INVITES_ATTEMPT,
   SEND_INVITES_FAILED,
   SEND_INVITES_FULFILLED
 } from '../action/invite.actions';
@@ -33,12 +34,11 @@ export class InviteActionCreator implements OnDestroy {
   }
 
   SendGroupInvite(userInvites) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: SEND_INVITES_ATTEMPT });
     this.inviteSubscription = this.invitationService.Invite(userInvites)
     .subscribe(
       result => {
         this.ngRedux.dispatch({ type: SEND_INVITES_FULFILLED, payload: result });
-        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message',{
           title: 'Invitation Sent!',
           text: 'Congratulations! Your invitation has successfully sent!'
@@ -52,7 +52,6 @@ export class InviteActionCreator implements OnDestroy {
             text: 'Your invitation was not successfully sent.'
           });
         }
-        this.miscActionCreator.UnloadSpinner();
       }
     );
   }

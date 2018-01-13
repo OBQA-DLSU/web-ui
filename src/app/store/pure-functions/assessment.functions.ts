@@ -5,7 +5,8 @@ import * as _ from 'lodash';
 
 export const assessmentCreateAttempt = (state, action) => {
   return tassign(state, {
-    ...state
+    ...state,
+    spinner: true
   });
 };
 
@@ -16,6 +17,7 @@ export const assessmentCreateFulfilled = (state, action) => {
       action.payload
     ],
     selectedAssessment: state.selectedAssessment,
+    spinner: false,
     error: ''
   });
 };
@@ -23,6 +25,7 @@ export const assessmentCreateFulfilled = (state, action) => {
 export const assessmentCreateFailed = (state, action) => {
   return tassign(state, {
     ...state,
+    spinner: false,
     error: action.error
   });
 };
@@ -31,6 +34,7 @@ export const assessmentUpdateAttempt = (state, action) => {
   return tassign(state, {
     assessments: state.assessments,
     selectedAssessment: state.selectedAssessment,
+    spinner: true,
     error: ''
   });
 };
@@ -42,6 +46,7 @@ export const assessmentUpdateFulfilled = (state, action) => {
   return tassign(state, {
     assessments: newArray,
     selectedAssessment: state.selectedAssessment,
+    spinner: false,
     error: ''
   });
 };
@@ -50,6 +55,7 @@ export const assessmentUpdateFailed = (state, action) => {
   return tassign(state, {
     assessments: state.assessments,
     selectedAssessment: state.selectedAssessment,
+    spinner: false,
     error: action.error
   });
 };
@@ -58,6 +64,7 @@ export const assessmentGetAttempt = (state, action) => {
   return tassign(state, {
     assessments: state.assessments,
     selectedAssessment: state.selectedAssessment,
+    spinner: true,
     error: ''
   });
 };
@@ -66,6 +73,7 @@ export const assessmentGetFulfilled = (state, action) => {
   return tassign(state, {
     assessments: action.payload,
     selectedAssessment: state.selectedAssessment,
+    spinner: false,
     error: ''
   });
 };
@@ -74,6 +82,7 @@ export const assessmentGetFailed = (state, action) => {
   return tassign(state, {
     assessments: state.assessments,
     selectedAssessment: state.selectedAssessment,
+    spinner: false,
     error: action.error
   });
 };
@@ -82,6 +91,7 @@ export const assessmentDeleteAttempt = (state, action) => {
   return tassign(state, {
     assessments: state.assessments,
     selectedAssessment: state.selectedAssessment,
+    spinner: true,
     error: ''
   });
 };
@@ -93,6 +103,7 @@ export const assessmentDeleteFulfilled = (state, action) => {
   return tassign(state, {
     assessments: newArray,
     selectedAssessment: state.selectedAssessment,
+    spinner: false,
     error: ''
   });
 };
@@ -101,7 +112,17 @@ export const assessmentDeleteFailed = (state, action) => {
   return tassign(state, {
     assessments: state.assessments,
     selectedAssessment: state.selectedAssessment,
+    spinner: false,
     error: action.error
+  });
+};
+
+export const assessmentSelectAttempt = (state, action) => {
+  return tassign(state, {
+    assessments: state.assessments,
+    selectedAssessment: state.selectedAssessment,
+    spinner: true,
+    error: ''
   });
 };
 
@@ -109,6 +130,7 @@ export const assessmentSelectFulfilled = (state, action) => {
   return tassign(state, {
     assessments: state.assessments,
     selectedAssessment: action.payload,
+    spinner: false,
     error: ''
   });
 };
@@ -117,6 +139,7 @@ export const assessmentSelectFailed = (state, action) => {
   return tassign(state, {
     assessments: state.assessments,
     selectedAssessment: state.selectedAssessment,
+    spinner: false,
     error: action.error
   });
 };

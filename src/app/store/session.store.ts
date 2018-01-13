@@ -15,6 +15,7 @@ import {
 } from './action/session.actions';
 import * as session from './pure-functions/session.functions';
 export interface ISessionStore extends ISession {
+  spinner: boolean;
   error: any;
 }
 
@@ -26,6 +27,7 @@ export const SESSION_INITIAL_STATE: ISessionStore = {
   instructorId: null,
   program: null,
   token: null,
+  spinner: false,
   error: null
 }
 

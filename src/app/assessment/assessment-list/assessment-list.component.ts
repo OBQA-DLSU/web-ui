@@ -21,7 +21,7 @@ export class AssessmentListComponent implements OnInit, OnDestroy {
   @select(s => s.assessments.assessments) assessments;
   @select(s => s.session.programId) programId;
   @select(s => s.session.isAdmin) isAdmin;
-  @select(s => s.misc.spinner) spinner;
+  @select(s => s.assessments.spinner) spinner;
   private dialogRef: any;
   private dialogRefSubscription: Subscription = null;
   private programIdSubscription: Subscription = null;

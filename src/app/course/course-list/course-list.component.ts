@@ -20,7 +20,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
   @select(s => s.courses.courses) courses;
   @select(s => s.session.programId) programId;
   @select(s => s.session.isAdmin) isAdmin;
-  @select(s => s.misc.spinner) spinner;
+  @select(s => s.courses.spinner) spinner;
 
   constructor(
     private courseActionCreator: CourseActionCreator,

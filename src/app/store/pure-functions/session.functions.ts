@@ -10,6 +10,7 @@ export const sessionCreateAttempt = (state, action) => {
     instructorId: state.instructorId,
     program: state.program,
     token: state.token,
+    spinner: true,
     error: null
   });
 };
@@ -23,6 +24,7 @@ export const sessionCreateFulfilled = (state, action) => {
     instructorId: state.instructorId,
     program: state.program,
     token: action.payload.token,
+    spinner: false,
     error: ''
   });
 };
@@ -36,6 +38,7 @@ export const sessionCreateFailed = (state, action) => {
     instructorId: state.instructorId,
     program: state.program,
     token: state.token,
+    spinner: false,
     error: action.error
   });
 };
@@ -49,6 +52,7 @@ export const sessionCheckAttempt = (state, action) => {
     instructorId: state.instructorId,
     program: state.program,
     token: state.token,
+    spinner: true,
     error: ''
   });
 };
@@ -62,6 +66,7 @@ export const sessionCheckFulfilled = (state, action) => {
     instructorId: action.payload.instructorId,
     user: action.payload.user,
     token: action.payload.token,
+    spinner: false,
     error: ''
   });
 };
@@ -75,6 +80,7 @@ export const sessionCheckFailed = (state, action) => {
     instructorId: state.instructorId,
     program: state.program,
     token: state.token,
+    spinner: false,
     error: action.error
   });
 };
@@ -88,7 +94,22 @@ export const sessionDestroy = (state, action) => {
     instructorId: null,
     program: null,
     token: null,
+    spinner: false,
     error: ''
+  });
+};
+
+export const sessionUpdateAttempt = (state, action) => {
+  return tassign(state, {
+    user: state.user,
+    isStudent: state.payload.isStudent,
+    isAdmin: state.payload.isAdmin,
+    programId: state.payload.programId,
+    instructorId: state.instructorId,
+    program: state.payload.program,
+    token: state.token,
+    spinner: false,
+    error: null
   });
 };
 
@@ -102,6 +123,7 @@ export const sessionUpdateFulfilled = (state, action) => {
     instructorId: state.user.instructors[index].id,
     program: action.payload.program,
     token: state.token,
+    spinner: false,
     error: null
   });
 };
@@ -115,6 +137,7 @@ export const sessionUpdateFailed = (state, action) => {
     instructorId: state.instructorId,
     program: state.program,
     token: state.token,
+    spinner: false,
     error: action.error
   });
 };
@@ -128,6 +151,7 @@ export const sessionPasswordChangeAttempt = (state, action) => {
     instructorId: state.instructorId,
     program: state.program,
     token: state.token,
+    spinner: true,
     error: ''
   });
 };
@@ -141,6 +165,7 @@ export const sessionPasswordChangeFulfilled = (state, action) => {
     instructorId: state.instructorId,
     program: state.program,
     token: action.payload.token,
+    spinner: false,
     error: ''
   });
 };
@@ -154,6 +179,7 @@ export const sessionPasswordChangeFailed = (state, action) => {
     instructorId: state.instructorId,
     program: state.program,
     token: state.token,
+    spinner: false,
     error: action.error
   });
 };

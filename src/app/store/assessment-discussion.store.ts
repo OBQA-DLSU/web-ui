@@ -16,11 +16,13 @@ import {
 import * as assessmentDiscussion from './pure-functions/assessment-discussion.functions';
 export interface IAssessmentDiscussionStore {
   assessmentDiscussions: Array<IAssessmentDiscussionView>;
+  spinner: boolean;
   error: string;
 };
 
 export const ASSESSMENT_DISCUSSION_INITIAL_STORE: IAssessmentDiscussionStore = {
   assessmentDiscussions: [],
+  spinner: false,
   error: ''
 };
 

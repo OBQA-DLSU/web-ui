@@ -16,11 +16,13 @@ import {
 import * as instructor from './pure-functions/instructor.functions';
 export interface IInstructorStore {
   instructors: Array<IInstructorView>;
+  spinner: boolean;
   error: string;
 }
 
 export const INSTRUCTOR_INITIAL_STATE: IInstructorStore = {
   instructors: [],
+  spinner: false,
   error: ''
 }
 

@@ -5,7 +5,8 @@ import * as _ from 'lodash';
 
 export const courseCreateAttempt = (state, action) => {
   return tassign(state, {
-    ...state
+    ...state,
+    spinner: true
   });
 };
 
@@ -15,6 +16,7 @@ export const courseCreateFulfilled = (state, action) => {
       ...state.courses,
       action.payload
     ],
+    spinner: false,
     error: ''
   });
 };
@@ -22,6 +24,7 @@ export const courseCreateFulfilled = (state, action) => {
 export const courseCreateFailed = (state, action) => {
   return tassign(state, {
     ...state,
+    spinner: false,
     error: action.error
   });
 };
@@ -29,6 +32,7 @@ export const courseCreateFailed = (state, action) => {
 export const courseUpdateAttempt = (state, action) => {
   return tassign(state, {
     courses: state.courses,
+    spinner: true,
     error: ''
   });
 };
@@ -39,6 +43,7 @@ export const courseUpdateFulfilled = (state, action) => {
   newArray.splice(index, 1, action.payload);
   return tassign(state, {
     courses: newArray,
+    spinner: false,
     error: ''
   });
 };
@@ -46,6 +51,7 @@ export const courseUpdateFulfilled = (state, action) => {
 export const courseUpdateFailed = (state, action) => {
   return tassign(state, {
     courses: state.courses,
+    spinner: false,
     error: action.error
   });
 };
@@ -53,6 +59,7 @@ export const courseUpdateFailed = (state, action) => {
 export const courseGetAttempt = (state, action) => {
   return tassign(state, {
     courses: state.courses,
+    spinner: true,
     error: ''
   });
 };
@@ -60,6 +67,7 @@ export const courseGetAttempt = (state, action) => {
 export const courseGetFulfilled = (state, action) => {
   return tassign(state, {
     courses: action.payload,
+    spinner: false,
     error: ''
   });
 };
@@ -67,6 +75,7 @@ export const courseGetFulfilled = (state, action) => {
 export const courseGetFailed = (state, action) => {
   return tassign(state, {
     courses: state.courses,
+    spinner: false,
     error: action.error
   });
 };
@@ -74,6 +83,7 @@ export const courseGetFailed = (state, action) => {
 export const courseDeleteAttempt = (state, action) => {
   return tassign(state, {
     courses: state.courses,
+    spinner: true,
     error: ''
   });
 };
@@ -84,6 +94,7 @@ export const courseDeleteFulfilled = (state, action) => {
   });
   return tassign(state, {
     courses: newArray,
+    spinner: false,
     error: ''
   });
 };
@@ -91,7 +102,7 @@ export const courseDeleteFulfilled = (state, action) => {
 export const courseDeleteFailed = (state, action) => {
   return tassign(state, {
     courses: state.courses,
+    spinner: false,
     error: action.error
   });
 };
-

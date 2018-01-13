@@ -21,12 +21,14 @@ import * as myClass from './pure-functions/my-class.functions';
 export interface IMyClassStore {
   myClasses: IMyClassView[];
   selectedClass: IMyClassView;
+  spinner: boolean;
   error: string;
 }
 
 export const MY_CLASS_INITIAL_STATE: IMyClassStore = {
   myClasses: [],
   selectedClass: null,
+  spinner: false,
   error: ''
 }
 
