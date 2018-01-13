@@ -3,6 +3,7 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import * as _ from 'lodash';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import { TableActionCreator } from '../../store/action-creators';
 
 declare interface DataTable {
   headerRow: string[];
@@ -23,6 +24,7 @@ export class ObqaTableComponent implements OnInit {
   @Input() actionMore: boolean;
   @Input() actionViewDetail: boolean;
   @Input() paginator: boolean;
+  @Input() currentPage: number;
   @Input() tableDataArray: Observable<any[]>;
   @Input() tableHeaderName: Array<string>;
   @Input() tableHeaderAlias: Array<string>;
@@ -30,14 +32,14 @@ export class ObqaTableComponent implements OnInit {
   @Output() clickDelete = new EventEmitter<any>();
   @Output() clickMore = new EventEmitter<any>();
 
-  private newTableDataArray:any[];
-  private currentPage:number = 0; // page number
+  private newTableDataArray:any[]; // page number
   private itemPerPage:number = 5; // item per page
   private pagesToShow:number; // pages button between first and last
   private totalItem:number; // total number of item
 
   constructor (
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private tableActionCreator: TableActionCreator
   ) {}
 
   ngOnInit () {
@@ -77,11 +79,13 @@ export class ObqaTableComponent implements OnInit {
 
   onFirst() {
     this.currentPage = 0;
+    this.tableActionCreator.UpatePage(this.currentPage);
   }
 
   onPrev() {
     if (this.currentPage !== 0){
       this.currentPage--;
+      this.tableActionCreator.UpatePage(this.currentPage);
     }
   }
 
@@ -90,11 +94,13 @@ export class ObqaTableComponent implements OnInit {
 
     } else {
       this.currentPage++;
+      this.tableActionCreator.UpatePage(this.currentPage);
     }
   }
 
   onLast() {
    this.currentPage = this.pagesToShow - 1;
+   this.tableActionCreator.UpatePage(this.currentPage);
   }
 
   onEditClick (data) {

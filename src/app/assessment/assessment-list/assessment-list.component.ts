@@ -9,7 +9,8 @@ import {
   AssessmentActionCreator,
   CourseActionCreator,
   MiscActionCreator,
-  SopiActionCreator
+  SopiActionCreator,
+  TableActionCreator
 } from '../../store/action-creators'
 import { CYCLE, ACADEMIC_YEAR, TERM } from '../../config';
 @Component({
@@ -21,6 +22,7 @@ export class AssessmentListComponent implements OnInit, OnDestroy {
   @select(s => s.assessments.assessments) assessments;
   @select(s => s.session.programId) programId;
   @select(s => s.session.isAdmin) isAdmin;
+  @select(s => s.table.page) page;
   @select(s => s.assessments.spinner) spinner;
   private dialogRef: any;
   private dialogRefSubscription: Subscription = null;
@@ -32,7 +34,8 @@ export class AssessmentListComponent implements OnInit, OnDestroy {
     private sopiActionCreator: SopiActionCreator,
     private courseActionCreator: CourseActionCreator,
     private miscActionCreator: MiscActionCreator,
-    private router: Router
+    private router: Router,
+    private tableActionCreator: TableActionCreator
   ) { }
 
   private dataNames = [
@@ -75,6 +78,7 @@ export class AssessmentListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     (this.dialogRefSubscription) ? this.dialogRefSubscription.unsubscribe() : null;
     (this.programIdSubscription) ? this.programIdSubscription.unsubscribe() : null;
+    this.tableActionCreator.ResetPage();
   }
 
   onClickEdit (data) {

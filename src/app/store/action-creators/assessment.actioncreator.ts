@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
-import * as Redux from 'redux';
+import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -70,6 +70,7 @@ export class AssessmentActionCreator implements OnDestroy {
       newData = data.map(d => this.assessmentToViewFlat(d))
       return newData;
     })
+    .map(data => this.sortBySopiCode(data))
     .subscribe(
       (assessments: IAssessmentView[]) => {
         this.ngRedux.dispatch({ type: ASSESSMENT_GET_FULFILLED, payload: assessments });
@@ -117,6 +118,7 @@ export class AssessmentActionCreator implements OnDestroy {
       newData = data.map(d => this.assessmentToViewFlat(d))
       return newData;
     })
+    .map(data => this.sortBySopiCode(data))
     .subscribe(
       (assessments: IAssessmentView[]) => {
         this.ngRedux.dispatch({ type: ASSESSMENT_GET_FULFILLED, payload: assessments });
@@ -140,6 +142,7 @@ export class AssessmentActionCreator implements OnDestroy {
       newData = data.map(d => this.assessmentToViewFlat(d))
       return newData;
     })
+    .map(data => this.sortBySopiCode(data))
     .subscribe(
       (assessments: IAssessmentView[]) => {
         this.ngRedux.dispatch({ type: ASSESSMENT_GET_FULFILLED, payload: assessments });
@@ -163,6 +166,7 @@ export class AssessmentActionCreator implements OnDestroy {
       newData = data.map(d => this.assessmentToViewFlat(d))
       return newData;
     })
+    .map(data => this.sortBySopiCode(data))
     .subscribe(
       (assessments: IAssessmentView[]) => {
         this.ngRedux.dispatch({ type: ASSESSMENT_GET_FULFILLED, payload: assessments });
@@ -309,4 +313,11 @@ export class AssessmentActionCreator implements OnDestroy {
     };
     return newData;
   }
+
+  private sortBySopiCode: Function = (data: IAssessmentView[]): IAssessmentView[] => {
+    const sortedSopi = _.sortBy(data, (d) => {
+      return d.sopi;
+    });
+    return sortedSopi;
+  };
 }

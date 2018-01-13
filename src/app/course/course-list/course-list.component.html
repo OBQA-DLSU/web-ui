@@ -11,6 +11,7 @@
               <app-obqa-table
                 tableTitle="Course List"
                 paginator="true"
+                [currentPage]="(page | async)"
                 [actionDelete]="(isAdmin | async)"
                 [actionEdit]="(isAdmin | async)"
                 [tableDataArray]="(courses)"

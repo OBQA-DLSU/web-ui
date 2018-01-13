@@ -11,6 +11,7 @@
               <app-obqa-table
                 tableTitle="Assessment List"
                 paginator="true"
+                [currentPage]="(page | async)"
                 [actionDelete]="(isAdmin | async)"
                 [actionEdit]="(isAdmin | async)"
                 actionMore="true"

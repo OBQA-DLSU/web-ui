@@ -10,6 +10,8 @@
             <div class="card-content">
               <app-obqa-table
                 tableTitle="Class List"
+                paginator="true"
+                [currentPage]="(page | async)"
                 [actionDelete]="true"
                 [actionMore]="true"
                 [actionEdit]="true"

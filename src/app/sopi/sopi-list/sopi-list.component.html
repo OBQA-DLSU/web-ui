@@ -11,6 +11,7 @@
               <app-obqa-table
                 tableTitle="Sopi List"
                 paginator="true"
+                [currentPage]="(page | async)"
                 [actionDelete]="true"
                 [actionEdit]="true"
                 [tableDataArray]="(sopis)"

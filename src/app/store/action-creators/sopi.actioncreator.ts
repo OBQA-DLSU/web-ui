@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
-import * as Redux from 'redux';
+import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Subscription';
 
 import { IAppState } from '../app.store';
@@ -81,6 +81,7 @@ export class SopiActionCreator implements OnDestroy {
       newData = data.map(d => this.programSopiToView(d));
       return newData;
     })
+    .map(data => this.sortBySopiCode(data))
     .subscribe(
       (sopis: ISopiView[]) => {
         this.ngRedux.dispatch({ type: SOPI_GET_FULFILLED, payload: sopis });
@@ -156,5 +157,12 @@ export class SopiActionCreator implements OnDestroy {
       program: data.program.name
     };
     return newData;
+  };
+
+  private sortBySopiCode: Function = (data: ISopiView[]): ISopiView[] => {
+    const sortedSopi = _.sortBy(data, (d) => {
+      return d.code;
+    });
+    return sortedSopi;
   };
 }
