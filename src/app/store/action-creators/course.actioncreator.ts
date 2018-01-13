@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
-import * as Redux from 'redux';
+import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Subscription';
 
 import { CourseService } from '../../services/course.service';
@@ -81,6 +81,7 @@ export class CourseActionCreator implements OnDestroy {
       newData = data.map(d => this.programCourseToView(d))
       return newData;
     })
+    .map(data => this.sortByCourseCode(data))
     .subscribe(
       (courses: any[]) => {
         this.ngRedux.dispatch({type: COURSE_GET_FULFILLED, payload: courses});
@@ -154,5 +155,12 @@ export class CourseActionCreator implements OnDestroy {
       toBeAssessed: data.toBeAssessed
     };
     return newData;
+  };
+
+  private sortByCourseCode: Function = (data: ICourseView[]): ICourseView[] => {
+    const sortedCourse = _.sortBy(data, (d) => {
+      return d.code;
+    });
+    return sortedCourse;
   };
 }
