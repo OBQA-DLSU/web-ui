@@ -51,13 +51,12 @@ export class SopiActionCreator implements OnDestroy {
   }
 
   CreateSopi (programId: number, sopi: ISopiView) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: SOPI_CREATE_ATTEMPT });
     this.createSopiSubscription = this.sopiService.CreateSopi(programId, sopi)
     .map(data => this.programSopiToView(data))
     .subscribe(
       (sopi: ISopiView) => {
         this.ngRedux.dispatch({ type: SOPI_CREATE_FULFILLED, payload: sopi });
-        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Successful Course Creation',
           text: `${sopi.code} was successfully Created.`
@@ -67,7 +66,6 @@ export class SopiActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: SOPI_CREATE_FAILED, error: this.errorMessage });
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
@@ -76,7 +74,7 @@ export class SopiActionCreator implements OnDestroy {
   }
 
   GetSopi (programId: number) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: SOPI_GET_ATTEMPT });
     this.getSopiSubscription = this.sopiService.GetSopi(programId)
     .map(data => {
       let newData: ISopiView[];
@@ -92,23 +90,20 @@ export class SopiActionCreator implements OnDestroy {
           this.ngRedux.dispatch({ type: SOPI_GET_FAILED, error: this.errorMessage });
           // put error mesage here.
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
-        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   UpdateSopi (id: number, sopi: ISopiView) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: SOPI_UPDATE_ATTEMPT });
     this.updateSopiSubscription = this.sopiService.UpdateSopi(id, sopi)
     .map(data => this.programSopiToView(data))
     .subscribe(
       (sopi: ISopiView) => {
         this.ngRedux.dispatch({ type: SOPI_UPDATE_FULFILLED, payload: sopi });
-        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Successful Course Update',
           text: `${sopi.code} was successfully Updated.`
@@ -119,7 +114,6 @@ export class SopiActionCreator implements OnDestroy {
           this.ngRedux.dispatch({ type: SOPI_UPDATE_FAILED, error: this.errorMessage });
           // put error mesage here.
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
@@ -128,12 +122,11 @@ export class SopiActionCreator implements OnDestroy {
   }
 
   DeleteSopi (id: number, sopi: ISopiView) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: SOPI_DELETE_ATTEMPT });
     this.deleteSopiSubscription = this.sopiService.DeleteSopi(id)
     .subscribe(
       (data) => {
         this.ngRedux.dispatch({ type: SOPI_DELETE_FULFILLED, payload: data });
-        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Successful SOPI Deletion',
           text: `${sopi.code} was successfully deleted.`
@@ -144,7 +137,6 @@ export class SopiActionCreator implements OnDestroy {
           this.ngRedux.dispatch({ type: SOPI_DELETE_FAILED, error: this.errorMessage });
           // put error mesage here.
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;

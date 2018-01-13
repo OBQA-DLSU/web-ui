@@ -64,7 +64,7 @@
           <div class="card-content">
             <div class="list">
               <div class="list-wrapper">
-                <div *appspinner="(spinner | async)">
+                <div *appspinner="(studentSpinner | async)">
                   <h5 *ngIf="studentData.length === 0; else students">No Student  Listed</h5>
                   <ng-template #students>
                     <div class="list-content">

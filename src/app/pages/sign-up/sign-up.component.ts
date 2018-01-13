@@ -4,8 +4,7 @@ import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
-import { SessionActionCreator } from '../../store/action-creators/session.actioncreator';
-import { UserActionCreator } from '../../store/action-creators/user.actioncreator';
+import { UserActionCreator } from '../../store/action-creators';
 import { ISessionCreate } from '../../interfaces/session/session-create.interface';
 import { MiscActionCreator } from '../../store/action-creators/misc.actioncreator';
 import { IUserCreate } from '../../interfaces/user/user-create.interface';
@@ -21,7 +20,7 @@ declare var $: any;
 export class SignUpComponent implements OnInit, OnDestroy {
 
   @select(s => s.misc.invitationCode) myInvitationCode;
-  @select(s => s.misc.spinner) spinner;
+  @select(s => s.user.spinner) spinner;
 
   private routeSubscription: Subscription;
   private invitationCode: string;
@@ -34,7 +33,6 @@ export class SignUpComponent implements OnInit, OnDestroy {
   constructor(
     private element: ElementRef,
     private formBuilder: FormBuilder,
-    private sessionActionCreator: SessionActionCreator,
     private activatedRoute: ActivatedRoute,
     private miscActionCreator: MiscActionCreator,
     private userActionCreator: UserActionCreator

@@ -61,7 +61,7 @@ export class MyClassActionCreator implements OnDestroy {
   }
 
   GetOneMyClass(id: number) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: MY_CLASS_GET_ATTEMPT });
     this.getOneMyClassSubscription = this.myClassService.GetOneMyClass(id)
     .map(data => this.myClassToView(data))
     .subscribe(
@@ -72,23 +72,20 @@ export class MyClassActionCreator implements OnDestroy {
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: MY_CLASS_SELECT_FAILED, error: this.errorMessage });
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
-        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   UpdateMyClass(id: number, myClass: IMyClassView) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: MY_CLASS_UPDATE_ATTEMPT });
     this.updateMyClassSubscription = this.myClassService.UpdateMyClass(id, myClass)
     .map(data => this.myClassToView(data))
     .subscribe(
       (myClass: IMyClassView) => {
         this.ngRedux.dispatch({ type: MY_CLASS_UPDATE_FULFILLED, payload: myClass });
-        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Successful Class Update',
           text: `Class ID: ${myClass.id} was successfully Updated.`
@@ -99,7 +96,6 @@ export class MyClassActionCreator implements OnDestroy {
           this.ngRedux.dispatch({ type: MY_CLASS_UPDATE_FAILED, error: this.errorMessage });
           // put error mesage here.
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
@@ -108,12 +104,11 @@ export class MyClassActionCreator implements OnDestroy {
   }
 
   DeleteMyClass(id: number, myClass: IMyClassView) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: MY_CLASS_DELETE_ATTEMPT });
     this.deleteMyClassSubscription = this.myClassService.DeleteMyClass(id)
     .subscribe(
       (id) => {
         this.ngRedux.dispatch({ type: MY_CLASS_DELETE_FULFILLED, payload: id });
-        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Successful Class Deletion',
           text: `Class ID: ${myClass.id} was successfully deleted.`
@@ -124,7 +119,6 @@ export class MyClassActionCreator implements OnDestroy {
           this.ngRedux.dispatch({ type: MY_CLASS_DELETE_FAILED, error: this.errorMessage });
           
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
@@ -133,7 +127,7 @@ export class MyClassActionCreator implements OnDestroy {
   }
 
   GetMyClass (id: number) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: MY_CLASS_GET_ATTEMPT });
     this.getMyClassSubscription = this.myClassService.GetMyClass(id)
     .map(data => {
       let newData: IMyClassView[];
@@ -149,17 +143,15 @@ export class MyClassActionCreator implements OnDestroy {
           this.ngRedux.dispatch({ type: MY_CLASS_GET_FAILED, error: this.errorMessage });
           // put error mesage here.
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
-        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   GetMyClassPerProgramWithFilter(programId: number, filterName: string, filterValue: string) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: MY_CLASS_GET_ATTEMPT });
     this.getMyClassPerProgramWithFilterSubscription = this.myClassService.GetMyClassPerProgramWithFilter(programId, filterName, filterValue)
     .map(data => {
       let newData: IMyClassView[];
@@ -175,17 +167,15 @@ export class MyClassActionCreator implements OnDestroy {
           this.ngRedux.dispatch({ type: MY_CLASS_GET_FAILED, error: this.errorMessage });
           // put error mesage here.
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
-        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   GetMyClassWithFilter(filterName: string, filterValue: string) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: MY_CLASS_GET_ATTEMPT });
     this.getMyClassWithFilterSubscription = this.myClassService.GetMyClassWithFilter(filterName, filterValue)
     .map(data => {
       let newData: IMyClassView[];
@@ -201,17 +191,15 @@ export class MyClassActionCreator implements OnDestroy {
           this.ngRedux.dispatch({ type: MY_CLASS_GET_FAILED, error: this.errorMessage });
           // put error mesage here.
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
-        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   GetMyClassAll() {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: MY_CLASS_GET_ATTEMPT });
     this.getMyClassAllSubscription = this.myClassService.GetMyClassAll()
     .map(data => {
       let newData: IMyClassView[];
@@ -227,22 +215,19 @@ export class MyClassActionCreator implements OnDestroy {
           this.ngRedux.dispatch({ type: MY_CLASS_GET_FAILED, error: this.errorMessage });
           // put error mesage here.
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;
-        this.miscActionCreator.UnloadSpinner();
       }
     );
   }
 
   CreateMyClass(programId: number, myClass: IMyClassView) {
-    this.miscActionCreator.LoadSpinner();
+    this.ngRedux.dispatch({ type: MY_CLASS_CREATE_ATTEMPT });
     this.createMyClassSubscription = this.myClassService.CreateMyClass(programId, myClass)
     .subscribe(
       (myClass: IMyClass) => {
         this.ngRedux.dispatch({ type: MY_CLASS_CREATE_FULFILLED, payload: myClass });
-        this.miscActionCreator.UnloadSpinner();
         this.dialogService.showSwal('success-message', {
           title:  'Successful Class Add',
           text: `Class ID: ${myClass.id} was successfully added.`
@@ -253,7 +238,6 @@ export class MyClassActionCreator implements OnDestroy {
           this.ngRedux.dispatch({ type: MY_CLASS_CREATE_FAILED, error: this.errorMessage });
           // put error mesage here.
         }
-        this.miscActionCreator.UnloadSpinner();
       },
       () => {
         this.errorMessage = null;

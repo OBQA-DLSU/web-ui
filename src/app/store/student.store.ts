@@ -17,11 +17,13 @@ import * as student from './pure-functions/student.functions';
 
 export interface IStudentStore {
   students: IStudentView[];
+  spinner: boolean;
   error: string;
 }
 
 export const STUDENT_INITIAL_STATE: IStudentStore = {
   students: [],
+  spinner: false,
   error: ''
 }
 
