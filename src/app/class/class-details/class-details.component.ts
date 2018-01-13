@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { select } from '@angular-redux/store';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
-
+import { WEB_API_URL } from '../../config';
 import { AddStudentDialogComponent } from '../../student';
 import {
   StudentActionCreator
@@ -29,6 +29,7 @@ export class ClassDetailsComponent implements OnInit, OnDestroy {
   private dialogRef: any;
   private dialogRefSubscription: Subscription = null;
   private routeSubscription: Subscription = null;
+  private uploadUrl: string;
 
   constructor(
     public dialog: MatDialog,
@@ -40,6 +41,7 @@ export class ClassDetailsComponent implements OnInit, OnDestroy {
       .subscribe(
         selectedClass => {
           this.selectedClassData = selectedClass;
+          this.uploadUrl = `${WEB_API_URL}/api/student/bulk/${selectedClass.programId}/${selectedClass.id}`;
         }
       );
     this.studentSubscription = this.students

@@ -5,7 +5,8 @@ import { Subscription } from 'rxjs/Subscription';
 import swal from 'sweetalert2';
 import {
   MiscActionCreator,
-  SopiActionCreator
+  SopiActionCreator,
+  TableActionCreator
 } from '../../store/action-creators';
 import { ISopiView } from '../../interfaces/sopi/sopi-view.interface';
 import { select } from '@angular-redux/store';
@@ -20,10 +21,12 @@ export class SopiListComponent implements OnInit, OnDestroy {
   constructor (
     private sopiActionCreator: SopiActionCreator,
     private miscActionCreator: MiscActionCreator,
+    private tableActionCreator: TableActionCreator,
     public dialog: MatDialog
   ) { }
 
   @select(s => s.sopis.sopis) sopis;
+  @select(s => s.table.page) page;
   @select(s => s.sopis.spinner) spinner;
   private dataNames = ['id', 'code', 'so', 'description'];
   private dataNameAlias = ['ID', 'SOPI Code', 'SO', 'Description'];
@@ -39,6 +42,7 @@ export class SopiListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy () {
     (this.dialogRefSubscription) ? this.dialogRefSubscription.unsubscribe() : null;
+    this.tableActionCreator.ResetPage();
   }
 
   onClickEdit(data) {

@@ -9,6 +9,7 @@ import { SopiActionCreator } from './sopi.actioncreator';
 import { UserActionCreator } from './user.actioncreator';
 import { StudentActionCreator } from './student.actioncreator';
 import { AssessmentDiscussionActionCreator } from './assessment-discussion.actioncreator';
+import { TableActionCreator } from './table.actioncreator';
 
 export {
   AssessmentActionCreator,
@@ -21,5 +22,6 @@ export {
   SopiActionCreator,
   UserActionCreator,
   StudentActionCreator,
-  AssessmentDiscussionActionCreator
+  AssessmentDiscussionActionCreator,
+  TableActionCreator
 };

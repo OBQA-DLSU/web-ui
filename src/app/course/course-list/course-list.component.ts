@@ -6,7 +6,8 @@ import { Subscription } from 'rxjs/Subscription';
 import swal from 'sweetalert2';
 import {
   CourseActionCreator,
-  MiscActionCreator
+  MiscActionCreator,
+  TableActionCreator
 } from '../../store/action-creators';
 
 declare var $: any;
@@ -21,10 +22,12 @@ export class CourseListComponent implements OnInit, OnDestroy {
   @select(s => s.session.programId) programId;
   @select(s => s.session.isAdmin) isAdmin;
   @select(s => s.courses.spinner) spinner;
+  @select(s => s.table.page) page;
 
   constructor(
     private courseActionCreator: CourseActionCreator,
     private miscActionCreator: MiscActionCreator,
+    private tableActionCreator: TableActionCreator,
     private formBuilder: FormBuilder,
     public dialog: MatDialog
   ) { }
@@ -46,6 +49,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     (this.dialogRefSubscription) ? this.dialogRefSubscription.unsubscribe() : null;
     (this.programIdSubscription) ? this.programIdSubscription.unsubscribe() : null;
+    this.tableActionCreator.ResetPage();
   }
 
   onClickEdit(data) {
