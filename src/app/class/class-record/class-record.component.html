@@ -6,9 +6,57 @@
     </p>
   </div>
   <div class="card-content">
-    Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time
-    schemas.
-    <br />
-    <br /> Dramatically maintain clicks-and-mortar solutions without functional solutions.
+    <div *appspinner="(spinner | async)">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header" data-background-color="red">
+              <h4 class="card-title">Class Record</h4>
+              <p class="category">More information on class ID: {{(selectedClass | async).id}}</p>
+            </div>
+            <div class="card-content">
+              <div class="list">
+                <div *appspinner="(studentSpinner | async)">
+                  <div *ngIf="studentData.length === 0; else students" class="list-wrapper">
+                    <h5>No Student Listed</h5>
+                    <div class="list-content">
+                    </div>
+                  </div>
+                  <ng-template #students>
+                    <div class="list-wrapper">
+                      <div class="list-content">
+                        <div class="material-data-table">
+                          <table class="table table-striped table-no-bordered table-hover " cellspacing="200" width="90%">
+                            <thead>
+                              <th>ID</th>
+                              <th>Name</th>
+                              <th class="text-center" *ngFor="let assessment of (assessments | async)">
+                                {{assessment.sopi}}
+                              </th>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let student of studentData ">
+                                <td>{{student.idNumber}}</td>
+                                <td>{{student.lname}}, {{student.fname}}</td>
+                                <td class="text-center" *ngFor="let assessment of (assessments | async)">
+                                  90%
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+            <!-- end content-->
+          </div>
+          <!--  end card  -->
+        </div>
+        <!-- end col-md-12 -->
+      </div>
+    </div>
   </div>
 </div>
