@@ -39,7 +39,7 @@ export class AssessmentService {
   GetAllAssessment (): Observable<IAssessment[]> {
     const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    return this.http.get(`${this.assessmentUrl}/all`, options)
+    return this.http.get(`${this.assessmentUrl}`, options)
     .map(response => response.json())
   }
 
@@ -68,6 +68,14 @@ export class AssessmentService {
     const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
     return this.http.delete(`${this.assessmentUrl}/${id}`, options)
+    .map(response => response.json())
+  }
+
+  GetAssessmentWithFilterObject (operator: string, queryObjectArray: any[]): Observable<IAssessment[]> {
+    // operator can only be and or or, filterObjectQuery Array needs to match the model assessment
+    const headers = new Headers({ 'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+    return this.http.post(`${this.assessmentUrl}`, {operator, queryObjectArray}, options)
     .map(response => response.json())
   }
 

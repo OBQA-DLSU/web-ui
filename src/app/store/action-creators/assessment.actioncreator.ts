@@ -44,6 +44,7 @@ export class AssessmentActionCreator implements OnDestroy {
   private getOneAssessmentSubscription: Subscription = null;
   private updateAssessmentSubscription: Subscription = null;
   private deleteAssessmentSubscription: Subscription = null;
+  private getAssessmentWithQueryObjectSubscription: Subscription = null;
 
   constructor (
     private ngRedux: NgRedux<IAppState>,
@@ -60,6 +61,7 @@ export class AssessmentActionCreator implements OnDestroy {
     (this.getOneAssessmentSubscription) ? this.getOneAssessmentSubscription.unsubscribe() : null;
     (this.updateAssessmentSubscription) ? this.updateAssessmentSubscription.unsubscribe() : null;
     (this.deleteAssessmentSubscription) ? this.deleteAssessmentSubscription.unsubscribe() : null;
+    (this.getAssessmentWithQueryObjectSubscription) ? this.getAssessmentWithQueryObjectSubscription.unsubscribe() : null;
   }
 
   GetAssessment (programId: number) {
@@ -259,6 +261,29 @@ export class AssessmentActionCreator implements OnDestroy {
         this.errorMessage = err._body;
         if (this.errorMessage && typeof this.errorMessage === 'string') {
           this.ngRedux.dispatch({ type: ASSESSMENT_SELECT_FAILED, error: this.errorMessage });
+        }
+      },
+      () => {
+        this.errorMessage = null;
+      }
+    );
+  }
+
+  GetAssessmentWithQueryObject (operator: string, queryObjectArray: any[]) {
+    this.getAssessmentWithQueryObjectSubscription = this.assessmentService.GetAssessmentWithFilterObject(operator, queryObjectArray)
+    .map(data => {
+      let newData: IAssessmentView[];
+      newData = data.map(d => this.assessmentToViewFlat(d))
+      return newData;
+    })
+    .map(data => this.sortBySopiCode(data))
+    .subscribe(
+      (assessments: IAssessmentView[]) => {
+        this.ngRedux.dispatch({ type: ASSESSMENT_GET_FULFILLED, payload: assessments });
+      }, err => {
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: ASSESSMENT_GET_FAILED, error: this.errorMessage });
         }
       },
       () => {
