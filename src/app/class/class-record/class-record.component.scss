@@ -1,0 +1,30 @@
+.list {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.list:after,
+.list:before{
+  box-sizing: border-box;
+}
+
+.list-wrapper{
+  display: flex;
+  flex-direction: column;            
+  height: 40vh;
+  overflow: hidden;
+}
+.list-header{
+  flex: 0 0 auto;  
+  background: #aaa;
+}
+.list-content{
+  display: flex;
+  flex: 1 1 auto;     
+  overflow-y: auto;
+  flex-direction: column;     
+}
+.list-footer{
+  flex: 0 0 auto;  
+  background: #aaa;
+}
