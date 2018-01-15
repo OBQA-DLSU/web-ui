@@ -9,6 +9,7 @@ import { SopiService } from './sopi.service';
 import { ServiceModule } from './service.module';
 import { StudentService } from './student.service';
 import { AssessmentDiscussionService } from './assessment-discussion.service';
+import { GradeService } from './grade.service';
 
 export {
   AssessmentService,
@@ -21,5 +22,6 @@ export {
   SopiService,
   ServiceModule,
   StudentService,
-  AssessmentDiscussionService
+  AssessmentDiscussionService,
+  GradeService
 };

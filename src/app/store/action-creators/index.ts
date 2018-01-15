@@ -10,6 +10,7 @@ import { UserActionCreator } from './user.actioncreator';
 import { StudentActionCreator } from './student.actioncreator';
 import { AssessmentDiscussionActionCreator } from './assessment-discussion.actioncreator';
 import { TableActionCreator } from './table.actioncreator';
+import { GradeActionCreator } from './grade.actioncreator';
 
 export {
   AssessmentActionCreator,
@@ -23,5 +24,6 @@ export {
   UserActionCreator,
   StudentActionCreator,
   AssessmentDiscussionActionCreator,
-  TableActionCreator
+  TableActionCreator,
+  GradeActionCreator
 };

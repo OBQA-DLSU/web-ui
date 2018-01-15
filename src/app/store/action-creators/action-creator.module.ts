@@ -12,6 +12,7 @@ import { AssessmentActionCreator } from './assessment.actioncreator';
 import { StudentActionCreator } from './student.actioncreator';
 import { AssessmentDiscussionActionCreator } from './assessment-discussion.actioncreator';
 import { TableActionCreator } from './table.actioncreator';
+import { GradeActionCreator } from './grade.actioncreator';
 
 @NgModule({
   imports: [],
@@ -33,7 +34,8 @@ export class ActionCreatorModule {
         AssessmentActionCreator,
         StudentActionCreator,
         AssessmentDiscussionActionCreator,
-        TableActionCreator
+        TableActionCreator,
+        GradeActionCreator
       ]
     }
   }
