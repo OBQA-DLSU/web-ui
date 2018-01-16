@@ -33,13 +33,19 @@
                               <th class="text-center" *ngFor="let assessment of (assessments | async)">
                                 {{assessment.sopi}}
                               </th>
+                              <th class="text-center">Actions</th>
                             </thead>
                             <tbody>
                               <tr *ngFor="let student of studentData ">
                                 <td>{{student.idNumber}}</td>
                                 <td>{{student.lname}}, {{student.fname}}</td>
                                 <td class="text-center" *ngFor="let assessment of (assessments | async)">
-                                  90%
+                                  {{showGrade(student.studentId, assessment.id)}}
+                                </td>
+                                <td class="text-center">
+                                  <button (click)="onEditClick(student)" class="btn btn-simple btn-warning btn-icon edit"  matTooltip="Edit" [matTooltipPosition]="'left'">
+                                    <i class="material-icons">edit</i>
+                                  </button>
                                 </td>
                               </tr>
                             </tbody>

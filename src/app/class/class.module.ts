@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../app.module';
 
 import { StudentModule, AddStudentDialogComponent } from '../student';
-
+import { GradeModule, AddGradeDialogComponent } from '../grade';
 import { AddClassComponent } from './add-class/add-class.component';
 import { ClassListComponent } from './class-list/class-list.component';
 import { ClassRoutes } from './class.routing';
@@ -25,7 +25,8 @@ import { ClassRecordComponent } from './class-record/class-record.component';
     MaterialModule,
     ComponentModule,
     DirectiveModule,
-    StudentModule
+    StudentModule,
+    GradeModule
   ],
   declarations: [
     AddClassComponent,
@@ -38,7 +39,8 @@ import { ClassRecordComponent } from './class-record/class-record.component';
   entryComponents: [
     SpinnerComponent,
     UpdateClassDialogComponent,
-    AddStudentDialogComponent
+    AddStudentDialogComponent,
+    AddGradeDialogComponent
   ]
 })
 export class ClassModule { }
