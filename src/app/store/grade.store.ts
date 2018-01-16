@@ -26,7 +26,7 @@ export const GRADE_INITIAL_STATE: IGradeStore = {
   error: ''
 }
 
-export function userReducer(state: IGradeStore = GRADE_INITIAL_STATE, action): IGradeStore {
+export function gradeReducer(state: IGradeStore = GRADE_INITIAL_STATE, action): IGradeStore {
   switch (action.type) {
     case GRADE_CREATE_ATTEMPT: return grade.gradeCreateAttempt(state, action);
     case GRADE_CREATE_FAILED: return grade.gradeCreateFailed(state, action);

@@ -32,6 +32,8 @@ export class GradeActionCreator implements OnDestroy {
   private getOneGradeSubscription: Subscription = null;
   private updateGradeSubscription: Subscription = null;
   private deleteGradeSubscription: Subscription = null;
+
+  private updateMyClassGradeSubscription: Subscription = null;
   private errorMessage: string = null;
 
   constructor (
@@ -46,6 +48,8 @@ export class GradeActionCreator implements OnDestroy {
     (this.getOneGradeSubscription) ? this.getMyClassGradeSubscription.unsubscribe() : null;
     (this.updateGradeSubscription) ? this.updateGradeSubscription.unsubscribe() : null;
     (this.deleteGradeSubscription) ? this.deleteGradeSubscription.unsubscribe() : null;
+
+    (this.updateMyClassGradeSubscription) ? this.updateMyClassGradeSubscription.unsubscribe() : null;
   }
   
   GetMyClassGrade (myClassId: number) {
@@ -155,6 +159,30 @@ export class GradeActionCreator implements OnDestroy {
       },
       () => {
         this.errorMessage = null;
+      }
+    );
+  }
+
+  UpdateMyClassGrade (myClassId: number, myClassGradeData: any) {
+    this.ngRedux.dispatch({ type: GRADE_UPDATE_ATTEMPT });
+    this.updateMyClassGradeSubscription = this.gradeService.UpdateMyClassGrade(myClassId, myClassGradeData)
+    .subscribe(
+      (result: any) => {
+        // this.ngRedux.dispatch({type: GRADE_UPDATE_FULFILLED, payload: grade});
+        this.dialogService.showSwal('success-message', {
+          title:  'Successful Grade Update',
+          text: `Student's grade was successfully Updated.`
+        });
+      }, err => {
+        this.errorMessage = err._body;
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: GRADE_UPDATE_FAILED, error: this.errorMessage });
+          // put error mesage here.
+        }
+      },
+      () => {
+        this.errorMessage = null;
+        this.GetMyClassGrade(myClassId);
       }
     );
   }
