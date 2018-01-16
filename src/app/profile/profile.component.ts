@@ -46,8 +46,6 @@ export class ProfileComponent implements OnInit {
       const { email, password, newPassword, confirmation } = newData;
       if (!result) {
       } else {
-        console.log(newData);
-        console.log(result);
         this.sessionActionCreator.ChangePassword(email, password, newPassword, confirmation);
       }
     });

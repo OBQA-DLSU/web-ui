@@ -12,7 +12,7 @@ import { ASSESSMENT_INITIAL_STORE, assessmentReducer as assessments, IAssessment
 import { STUDENT_INITIAL_STATE, studentReducer as students, IStudentStore } from './student.store';
 import { ASSESSMENT_DISCUSSION_INITIAL_STORE, assessmentDiscussionReducer as assessmentDiscussions, IAssessmentDiscussionStore } from './assessment-discussion.store';
 import { TABLE_INITIAL_STATE, tableReducer as table, ITableStore } from './table.store';
-
+import { GRADE_INITIAL_STATE, gradeReducer as grades, IGradeStore } from './grade.store';
 export interface IAppState {
   session: ISessionStore;
   user: IUserStore;
@@ -26,6 +26,7 @@ export interface IAppState {
   students: IStudentStore;
   assessmentDiscussions: IAssessmentDiscussionStore;
   table: ITableStore;
+  grades: IGradeStore;
 }
 
 export const INITIAL_STATE: IAppState = {
@@ -40,7 +41,8 @@ export const INITIAL_STATE: IAppState = {
   assessments: ASSESSMENT_INITIAL_STORE,
   students: STUDENT_INITIAL_STATE,
   assessmentDiscussions: ASSESSMENT_DISCUSSION_INITIAL_STORE,
-  table: TABLE_INITIAL_STATE
+  table: TABLE_INITIAL_STATE,
+  grades: GRADE_INITIAL_STATE
 }
 
 export const rootReducer = combineReducers<IAppState>({
@@ -56,5 +58,6 @@ export const rootReducer = combineReducers<IAppState>({
   assessments,
   students,
   assessmentDiscussions,
-  table
+  table,
+  grades
 });
