@@ -24,7 +24,7 @@ export class GradeService {
     .map(response => response.json())
   }
 
-  UpdateMyClassGrade (myClassId: number, myClassGradeData: IGradeView[]): Observable<IGrade[]> {
+  UpdateMyClassGrade (myClassId: number, myClassGradeData: any): Observable<any> {
     const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
     return this.http.put(`${this.gradeUrl}/myClass/${myClassId}`, myClassGradeData, options)

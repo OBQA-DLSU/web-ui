@@ -1,0 +1,23 @@
+<form [formGroup]="gradeAddForm" (ngSubmit)="onSubmit()">
+  <h4 mat-dialog-title>Update assessment outcome of: {{data.studentName}}</h4>
+  <mat-dialog-content>
+    <div
+    formArrayName="gradeData"
+    *ngFor="let item of gradeAddForm.get('gradeData').controls; let i = index;"
+    class="form-group label-floating col-md-3">
+      <div [formGroupName]="i">
+        <label class="control-label" for="description">
+          <span class="star">*</span>{{data.assessments[i].sopi}}
+        </label>
+        <div class="form-group">
+          <input pattern="^[0]+(.[0-9]{0,2})?$" formControlName="grade" class="form-control" type="text" id="grade" placeholder="decimal..">
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button type="button" mat-dialog-close>Cancel</button>
+    <!-- Can optionally provide a result for the closing dialog. -->
+    <button mat-button type="submit">Submit</button>
+  </mat-dialog-actions>
+</form>
