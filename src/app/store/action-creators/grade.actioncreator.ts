@@ -168,7 +168,6 @@ export class GradeActionCreator implements OnDestroy {
     this.updateMyClassGradeSubscription = this.gradeService.UpdateMyClassGrade(myClassId, myClassGradeData)
     .subscribe(
       (result: any) => {
-        // this.ngRedux.dispatch({type: GRADE_UPDATE_FULFILLED, payload: grade});
         this.dialogService.showSwal('success-message', {
           title:  'Successful Grade Update',
           text: `Student's grade was successfully Updated.`
