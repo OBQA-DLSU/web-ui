@@ -79,6 +79,7 @@
                             <th>Email</th>
                             <th>Last Name</th>
                             <th>First Name</th>
+                            <th class="text-center">Actions</th>
                           </thead>
                           <tbody>
                             <tr *ngFor="let student of studentData">
@@ -86,6 +87,11 @@
                               <td>{{student.email}}</td>
                               <td>{{student.lname}}</td>
                               <td>{{student.fname}}</td>
+                              <td class="text-center">
+                                <button (click)="onUpdateStudent(student)" class="btn btn-simple btn-warning btn-icon edit"  matTooltip="Edit" [matTooltipPosition]="'left'">
+                                  <i class="material-icons">edit</i>
+                                </button>
+                              </td>
                             </tr>
                           </tbody>
                         </table>

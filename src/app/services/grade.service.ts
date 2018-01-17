@@ -66,4 +66,11 @@ export class GradeService {
     .map(response => response.json())
   }
 
+  CreateBulkMyClassGrade (myClassId: number, myClassGradeDataArray: any[]): Observable<any> {
+    const headers = new Headers({ 'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+    return this.http.post(`${this.gradeUrl}/bulk/${myClassId}`, myClassGradeDataArray, options)
+    .map(response => response.json())
+  }
+
 }

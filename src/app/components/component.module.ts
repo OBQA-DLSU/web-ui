@@ -11,6 +11,7 @@ import { ObqaUploadBasicComponent } from './upload/basic/obqa-upload-basic.compo
 import { ObqaInputBasicComponent } from './input/basic/obqa-input-basic.component';
 import { CardCommentComponent } from './card/card-comment/card-comment.component';
 import { ObqaTableSimpleComponent } from './table/obqa-table-simple/obqa-table-simple.component';
+import { XlsxToJsonComponent } from './upload/xlsx-json/xlsx-to-json.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { ObqaTableSimpleComponent } from './table/obqa-table-simple/obqa-table-s
     FileSelectDirective,
     ObqaInputBasicComponent,
     CardCommentComponent,
-    ObqaTableSimpleComponent
+    ObqaTableSimpleComponent,
+    XlsxToJsonComponent
   ],
   declarations: [
     ObqaTableComponent,
@@ -35,7 +37,8 @@ import { ObqaTableSimpleComponent } from './table/obqa-table-simple/obqa-table-s
     FileSelectDirective,
     ObqaInputBasicComponent,
     CardCommentComponent,
-    ObqaTableSimpleComponent
+    ObqaTableSimpleComponent,
+    XlsxToJsonComponent
   ],
   entryComponents: []
 })

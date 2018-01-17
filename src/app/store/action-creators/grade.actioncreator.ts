@@ -34,6 +34,7 @@ export class GradeActionCreator implements OnDestroy {
   private deleteGradeSubscription: Subscription = null;
 
   private updateMyClassGradeSubscription: Subscription = null;
+  private createBulkMyClassGradeSubscription: Subscription = null;
   private errorMessage: string = null;
 
   constructor (
@@ -50,6 +51,7 @@ export class GradeActionCreator implements OnDestroy {
     (this.deleteGradeSubscription) ? this.deleteGradeSubscription.unsubscribe() : null;
 
     (this.updateMyClassGradeSubscription) ? this.updateMyClassGradeSubscription.unsubscribe() : null;
+    (this.createBulkMyClassGradeSubscription) ? this.createBulkMyClassGradeSubscription.unsubscribe() : null;
   }
   
   GetMyClassGrade (myClassId: number) {
@@ -181,6 +183,27 @@ export class GradeActionCreator implements OnDestroy {
       },
       () => {
         this.errorMessage = null;
+        this.GetMyClassGrade(myClassId);
+      }
+    );
+  }
+
+  CreateBulkMyClassGrade (myClassId: number, myClassGradeDataArray: any[]) {
+    this.createBulkMyClassGradeSubscription = this.gradeService.CreateBulkMyClassGrade(myClassId, myClassGradeDataArray)
+    .subscribe(
+      result => {
+        this.dialogService.showSwal('success-message', {
+          title:  'Successful Grade Update',
+          text: `Students' grades was successfully Updated.`
+        });
+      },
+      err => {
+        if (this.errorMessage && typeof this.errorMessage === 'string') {
+          this.ngRedux.dispatch({ type: GRADE_UPDATE_FAILED, error: this.errorMessage });
+          // put error mesage here.
+        }
+      },
+      () => {
         this.GetMyClassGrade(myClassId);
       }
     );
