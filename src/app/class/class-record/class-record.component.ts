@@ -121,4 +121,47 @@ export class ClassRecordComponent implements OnInit, OnDestroy {
     }
   }
 
+  uploadJson(event) {
+    const data = this.convertHeaders(event);
+    this.gradeActionCreator.CreateBulkMyClassGrade(this.selectedClassData.id, data);
+    this.ngOnInit();
+  }
+
+  convertHeaders(data: any[]) {
+    const newData = data.map((d) => {
+      const student = _.find(this.studentData, (s) => {
+        return s.idNumber === d['STUDENT NUMBER'];
+      });
+      if (student) {
+        const myObject = {
+          term: this.selectedClassData.term,
+          cycle: this.selectedClassData.cycle,
+          academicYear: this.selectedClassData.academicYear,
+          studentId: student.studentId,
+          instructorId: this.selectedClassData.instructorId,
+          programCourseId: this.selectedClassData.programCourseId,
+          myClassId: this.selectedClassData.id,
+          gradeData: this.setGradeData(d)
+        }
+        return myObject;
+      }
+    })
+    return newData;
+  }
+
+  setGradeData (data) {
+    const newData = this.assessmentData.map((a) => {
+      const myObject = {
+        programSopiId: a.programSopiId,
+        assessmentId: a.id,
+        grade: parseFloat(data[a.sopi]),
+        sopi: a.sopi
+      }
+      if(myObject.grade) {
+        return myObject;
+      }
+    });
+    return newData;
+  }
+
 }

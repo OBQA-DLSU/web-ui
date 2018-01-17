@@ -6,7 +6,7 @@ import { select } from '@angular-redux/store';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 import { WEB_API_URL } from '../../config';
-import { AddStudentDialogComponent } from '../../student';
+import { AddStudentDialogComponent, UpdateStudentDialogComponent } from '../../student';
 import {
   StudentActionCreator
 } from '../../store/action-creators';
@@ -70,6 +70,21 @@ export class ClassDetailsComponent implements OnInit, OnDestroy {
       } else {
         const newData = JSON.parse(result);
         this.studentActionCreator.CreateMyClassStudent(newData.myClassId, newData);
+      }
+    });
+  }
+
+  onUpdateStudent(student) {
+    this.dialogRef = this.dialog.open(UpdateStudentDialogComponent, {
+      width: '500px',
+      data: { ...student }
+    });
+
+    this.dialogRefSubscription = this.dialogRef.afterClosed().subscribe(result => {
+      if (!result) {
+      } else {
+        const newData = JSON.parse(result);
+        this.studentActionCreator.UpdateMyClassStudent(newData, newData.id);
       }
     });
   }

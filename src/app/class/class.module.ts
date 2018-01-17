@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../app.module';
 
-import { StudentModule, AddStudentDialogComponent } from '../student';
+import { StudentModule, AddStudentDialogComponent, UpdateStudentDialogComponent } from '../student';
 import { GradeModule, AddGradeDialogComponent } from '../grade';
 import { AddClassComponent } from './add-class/add-class.component';
 import { ClassListComponent } from './class-list/class-list.component';
@@ -40,7 +40,8 @@ import { ClassRecordComponent } from './class-record/class-record.component';
     SpinnerComponent,
     UpdateClassDialogComponent,
     AddStudentDialogComponent,
-    AddGradeDialogComponent
+    AddGradeDialogComponent,
+    UpdateStudentDialogComponent
   ]
 })
 export class ClassModule { }
