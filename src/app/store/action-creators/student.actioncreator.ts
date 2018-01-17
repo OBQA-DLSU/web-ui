@@ -123,7 +123,7 @@ export class StudentActionCreator implements OnDestroy {
         this.ngRedux.dispatch({type: STUDENT_UPDATE_FULFILLED, payload: student});
         this.dialogService.showSwal('success-message', {
           title:  'Successful Course Update',
-          text: `$Student was successfully Updated.`
+          text: `Student was successfully Updated.`
         });
       }, err => {
         this.errorMessage = err._body;
