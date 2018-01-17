@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../app.module';
 
 import { AddStudentDialogComponent } from './add-student/add-student-dialog.component';
+import { UpdateStudentDialogComponent } from './update-student/update-student-dialog.component';
 
 @NgModule({
   imports: [
@@ -15,10 +16,12 @@ import { AddStudentDialogComponent } from './add-student/add-student-dialog.comp
     MaterialModule
   ],
   exports: [
-    AddStudentDialogComponent
+    AddStudentDialogComponent,
+    UpdateStudentDialogComponent
   ],
   declarations: [
-    AddStudentDialogComponent
+    AddStudentDialogComponent,
+    UpdateStudentDialogComponent
   ]
 })
 export class StudentModule { }
