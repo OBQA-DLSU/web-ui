@@ -2,27 +2,30 @@
   <div>
     <div class="row">
       <div class="col-md-12 ">
-        <div class="nav-center">
-          <ul class="nav nav-pills nav-pills-info nav-pills-icons" role="tablist">
-            <!--
-          color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
-      -->
-            <li class="active">
-              <a href="#class-details" role="tab" data-toggle="tab">
-                <i class="material-icons">info</i> Class Details
-              </a>
-            </li>
-            <li>
-              <a href="#class-record" role="tab" data-toggle="tab">
-                <i class="material-icons">input</i> Class Record
-              </a>
-            </li>
-            <li>
-              <a href="#class-evidence" role="tab" data-toggle="tab">
-                <i class="material-icons">import_contacts</i> Evidence
-              </a>
-            </li>
-          </ul>
+        <div [ngClass]="{'nav-center': !isMobileView(), 'row': isMobileView()}">
+          <div style="margin-right: 15px; margin-left: 15px">
+            <ul [ngClass]="{'nav': true, 'nav-pills': true, 'nav-pills-info': true, 'nav-pills-icons': true, 'nav-stacked': isMobileView()}"
+              role="tablist">
+              <!--
+                color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+            -->
+              <li class="active">
+                <a href="#class-details" role="tab" data-toggle="tab">
+                  <i class="material-icons">info</i> Class Details
+                </a>
+              </li>
+              <li>
+                <a href="#class-record" role="tab" data-toggle="tab">
+                  <i class="material-icons">input</i> Class Record
+                </a>
+              </li>
+              <li>
+                <a href="#class-evidence" role="tab" data-toggle="tab">
+                  <i class="material-icons">import_contacts</i> Evidence
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
         <div *ngIf="!(spinner | async); else spin" class="tab-content">
           <div class="tab-pane active" id="class-details">
@@ -40,37 +43,16 @@
                 </p>
               </div>
               <div class="card-content">
-                Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer
-                service with robust ideas.
-                <br />
-                <br />Dynamically innovate resource-leveling customer service for state of the art customer service.
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane" id="tasks-2">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">Help center</h4>
-                <p class="category">
-                  More information here
-                </p>
-              </div>
-              <div class="card-content">
-                From the seamless transition of glass and metal to the streamlined profile, every detail was carefully considered to enhance
-                your experience. So while its display is larger, the phone feels just right.
-                <br />
-                <br /> Another Text. The first thing you notice when you hold the phone is how great it feels in your hand. The
-                cover glass curves down around the sides to meet the anodized aluminum enclosure in a remarkable, simplified
-                design.
+                <app-evidence-class-view [assessments]="assessments"></app-evidence-class-view>
               </div>
             </div>
           </div>
         </div>
         <ng-template #spin>
           <div style="margin-top: 50%">
-          <div *appspinner="true">
+            <div *appspinner="true">
 
-          </div>
+            </div>
           </div>
         </ng-template>
       </div>

@@ -6,6 +6,7 @@ import { MaterialModule } from '../app.module';
 
 import { StudentModule, AddStudentDialogComponent, UpdateStudentDialogComponent } from '../student';
 import { GradeModule, AddGradeDialogComponent } from '../grade';
+import { EvidenceModule, EvidenceClassViewComponent } from '../evidence';
 import { AddClassComponent } from './add-class/add-class.component';
 import { ClassListComponent } from './class-list/class-list.component';
 import { ClassRoutes } from './class.routing';
@@ -26,7 +27,8 @@ import { ClassRecordComponent } from './class-record/class-record.component';
     ComponentModule,
     DirectiveModule,
     StudentModule,
-    GradeModule
+    GradeModule,
+    EvidenceModule
   ],
   declarations: [
     AddClassComponent,
