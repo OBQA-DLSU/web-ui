@@ -10,16 +10,19 @@ import {
 } from '../../store/action-creators';
 import { Observable } from 'rxjs/Observable';
 
+declare const $: any;
+
 @Component({
   selector: 'app-class-page',
   templateUrl: './class-page.component.html',
-  styles: []
+  styles: ['./class-page.component.scss']
 })
 export class ClassPageComponent implements OnInit {
 
   @select(s => s.myClasses.selectedClass) selectedClass;
   @select(s => s.students.students) students;
   @select(s => s.myClasses.spinner) spinner;
+  @select(s => s.assessments.assessments) assessments;
 
   private routeSubscription: Subscription;
   private myClassId: number = null;
@@ -42,4 +45,11 @@ export class ClassPageComponent implements OnInit {
         this.studentActionCreator.GetMyClassStudent(params.id);
       });
   }
+
+  isMobileView() {
+    if ($(window).width() > 991) {
+      return false;
+    }
+    return true;
+  };
 }

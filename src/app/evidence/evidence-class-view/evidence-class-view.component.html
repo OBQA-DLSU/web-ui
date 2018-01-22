@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-4">
+      <ul class="nav nav-pills nav-pills-icons nav-pills-danger nav-stacked" role="tablist">
+          <li *ngFor="let assessment of assessmentData; index as i" [ngClass]="{'active': i===0 }">
+              <a href="#tab1" data-toggle="tab" (click)="onSelectAssessment(assessment.id)">{{assessment.sopi}}</a>
+          </li>
+      </ul>
+  </div>
+  <div class="col-md-8">
+      <div class="tab-content">
+        <div *ngIf="selectedAssessment">
+          <app-evidence-detail-view
+            [assessment]="selectedAssessment"
+          ></app-evidence-detail-view>
+        </div>
+      </div>
+  </div>
+</div>
