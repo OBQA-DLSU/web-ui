@@ -27,7 +27,8 @@ export class ObqaUploadBasicComponent implements OnInit {
 	}
 
 	constructor(
-		private http: Http, private el: ElementRef,
+		private http: Http,
+		private el: ElementRef,
 		private dialogService: DialogService,
 		private miscActionCreator: MiscActionCreator
 	) { }

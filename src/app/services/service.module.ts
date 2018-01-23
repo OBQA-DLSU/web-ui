@@ -13,6 +13,7 @@ import { AssessmentService } from './assessment.service';
 import { StudentService } from './student.service';
 import { AssessmentDiscussionService } from './assessment-discussion.service';
 import { GradeService } from './grade.service';
+import { EvidenceService } from './evidence.service';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ export class ServiceModule {
         AssessmentService,
         StudentService,
         AssessmentDiscussionService,
-        GradeService
+        GradeService,
+        EvidenceService
       ]
     }
   }

@@ -10,6 +10,7 @@ import { ServiceModule } from './service.module';
 import { StudentService } from './student.service';
 import { AssessmentDiscussionService } from './assessment-discussion.service';
 import { GradeService } from './grade.service';
+import { EvidenceService } from './evidence.service';
 
 export {
   AssessmentService,
@@ -23,5 +24,6 @@ export {
   ServiceModule,
   StudentService,
   AssessmentDiscussionService,
-  GradeService
+  GradeService,
+  EvidenceService
 };
