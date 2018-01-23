@@ -1,16 +1,17 @@
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-2">
       <ul class="nav nav-pills nav-pills-icons nav-pills-danger nav-stacked" role="tablist">
-          <li *ngFor="let assessment of assessmentData; index as i" [ngClass]="{'active': i===0 }">
-              <a href="#tab1" data-toggle="tab" (click)="onSelectAssessment(assessment.id)">{{assessment.sopi}}</a>
+          <li *ngFor="let assessment of assessmentData; index as i">
+              <a href="#{{i}}" data-toggle="tab">{{assessment.sopi}}</a>
           </li>
       </ul>
   </div>
-  <div class="col-md-8">
+  <div class="col-md-10">
       <div class="tab-content">
-        <div *ngIf="selectedAssessment">
+        <div *ngFor="let assessment of assessmentData; index as i" id="{{i}}" class="tab-pane">
           <app-evidence-detail-view
-            [assessment]="selectedAssessment"
+            [assessment]="assessment"
+            [myClass]="selectedClassData"
           ></app-evidence-detail-view>
         </div>
       </div>
