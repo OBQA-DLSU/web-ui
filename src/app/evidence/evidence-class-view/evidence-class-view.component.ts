@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import * as _ from 'lodash';
 
 import { IAssessmentView } from '../../interfaces/assessment/assessment-view.interface';
+import { IMyClassView } from '../../interfaces/myClass/my-class-view.interface';
 import { Subscription } from 'rxjs/Subscription';
 
 
@@ -15,9 +16,12 @@ import { Subscription } from 'rxjs/Subscription';
 export class EvidenceClassViewComponent implements OnInit, OnDestroy {
 
   @Input() assessments: Observable<IAssessmentView[]>;
+  @Input() selectedClass: Observable<IMyClassView>;
   private assessmentsSubscription: Subscription = null;
   private assessmentData: IAssessmentView[];
   private selectedAssessment: IAssessmentView;
+  private selectedClassSubscription: Subscription = null;
+  private selectedClassData: IMyClassView;
 
   constructor() { }
 
@@ -27,6 +31,12 @@ export class EvidenceClassViewComponent implements OnInit, OnDestroy {
       (assessments:IAssessmentView[]) => {
         this.assessmentData = assessments;
         this.selectedAssessment = assessments[0];
+      }
+    );
+    this.selectedClassSubscription = this.selectedClass
+    .subscribe(
+      (selectedClass: IMyClassView) => {
+        this.selectedClassData = selectedClass;
       }
     );
   }
