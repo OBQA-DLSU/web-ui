@@ -29,10 +29,10 @@ export class EvidenceService {
     .map(response => response.json())
   }
 
-  GetEvidenceWithQueryObject(option: string, queryObjectArray: any[]): Observable<IEvidence[]> {
+  GetEvidenceWithQueryObject(operator: string, queryObjectArray: any[]): Observable<IEvidence[]> {
     const headers = new Headers({ 'Content-Type': 'application/json'});
     const options = new RequestOptions({headers: headers});
-    return this.http.post(`${this.evidenceUrl}/query`, {option, queryObjectArray}, options)
+    return this.http.post(`${this.evidenceUrl}/query`, {operator, queryObjectArray}, options)
     .map(response => response.json())
   }
 }

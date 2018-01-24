@@ -11,25 +11,27 @@ import {
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
-  selector: 'app-evidence-add',
-  templateUrl: './evidence-add.component.html',
-  styleUrls: ['./evidence-add.component.scss']
+  selector: 'app-evidence-update',
+  templateUrl: './evidence-update.component.html',
+  styleUrls: ['./evidence-update.component.scss']
 })
-export class EvidenceAddComponent implements OnInit, OnDestroy {
+export class EvidenceUpdateComponent implements OnInit, OnDestroy {
 
   constructor(
     private http: Http,
     private formBuilder: FormBuilder,
     private el: ElementRef
   ) { }
+
   @Input() evidence: any;
   private URL: string;;
   private fileAlias: string = 'file';
   private headers = new Headers();
   public uploader: FileUploader = new FileUploader({ url: this.URL, itemAlias: this.fileAlias });
   private httpSubscription: Subscription = null;
+
   ngOnInit() {
-    this.URL = `${WEB_API_URL}/api/evidence/program/${this.evidence.programId}`;
+    this.URL = `${WEB_API_URL}/api/evidence/program/${this.evidence.programId}/${this.evidence.id}`;
   }
 
   ngOnDestroy() {
@@ -53,7 +55,7 @@ export class EvidenceAddComponent implements OnInit, OnDestroy {
           formData.append(this.fileAlias, inputEl.files.item(i));
         }
         this.httpSubscription = this.http
-        .post(this.URL, formData, options)
+        .put(this.URL, formData, options)
         .map((res: any) => res.json())
         .subscribe(
           (result) => {
@@ -66,4 +68,7 @@ export class EvidenceAddComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+
+
 }
