@@ -3,8 +3,7 @@ import { NgRedux } from '@angular-redux/store';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs/Subscription';
 
-import { CourseService } from '../../services/course.service';
-import { DialogService } from '../../services/dialog.service';
+import { CourseService, DialogService } from '../../services';
 import { IAppState } from '../app.store';
 import { ICourseView } from '../../interfaces/course/course-view.interface';
 import { IProgramCourse } from '../../interfaces/programCourse/program-course.interface';
