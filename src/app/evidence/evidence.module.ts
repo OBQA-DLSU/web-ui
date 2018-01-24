@@ -7,6 +7,7 @@ import { MaterialModule } from '../app.module';
 import { EvidenceClassViewComponent } from './evidence-class-view/evidence-class-view.component';
 import { EvidenceDetailViewComponent } from './evidence-detail-view/evidence-detail-view.component';
 import { EvidenceAddComponent } from './evidence-add/evidence-add.component';
+import { EvidenceUpdateComponent } from './evidence-update/evidence-update.component';
 
 @NgModule({
   imports: [
@@ -19,12 +20,14 @@ import { EvidenceAddComponent } from './evidence-add/evidence-add.component';
   exports: [
     EvidenceClassViewComponent,
     EvidenceDetailViewComponent,
-    EvidenceAddComponent
+    EvidenceAddComponent,
+    EvidenceUpdateComponent
   ],
   declarations: [
     EvidenceClassViewComponent,
     EvidenceDetailViewComponent,
-    EvidenceAddComponent
+    EvidenceAddComponent,
+    EvidenceUpdateComponent
   ]
 })
 export class EvidenceModule { }
